@@ -655,6 +655,50 @@
       outline-offset: 4px;
     }
 
+    .email-reveal-btn {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 24px;
+      font-weight: 600;
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      padding: 12px 24px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .email-reveal-btn:hover {
+      background: var(--accent-wash);
+    }
+
+    .email-reveal-btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    #email-revealed a {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s ease;
+      display: inline-block;
+      margin-top: 16px;
+    }
+
+    #email-revealed a:hover,
+    #email-revealed a:focus {
+      border-bottom-color: var(--accent);
+    }
+
+    #email-revealed a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+
     /* Responsive */
     @media (max-width: 640px) {
       .masthead {
@@ -1276,7 +1320,10 @@
 
     <!-- 10. Contact -->
     <section class="contact">
-      <a href="mailto:mail4udhaya@gmail.com">mail4udhaya@gmail.com</a>
+      <button id="reveal-email" class="email-reveal-btn" aria-label="Reveal email address">
+        Reveal email
+      </button>
+      <div id="email-revealed" style="display: none;"></div>
     </section>
   </main>
 
@@ -1472,6 +1519,18 @@
     } else {
       updateGitHubActivity();
     }
+
+    // Email reveal button (generated from JS, not in HTML)
+    document.getElementById('reveal-email').addEventListener('click', (e) => {
+      e.target.style.display = 'none';
+      const emailRevealed = document.getElementById('email-revealed');
+      const emailAddress = ['mail4udhaya', 'gmail.com'].join('@');
+      const link = document.createElement('a');
+      link.href = 'mailto:' + emailAddress;
+      link.textContent = emailAddress;
+      emailRevealed.appendChild(link);
+      emailRevealed.style.display = 'block';
+    });
 
     // Command palette (basic search)
     document.addEventListener('keydown', (e) => {

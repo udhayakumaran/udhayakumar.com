@@ -16,3 +16,4 @@ Thumbs.db
 # Build artifacts (none for this project, but standard pattern)
 dist/
 build/
+.vercel

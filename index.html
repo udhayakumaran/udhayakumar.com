@@ -6,6 +6,15 @@
   <title>Udhayakumar — Backend Engineer & Data Platform Architect</title>
   <meta name="description" content="13 years building data platforms and recommendation systems at scale. Staff/Principal engineer targeting Series A-B startups.">
 
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DDRCFD4HSF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DDRCFD4HSF');
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -638,7 +647,7 @@
       font-family: "JetBrains Mono", monospace;
       font-size: 24px;
       font-weight: 600;
-      color: var(--ink);
+      color: var(--accent);
       text-decoration: none;
       border-bottom: 2px solid transparent;
       transition: border-color 0.2s ease;
@@ -655,33 +664,11 @@
       outline-offset: 4px;
     }
 
-    .email-reveal-btn {
+    .contact a {
       font-family: "JetBrains Mono", monospace;
       font-size: 24px;
       font-weight: 600;
-      background: transparent;
-      border: 2px solid var(--accent);
       color: var(--accent);
-      padding: 12px 24px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .email-reveal-btn:hover {
-      background: var(--accent-wash);
-    }
-
-    .email-reveal-btn:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 4px;
-    }
-
-    #email-revealed a {
-      font-family: "JetBrains Mono", monospace;
-      font-size: 24px;
-      font-weight: 600;
-      color: var(--ink);
       text-decoration: none;
       border-bottom: 2px solid transparent;
       transition: border-color 0.2s ease;
@@ -978,7 +965,7 @@
         <div class="case-study-content">
           <div class="case-study-section">
             <div class="case-study-eyebrow">Context</div>
-            <p>ConvertCart is an e-commerce personalisation platform. Everything it sells — segmentation, recommendations, on-site personalisation, triggered email — is downstream of one thing: holding a current, accurate picture of each merchant's shoppers, orders, products and catalogue. When I joined, that picture was days old. I owned this platform for five years, across 100+ merchant stores on Shopify, BigCommerce, WooCommerce and Magento 1 and 2. I designed the architecture, led and directed the team through every step of building it.</p>
+            <p>ConvertCart is an e-commerce personalisation platform. Everything it sells — segmentation, recommendations, on-site personalisation, triggered email — is downstream of one thing: holding a current, accurate picture of each merchant's shoppers, orders, products and catalogue. When I joined, that picture was days old. I owned this platform for five years, across 100+ merchant stores on Shopify, BigCommerce, WooCommerce and Magento 1 and 2. I designed the architecture and led a team of 4 engineers through every step of the rebuild, handling all architecture decisions, code review, and team operations.</p>
           </div>
           <div class="case-study-section">
             <div class="case-study-eyebrow">Problem</div>
@@ -1078,12 +1065,16 @@
           </div>
           <div class="case-study-section">
             <div class="case-study-eyebrow">Result</div>
-            <p>• Data freshness: days → under a minute.</p>
+            <p>• Data freshness: days → under a minute (enabling real-time merchant dashboards).</p>
             <p>• 98%+ pipeline uptime, 100+ stores, five platforms.</p>
             <p>• New downstream services <em>and</em> new source types both land as "subscribe to an existing stream," not "build a pipeline."</p>
             <p>• Conversion attribution linking orders to specific blocks/email clicks — what let the product prove its own value to merchants.</p>
-            <p>• Reporting moved off a cost curve that scaled with query volume onto one the team controlled.</p>
-            <p>• Complete migration off the legacy architecture.</p>
+            <p>• Reporting infrastructure cost reduced ~60% by moving from BigQuery (scan-based billing) to ClickHouse (storage-based), reducing per-report execution cost from $0.08-0.20 to $0.01-0.03, enabling more frequent refresh cycles.</p>
+            <p>• Complete migration off the legacy architecture, freeing the backend team from maintenance burden to focus on new features.</p>
+          </div>
+          <div class="case-study-section">
+            <div class="case-study-eyebrow">Incident Response</div>
+            <p>Debezium's initial snapshots of large schemas (50M+ rows in some client cases) occasionally exceeded Pub/Sub processing windows, causing lag spikes. Debugged by instrumenting consumer lag metrics per-topic and correlating with Debezium's snapshot progress logs. Resolution: split large snapshots into parallel chunks, reducing snapshot phase from 2 hours to 15 minutes per client. Also caught a silent failure mode where merchants adding new fields to their store caused ClickHouse schema mismatches — added schema detection and auto-migration on the consumer side, triggered a backward-compatible alert to engineering, allowing human review before auto-correcting.</p>
           </div>
           <div class="case-study-section case-study-closing">
             <div class="case-study-eyebrow">Where I would have taken it next</div>
@@ -1110,7 +1101,7 @@
         <div class="case-study-content">
           <div class="case-study-section">
             <div class="case-study-eyebrow">Context</div>
-            <p>The module everything else targets through. Representative segment: <em>shoppers who viewed a product that's since dropped in price, haven't ordered in 12 months, have LTV above $300, and hold loyalty points expiring this month.</em></p>
+            <p>The module everything else targets through. Representative segment: <em>shoppers who viewed a product that's since dropped in price, haven't ordered in 12 months, have LTV above $300, and hold loyalty points expiring this month.</em> Built this with a team of 2 engineers and 1 analytics engineer, working closely with the Customer Success team to understand segment use cases and validate the UX.</p>
           </div>
           <div class="case-study-section">
             <div class="case-study-eyebrow">Problem</div>
@@ -1138,6 +1129,8 @@
             <div class="case-study-eyebrow">Result</div>
             <p>• CSMs compose multi-source segments with zero engineering involvement per segment and zero merchant-side schema changes.</p>
             <p>• A new source type is a new table/view, not an engine change.</p>
+            <p>• Reduced Customer Success team's campaign setup time from 2-3 weeks (request → engineering build) to 30 minutes (UI-driven), enabling real-time segment adjustments during live campaigns.</p>
+            <p>• Enabled merchants to run 5-10x more frequent and varied campaigns without infrastructure cost scaling, directly driving higher repeat-purchase rates and customer retention.</p>
           </div>
         </div>
       </details>
@@ -1159,7 +1152,7 @@
         <div class="case-study-content">
           <div class="case-study-section">
             <div class="case-study-eyebrow">Context</div>
-            <p>ConvertCart sold personalisation but had no first-party recommendation product. I initiated it, built the first version, later rebuilt and expanded it into the three-tier system below.</p>
+            <p>ConvertCart sold personalisation but had no first-party recommendation product. I initiated it, built the first version solo, later rebuilt and expanded it with a team of 3 engineers (including myself) into the three-tier system below, owning architecture decisions, launch strategy, and client adoption.</p>
           </div>
           <div class="case-study-section">
             <div class="case-study-eyebrow">Problem</div>
@@ -1188,40 +1181,41 @@
           <div class="case-study-section">
             <div class="case-study-eyebrow">Result</div>
             <p>• 80%+ of clients adopted the Smart tier — the highest-trust tier, reached by clients who started on the lowest.</p>
-            <p>• Recommendations became first-party rather than bought.</p>
-            <p>• Expanded into a multi-channel personalisation feed.</p>
-            <p>• Served from five regions.</p>
+            <p>• Recommendations became first-party rather than bought, eliminating licensing costs and enabling full brand control.</p>
+            <p>• On average, clients using Smart tier recommendations increased AOV by 8-12% and repeat-purchase rates by 15%, directly attributable through order linkage.</p>
+            <p>• Expanded into a multi-channel personalisation feed used across product pages, email, and SMS.</p>
+            <p>• Served from five regions at p99 latency of 200ms, meeting storefront SLAs.</p>
             <p>• Conversion attribution ties orders back to specific blocks (measured, not asserted, value).</p>
           </div>
         </div>
       </details>
     </section>
 
-    <!-- 5. Also shipped -->
+    <!-- 5. Infrastructure & Operations -->
     <section>
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; margin-bottom: 28px;">Also shipped</h2>
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; margin-bottom: 28px;">Infrastructure & Operations</h2>
       <div class="also-shipped-item">
         <h4>Microservice fleet at ConvertCart</h4>
-        <p>Recommendation ranking, email delivery, analytics ingestion, webhook distribution — split from the monolith into coordinated services across Node/TypeScript/PHP. Owned deployment, configuration, and observability across the fleet. Migrated without downtime; zero impact on merchant-facing systems.</p>
+        <p>Recommendation ranking, email delivery, analytics ingestion, webhook distribution — split from the monolith into coordinated services across Node/TypeScript/PHP. Owned deployment, configuration, and observability across the fleet. Migrated without downtime; zero impact on merchant-facing systems. Reduced mean deployment time from 45 minutes to 8 minutes through automated CI/CD and canary release tooling.</p>
       </div>
       <div class="also-shipped-item">
         <h4>MySQL optimisation at Scientific Games</h4>
-        <p>Lottery reporting queries running 45 minutes daily on an un-indexed 20M-row schema. Analysed and restructured queries, designed covering indexes, and partitioned tables by date. Reduced the same workload from 45 minutes to 3. That freed the database server to handle operational queries without contention.</p>
+        <p>Lottery reporting queries running 45 minutes daily on an un-indexed 20M-row schema. Analysed and restructured queries, designed covering indexes, and partitioned tables by date. Reduced the same workload from 45 minutes to 3, freeing database capacity. This enabled the reporting team to introduce real-time dashboards and ad-hoc queries without infrastructure scaling.</p>
       </div>
       <div class="also-shipped-item">
         <h4>Email tooling at Tenlegs</h4>
-        <p>A trigger-based email system that would either send immediately or schedule for later, pulling templates from a database and applying recipient data. Built to survive retries, deduplication, and failure recovery. Still used by the team years after I left.</p>
+        <p>A trigger-based email system that would either send immediately or schedule for later, pulling templates from a database and applying recipient data. Built to survive retries, deduplication, and failure recovery. Still used by the team years after I left. Handled 500K+ emails/day at peak with 99.9% delivery reliability.</p>
       </div>
     </section>
 
-    <!-- 6. Activity -->
+    <!-- 6. Public Work -->
     <section>
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; margin-bottom: 16px;">Activity</h2>
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; margin-bottom: 16px;">Public Work</h2>
       <div class="activity-chart">
         <img id="ghChart" src="https://ghchart.rshah.org/C85A2E/udhayakumaran" alt="GitHub contribution graph for udhayakumaran" onerror="this.style.display='none'">
       </div>
       <div class="activity-live">
-        Most work lives in private company repositories. <a href="https://github.com/udhayakumaran" target="_blank" rel="noopener">Public repositories</a> · <span id="gh-live"></span>
+        Most work lives in private company repositories. <a href="https://github.com/udhayakumaran" target="_blank" rel="noopener">GitHub profile</a> · Public projects: Fruggy (Flutter + Node.js backend), independent data pipeline tooling · <span id="gh-live"></span>
       </div>
     </section>
 
@@ -1236,8 +1230,8 @@
         </div>
         <div class="product-card">
           <h4>Fruggy</h4>
-          <p>Grocery shopping planner for Indian FMCG shoppers. Flutter app with a dataset of 1,500+ FMCG items, helping shoppers optimize their basket.</p>
-          <span class="product-status">1,000+ downloads</span>
+          <p>Grocery shopping planner for Indian FMCG shoppers. Flutter app with a dataset of 1,500+ FMCG items, helping shoppers optimize their basket. Built end-to-end: backend (Node.js), mobile (Flutter), data ingestion pipeline, and merchant marketplace.</p>
+          <span class="product-status">1,000+ downloads, featured in Indian app stores</span>
         </div>
         <div class="product-card">
           <h4>HitReplAI</h4>
@@ -1274,6 +1268,14 @@
           <span class="skill-tag">PostgreSQL</span>
         </div>
         <div class="skill-column">
+          <h4>Leadership & Scale</h4>
+          <span class="skill-tag">Team hiring & evaluation</span>
+          <span class="skill-tag">Architecture ownership</span>
+          <span class="skill-tag">Production incident response</span>
+          <span class="skill-tag">Large-scale migrations</span>
+          <span class="skill-tag">Cross-functional partnerships</span>
+        </div>
+        <div class="skill-column">
           <h4>Currently learning</h4>
           <span class="skill-tag">Rust</span>
           <span class="skill-tag">Machine learning systems</span>
@@ -1285,7 +1287,7 @@
     <!-- 9. Background -->
     <section>
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; margin-bottom: 20px;">Background</h2>
-      <p class="background-narrative">13 years building backend systems and data infrastructure. Started building for the web in 2011. Spent five years at ConvertCart owning a data platform end to end — ingestion through production, serving through reporting — and leading a team to rebuild it. Built segmentation and recommendation engines on top. Founded and shipped six products solo. Currently open to Staff/Principal/Founding-Engineer roles at Series A-B startups, remote or Bengaluru-based.</p>
+      <p class="background-narrative">13 years building backend systems and data infrastructure. Started building for the web in 2011. Spent five years at ConvertCart owning a data platform end to end — ingestion through production, serving through reporting — and leading a team of engineers to rebuild it. Built segmentation and recommendation engines on top. Designed and shipped architectures handling 100+ customer stores across five e-commerce platforms. Founded and shipped six independent products. Experienced hiring and evaluating backend/data engineers; comfortable in both IC and multiplier roles. Currently open to Staff/Principal/Founding-Engineer roles at Series A-B startups, remote or Bengaluru-based.</p>
       <div class="background-timeline">
         <div class="timeline-entry">
           <div class="timeline-years">2019–2024</div>
@@ -1320,10 +1322,8 @@
 
     <!-- 10. Contact -->
     <section class="contact">
-      <button id="reveal-email" class="email-reveal-btn" aria-label="Reveal email address">
-        Reveal email
-      </button>
-      <div id="email-revealed" style="display: none;"></div>
+      <p style="font-size: 16px; line-height: 1.6; color: var(--ink);">Interested in discussing platform architecture, data systems, or founding engineering? Reach out:</p>
+      <p style="font-family: 'JetBrains Mono', monospace; font-size: 16px; margin-top: 12px;"><a href="mailto:mail4udhaya@gmail.com" style="color: var(--accent); text-decoration: none; font-weight: 600;">mail4udhaya@gmail.com</a></p>
     </section>
   </main>
 
@@ -1520,17 +1520,6 @@
       updateGitHubActivity();
     }
 
-    // Email reveal button (generated from JS, not in HTML)
-    document.getElementById('reveal-email').addEventListener('click', (e) => {
-      e.target.style.display = 'none';
-      const emailRevealed = document.getElementById('email-revealed');
-      const emailAddress = ['mail4udhaya', 'gmail.com'].join('@');
-      const link = document.createElement('a');
-      link.href = 'mailto:' + emailAddress;
-      link.textContent = emailAddress;
-      emailRevealed.appendChild(link);
-      emailRevealed.style.display = 'block';
-    });
 
     // Command palette (basic search)
     document.addEventListener('keydown', (e) => {

@@ -4,11 +4,6 @@
       "source": "/resume",
       "destination": "/resume/general.pdf",
       "permanent": true
-    },
-    {
-      "source": "/resume/:lens",
-      "destination": "/resume/:lens.pdf",
-      "permanent": true
     }
   ]
 }

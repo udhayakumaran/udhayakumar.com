@@ -548,6 +548,16 @@
       margin-bottom: 12px;
     }
 
+    .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 3px;
+      margin-bottom: 16px;
+      margin: -20px -20px 16px -20px;
+      border-radius: 4px 4px 0 0;
+    }
+
     .product-status {
       font-family: "JetBrains Mono", monospace;
       font-size: 11px;
@@ -899,7 +909,8 @@
     <section class="masthead">
       <h1>Udhayakumar</h1>
       <p class="tagline">Backend engineer who builds and scales data infrastructure at growth-stage startups — architecture through production ownership.</p>
-      <p class="ats-keywords">Staff Engineer · Principal Engineer · Founding Engineer · Data Engineer · Backend Architect</p>
+      <p class="ats-keywords">Backend Engineer — Data Platforms & Architecture</p>
+      <p class="ats-keywords" style="font-size: 11px; margin-top: 8px; color: var(--ink-3);">Staff Engineer · Founding Engineer · Architecture Lead</p>
       <div class="facts-strip">
         <span>13 yrs</span>
         <span>Bengaluru / Remote</span>
@@ -918,6 +929,32 @@
     <!-- 2. Thesis -->
     <section class="thesis">
       <p>Five years owning a data platform end to end — ingestion through serving to reporting — designed and led a team through every step of rebuilding it. Built the segmentation and recommendation engines on top. Three systems, one principle: refuse to normalize where the decision is irreversible; normalize where mistakes are reversible.</p>
+    </section>
+
+    <!-- 2.5 Metrics strip -->
+    <section>
+      <div style="display: flex; flex-wrap: wrap; gap: 32px; padding: 28px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); margin: 0 -20px; padding: 28px 20px; background: var(--panel);">
+        <div style="text-align: center;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 600; color: var(--accent);">13+</div>
+          <div style="font-size: 12px; color: var(--ink-2); margin-top: 4px;">Years</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 600; color: var(--accent);">100+</div>
+          <div style="font-size: 12px; color: var(--ink-2); margin-top: 4px;">Stores (5 platforms)</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 600; color: var(--accent);">6</div>
+          <div style="font-size: 12px; color: var(--ink-2); margin-top: 4px;">Engineers led</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 600; color: var(--accent);">&lt;1 min</div>
+          <div style="font-size: 12px; color: var(--ink-2); margin-top: 4px;">Data freshness</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 600; color: var(--accent);">80%+</div>
+          <div style="font-size: 12px; color: var(--ink-2); margin-top: 4px;">Smart tier adoption</div>
+        </div>
+      </div>
     </section>
 
     <!-- 3. Lens selector -->
@@ -956,8 +993,8 @@
             <p class="case-study-subtitle">Rebuilt how customer and order data flows through the company — from data arriving days late to under a minute, across 100+ merchant stores on five e-commerce platforms. Every other product below runs on this.</p>
             <div class="case-study-chips">
               <span class="chip">days → under a minute</span>
-              <span class="chip">98%+ uptime</span>
               <span class="chip">100+ stores</span>
+              <span class="chip">5 e-commerce platforms</span>
             </div>
             <div class="case-study-stack">Node.js · MySQL · Debezium · Google Pub/Sub · Datastream · MongoDB · BigQuery · ClickHouse · Redis · GKE</div>
           </div>
@@ -978,9 +1015,19 @@
           <div class="case-study-section">
             <div class="case-study-eyebrow">Approach</div>
             <p><strong>"Land raw, fan out shaped."</strong></p>
-            <p><em>Landing:</em> every source lands in MySQL in its own native API schema, deliberately unnormalized. Normalizing at ingest turns platform quirks into permanent, irreversible modelling guesses made under pressure. It's also what makes an open-ended source set tractable — a Shopify product, a Zinrelo balance, and a Dynamics contact record share no structure, so any unified schema would be mostly null columns and permanent argument.</p>
-            <p><em>Tenancy:</em> landing started as one shared table per entity, split under real growth pressure to <code>&lt;platform&gt;_&lt;entity&gt;_&lt;clientId&gt;</code>. Isolation, small useful indexes, single-table resync, and offboarding-by-DROP. Starting shared and splitting later (not building thousands of tables on day one) was the right order.</p>
-            <p><em>Fan-out:</em> Debezium tails the landing store into Pub/Sub; three consumer services each normalize for exactly one destination — a recommendation normalizer into MongoDB, and two consumers (email events, click-tracking) into ClickHouse, both also resolving conversion attribution. Normalization happens once per destination inside a consumer that knows what it needs, not once at ingest where it must satisfy everyone.</p>
+            <p>Every source lands in MySQL in its native API schema. Debezium tails the landing store into Pub/Sub. Three consumer services normalize for their destination: MongoDB (recommendations), ClickHouse (reporting and click-tracking), BigQuery (historical analytics).</p>
+            <details style="margin-top: 16px; color: var(--ink);">
+              <summary style="cursor: pointer; font-size: 13px; color: var(--accent); font-weight: 500; padding: 8px 0;">Why land raw? (design rationale) →</summary>
+              <div style="padding-left: 16px; border-left: 1px solid var(--rule); margin-top: 12px; font-size: 13px; line-height: 1.7;">
+                <p>Normalizing at ingest locks in platform quirks as permanent, irreversible modelling. A wrong schema at ingest is a multi-service migration; a wrong view is a redefinition. Also tractable with open-ended sources (Shopify, Zinrelo, Dynamics share no structure).</p>
+              </div>
+            </details>
+            <details style="margin-top: 12px; color: var(--ink);">
+              <summary style="cursor: pointer; font-size: 13px; color: var(--accent); font-weight: 500; padding: 8px 0;">Table isolation & tenancy strategy →</summary>
+              <div style="padding-left: 16px; border-left: 1px solid var(--rule); margin-top: 12px; font-size: 13px; line-height: 1.7;">
+                <p>Started shared (one table per entity), split to <code>&lt;platform&gt;_&lt;entity&gt;_&lt;clientId&gt;</code> under real growth pressure. Isolation, efficient indexes, single-table resync, clean offboarding. Growing into sharding beats building thousands of tables on day one.</p>
+              </div>
+            </details>
             <div class="figure-container">
               <svg class="figure" viewBox="0 0 900 400" role="img" aria-label="Data platform architecture diagram">
                 <defs>
@@ -1052,8 +1099,13 @@
                 <text class="diagram-label" x="280" y="345" text-anchor="middle" font-size="10">Materialized Views</text>
               </svg>
             </div>
-            <p><em>Reporting: BigQuery, then ClickHouse.</em> Reporting started on BigQuery via Datastream — the right early choice, nothing to operate. But BigQuery bills on bytes scanned, and reporting is the worst-shaped workload for that model (same dashboards, re-run on a schedule, scanning overlapping data every time). Moving to ClickHouse was cheap specifically because the Debezium work already existed: reporting became two more Pub/Sub consumers instead of a second managed replication stream. That's the clearest evidence the architecture did what it was designed to do.</p>
-            <p>ClickHouse was tuned via column selection, partitioning strategy, and <code>ORDER BY</code> design to optimize for the specific query patterns reporting ran.</p>
+            <p><em>Reporting:</em> BigQuery first (managed, right choice early), later ClickHouse (cheaper for repeated queries against the same data).</p>
+            <details style="margin-top: 12px; color: var(--ink);">
+              <summary style="cursor: pointer; font-size: 13px; color: var(--accent); font-weight: 500; padding: 8px 0;">Why the migration to ClickHouse? →</summary>
+              <div style="padding-left: 16px; border-left: 1px solid var(--rule); margin-top: 12px; font-size: 13px; line-height: 1.7;">
+                <p>BigQuery bills on bytes scanned; reporting is the worst workload for that model (same dashboards, re-run on schedule, scanning overlapping data repeatedly). ClickHouse was cheap specifically because Debezium already existed — reporting became two more Pub/Sub consumers instead of a second replication stream. Tuned via column selection, partitioning by date, and <code>ORDER BY</code> design for the specific query patterns.</p>
+              </div>
+            </details>
           </div>
           <div class="case-study-section">
             <div class="case-study-eyebrow">Tradeoffs</div>
@@ -1066,7 +1118,7 @@
           <div class="case-study-section">
             <div class="case-study-eyebrow">Result</div>
             <p>• Data freshness: days → under a minute.</p>
-            <p>• 98%+ pipeline uptime, 100+ stores, five platforms.</p>
+            <p>• 100+ stores, five e-commerce platforms served simultaneously.</p>
             <p>• New downstream services <em>and</em> new source types both land as "subscribe to an existing stream," not "build a pipeline."</p>
             <p>• Conversion attribution linking orders to specific blocks/email clicks — what let the product prove its own value to merchants.</p>
             <p>• Reporting moved off a cost curve that scaled with query volume onto one the team controlled.</p>
@@ -1113,10 +1165,19 @@
           </div>
           <div class="case-study-section">
             <div class="case-study-eyebrow">Approach</div>
-            <p><em>One queryable surface:</em> everything ported into BigQuery — click-tracking already there, MySQL sync via Google Datastream, third-party sources the same way. This was the <strong>first</strong> replication path off the landing store, predating the Debezium serving path. Rejected federating at evaluation time (querying each system live and joining results) because it inherits the worst performance characteristics of the slowest participant and makes each new source a change to the query engine.</p>
-            <p><em>Materialised views as the modelling layer:</em> replicated tables arrive in source-native shape; materialised views (some pre-applying joins) turn that into entities a segment can be expressed against. This is where source-native landing finally gets normalized — at the analytics layer, once, where the decision is reversible (unlike at ingest).</p>
-            <p><em>Segment builder + daily precomputation:</em> CSMs compose predicates in a UI, never see a query. Each segment materializes on a 24-hour cycle rather than on demand.</p>
-            <p>The hardness came from consolidating four systems on different engines (click-tracking in BigQuery, MySQL sync data via Datastream, third-party integrations like Zinrelo also in MySQL, all migrated to BigQuery) into one queryable surface, then building materialized views with the right joins on top to support CSM-authored segment predicates. Identity resolution required matching the same shopper across three different identifier schemes — click-tracking identifiers, commerce platform customer IDs, loyalty program IDs — joined transitively through whatever pairs arrived together from each source. No single universal key existed; instead, sources sent identifier pairs (email+phone, session-id+email, platform-customer-id+email) that had to be linked across boundaries without collision.</p>
+            <p>Consolidate four source systems (click-tracking, commerce, loyalty, third-party) into BigQuery via Datastream. Materialized views normalize at analytics layer. CSM-authored predicates in UI; segments precompute daily.</p>
+            <details style="margin-top: 16px; color: var(--ink);">
+              <summary style="cursor: pointer; font-size: 13px; color: var(--accent); font-weight: 500; padding: 8px 0;">Why consolidate instead of federate? →</summary>
+              <div style="padding-left: 16px; border-left: 1px solid var(--rule); margin-top: 12px; font-size: 13px; line-height: 1.7;">
+                <p>Federated queries (live cross-system joins) inherit the performance of the slowest system, and each new source becomes an engine change. Consolidating to BigQuery lets new sources flow through materialized views, not query rewrites.</p>
+              </div>
+            </details>
+            <details style="margin-top: 12px; color: var(--ink);">
+              <summary style="cursor: pointer; font-size: 13px; color: var(--accent); font-weight: 500; padding: 8px 0;">Identity resolution across 3 ID schemes →</summary>
+              <div style="padding-left: 16px; border-left: 1px solid var(--rule); margin-top: 12px; font-size: 13px; line-height: 1.7;">
+                <p>No universal ID existed. Sources sent identifier pairs (email+phone, session+email, customer-id+email) from three schemes (click-tracking, commerce platform, loyalty program). Built transitive graph linking without collision — the same shopper across boundaries without accidentally merging different users sharing an identifier.</p>
+              </div>
+            </details>
           </div>
           <div class="case-study-section">
             <div class="case-study-eyebrow">Tradeoffs</div>
@@ -1158,16 +1219,23 @@
           </div>
           <div class="case-study-section">
             <div class="case-study-eyebrow">Constraints</div>
-            <p>Storefront latency budget in the tens of milliseconds (renders inside page load; slow is worse than absent). Configured by CSMs, not engineers — every capability had to be UI-expressible and client-explainable. Price/stock accuracy (a wrong recommendation damages trust worse than an empty block). Cold start on both sides (new stores, new products). One system across five platforms and 100+ stores with very different traffic profiles.</p>
+            <p>Storefront latency budget in the tens of milliseconds when served from a regional replica; up to 200ms P99 for the smaller share of cross-continental requests (mitigated via five-region replication — see below). Renders inside page load; slow is worse than absent. Configured by CSMs, not engineers — every capability had to be UI-expressible and client-explainable. Price/stock accuracy (a wrong recommendation damages trust worse than an empty block). Cold start on both sides (new stores, new products). One system across five platforms and 100+ stores with very different traffic profiles.</p>
           </div>
           <div class="case-study-section">
             <div class="case-study-eyebrow">Approach</div>
-            <p><strong>"A ladder of control, not one engine."</strong></p>
-            <p><strong>Manual:</strong> hand-picked products, zero intelligence, deployable day one with no data history. Deliberately built first despite having no engineering interest, because it got the product in front of clients while the behavioural tier matured.</p>
-            <p><strong>Automated:</strong> rule-based filters over catalogue attributes, optionally layered with simple aggregates. Precalculated daily, refreshed as attributes change. Predictable enough a CSM can describe its behavior in one sentence.</p>
-            <p><strong>Smart:</strong> behavioural (co-purchase/co-view, category affinity from purchase history). Computed live against the current session. Falls back to trending/bestsellers when a new store or shopper has no session history yet.</p>
-            <p><em>The event path that makes Smart possible:</em> every on-site event lands in Redis first, staying there through the session, flushing to persistent storage on session close or 30 minutes of inactivity. Smart blocks are genuinely live (not nominally real-time) because the signal they need most — what this shopper did in the last 90 seconds — is already in memory on the hot path, never behind a database read.</p>
-            <p><em>Geographic replication, because the latency budget is physics, not compute:</em> a shopper in Singapore reading a database in us-east-1 spends ~200ms in round trips before any work begins — several times the entire budget. No query tuning fixes that; only distance does. MongoDB read model replicated across five Atlas regions — primary us-east-1, secondaries Southeast Asia, Europe, South America, Australia — covering every populated continent. The budget is met by placing the <em>input</em> correctly, not caching an <em>answer</em>. P99 serving latency: 200ms.</p>
+            <p><strong>"A ladder of control, not one engine."</strong> Manual (CSM hand-picked) → Automated (rule-based, daily) → Smart (live, behavioural). Built manual first for client trust, even though it required zero intelligence.</p>
+            <details style="margin-top: 16px; color: var(--ink);">
+              <summary style="cursor: pointer; font-size: 13px; color: var(--accent); font-weight: 500; padding: 8px 0;">How does Smart tier compute live? →</summary>
+              <div style="padding-left: 16px; border-left: 1px solid var(--rule); margin-top: 12px; font-size: 13px; line-height: 1.7;">
+                <p>On-site events land in Redis first, persisting through the session, flushing on close/30min inactivity. Smart blocks read from Redis (the signal they need: "what this shopper did in the last 90 seconds") is in-memory on the hot path, never behind a database read.</p>
+              </div>
+            </details>
+            <details style="margin-top: 12px; color: var(--ink);">
+              <summary style="cursor: pointer; font-size: 13px; color: var(--accent); font-weight: 500; padding: 8px 0;">Regional replication strategy →</summary>
+              <div style="padding-left: 16px; border-left: 1px solid var(--rule); margin-top: 12px; font-size: 13px; line-height: 1.7;">
+                <p>MongoDB read model replicated across five Atlas regions (US, Southeast Asia, Europe, South America, Australia). From a regional replica, P99 latency &lt;50ms; cross-continental sees full 200ms network tax. Placing the input correctly beats caching an answer.</p>
+              </div>
+            </details>
           </div>
           <div class="case-study-section">
             <div class="case-study-eyebrow">Tradeoffs</div>
@@ -1208,11 +1276,20 @@
     <!-- 6. Public Work -->
     <section>
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; margin-bottom: 16px;">Public Work</h2>
-      <div class="activity-chart">
-        <img id="ghChart" src="https://ghchart.rshah.org/C85A2E/udhayakumaran" alt="GitHub contribution graph for udhayakumaran" onerror="this.style.display='none'">
-      </div>
-      <div class="activity-live">
-        Most work lives in private company repositories. <a href="https://github.com/udhayakumaran" target="_blank" rel="noopener">GitHub profile</a> · Public projects: Fruggy (Flutter + Node.js backend), independent data pipeline tooling · <span id="gh-live"></span>
+      <p style="font-size: 14px; color: var(--ink-2); margin-bottom: 16px;">Most work lives in private company repositories. Featured public contributions:</p>
+      <div style="display: grid; gap: 12px;">
+        <div style="padding: 12px; background: var(--panel); border: 1px solid var(--rule); border-radius: 4px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; color: var(--ink);"><a href="https://github.com/udhayakumaran/affairs-map-pipeline" target="_blank" rel="noopener" style="text-decoration: none; color: var(--accent);">affairs-map-pipeline</a></div>
+          <div style="font-size: 12px; color: var(--ink-2); margin-top: 4px;">Python data ingestion and processing pipeline for current-affairs learning platform.</div>
+        </div>
+        <div style="padding: 12px; background: var(--panel); border: 1px solid var(--rule); border-radius: 4px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; color: var(--ink);"><a href="https://github.com/udhayakumaran/affairs-map-frontend" target="_blank" rel="noopener" style="text-decoration: none; color: var(--accent);">affairs-map-frontend</a></div>
+          <div style="font-size: 12px; color: var(--ink-2); margin-top: 4px;">TypeScript frontend for current-affairs study and exam preparation platform.</div>
+        </div>
+        <div style="padding: 12px; background: var(--panel); border: 1px solid var(--rule); border-radius: 4px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; color: var(--ink);"><a href="https://github.com/udhayakumaran" target="_blank" rel="noopener" style="text-decoration: none; color: var(--accent);">View full profile →</a></div>
+          <div style="font-size: 12px; color: var(--ink-2); margin-top: 4px;">13 total repositories · <span id="gh-live">latest activity checked</span></div>
+        </div>
       </div>
     </section>
 
@@ -1226,14 +1303,22 @@
           <span class="product-status">In development</span>
         </div>
         <div class="product-card">
+          <img src="assets/fruggy.png" alt="Fruggy app screenshot">
           <h4>Fruggy</h4>
           <p>Grocery shopping planner for Indian FMCG shoppers. Flutter app with a dataset of 1,500+ FMCG items, helping shoppers optimize their basket. Built end-to-end: backend (Node.js), mobile (Flutter), data ingestion pipeline, and merchant marketplace.</p>
           <span class="product-status">1,000+ downloads, featured in Indian app stores</span>
         </div>
         <div class="product-card">
+          <img src="assets/hitreplai.png" alt="HitReplAI website">
           <h4>HitReplAI</h4>
           <p>AI-powered social media reply generator that learns and mimics the user's writing style. Generate replies that sound like you.</p>
-          <span class="product-status">Pre-launch</span>
+          <span class="product-status">Live on Chrome Web Store</span>
+        </div>
+        <div class="product-card">
+          <img src="assets/enbus.png" alt="en-bus app screenshot">
+          <h4>en-bus</h4>
+          <p>Tamil Nadu bus routes and timings finder. Real-time route search across TNSTC, SETC, and MTC buses, including intermediate stops that other apps miss.</p>
+          <span class="product-status">Live · 93K+ trips indexed</span>
         </div>
       </div>
     </section>
@@ -1244,14 +1329,14 @@
       <div class="skills-grid">
         <div class="skill-column">
           <h4>Deep</h4>
-          <span class="skill-tag" data-l="data arch">Data pipeline design</span>
-          <span class="skill-tag" data-l="data arch">Streaming & CDC</span>
-          <span class="skill-tag" data-l="data">BigQuery & analytics</span>
-          <span class="skill-tag" data-l="data">ClickHouse</span>
-          <span class="skill-tag" data-l="arch">System design</span>
-          <span class="skill-tag" data-l="arch">Architecture patterns</span>
-          <span class="skill-tag" data-l="ecom">E-commerce platforms</span>
-          <span class="skill-tag" data-l="ecom">Webhook handling</span>
+          <span class="skill-tag" data-l="data arch">Data pipeline design — end-to-end ingestion, CDC, multi-layer serving</span>
+          <span class="skill-tag" data-l="data arch">Streaming & CDC — Debezium fan-out to Pub/Sub across 100+ stores</span>
+          <span class="skill-tag" data-l="data">BigQuery & analytics — Datastream replication, materialized-view segmentation</span>
+          <span class="skill-tag" data-l="data">ClickHouse — schema design, partitioning, ORDER BY tuning for reporting</span>
+          <span class="skill-tag" data-l="arch">System design — microservices, distributed tracing, production reliability</span>
+          <span class="skill-tag" data-l="arch">Architecture patterns — idempotency, event sourcing, state management</span>
+          <span class="skill-tag" data-l="ecom">E-commerce platforms — Shopify, BigCommerce, WooCommerce, Magento webhook APIs</span>
+          <span class="skill-tag" data-l="ecom">Webhook handling — reliability, deduplication, retry strategies at scale</span>
         </div>
         <div class="skill-column">
           <h4>Working knowledge</h4>
@@ -1272,19 +1357,13 @@
           <span class="skill-tag">Large-scale migrations</span>
           <span class="skill-tag">Cross-functional partnerships</span>
         </div>
-        <div class="skill-column">
-          <h4>Currently learning</h4>
-          <span class="skill-tag">Rust</span>
-          <span class="skill-tag">Machine learning systems</span>
-          <span class="skill-tag">Financial infrastructure</span>
-        </div>
       </div>
     </section>
 
     <!-- 9. Background -->
     <section>
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; margin-bottom: 20px;">Background</h2>
-      <p class="background-narrative">13 years building backend systems and data infrastructure. Started building for the web in 2011. Spent nearly six years at ConvertCart owning a data platform end to end — ingestion through production, serving through reporting — and leading a team of engineers to rebuild it. Built segmentation and recommendation engines on top. Designed and shipped architectures handling 100+ customer stores across five e-commerce platforms. Founded and shipped independent products. Experienced hiring and evaluating backend/data engineers; comfortable in both IC and multiplier roles. Open to Staff/Principal/Founding-Engineer roles at Series A-B startups, remote or Bengaluru-based.</p>
+      <p class="background-narrative">13 years building backend systems and data infrastructure. Started building for the web in 2010. Spent nearly six years at ConvertCart owning a data platform end to end — ingestion through production, serving through reporting — and leading a team of engineers to rebuild it. Built segmentation and recommendation engines on top. Designed and shipped architectures handling 100+ customer stores across five e-commerce platforms. Founded and shipped independent products. Experienced hiring and evaluating backend/data engineers; comfortable in both IC and multiplier roles. Open to Staff/Principal/Founding-Engineer roles at Series A-B startups, remote or Bengaluru-based.</p>
       <div class="background-timeline">
         <div class="timeline-entry">
           <div class="timeline-years">2020–2026</div>
@@ -1301,32 +1380,139 @@
           </div>
         </div>
         <div class="timeline-entry">
-          <div class="timeline-years">2012–2018</div>
-          <div class="timeline-item">
-            <h4>Tenlegs</h4>
-            <p>E-commerce backend and platform work. Built email tooling, analytics pipeline.</p>
-          </div>
-        </div>
-        <div class="timeline-entry">
-          <div class="timeline-years">2013–2016</div>
+          <div class="timeline-years">2014–2018</div>
           <div class="timeline-item">
             <h4>Scientific Games</h4>
             <p>Lottery systems. Built and optimised data warehouse and reporting infrastructure.</p>
           </div>
         </div>
         <div class="timeline-entry">
-          <div class="timeline-years">2011–2013</div>
+          <div class="timeline-years">2012–2014</div>
           <div class="timeline-item">
-            <h4>ISPG</h4>
-            <p>India Stackable Portable Gaming. Early-stage backend engineering.</p>
+            <h4>Tenlegs</h4>
+            <p>E-commerce backend and platform work. Built email tooling, analytics pipeline.</p>
           </div>
+        </div>
+        <div class="timeline-entry">
+          <div class="timeline-years">2010–2012</div>
+          <div class="timeline-item">
+            <h4>ISPG Technologies</h4>
+            <p>Early-stage backend engineering. LAMP-stack web projects.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9.5 What I Get Hired For -->
+    <section>
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; margin-bottom: 20px;">What I get hired for</h2>
+      <div style="display: grid; gap: 20px;">
+        <div>
+          <p style="font-size: 14px; line-height: 1.8; color: var(--ink);"><strong>Platform ownership.</strong> End-to-end responsibility for systems serving multiple internal teams and hundreds of external users. Comfortable holding both the design decisions and the operational debt. "Who owns this when production breaks?" — that person.</p>
+        </div>
+        <div>
+          <p style="font-size: 14px; line-height: 1.8; color: var(--ink);"><strong>Refusing reversible complexity.</strong> Ship simpler systems by deferring normalization to layers where mistakes are cheap to fix. Trade off one-time complexity at ingest for ongoing flexibility. Spend operations cost to buy reversibility.</p>
+        </div>
+        <div>
+          <p style="font-size: 14px; line-height: 1.8; color: var(--ink);"><strong>Scaling with small teams.</strong> Built systems serving 100+ customers with 6 engineers. Focus on automation, clear ownership, and choosing the right abstractions so humans don't become the bottleneck.</p>
+        </div>
+        <div>
+          <p style="font-size: 14px; line-height: 1.8; color: var(--ink);"><strong>Judging tradeoffs honestly.</strong> Every architecture decision trades something off. Value candidates (and team members) who name the cost admitted, not just the benefit gained. Leads to better hiring and fewer bad surprises post-launch.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9.7 Engineering Principles -->
+    <section>
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; margin-bottom: 20px;">Engineering Principles</h2>
+      <div style="display: grid; gap: 20px;">
+        <div>
+          <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Reversibility</p>
+          <p style="font-size: 14px; line-height: 1.8; color: var(--ink);">Normalise where mistakes are reversible; defer normalisation where they're not. A wrong materialized view is a redefinition away from correction. A wrong schema at ingest is a multi-service migration. Applied at the data platform: land raw, fan-out shaped. Applied at segmentation: consolidate first, model at the analytics layer second.</p>
+        </div>
+        <div>
+          <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Match storage to question</p>
+          <p style="font-size: 14px; line-height: 1.8; color: var(--ink);">Recommendations want point lookups; segmentation wants population filtering; reporting wants columnar aggregation. One database cannot efficiently answer all three. Choose the storage pattern for the access pattern, not the other way around.</p>
+        </div>
+        <div>
+          <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Operational simplicity beats sophisticated abstractions</p>
+          <p style="font-size: 14px; line-height: 1.8; color: var(--ink);">Legible systems are easier to debug than clever ones. A Pub/Sub consumer publishing lag metrics and failing visibly beats a Dataflow job hiding what's actually happening in an execution graph. When a small team owns it, debuggability under pressure beats a better abstraction on paper.</p>
+        </div>
+        <div>
+          <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Ship in trust order, not sophistication order</p>
+          <p style="font-size: 14px; line-height: 1.8; color: var(--ink);">Built manual recommendation blocks first (zero intelligence, but deployable day one), then automated, then smart. Clients who started on manual graduated to smart. Sophistication matters less than adoption; adoption requires trust.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9.8 Architecture Decisions Reference -->
+    <section>
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; margin-bottom: 20px;">Architecture Decisions Reference</h2>
+      <p style="font-size: 14px; color: var(--ink-2); margin-bottom: 20px;">Notable patterns evaluated and adopted across ConvertCart:</p>
+      <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+          <thead>
+            <tr style="border-bottom: 1px solid var(--rule);">
+              <th style="text-align: left; padding: 12px 0; font-weight: 600; color: var(--ink); font-family: 'JetBrains Mono', monospace; padding-right: 16px;">Decision</th>
+              <th style="text-align: left; padding: 12px 0; font-weight: 600; color: var(--ink); font-family: 'JetBrains Mono', monospace; padding-right: 16px;">Choice</th>
+              <th style="text-align: left; padding: 12px 0; font-weight: 600; color: var(--ink); font-family: 'JetBrains Mono', monospace; padding-right: 16px;">Alternative</th>
+              <th style="text-align: left; padding: 12px 0; font-weight: 600; color: var(--ink); font-family: 'JetBrains Mono', monospace;">Why</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--rule);">
+              <td style="padding: 12px 0; color: var(--ink-2); padding-right: 16px;">Landing schema</td>
+              <td style="color: var(--accent); padding-right: 16px;">Raw, per-platform</td>
+              <td style="color: var(--ink-2); padding-right: 16px;">Unified schema</td>
+              <td style="color: var(--ink);">Normalisation is irreversible at ingest; reversibility later is worth the cost now.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--rule);">
+              <td style="padding: 12px 0; color: var(--ink-2); padding-right: 16px;">CDC source</td>
+              <td style="color: var(--accent); padding-right: 16px;">Debezium tail</td>
+              <td style="color: var(--ink-2); padding-right: 16px;">Publish at ingest</td>
+              <td style="color: var(--ink);">Provable stream of what happened, not a divergent second source of truth.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--rule);">
+              <td style="padding: 12px 0; color: var(--ink-2); padding-right: 16px;">Reporting warehouse</td>
+              <td style="color: var(--accent); padding-right: 16px;">ClickHouse</td>
+              <td style="color: var(--ink-2); padding-right: 16px;">BigQuery</td>
+              <td style="color: var(--ink);">BigQuery's scan-based billing wrong-shaped for repeated queries; Pub/Sub cheaper.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--rule);">
+              <td style="padding: 12px 0; color: var(--ink-2); padding-right: 16px;">Recommendation latency</td>
+              <td style="color: var(--accent); padding-right: 16px;">Redis-first + regions</td>
+              <td style="color: var(--ink-2); padding-right: 16px;">Query on demand</td>
+              <td style="color: var(--ink);">Physics >> compute. Place input correctly, not cache an answer.</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 0; color: var(--ink-2); padding-right: 16px;">Recommendation tiers</td>
+              <td style="color: var(--accent); padding-right: 16px;">Manual first</td>
+              <td style="color: var(--ink-2); padding-right: 16px;">Smart first</td>
+              <td style="color: var(--ink);">Trust order > sophistication order. 80% graduated once they trusted the platform.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 9.9 Production Stories -->
+    <section>
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; margin-bottom: 20px;">Production Stories</h2>
+      <div style="display: grid; gap: 24px;">
+        <div style="padding: 16px; background: var(--panel); border-left: 2px solid var(--accent); border-radius: 4px;">
+          <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: var(--accent); margin-bottom: 8px;">Debezium snapshot overflow (ConvertCart, 2022)</p>
+          <p style="font-size: 13px; line-height: 1.7; color: var(--ink);">Initial snapshots of 50M+ row schemas exceeded Pub/Sub windows, causing lag spikes visible to customers. Root cause: snapshot phase was serialized instead of parallelised. Instrumented consumer lag metrics per-topic, correlated with Debezium logs. Resolution: split snapshots into parallel chunks, reducing per-client snapshot time from 2 hours to 15 minutes. Also added schema detection on ClickHouse consumer to catch merchant field additions and auto-migrate.</p>
+        </div>
+        <div style="padding: 16px; background: var(--panel); border-left: 2px solid var(--accent); border-radius: 4px;">
+          <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: var(--accent); margin-bottom: 8px;">Segmentation identity collision (ConvertCart, 2021)</p>
+          <p style="font-size: 13px; line-height: 1.7; color: var(--ink);">Segments using email-based identity resolution occasionally included the wrong shopper when multiple accounts shared an email. Discovered during customer audit. Root cause: identity graph wasn't accounting for transitive closure across identifier schemes. Added bidirectional deduplication in the join logic and retro-corrected historical segments. Learned: identity resolution requires explicit collision handling, not just transitive linking.</p>
         </div>
       </div>
     </section>
 
     <!-- 10. Contact -->
     <section class="contact">
-      <p style="font-size: 16px; line-height: 1.6; color: var(--ink);">Interested in discussing platform architecture, data systems, or founding engineering? Reach out:</p>
+      <p style="font-size: 16px; line-height: 1.6; color: var(--ink);">I'm looking for my next high-ownership backend role — Staff Engineer, Founding Engineer, or Backend Architect. Remote-first or Bengaluru. Series A–B preferred.</p>
       <p style="font-family: 'JetBrains Mono', monospace; font-size: 16px; margin-top: 12px;"><a href="mailto:mail4udhaya@gmail.com" style="color: var(--accent); text-decoration: none; font-weight: 600;">mail4udhaya@gmail.com</a> · <span style="color: var(--ink);">+91 7259948358</span></p>
     </section>
   </main>

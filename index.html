@@ -448,6 +448,43 @@
       line-height: 1.7;
     }
 
+    /* Nested "Read full case study" disclosure styling */
+    .case-study-full-disclosure {
+      margin-top: 24px;
+    }
+
+    .case-study-full-disclosure > summary {
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--accent);
+      font-weight: 600;
+      padding: 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .case-study-full-disclosure > summary:hover {
+      text-decoration: underline;
+      opacity: 0.8;
+    }
+
+    .case-study-full-disclosure > summary:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+
+    .case-study-full-disclosure > div {
+      padding-top: 16px;
+      padding-left: 16px;
+      border-left: 2px solid var(--accent);
+    }
+
+    .case-study-full-disclosure .case-study-section {
+      max-width: 65ch;
+    }
+
     /* Figure */
     .figure-container {
       margin: 24px 0;
@@ -1001,33 +1038,8 @@
         </summary>
         <div class="case-study-content">
           <div class="case-study-section">
-            <div class="case-study-eyebrow">Context</div>
-            <p>ConvertCart is an e-commerce personalisation platform. Everything it sells — segmentation, recommendations, on-site personalisation, triggered email — is downstream of one thing: holding a current, accurate picture of each merchant's shoppers, orders, products and catalogue. When I joined, that picture was days old. I owned this platform for nearly six years, across 100+ merchant stores on Shopify, BigCommerce, WooCommerce and Magento 1 and 2. I designed the architecture and led a team of up to 6 engineers through every step of the rebuild, handling all architecture decisions, code review, and team operations.</p>
-          </div>
-          <div class="case-study-section">
-            <div class="case-study-eyebrow">Problem</div>
-            <p>Platform sync ran as scheduled batch pulls against each merchant's commerce API, so data landed days late — worst during sale periods, when volume and API rate limiting peak together. Commerce platforms were never the whole picture either — merchants also run loyalty platforms (Zinrelo) and marketing/CRM systems (Microsoft Dynamics), none of which resemble a commerce API or each other. The deeper problem was on the consuming side: recommendations want point lookups, segmentation wants population filtering, reporting wants columnar aggregation — one store can't serve all three, so every new feature meant another bespoke path back to the data.</p>
-          </div>
-          <div class="case-study-section">
-            <div class="case-study-eyebrow">Constraints</div>
-            <p>No merchant-side changes (no schema changes, no downtime, merchants absorb zero cost). Five platforms with genuinely different webhook reliability. An open-ended, never-final set of source types. Consumers wanting structurally incompatible read shapes. A live migration with no coverage gap allowed.</p>
-          </div>
-          <div class="case-study-section">
-            <div class="case-study-eyebrow">Approach</div>
-            <p><strong>"Land raw, fan out shaped."</strong></p>
-            <p>Every source lands in MySQL in its native API schema. Debezium tails the landing store into Pub/Sub. Three consumer services normalize for their destination: MongoDB (recommendations), ClickHouse (reporting and click-tracking), BigQuery (historical analytics).</p>
-            <details style="margin-top: 16px; color: var(--ink);">
-              <summary style="cursor: pointer; font-size: 13px; color: var(--accent); font-weight: 500; padding: 8px 0;">Why land raw? (design rationale) →</summary>
-              <div style="padding-left: 16px; border-left: 1px solid var(--rule); margin-top: 12px; font-size: 13px; line-height: 1.7;">
-                <p>Normalizing at ingest locks in platform quirks as permanent, irreversible modelling. A wrong schema at ingest is a multi-service migration; a wrong view is a redefinition. Also tractable with open-ended sources (Shopify, Zinrelo, Dynamics share no structure).</p>
-              </div>
-            </details>
-            <details style="margin-top: 12px; color: var(--ink);">
-              <summary style="cursor: pointer; font-size: 13px; color: var(--accent); font-weight: 500; padding: 8px 0;">Table isolation & tenancy strategy →</summary>
-              <div style="padding-left: 16px; border-left: 1px solid var(--rule); margin-top: 12px; font-size: 13px; line-height: 1.7;">
-                <p>Started shared (one table per entity), split to <code>&lt;platform&gt;_&lt;entity&gt;_&lt;clientId&gt;</code> under real growth pressure. Isolation, efficient indexes, single-table resync, clean offboarding. Growing into sharding beats building thousands of tables on day one.</p>
-              </div>
-            </details>
+            <div class="case-study-eyebrow">Overview</div>
+            <p>Consolidates four systems that share no schema — commerce, click-tracking, loyalty, CRM — into one MySQL landing store, then fans that out via CDC to the three shapes downstream products actually need: point lookups, columnar analytics, population filtering. New sources and new consumers both plug into the same pipeline instead of requiring a bespoke integration each time.</p>
             <div class="figure-container">
               <svg class="figure" viewBox="0 0 900 400" role="img" aria-label="Data platform architecture diagram">
                 <defs>
@@ -1099,13 +1111,6 @@
                 <text class="diagram-label" x="280" y="345" text-anchor="middle" font-size="10">Materialized Views</text>
               </svg>
             </div>
-            <p><em>Reporting:</em> BigQuery first (managed, right choice early), later ClickHouse (cheaper for repeated queries against the same data).</p>
-            <details style="margin-top: 12px; color: var(--ink);">
-              <summary style="cursor: pointer; font-size: 13px; color: var(--accent); font-weight: 500; padding: 8px 0;">Why the migration to ClickHouse? →</summary>
-              <div style="padding-left: 16px; border-left: 1px solid var(--rule); margin-top: 12px; font-size: 13px; line-height: 1.7;">
-                <p>BigQuery bills on bytes scanned; reporting is the worst workload for that model (same dashboards, re-run on schedule, scanning overlapping data repeatedly). ClickHouse was cheap specifically because Debezium already existed — reporting became two more Pub/Sub consumers instead of a second replication stream. Tuned via column selection, partitioning by date, and <code>ORDER BY</code> design for the specific query patterns.</p>
-              </div>
-            </details>
           </div>
           <div class="case-study-section">
             <div class="case-study-eyebrow">Tradeoffs</div>
@@ -1124,16 +1129,57 @@
             <p>• Reporting moved off a cost curve that scaled with query volume onto one the team controlled.</p>
             <p>• Complete migration off the legacy architecture.</p>
           </div>
-          <div class="case-study-section">
-            <div class="case-study-eyebrow">Incident Response</div>
-            <p>Debezium's initial snapshots of large schemas (50M+ rows in some client cases) occasionally exceeded Pub/Sub processing windows, causing lag spikes. Debugged by instrumenting consumer lag metrics per-topic and correlating with Debezium's snapshot progress logs. Resolution: split large snapshots into parallel chunks, reducing snapshot phase from 2 hours to 15 minutes per client. Also caught a silent failure mode where merchants adding new fields to their store caused ClickHouse schema mismatches — added schema detection and auto-migration on the consumer side, triggered a backward-compatible alert to engineering, allowing human review before auto-correcting.</p>
-          </div>
-          <div class="case-study-section case-study-closing">
-            <div class="case-study-eyebrow">Where I would have taken it next</div>
-            <p>Conversion attribution is the most fragile thing built here, because it's the wrong shape for the tool underneath it. Attribution is a windowed join between two streams (orders; click/email events inside a conversion window). Pub/Sub carries no state, so this runs as an hourly batch job with substantial reconciliation logic — an emulation of a primitive the platform doesn't provide.</p>
-            <p>Proposed moving the event backbone to Kafka + Kafka Streams on <strong>managed Confluent Cloud</strong> (deliberately not self-hosted — this was never a proposal to take on Kafka operations). Evaluated <strong>Dataflow</strong> first (the "why not stay on GCP" fair comparison) and rejected it: Beam's windowing/triggers/watermarks model is heavy to carry, and a misbehaving Dataflow job is hard to debug because the execution graph obscures what's happening — topics and consumer lag are legible in a way a Dataflow execution plan isn't, and with a small team, debuggability under pressure beats a better abstraction on paper.</p>
-            <p>The one piece left unresolved: Kafka Streams is JVM-only, the team was Node/TypeScript. Real open choice between <strong>ksqlDB</strong> (Confluent-managed, no new language enters the codebase) and a JVM service (learning curve, in tension with the maintainability argument just made against Dataflow). This is written as an <strong>open, unresolved evaluation</strong>, not a settled plan — that's deliberate. The unresolved piece is the one thing that survives an experienced interviewer's skepticism.</p>
-          </div>
+          <details class="case-study-full-disclosure">
+            <summary>Read the full case study →</summary>
+            <div>
+              <div class="case-study-section">
+                <div class="case-study-eyebrow">Context</div>
+                <p>ConvertCart is an e-commerce personalisation platform. Everything it sells — segmentation, recommendations, on-site personalisation, triggered email — is downstream of one thing: holding a current, accurate picture of each merchant's shoppers, orders, products and catalogue. When I joined, that picture was days old. I owned this platform for nearly six years, across 100+ merchant stores on Shopify, BigCommerce, WooCommerce and Magento 1 and 2. I designed the architecture and led a team of up to 6 engineers through every step of the rebuild, handling all architecture decisions, code review, and team operations.</p>
+              </div>
+              <div class="case-study-section">
+                <div class="case-study-eyebrow">Problem</div>
+                <p>Platform sync ran as scheduled batch pulls against each merchant's commerce API, so data landed days late — worst during sale periods, when volume and API rate limiting peak together. Commerce platforms were never the whole picture either — merchants also run loyalty platforms (Zinrelo) and marketing/CRM systems (Microsoft Dynamics), none of which resemble a commerce API or each other. The deeper problem was on the consuming side: recommendations want point lookups, segmentation wants population filtering, reporting wants columnar aggregation — one store can't serve all three, so every new feature meant another bespoke path back to the data.</p>
+              </div>
+              <div class="case-study-section">
+                <div class="case-study-eyebrow">Constraints</div>
+                <p>No merchant-side changes (no schema changes, no downtime, merchants absorb zero cost). Five platforms with genuinely different webhook reliability. An open-ended, never-final set of source types. Consumers wanting structurally incompatible read shapes. A live migration with no coverage gap allowed.</p>
+              </div>
+              <div class="case-study-section">
+                <div class="case-study-eyebrow">Approach</div>
+                <p><strong>"Land raw, fan out shaped."</strong></p>
+                <p>Every source lands in MySQL in its native API schema. Debezium tails the landing store into Pub/Sub. Three consumer services normalize for their destination: MongoDB (recommendations), ClickHouse (reporting and click-tracking), BigQuery (historical analytics).</p>
+                <details style="margin-top: 16px; color: var(--ink);">
+                  <summary style="cursor: pointer; font-size: 13px; color: var(--accent); font-weight: 500; padding: 8px 0;">Why land raw? (design rationale) →</summary>
+                  <div style="padding-left: 16px; border-left: 1px solid var(--rule); margin-top: 12px; font-size: 13px; line-height: 1.7;">
+                    <p>Normalizing at ingest locks in platform quirks as permanent, irreversible modelling. A wrong schema at ingest is a multi-service migration; a wrong view is a redefinition. Also tractable with open-ended sources (Shopify, Zinrelo, Dynamics share no structure).</p>
+                  </div>
+                </details>
+                <details style="margin-top: 12px; color: var(--ink);">
+                  <summary style="cursor: pointer; font-size: 13px; color: var(--accent); font-weight: 500; padding: 8px 0;">Table isolation & tenancy strategy →</summary>
+                  <div style="padding-left: 16px; border-left: 1px solid var(--rule); margin-top: 12px; font-size: 13px; line-height: 1.7;">
+                    <p>Started shared (one table per entity), split to <code>&lt;platform&gt;_&lt;entity&gt;_&lt;clientId&gt;</code> under real growth pressure. Isolation, efficient indexes, single-table resync, clean offboarding. Growing into sharding beats building thousands of tables on day one.</p>
+                  </div>
+                </details>
+                <p style="margin-top: 12px;"><em>Reporting:</em> BigQuery first (managed, right choice early), later ClickHouse (cheaper for repeated queries against the same data).</p>
+                <details style="margin-top: 12px; color: var(--ink);">
+                  <summary style="cursor: pointer; font-size: 13px; color: var(--accent); font-weight: 500; padding: 8px 0;">Why the migration to ClickHouse? →</summary>
+                  <div style="padding-left: 16px; border-left: 1px solid var(--rule); margin-top: 12px; font-size: 13px; line-height: 1.7;">
+                    <p>BigQuery bills on bytes scanned; reporting is the worst workload for that model (same dashboards, re-run on schedule, scanning overlapping data repeatedly). ClickHouse was cheap specifically because Debezium already existed — reporting became two more Pub/Sub consumers instead of a second replication stream. Tuned via column selection, partitioning by date, and <code>ORDER BY</code> design for the specific query patterns.</p>
+                  </div>
+                </details>
+              </div>
+              <div class="case-study-section">
+                <div class="case-study-eyebrow">Incident Response</div>
+                <p>Debezium's initial snapshots of large schemas (50M+ rows in some client cases) occasionally exceeded Pub/Sub processing windows, causing lag spikes. Debugged by instrumenting consumer lag metrics per-topic and correlating with Debezium's snapshot progress logs. Resolution: split large snapshots into parallel chunks, reducing snapshot phase from 2 hours to 15 minutes per client. Also caught a silent failure mode where merchants adding new fields to their store caused ClickHouse schema mismatches — added schema detection and auto-migration on the consumer side, triggered a backward-compatible alert to engineering, allowing human review before auto-correcting.</p>
+              </div>
+              <div class="case-study-section case-study-closing">
+                <div class="case-study-eyebrow">Where I would have taken it next</div>
+                <p>Conversion attribution is the most fragile thing built here, because it's the wrong shape for the tool underneath it. Attribution is a windowed join between two streams (orders; click/email events inside a conversion window). Pub/Sub carries no state, so this runs as an hourly batch job with substantial reconciliation logic — an emulation of a primitive the platform doesn't provide.</p>
+                <p>Proposed moving the event backbone to Kafka + Kafka Streams on <strong>managed Confluent Cloud</strong> (deliberately not self-hosted — this was never a proposal to take on Kafka operations). Evaluated <strong>Dataflow</strong> first (the "why not stay on GCP" fair comparison) and rejected it: Beam's windowing/triggers/watermarks model is heavy to carry, and a misbehaving Dataflow job is hard to debug because the execution graph obscures what's happening — topics and consumer lag are legible in a way a Dataflow execution plan isn't, and with a small team, debuggability under pressure beats a better abstraction on paper.</p>
+                <p>The one piece left unresolved: Kafka Streams is JVM-only, the team was Node/TypeScript. Real open choice between <strong>ksqlDB</strong> (Confluent-managed, no new language enters the codebase) and a JVM service (learning curve, in tension with the maintainability argument just made against Dataflow). This is written as an <strong>open, unresolved evaluation</strong>, not a settled plan — that's deliberate. The unresolved piece is the one thing that survives an experienced interviewer's skepticism.</p>
+              </div>
+            </div>
+          </details>
         </div>
       </details>
 
@@ -1152,32 +1198,48 @@
         </summary>
         <div class="case-study-content">
           <div class="case-study-section">
-            <div class="case-study-eyebrow">Context</div>
-            <p>The module everything else targets through. Representative segment: <em>shoppers who viewed a product that's since dropped in price, haven't ordered in 12 months, have LTV above $300, and hold loyalty points expiring this month.</em> Built this with a team of 2 engineers and 1 analytics engineer, working closely with the Customer Success team to understand segment use cases and validate the UX.</p>
-          </div>
-          <div class="case-study-section">
-            <div class="case-study-eyebrow">Problem</div>
-            <p>That question spans four systems of origin (click-tracking, commerce catalogue, transactional orders, third-party loyalty balance) across three storage engines. Nothing joins — different query languages, performance characteristics, owners, cadences. And the person asking the question is a CSM who doesn't write SQL.</p>
-          </div>
-          <div class="case-study-section">
-            <div class="case-study-eyebrow">Constraints</div>
-            <p>Authored by non-engineers in a UI (arbitrary predicate combinations, not a fixed report menu). Open-ended source set. No client-side schema changes. Read-heavy and repeated (segments run on a schedule, reused across campaigns).</p>
-          </div>
-          <div class="case-study-section">
-            <div class="case-study-eyebrow">Approach</div>
-            <p>Consolidate four source systems (click-tracking, commerce, loyalty, third-party) into BigQuery via Datastream. Materialized views normalize at analytics layer. CSM-authored predicates in UI; segments precompute daily.</p>
-            <details style="margin-top: 16px; color: var(--ink);">
-              <summary style="cursor: pointer; font-size: 13px; color: var(--accent); font-weight: 500; padding: 8px 0;">Why consolidate instead of federate? →</summary>
-              <div style="padding-left: 16px; border-left: 1px solid var(--rule); margin-top: 12px; font-size: 13px; line-height: 1.7;">
-                <p>Federated queries (live cross-system joins) inherit the performance of the slowest system, and each new source becomes an engine change. Consolidating to BigQuery lets new sources flow through materialized views, not query rewrites.</p>
-              </div>
-            </details>
-            <details style="margin-top: 12px; color: var(--ink);">
-              <summary style="cursor: pointer; font-size: 13px; color: var(--accent); font-weight: 500; padding: 8px 0;">Identity resolution across 3 ID schemes →</summary>
-              <div style="padding-left: 16px; border-left: 1px solid var(--rule); margin-top: 12px; font-size: 13px; line-height: 1.7;">
-                <p>No universal ID existed. Sources sent identifier pairs (email+phone, session+email, customer-id+email) from three schemes (click-tracking, commerce platform, loyalty program). Built transitive graph linking without collision — the same shopper across boundaries without accidentally merging different users sharing an identifier.</p>
-              </div>
-            </details>
+            <div class="case-study-eyebrow">Overview</div>
+            <p>Pulls customer signal from four disconnected systems — click-tracking, commerce, orders, loyalty — into one BigQuery-backed model, so a Customer Success rep can build an audience like "buy-again candidates with expiring loyalty points" by combining filters in a UI. No SQL, no engineering ticket.</p>
+            <div class="figure-container">
+              <svg class="figure" viewBox="0 0 900 220" role="img" aria-label="Segmentation architecture diagram">
+                <defs>
+                  <marker id="arrowhead-seg" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                    <polygon points="0 0, 10 3, 0 6" fill="var(--rule-2)"/>
+                  </marker>
+                </defs>
+
+                <!-- Sources -->
+                <rect class="diagram-node" x="30" y="20" width="100" height="45" rx="3"/>
+                <text class="diagram-label" x="80" y="47" text-anchor="middle">Click-tracking</text>
+
+                <rect class="diagram-node" x="155" y="20" width="100" height="45" rx="3"/>
+                <text class="diagram-label" x="205" y="47" text-anchor="middle">Commerce</text>
+
+                <rect class="diagram-node" x="280" y="20" width="100" height="45" rx="3"/>
+                <text class="diagram-label" x="330" y="47" text-anchor="middle">Orders</text>
+
+                <rect class="diagram-node" x="405" y="20" width="100" height="45" rx="3"/>
+                <text class="diagram-label" x="455" y="47" text-anchor="middle">Loyalty</text>
+
+                <!-- Arrows to BigQuery -->
+                <line class="diagram-path" x1="80" y1="65" x2="200" y2="110" marker-end="url(#arrowhead-seg)"/>
+                <line class="diagram-path" x1="205" y1="65" x2="200" y2="110" marker-end="url(#arrowhead-seg)"/>
+                <line class="diagram-path" x1="330" y1="65" x2="280" y2="110" marker-end="url(#arrowhead-seg)"/>
+                <line class="diagram-path" x1="455" y1="65" x2="320" y2="110" marker-end="url(#arrowhead-seg)"/>
+
+                <!-- BigQuery -->
+                <rect class="diagram-node" x="130" y="110" width="220" height="50" rx="3"/>
+                <text class="diagram-label" x="240" y="135" text-anchor="middle">BigQuery (Datastream)</text>
+                <text class="diagram-label" x="240" y="150" text-anchor="middle" font-size="10">Consolidation layer</text>
+
+                <!-- Arrow to views -->
+                <line class="diagram-path" x1="240" y1="160" x2="240" y2="185" marker-end="url(#arrowhead-seg)"/>
+
+                <!-- Materialized Views -->
+                <rect class="diagram-node" x="160" y="185" width="160" height="30" rx="3"/>
+                <text class="diagram-label" x="240" y="205" text-anchor="middle" font-size="11">Materialized Views</text>
+              </svg>
+            </div>
           </div>
           <div class="case-study-section">
             <div class="case-study-eyebrow">Tradeoffs</div>
@@ -1191,6 +1253,39 @@
             <p>• CSMs compose multi-source segments with zero engineering involvement per segment and zero merchant-side schema changes.</p>
             <p>• A new source type is a new table/view, not an engine change.</p>
           </div>
+          <details class="case-study-full-disclosure">
+            <summary>Read the full case study →</summary>
+            <div>
+              <div class="case-study-section">
+                <div class="case-study-eyebrow">Context</div>
+                <p>The module everything else targets through. Representative segment: <em>shoppers who viewed a product that's since dropped in price, haven't ordered in 12 months, have LTV above $300, and hold loyalty points expiring this month.</em> Built this with a team of 2 engineers and 1 analytics engineer, working closely with the Customer Success team to understand segment use cases and validate the UX.</p>
+              </div>
+              <div class="case-study-section">
+                <div class="case-study-eyebrow">Problem</div>
+                <p>That question spans four systems of origin (click-tracking, commerce catalogue, transactional orders, third-party loyalty balance) across three storage engines. Nothing joins — different query languages, performance characteristics, owners, cadences. And the person asking the question is a CSM who doesn't write SQL.</p>
+              </div>
+              <div class="case-study-section">
+                <div class="case-study-eyebrow">Constraints</div>
+                <p>Authored by non-engineers in a UI (arbitrary predicate combinations, not a fixed report menu). Open-ended source set. No client-side schema changes. Read-heavy and repeated (segments run on a schedule, reused across campaigns).</p>
+              </div>
+              <div class="case-study-section">
+                <div class="case-study-eyebrow">Approach</div>
+                <p>Consolidate four source systems (click-tracking, commerce, loyalty, third-party) into BigQuery via Datastream. Materialized views normalize at analytics layer. CSM-authored predicates in UI; segments precompute daily.</p>
+                <details style="margin-top: 16px; color: var(--ink);">
+                  <summary style="cursor: pointer; font-size: 13px; color: var(--accent); font-weight: 500; padding: 8px 0;">Why consolidate instead of federate? →</summary>
+                  <div style="padding-left: 16px; border-left: 1px solid var(--rule); margin-top: 12px; font-size: 13px; line-height: 1.7;">
+                    <p>Federated queries (live cross-system joins) inherit the performance of the slowest system, and each new source becomes an engine change. Consolidating to BigQuery lets new sources flow through materialized views, not query rewrites.</p>
+                  </div>
+                </details>
+                <details style="margin-top: 12px; color: var(--ink);">
+                  <summary style="cursor: pointer; font-size: 13px; color: var(--accent); font-weight: 500; padding: 8px 0;">Identity resolution across 3 ID schemes →</summary>
+                  <div style="padding-left: 16px; border-left: 1px solid var(--rule); margin-top: 12px; font-size: 13px; line-height: 1.7;">
+                    <p>No universal ID existed. Sources sent identifier pairs (email+phone, session+email, customer-id+email) from three schemes (click-tracking, commerce platform, loyalty program). Built transitive graph linking without collision — the same shopper across boundaries without accidentally merging different users sharing an identifier.</p>
+                  </div>
+                </details>
+              </div>
+            </div>
+          </details>
         </div>
       </details>
 
@@ -1210,32 +1305,51 @@
         </summary>
         <div class="case-study-content">
           <div class="case-study-section">
-            <div class="case-study-eyebrow">Context</div>
-            <p>ConvertCart sold personalisation but had no first-party recommendation product. I initiated it, built the first version solo, later rebuilt and expanded it with a team of 3 engineers (including myself) into the three-tier system below, owning architecture decisions, launch strategy, and client adoption.</p>
-          </div>
-          <div class="case-study-section">
-            <div class="case-study-eyebrow">Problem</div>
-            <p>The tempting build is one behavioural engine: collect signals, rank, render. That doesn't get adopted — merchandising is the part of a store owner's job they're least willing to hand to a black box, and blocks were configured by CSMs on the client's behalf, so the person deploying one had to be able to explain exactly what it would show and why. The real problem wasn't ranking quality — it was building something a non-technical CSM could confidently deploy.</p>
-          </div>
-          <div class="case-study-section">
-            <div class="case-study-eyebrow">Constraints</div>
-            <p>Storefront latency budget in the tens of milliseconds when served from a regional replica; up to 200ms P99 for the smaller share of cross-continental requests (mitigated via five-region replication — see below). Renders inside page load; slow is worse than absent. Configured by CSMs, not engineers — every capability had to be UI-expressible and client-explainable. Price/stock accuracy (a wrong recommendation damages trust worse than an empty block). Cold start on both sides (new stores, new products). One system across five platforms and 100+ stores with very different traffic profiles.</p>
-          </div>
-          <div class="case-study-section">
-            <div class="case-study-eyebrow">Approach</div>
-            <p><strong>"A ladder of control, not one engine."</strong> Manual (CSM hand-picked) → Automated (rule-based, daily) → Smart (live, behavioural). Built manual first for client trust, even though it required zero intelligence.</p>
-            <details style="margin-top: 16px; color: var(--ink);">
-              <summary style="cursor: pointer; font-size: 13px; color: var(--accent); font-weight: 500; padding: 8px 0;">How does Smart tier compute live? →</summary>
-              <div style="padding-left: 16px; border-left: 1px solid var(--rule); margin-top: 12px; font-size: 13px; line-height: 1.7;">
-                <p>On-site events land in Redis first, persisting through the session, flushing on close/30min inactivity. Smart blocks read from Redis (the signal they need: "what this shopper did in the last 90 seconds") is in-memory on the hot path, never behind a database read.</p>
-              </div>
-            </details>
-            <details style="margin-top: 12px; color: var(--ink);">
-              <summary style="cursor: pointer; font-size: 13px; color: var(--accent); font-weight: 500; padding: 8px 0;">Regional replication strategy →</summary>
-              <div style="padding-left: 16px; border-left: 1px solid var(--rule); margin-top: 12px; font-size: 13px; line-height: 1.7;">
-                <p>MongoDB read model replicated across five Atlas regions (US, Southeast Asia, Europe, South America, Australia). From a regional replica, P99 latency &lt;50ms; cross-continental sees full 200ms network tax. Placing the input correctly beats caching an answer.</p>
-              </div>
-            </details>
+            <div class="case-study-eyebrow">Overview</div>
+            <p>A three-tier ladder — Manual (CSM hand-picked) → Automated (rule-based) → Smart (live, behavioral, Redis-backed, five-region replicated) — so merchants could adopt the least risky tier first and graduate as trust built. Most who tried it ended up on Smart.</p>
+            <div class="figure-container">
+              <svg class="figure" viewBox="0 0 900 260" role="img" aria-label="Recommendations ladder architecture diagram">
+                <defs>
+                  <marker id="arrowhead-recs" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                    <polygon points="0 0, 10 3, 0 6" fill="var(--rule-2)"/>
+                  </marker>
+                  <marker id="arrowhead-accent-recs" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                    <polygon points="0 0, 10 3, 0 6" fill="var(--accent)"/>
+                  </marker>
+                </defs>
+
+                <!-- Tier ladder -->
+                <rect class="diagram-node" x="50" y="30" width="120" height="50" rx="3"/>
+                <text class="diagram-label" x="110" y="62" text-anchor="middle">Manual</text>
+                <text class="diagram-label" x="110" y="75" text-anchor="middle" font-size="10">(CSM pick)</text>
+
+                <line class="diagram-path" x1="170" y1="55" x2="250" y2="55" marker-end="url(#arrowhead-recs)"/>
+
+                <rect class="diagram-node" x="250" y="30" width="140" height="50" rx="3"/>
+                <text class="diagram-label" x="320" y="62" text-anchor="middle">Automated</text>
+                <text class="diagram-label" x="320" y="75" text-anchor="middle" font-size="10">(rule-based, daily)</text>
+
+                <line class="diagram-path" x1="390" y1="55" x2="470" y2="55" marker-end="url(#arrowhead-recs)"/>
+
+                <rect class="diagram-node" x="470" y="30" width="120" height="50" rx="3"/>
+                <text class="diagram-label" x="530" y="62" text-anchor="middle">Smart</text>
+                <text class="diagram-label" x="530" y="75" text-anchor="middle" font-size="10">(live, behavioral)</text>
+
+                <!-- Smart tier details -->
+                <line class="diagram-accent-path" x1="530" y1="80" x2="430" y2="140" marker-end="url(#arrowhead-accent-recs)"/>
+                <line class="diagram-accent-path" x1="530" y1="80" x2="630" y2="140" marker-end="url(#arrowhead-accent-recs)"/>
+
+                <rect class="diagram-node" x="360" y="140" width="140" height="40" rx="3"/>
+                <text class="diagram-label" x="430" y="167" text-anchor="middle" font-size="10">Redis (session signal)</text>
+
+                <rect class="diagram-node" x="560" y="140" width="140" height="40" rx="3"/>
+                <text class="diagram-label" x="630" y="167" text-anchor="middle" font-size="10">MongoDB (5 regions)</text>
+
+                <!-- Performance callout -->
+                <text class="diagram-label" x="110" y="220" text-anchor="middle" font-size="10" fill="var(--ink-2)">Regional: &lt;50ms P99</text>
+                <text class="diagram-label" x="530" y="220" text-anchor="middle" font-size="10" fill="var(--ink-2)">Cross-region: 200ms P99</text>
+              </svg>
+            </div>
           </div>
           <div class="case-study-section">
             <div class="case-study-eyebrow">Tradeoffs</div>
@@ -1252,6 +1366,39 @@
             <p>• Served from five regions.</p>
             <p>• Conversion attribution ties orders back to specific blocks (measured, not asserted, value).</p>
           </div>
+          <details class="case-study-full-disclosure">
+            <summary>Read the full case study →</summary>
+            <div>
+              <div class="case-study-section">
+                <div class="case-study-eyebrow">Context</div>
+                <p>ConvertCart sold personalisation but had no first-party recommendation product. I initiated it, built the first version solo, later rebuilt and expanded it with a team of 3 engineers (including myself) into the three-tier system below, owning architecture decisions, launch strategy, and client adoption.</p>
+              </div>
+              <div class="case-study-section">
+                <div class="case-study-eyebrow">Problem</div>
+                <p>The tempting build is one behavioural engine: collect signals, rank, render. That doesn't get adopted — merchandising is the part of a store owner's job they're least willing to hand to a black box, and blocks were configured by CSMs on the client's behalf, so the person deploying one had to be able to explain exactly what it would show and why. The real problem wasn't ranking quality — it was building something a non-technical CSM could confidently deploy.</p>
+              </div>
+              <div class="case-study-section">
+                <div class="case-study-eyebrow">Constraints</div>
+                <p>Storefront latency budget in the tens of milliseconds when served from a regional replica; up to 200ms P99 for the smaller share of cross-continental requests (mitigated via five-region replication — see below). Renders inside page load; slow is worse than absent. Configured by CSMs, not engineers — every capability had to be UI-expressible and client-explainable. Price/stock accuracy (a wrong recommendation damages trust worse than an empty block). Cold start on both sides (new stores, new products). One system across five platforms and 100+ stores with very different traffic profiles.</p>
+              </div>
+              <div class="case-study-section">
+                <div class="case-study-eyebrow">Approach</div>
+                <p><strong>"A ladder of control, not one engine."</strong> Manual (CSM hand-picked) → Automated (rule-based, daily) → Smart (live, behavioural). Built manual first for client trust, even though it required zero intelligence.</p>
+                <details style="margin-top: 16px; color: var(--ink);">
+                  <summary style="cursor: pointer; font-size: 13px; color: var(--accent); font-weight: 500; padding: 8px 0;">How does Smart tier compute live? →</summary>
+                  <div style="padding-left: 16px; border-left: 1px solid var(--rule); margin-top: 12px; font-size: 13px; line-height: 1.7;">
+                    <p>On-site events land in Redis first, persisting through the session, flushing on close/30min inactivity. Smart blocks read from Redis (the signal they need: "what this shopper did in the last 90 seconds") is in-memory on the hot path, never behind a database read.</p>
+                  </div>
+                </details>
+                <details style="margin-top: 12px; color: var(--ink);">
+                  <summary style="cursor: pointer; font-size: 13px; color: var(--accent); font-weight: 500; padding: 8px 0;">Regional replication strategy →</summary>
+                  <div style="padding-left: 16px; border-left: 1px solid var(--rule); margin-top: 12px; font-size: 13px; line-height: 1.7;">
+                    <p>MongoDB read model replicated across five Atlas regions (US, Southeast Asia, Europe, South America, Australia). From a regional replica, P99 latency &lt;50ms; cross-continental sees full 200ms network tax. Placing the input correctly beats caching an answer.</p>
+                  </div>
+                </details>
+              </div>
+            </div>
+          </details>
         </div>
       </details>
     </section>

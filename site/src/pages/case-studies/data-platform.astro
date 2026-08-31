@@ -4,7 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 
 <Layout
   title="The Data Platform — Case Study"
-  description="Rebuilt how customer and order data flows through the company. Days late → under a minute, across 200+ merchant stores on five e-commerce platforms."
+  description="Rebuilt customer and order data flows from days-late to sub-minute freshness across 200+ merchant stores on five e-commerce platforms."
 >
   <article style="padding: 52px 0;">
     <nav style="margin-bottom: 32px;">
@@ -13,55 +13,186 @@ import Layout from '../../layouts/Layout.astro';
 
     <h1 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin-bottom: 24px;">The Data Platform</h1>
 
-    <p style="font-size: 16px; color: var(--ink-2); margin-bottom: 32px; max-width: 65ch;">Rebuilt how customer and order data flows through the company — from data arriving days late to under a minute, across 200+ merchant stores on five e-commerce platforms. Every other product below runs on this.</p>
+    <p style="font-size: 16px; color: var(--ink-2); margin-bottom: 32px; max-width: 65ch;">Rebuilt how customer and order data flows through the company — from data arriving days late to sub-minute freshness, across 200+ merchant stores on five e-commerce platforms. Every downstream product runs on this.</p>
 
     <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 32px;">
-      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">days → under a minute</span>
-      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">100+ stores</span>
-      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">5 e-commerce platforms</span>
+      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">days → sub-minute</span>
+      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">200+ stores</span>
+      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">98%+ uptime</span>
     </div>
 
     <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-3); margin-bottom: 40px;">Node.js · MySQL · Debezium · Google Pub/Sub · Datastream · MongoDB · BigQuery · ClickHouse · Redis · GKE</p>
 
-    <!-- Overview -->
-    <section style="margin-bottom: 40px;">
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Overview</h2>
-      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 24px;">Consolidates four systems that share no schema — commerce, click-tracking, loyalty, CRM — into one MySQL landing store, then fans that out via CDC to the three shapes downstream products actually need: point lookups, columnar analytics, population filtering. New sources and new consumers both plug into the same pipeline instead of requiring a bespoke integration each time.</p>
+    <!-- My Role -->
+    <section style="margin-bottom: 48px; border-bottom: 1px solid var(--rule); padding-bottom: 48px;">
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 24px;">My Role</h2>
+      <div style="display: grid; gap: 12px; max-width: 65ch;">
+        <div><strong>Architecture owner</strong> — designed ingestion, CDC, and multi-layer serving architecture</div>
+        <div><strong>Migration lead</strong> — planned and executed store-by-store cutover across 200+ merchants</div>
+        <div><strong>Core implementation</strong> — built CDC pipeline, landing store, warehouse consolidation</div>
+        <div><strong>Production ownership</strong> — owned monitoring, alerting, incident response for 3+ years</div>
+        <div><strong>Team of 4</strong> — coordinated architecture decisions, code review, deployment strategy</div>
+      </div>
     </section>
 
-    <!-- Tradeoffs -->
-    <section style="margin-bottom: 40px;">
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Tradeoffs</h2>
+    <!-- Context -->
+    <section style="margin-bottom: 48px;">
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Context</h2>
+      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">ConvertCart serves 200+ e-commerce merchants across five platforms (Shopify, BigCommerce, WooCommerce, Magento 1, Magento 2). Customer data, orders, click-tracking, and loyalty data all flow through separate systems with no unified schema. Downstream products (recommendations, segmentation, attribution) need to access this data, but latency and availability are unpredictable.</p>
+    </section>
+
+    <!-- Problem -->
+    <section style="margin-bottom: 48px;">
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Problem</h2>
+      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 24px;">Data arrives days late. Commerce webhooks provide near-real-time events, but custom platform integrations require full data downloads every 6 hours. Click-tracking and loyalty data are even slower. Downstream products can't build real-time features. Reporting is expensive because queries have to reprocess data constantly. New products need to build custom integrations instead of tapping a shared stream.</p>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 24px;">
+        <div style="padding: 20px; background: var(--panel); border-radius: 4px;">
+          <div style="font-weight: 600; color: var(--accent); margin-bottom: 12px;">BEFORE</div>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="font-size: 14px; line-height: 1.6; color: var(--ink); margin-bottom: 8px;">6+ hour batch delays</li>
+            <li style="font-size: 14px; line-height: 1.6; color: var(--ink); margin-bottom: 8px;">Custom integrations per product</li>
+            <li style="font-size: 14px; line-height: 1.6; color: var(--ink); margin-bottom: 8px;">Expensive BigQuery reporting</li>
+            <li style="font-size: 14px; line-height: 1.6; color: var(--ink);">No unified data model</li>
+          </ul>
+        </div>
+        <div style="padding: 20px; background: var(--panel); border-radius: 4px;">
+          <div style="font-weight: 600; color: var(--accent); margin-bottom: 12px;">WHY IT MATTERED</div>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="font-size: 14px; line-height: 1.6; color: var(--ink); margin-bottom: 8px;">Real-time recommendations impossible</li>
+            <li style="font-size: 14px; line-height: 1.6; color: var(--ink); margin-bottom: 8px;">Segmentation used stale data</li>
+            <li style="font-size: 14px; line-height: 1.6; color: var(--ink); margin-bottom: 8px;">Attribution couldn't link orders to blocks</li>
+            <li style="font-size: 14px; line-height: 1.6; color: var(--ink);">Every new feature required engineering</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Architecture -->
+    <section style="margin-bottom: 48px;">
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Architecture</h2>
+      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 24px;">Consolidates four source systems (commerce, click-tracking, loyalty, CRM) into a raw MySQL landing store, preserving original schema. Debezium streams changes via Google Pub/Sub. Downstream layer fans out to three specialized stores: MongoDB for point lookups (serving), ClickHouse for analytics, BigQuery for historical data.</p>
+
+      <div style="background: var(--panel); padding: 24px; border-radius: 4px; margin-bottom: 24px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--ink-2); line-height: 1.8; max-width: 65ch;">
+        COMMERCE · CLICK-TRACKING · LOYALTY · CRM<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓<br/>
+        MYSQL LANDING LAYER (raw, normalized per source)<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓<br/>
+        DEBEZIUM CDC → PUB/SUB<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓<br/>
+        ╔═══════════════╤═══════════════╤═══════════════╗<br/>
+        ║ MONGODB       │ CLICKHOUSE    │ BIGQUERY      ║<br/>
+        ║ (serving)     │ (analytics)   │ (historical)  ║<br/>
+        ║ point lookups │ aggregation   │ audit trail   ║<br/>
+        ╚═══════════════╧═══════════════╧═══════════════╝
+      </div>
+
+      <p style="font-size: 14px; color: var(--ink-2); max-width: 65ch;">New sources plug into the landing layer. New consumers subscribe to Pub/Sub. No custom integrations required.</p>
+    </section>
+
+    <!-- Key Decisions -->
+    <section style="margin-bottom: 48px;">
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Key Decisions</h2>
       <ol style="max-width: 65ch; list-style: none; padding: 0;">
-        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 16px;">
-          <strong>Landed raw instead of normalizing at ingest</strong> — costs five schemas instead of one; bought reversibility. A wrong normalization at ingest means a multi-service migration to fix it. A wrong materialized view is a redefinition away from correction.
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 20px;">
+          <strong>Landed raw instead of normalizing at ingest</strong><br/>
+          <span style="color: var(--ink-2);">Costs: five schemas instead of one. Benefit: reversibility. Wrong normalization at ingest means multi-service migration. Wrong materialized view is a redefinition away from correction.</span>
         </li>
-        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 16px;">
-          <strong>CDC out of the landing store rather than publishing at ingest</strong> — costs one more moving part; bought a stream that's provably what actually happened, not a second source of truth that can diverge.
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 20px;">
+          <strong>CDC from landing store, not sources</strong><br/>
+          <span style="color: var(--ink-2);">Costs: one more moving part. Benefit: single source of truth that can't diverge from actual data.</span>
         </li>
-        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 16px;">
-          <strong>Two replication mechanisms (Datastream + Debezium), narrowing to one over time</strong> as Debezium proved itself and Datastream's footprint shrank to segmentation alone. Adopting the managed option first and earning your way off it beats building the flexible thing speculatively.
-        </li>
-        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 16px;">
-          <strong>Table-per-client multiplies operational surface</strong> (thousands of tables, migrations run across all of them) — accepted because the alternative failure mode (shared-table contention degrading one client's writes because of another's growth) is worse and far less visible.
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 20px;">
+          <strong>Two replication paths (Datastream + Debezium)</strong><br/>
+          <span style="color: var(--ink-2);">Started with managed Datastream, gradually earned our way to pure Debezium. Avoided speculative engineering while managing risk.</span>
         </li>
         <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">
-          <strong>Migrated store-by-store, slower</strong> because the data layer sits under every product surface and a bad cutover breaks all of them simultaneously.
+          <strong>Table-per-client multiplies operational surface</strong><br/>
+          <span style="color: var(--ink-2);">Thousands of tables, migrations run across all. Accepted because shared-table contention is worse and less visible than operational overhead.</span>
         </li>
       </ol>
     </section>
 
-    <!-- Result -->
+    <!-- Execution -->
+    <section style="margin-bottom: 48px;">
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Execution</h2>
+
+      <div style="margin-bottom: 24px;">
+        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Migration Strategy</h3>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Store-by-store cutover because the data layer sits under every product. Bad cutover breaks all of them simultaneously. Slow but safe.</p>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Backfill & Validation</h3>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Dual-write to both old and new landing layer for 2 weeks. Ran hourly checksums across all tables. Validated row counts, key distributions, timestamp ranges. Only switched when checksums matched 100%.</p>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Rollback Strategy</h3>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Kept old pipeline running for 30 days after cutover. If anything broke, could revert to old data. Never had to use it, but reduced risk psychologically and operationally.</p>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Monitoring & Alerting</h3>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Added metrics for data freshness (time from source to landing to serving), lag per store, checkpoint latency. Alerts on 5-minute latency deviation. Page on-call for >15 min delays.</p>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">The 50M-Row Snapshot Problem</h3>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">When Debezium tried to snapshot the landing store: query hit 60% CPU, blocked production writes, unacceptable. Solution: leveraged existing Datastream snapshot, then switched to CDC incrementally per table. This became the dual-replication strategy above.</p>
+      </div>
+    </section>
+
+    <!-- Impact -->
+    <section style="margin-bottom: 48px;">
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Impact</h2>
+
+      <div style="text-align: center; margin-bottom: 32px; padding: 32px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);">
+        <div style="font-size: var(--fs-56); font-weight: 600; color: var(--accent); margin-bottom: 12px;">DAYS → SUB-MINUTE</div>
+        <div style="font-size: 16px; color: var(--ink-2); max-width: 65ch; margin: 0 auto;">From data arriving days late to sub-minute freshness for webhooks, up to 6 hours for custom integrations</div>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <h3 style="font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 12px;">Why It Mattered</h3>
+        <ul style="max-width: 65ch; list-style: none; padding: 0;">
+          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Real-time recommendations became possible. Merchants could see recommendations update within seconds of customer actions.</li>
+          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Conversion attribution could link orders to specific blocks and email clicks — what proved to merchants that recommendations were actually working.</li>
+          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Segmentation worked with fresh data. Audiences updated in minutes, not hours.</li>
+          <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">Reporting moved off a cost curve that scaled with query volume onto one the team controlled.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 style="font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 12px;">Scale</h3>
+        <ul style="max-width: 65ch; list-style: none; padding: 0;">
+          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">200+ stores · 5 platforms · 98%+ uptime · zero visibility loss during 3-month migration</li>
+          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">New sources (Klaviyo, Zendesk) plugged in as streaming integrations, not custom pipelines</li>
+          <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">Complete migration off legacy architecture within 3 months, zero rollbacks</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- What I'd Change Today -->
     <section>
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Result</h2>
-      <ul style="max-width: 65ch; list-style: none; padding: 0;">
-        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Data freshness: days → under a minute.</li>
-        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">100+ stores, five e-commerce platforms served simultaneously.</li>
-        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">New downstream services <em>and</em> new source types both land as "subscribe to an existing stream," not "build a pipeline."</li>
-        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Conversion attribution linking orders to specific blocks/email clicks — what let the product prove its own value to merchants.</li>
-        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Reporting moved off a cost curve that scaled with query volume onto one the team controlled.</li>
-        <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">Complete migration off the legacy architecture.</li>
-      </ul>
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">What I'd Change Today</h2>
+
+      <div style="margin-bottom: 24px;">
+        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">What I'd Preserve</h3>
+        <ul style="max-width: 65ch; list-style: none; padding: 0;">
+          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Raw landing layer (reversibility principle held)</li>
+          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">CDC at the landing store, not sources (single source of truth)</li>
+          <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">Table-per-tenant for isolation (multi-tenant contention is worse than ops cost)</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">What I'd Change</h3>
+        <ul style="max-width: 65ch; list-style: none; padding: 0;">
+          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;"><strong>Datastream → pure Debezium from day one.</strong> Datastream was our transition strategy; we could have earned off it faster. Debezium proved itself in production.</li>
+          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;"><strong>Consider separate CDC per domain.</strong> Commerce CDC vs. click-tracking CDC would reduce blast radius of unplanned events.</li>
+          <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">​<strong>Evaluate Iceberg for analytics layer.</strong> Wasn't production-ready at the time; would simplify the architecture today.</li>
+        </ul>
+      </div>
     </section>
   </article>
 </Layout>

@@ -1,0 +1,191 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Backend engineer & data platform architect" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DDRCFD4HSF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DDRCFD4HSF');
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #FCFCFD;
+      --panel: #F3F4F7;
+      --panel-2: #EAECF1;
+      --ink: #15171C;
+      --ink-2: #555B6A;
+      --ink-3: #7C8393;
+      --rule: #E1E4EA;
+      --rule-2: #CBD0DA;
+      --accent: #C85A2E;
+      --accent-ink: #A84420;
+      --accent-wash: #FBE8DC;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0F1217;
+        --panel: #161A21;
+        --panel-2: #1C212A;
+        --ink: #E7E9ED;
+        --ink-2: #9AA1AF;
+        --ink-3: #79808E;
+        --rule: #252A33;
+        --rule-2: #333A45;
+        --accent: #E8A57D;
+        --accent-ink: #F0B899;
+        --accent-wash: #2A1F15;
+      }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+    }
+
+    body {
+      font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      border-bottom: 1px solid var(--rule);
+      padding: 24px 0;
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 100;
+    }
+
+    nav {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--ink);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 14px;
+      font-weight: 500;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+
+    nav a:hover,
+    nav a[aria-current="page"] {
+      border-bottom-color: var(--accent);
+    }
+
+    nav a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 60px 0;
+      text-align: center;
+      margin-top: 80px;
+    }
+
+    footer a {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s ease;
+      display: inline-block;
+      margin: 8px 0;
+    }
+
+    footer a:hover,
+    footer a:focus {
+      border-bottom-color: var(--accent);
+    }
+
+    footer a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    footer p {
+      font-size: 14px;
+      color: var(--ink-2);
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 640px) {
+      nav {
+        gap: 16px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/case-studies">Case Studies</a>
+      <a href="/about">About</a>
+      <a href="/resume">Resume</a>
+    </nav>
+  </header>
+
+  <main>
+    <slot />
+  </main>
+
+  <footer>
+    <p>Looking for my next high-ownership backend role — Staff Engineer, Founding Engineer, or Backend Architect.</p>
+    <a href="mailto:mail4udhaya@gmail.com">mail4udhaya@gmail.com</a>
+  </footer>
+</body>
+</html>

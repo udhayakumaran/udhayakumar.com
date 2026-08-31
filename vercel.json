@@ -1,4 +1,6 @@
 {
+  "outputDirectory": "dist",
+  "buildCommand": "",
   "redirects": [
     {
       "source": "/resume",

@@ -222,22 +222,30 @@ import Layout from '../layouts/Layout.astro';
   }
 </style>
 
-<script>
-  document.querySelectorAll('.lens-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const lens = btn.dataset.lens;
-      document.querySelectorAll('.lens-btn').forEach(b => {
-        b.classList.remove('active');
-        b.setAttribute('aria-pressed', 'false');
-      });
-      btn.classList.add('active');
-      btn.setAttribute('aria-pressed', 'true');
+<script is:inline>
+  function initLensButtons() {
+    document.querySelectorAll('.lens-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lens = btn.dataset.lens;
+        document.querySelectorAll('.lens-btn').forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
 
-      document.querySelectorAll('.lens-note').forEach(note => {
-        note.classList.remove('visible');
+        document.querySelectorAll('.lens-note').forEach(note => {
+          note.classList.remove('visible');
+        });
+        const noteId = `lens-note-${lens}`;
+        document.getElementById(noteId)?.classList.add('visible');
       });
-      const noteId = `lens-note-${lens}`;
-      document.getElementById(noteId)?.classList.add('visible');
     });
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLensButtons);
+  } else {
+    initLensButtons();
+  }
 </script>

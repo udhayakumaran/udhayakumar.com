@@ -4,7 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 
 <Layout
   title="Customer Segmentation — Case Study"
-  description="Built the system that lets non-technical Customer Success reps build audiences without code. Four source systems, one query interface."
+  description="Built the system that lets non-technical Customer Success reps build audiences without code. Four source systems, one query interface, 1,000+ segments."
 >
   <article style="padding: 52px 0;">
     <nav style="margin-bottom: 32px;">
@@ -13,47 +13,149 @@ import Layout from '../../layouts/Layout.astro';
 
     <h1 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin-bottom: 24px;">Customer Segmentation</h1>
 
-    <p style="font-size: 16px; color: var(--ink-2); margin-bottom: 32px; max-width: 65ch;">Built the system that lets a non-technical Customer Success rep build audiences like "shoppers who'd buy again if reminded" without writing a line of code or filing an engineering ticket. The hardest thing I built, and the module every marketing campaign ran through.</p>
+    <p style="font-size: 16px; color: var(--ink-2); margin-bottom: 32px; max-width: 65ch;">Built the system that lets a non-technical Customer Success rep build audiences like "shoppers who'd buy again if reminded" without writing a line of code or filing an engineering ticket. The hardest product I built.</p>
 
     <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 32px;">
-      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">4 source systems, 1 query</span>
+      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">1,000+ segments</span>
+      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">4 source systems</span>
       <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">built on the platform ↑</span>
     </div>
 
-    <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-3); margin-bottom: 40px;">BigQuery · Google Datastream · MySQL · materialised views</p>
+    <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-3); margin-bottom: 40px;">BigQuery · Google Datastream · MySQL · Materialised views · Query builder UI</p>
 
-    <!-- Overview -->
-    <section style="margin-bottom: 40px;">
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Overview</h2>
-      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">Pulls customer signal from four disconnected systems — click-tracking, commerce, orders, loyalty — into one BigQuery-backed model, so a Customer Success rep can build an audience like "buy-again candidates with expiring loyalty points" by combining filters in a UI. No SQL, no engineering ticket.</p>
+    <!-- My Role -->
+    <section style="margin-bottom: 48px; border-bottom: 1px solid var(--rule); padding-bottom: 48px;">
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 24px;">My Role</h2>
+      <div style="display: grid; gap: 12px; max-width: 65ch;">
+        <div><strong>Architecture & design</strong> — designed unified data model, query composition system, and materialized view strategy</div>
+        <div><strong>Core implementation</strong> — built query builder, materialization pipeline, customer data model</div>
+        <div><strong>Product partnership</strong> — worked with CSM team to understand audience composition needs, iterated on UI</div>
+        <div><strong>Production ownership</strong> — monitored BigQuery costs, query performance, materialization latency</div>
+      </div>
     </section>
 
-    <!-- Tradeoffs -->
-    <section style="margin-bottom: 40px;">
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Tradeoffs</h2>
+    <!-- Context -->
+    <section style="margin-bottom: 48px;">
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Context</h2>
+      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">Customer Success team wants to run targeted campaigns ("remind shoppers who almost bought", "reward loyal customers", "re-engage"). Customer signals live in four systems: click-tracking, commerce, orders, loyalty. Currently CSMs file engineering tickets for each segment. Blocks campaigns and doesn't scale.</p>
+    </section>
+
+    <!-- Problem -->
+    <section style="margin-bottom: 48px;">
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Problem</h2>
+      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 24px;">Segments are built ad-hoc for campaigns, manually combined by engineers. No way for CSMs to compose complex filters without SQL. Each new segment requires engineering work, adding 3-5 days of latency. Customer loyalty program can't be queried against order data. No way to answer "loyalty customers who haven't ordered in 30 days".</p>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 24px;">
+        <div style="padding: 20px; background: var(--panel); border-radius: 4px;">
+          <div style="font-weight: 600; color: var(--accent); margin-bottom: 12px;">BEFORE</div>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="font-size: 14px; line-height: 1.6; color: var(--ink); margin-bottom: 8px;">Manual segment definition</li>
+            <li style="font-size: 14px; line-height: 1.6; color: var(--ink); margin-bottom: 8px;">Engineering ticket per segment</li>
+            <li style="font-size: 14px; line-height: 1.6; color: var(--ink);">Disconnected data sources</li>
+          </ul>
+        </div>
+        <div style="padding: 20px; background: var(--panel); border-radius: 4px;">
+          <div style="font-weight: 600; color: var(--accent); margin-bottom: 12px;">WHY IT MATTERED</div>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="font-size: 14px; line-height: 1.6; color: var(--ink); margin-bottom: 8px;">Campaigns blocked on engineering</li>
+            <li style="font-size: 14px; line-height: 1.6; color: var(--ink); margin-bottom: 8px;">Can't combine customer signals</li>
+            <li style="font-size: 14px; line-height: 1.6; color: var(--ink);">CSM productivity capped</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Architecture -->
+    <section style="margin-bottom: 48px;">
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Architecture</h2>
+      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 24px;">Consolidates four source systems into one unified customer model in BigQuery. Defines reusable customer dimensions (loyalty status, purchase frequency, engagement, churn risk). CSMs compose segments by stacking filters through a UI. Query builder generates SQL, materialized views cache results for exports.</p>
+
+      <div style="background: var(--panel); padding: 24px; border-radius: 4px; margin-bottom: 24px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--ink-2); line-height: 1.8; max-width: 65ch;">
+        CLICK-TRACKING · COMMERCE · ORDERS · LOYALTY<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓<br/>
+        UNIFIED CUSTOMER MODEL (BigQuery)<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓<br/>
+        DIMENSIONS (loyalty_status, purchase_freq, engagement)<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓<br/>
+        QUERY BUILDER (CSM UI)<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓<br/>
+        MATERIALIZED VIEWS (daily cache)<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓<br/>
+        CAMPAIGNS
+      </div>
+    </section>
+
+    <!-- Key Decisions -->
+    <section style="margin-bottom: 48px;">
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Key Decisions</h2>
       <ol style="max-width: 65ch; list-style: none; padding: 0;">
-        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 16px;">
-          <strong>Consolidated (moved data) rather than federated (moved computation)</strong> — costs a second full copy and continuous replication; buys one query language and genuinely possible joins.
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 20px;">
+          <strong>Consolidated, not federated</strong><br/>
+          <span style="color: var(--ink-2);">Costs: second data copy and continuous replication. Benefit: one query language, genuinely possible joins across sources.</span>
         </li>
-        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 16px;">
-          <strong>Normalized at the analytics layer, not at ingest</strong> — deliberately the mirror image of the platform's ingest decision. Same modelling work, moved to where mistakes are cheap to fix.
-        </li>
-        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 16px;">
-          <strong>Precomputed daily, not live</strong> — correct for campaign-cadence workloads; also why segmentation and the recommendation engine deliberately use different computation models for different questions ("who to contact this week" vs "what to show this shopper right now").
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 20px;">
+          <strong>Normalize at analytics layer, not ingest</strong><br/>
+          <span style="color: var(--ink-2);">Mirror of platform's ingest decision. Same modelling work, moved to where mistakes are cheap to fix.</span>
         </li>
         <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">
-          <strong>BigQuery's scan-based billing was an accepted risk</strong> on a read-heavy, repeatedly-evaluated workload — the same cost shape that later drove reporting to ClickHouse.
+          <strong>Precomputed daily, not live</strong><br/>
+          <span style="color: var(--ink-2);">Right for campaign cadence. Recommendations needed live serving; segmentation didn't.</span>
         </li>
       </ol>
     </section>
 
-    <!-- Result -->
+    <!-- Execution -->
+    <section style="margin-bottom: 48px;">
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Execution</h2>
+
+      <div style="margin-bottom: 24px;">
+        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Rollout</h3>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Started with first CSM, got feedback, iterated on dimensions and UI. Expanded to full team once query builder patterns stabilized. Within 6 months, 1,000+ segments active.</p>
+      </div>
+
+      <div>
+        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">The Hard Part</h3>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Unified customer model required consolidating conflicting definitions. What's "churn"? 30 days without order? 60? Cross-platform or per-store? Built dimension tables with multiple definitions, let CSMs pick. Learned CSMs needed explainability: why is this customer in this segment? Added audit trail.</p>
+      </div>
+    </section>
+
+    <!-- Impact -->
+    <section style="margin-bottom: 48px;">
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Impact</h2>
+
+      <div style="text-align: center; margin-bottom: 32px; padding: 32px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);">
+        <div style="font-size: var(--fs-56); font-weight: 600; color: var(--accent); margin-bottom: 12px;">1,000+ SEGMENTS</div>
+        <div style="font-size: 16px; color: var(--ink-2); max-width: 65ch; margin: 0 auto;">Built by CSMs without engineering involvement</div>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <h3 style="font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 12px;">Why It Mattered</h3>
+        <ul style="max-width: 65ch; list-style: none; padding: 0;">
+          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">CSMs unblocked. Campaigns launched in days, not weeks.</li>
+          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Every marketing campaign ran through segmentation.</li>
+          <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">Data literacy grew within CSM team.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 style="font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 12px;">Scale</h3>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">1,000+ active segments · 4 source systems unified · zero engineering involvement after launch · CSMs building segments independently</p>
+      </div>
+    </section>
+
+    <!-- What I'd Change Today -->
     <section>
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Result</h2>
-      <ul style="max-width: 65ch; list-style: none; padding: 0;">
-        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">CSMs compose multi-source segments with zero engineering involvement per segment and zero merchant-side schema changes.</li>
-        <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">A new source type is a new table/view, not an engine change.</li>
-      </ul>
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">What I'd Change Today</h2>
+
+      <div style="margin-bottom: 24px;">
+        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">What I'd Preserve</h3>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">The consolidated data model and query builder pattern were right. CSMs needed self-service.</p>
+      </div>
+
+      <div>
+        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">What I'd Change</h3>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">BigQuery's scan-based billing drove reporting cost concerns. Would have made the move to ClickHouse earlier, or built segmentation there directly. Also would have built lineage tracking from day one (which segments depend on which queries), as dependencies grew complex.</p>
+      </div>
     </section>
   </article>
 </Layout>

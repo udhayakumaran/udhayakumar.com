@@ -136,6 +136,30 @@ const { title, description = "Backend engineer & data platform architect" } = As
       outline-offset: 2px;
     }
 
+    .theme-toggle {
+      background: transparent;
+      border: 1px solid var(--rule-2);
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: "JetBrains Mono", monospace;
+      margin-left: auto;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .theme-toggle:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
     /* Footer */
     footer {
       border-top: 1px solid var(--rule);
@@ -188,6 +212,9 @@ const { title, description = "Backend engineer & data platform architect" } = As
       <a href="/case-studies">Case Studies</a>
       <a href="/about">About</a>
       <a href="/resume">Resume</a>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span id="theme-icon">🌙</span>
+      </button>
     </nav>
   </header>
 
@@ -199,5 +226,54 @@ const { title, description = "Backend engineer & data platform architect" } = As
     <p>Looking for my next high-ownership backend role — Staff Engineer, Founding Engineer, or Backend Architect.</p>
     <a href="mailto:mail4udhaya@gmail.com">mail4udhaya@gmail.com</a>
   </footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const html = document.documentElement;
+
+    // Load saved theme or detect system preference
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+
+    // Apply initial theme
+    if (initialTheme === 'dark') {
+      html.setAttribute('data-theme', 'dark');
+      themeIcon.textContent = '☀️';
+    } else {
+      html.removeAttribute('data-theme');
+      themeIcon.textContent = '🌙';
+    }
+
+    // Toggle theme on button click
+    themeToggle.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const newTheme = current === 'dark' ? 'light' : 'dark';
+
+      if (newTheme === 'dark') {
+        html.setAttribute('data-theme', 'dark');
+        themeIcon.textContent = '☀️';
+      } else {
+        html.removeAttribute('data-theme');
+        themeIcon.textContent = '🌙';
+      }
+
+      localStorage.setItem('theme', newTheme);
+    });
+
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (!localStorage.getItem('theme')) {
+        if (e.matches) {
+          html.setAttribute('data-theme', 'dark');
+          themeIcon.textContent = '☀️';
+        } else {
+          html.removeAttribute('data-theme');
+          themeIcon.textContent = '🌙';
+        }
+      }
+    });
+  </script>
 </body>
 </html>

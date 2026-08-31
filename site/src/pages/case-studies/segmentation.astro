@@ -1,0 +1,59 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Customer Segmentation — Case Study"
+  description="Built the system that lets non-technical Customer Success reps build audiences without code. Four source systems, one query interface."
+>
+  <article style="padding: 52px 0;">
+    <nav style="margin-bottom: 32px;">
+      <a href="/case-studies" style="font-size: 14px; color: var(--accent); text-decoration: none;">← Back to case studies</a>
+    </nav>
+
+    <h1 style="font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 600; margin-bottom: 24px;">Customer Segmentation</h1>
+
+    <p style="font-size: 16px; color: var(--ink-2); margin-bottom: 32px; max-width: 65ch;">Built the system that lets a non-technical Customer Success rep build audiences like "shoppers who'd buy again if reminded" without writing a line of code or filing an engineering ticket. The hardest thing I built, and the module every marketing campaign ran through.</p>
+
+    <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 32px;">
+      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">4 source systems, 1 query</span>
+      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">built on the platform ↑</span>
+    </div>
+
+    <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-3); margin-bottom: 40px;">BigQuery · Google Datastream · MySQL · materialised views</p>
+
+    <!-- Overview -->
+    <section style="margin-bottom: 40px;">
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Overview</h2>
+      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">Pulls customer signal from four disconnected systems — click-tracking, commerce, orders, loyalty — into one BigQuery-backed model, so a Customer Success rep can build an audience like "buy-again candidates with expiring loyalty points" by combining filters in a UI. No SQL, no engineering ticket.</p>
+    </section>
+
+    <!-- Tradeoffs -->
+    <section style="margin-bottom: 40px;">
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Tradeoffs</h2>
+      <ol style="max-width: 65ch; list-style: none; padding: 0;">
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 16px;">
+          <strong>Consolidated (moved data) rather than federated (moved computation)</strong> — costs a second full copy and continuous replication; buys one query language and genuinely possible joins.
+        </li>
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 16px;">
+          <strong>Normalized at the analytics layer, not at ingest</strong> — deliberately the mirror image of the platform's ingest decision. Same modelling work, moved to where mistakes are cheap to fix.
+        </li>
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 16px;">
+          <strong>Precomputed daily, not live</strong> — correct for campaign-cadence workloads; also why segmentation and the recommendation engine deliberately use different computation models for different questions ("who to contact this week" vs "what to show this shopper right now").
+        </li>
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">
+          <strong>BigQuery's scan-based billing was an accepted risk</strong> on a read-heavy, repeatedly-evaluated workload — the same cost shape that later drove reporting to ClickHouse.
+        </li>
+      </ol>
+    </section>
+
+    <!-- Result -->
+    <section>
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Result</h2>
+      <ul style="max-width: 65ch; list-style: none; padding: 0;">
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">CSMs compose multi-source segments with zero engineering involvement per segment and zero merchant-side schema changes.</li>
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">A new source type is a new table/view, not an engine change.</li>
+      </ul>
+    </section>
+  </article>
+</Layout>

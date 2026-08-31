@@ -1,0 +1,63 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Recommendation Blocks — Case Study"
+  description="Built the product recommendation feature from zero to 80%+ adoption by designing a three-tier ladder: Manual, Automated, Smart."
+>
+  <article style="padding: 52px 0;">
+    <nav style="margin-bottom: 32px;">
+      <a href="/case-studies" style="font-size: 14px; color: var(--accent); text-decoration: none;">← Back to case studies</a>
+    </nav>
+
+    <h1 style="font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 600; margin-bottom: 24px;">Recommendation Blocks</h1>
+
+    <p style="font-size: 16px; color: var(--ink-2); margin-bottom: 32px; max-width: 65ch;">Built the company's product recommendation feature from nothing, designed so store owners could trust it enough to turn it on. Most clients who tried it ended up on the fully automated version.</p>
+
+    <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 32px;">
+      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">80%+ adoption, Smart tier</span>
+      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">5 regions</span>
+      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">built on the platform ↑</span>
+    </div>
+
+    <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-3); margin-bottom: 40px;">Node.js · Redis · MongoDB Atlas (multi-region) · ClickHouse · Pub/Sub</p>
+
+    <!-- Overview -->
+    <section style="margin-bottom: 40px;">
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Overview</h2>
+      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">A three-tier ladder — Manual (CSM hand-picked) → Automated (rule-based) → Smart (live, behavioral, Redis-backed, five-region replicated) — so merchants could adopt the least risky tier first and graduate as trust built. Most who tried it ended up on Smart.</p>
+    </section>
+
+    <!-- Tradeoffs -->
+    <section style="margin-bottom: 40px;">
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Tradeoffs</h2>
+      <ol style="max-width: 65ch; list-style: none; padding: 0;">
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 16px;">
+          <strong>Split live vs. precomputed by tier, not uniformly</strong> — matched each tier's computation model to how fast its inputs actually move.
+        </li>
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 16px;">
+          <strong>Read replicas trade freshness for distance</strong>, which cuts against the stated stock-accuracy constraint — accepted because the failure modes are asymmetric: a few seconds of lag affecting a few items in a narrow window beats permanently serving every non-US shopper a slow block.
+        </li>
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 16px;">
+          <strong>Redis-first buys latency, costs durability</strong> (an in-flight session is lost on a Redis failure) — acceptable for click-tracking, would not have made the same call for order data.
+        </li>
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">
+          <strong>Built the least-interesting tier (Manual) first, deliberately</strong>, in trust order rather than sophistication order — which is why Smart eventually had an installed base to graduate into.
+        </li>
+      </ol>
+    </section>
+
+    <!-- Result -->
+    <section>
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Result</h2>
+      <ul style="max-width: 65ch; list-style: none; padding: 0;">
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">80%+ of clients adopted the Smart tier — the highest-trust tier, reached by clients who started on the lowest.</li>
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Recommendations became first-party rather than bought.</li>
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Expanded into a multi-channel personalisation feed.</li>
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Served from five regions.</li>
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">Conversion attribution ties orders back to specific blocks (measured, not asserted, value).</li>
+      </ul>
+    </section>
+  </article>
+</Layout>

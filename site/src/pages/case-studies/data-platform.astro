@@ -1,0 +1,67 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="The Data Platform — Case Study"
+  description="Rebuilt how customer and order data flows through the company. Days late → under a minute, across 100+ merchant stores on five e-commerce platforms."
+>
+  <article style="padding: 52px 0;">
+    <nav style="margin-bottom: 32px;">
+      <a href="/case-studies" style="font-size: 14px; color: var(--accent); text-decoration: none;">← Back to case studies</a>
+    </nav>
+
+    <h1 style="font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 600; margin-bottom: 24px;">The Data Platform</h1>
+
+    <p style="font-size: 16px; color: var(--ink-2); margin-bottom: 32px; max-width: 65ch;">Rebuilt how customer and order data flows through the company — from data arriving days late to under a minute, across 100+ merchant stores on five e-commerce platforms. Every other product below runs on this.</p>
+
+    <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 32px;">
+      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">days → under a minute</span>
+      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">100+ stores</span>
+      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">5 e-commerce platforms</span>
+    </div>
+
+    <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-3); margin-bottom: 40px;">Node.js · MySQL · Debezium · Google Pub/Sub · Datastream · MongoDB · BigQuery · ClickHouse · Redis · GKE</p>
+
+    <!-- Overview -->
+    <section style="margin-bottom: 40px;">
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Overview</h2>
+      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 24px;">Consolidates four systems that share no schema — commerce, click-tracking, loyalty, CRM — into one MySQL landing store, then fans that out via CDC to the three shapes downstream products actually need: point lookups, columnar analytics, population filtering. New sources and new consumers both plug into the same pipeline instead of requiring a bespoke integration each time.</p>
+    </section>
+
+    <!-- Tradeoffs -->
+    <section style="margin-bottom: 40px;">
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Tradeoffs</h2>
+      <ol style="max-width: 65ch; list-style: none; padding: 0;">
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 16px;">
+          <strong>Landed raw instead of normalizing at ingest</strong> — costs five schemas instead of one; bought reversibility. A wrong normalization at ingest means a multi-service migration to fix it. A wrong materialized view is a redefinition away from correction.
+        </li>
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 16px;">
+          <strong>CDC out of the landing store rather than publishing at ingest</strong> — costs one more moving part; bought a stream that's provably what actually happened, not a second source of truth that can diverge.
+        </li>
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 16px;">
+          <strong>Two replication mechanisms (Datastream + Debezium), narrowing to one over time</strong> as Debezium proved itself and Datastream's footprint shrank to segmentation alone. Adopting the managed option first and earning your way off it beats building the flexible thing speculatively.
+        </li>
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 16px;">
+          <strong>Table-per-client multiplies operational surface</strong> (thousands of tables, migrations run across all of them) — accepted because the alternative failure mode (shared-table contention degrading one client's writes because of another's growth) is worse and far less visible.
+        </li>
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">
+          <strong>Migrated store-by-store, slower</strong> because the data layer sits under every product surface and a bad cutover breaks all of them simultaneously.
+        </li>
+      </ol>
+    </section>
+
+    <!-- Result -->
+    <section>
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Result</h2>
+      <ul style="max-width: 65ch; list-style: none; padding: 0;">
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Data freshness: days → under a minute.</li>
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">100+ stores, five e-commerce platforms served simultaneously.</li>
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">New downstream services <em>and</em> new source types both land as "subscribe to an existing stream," not "build a pipeline."</li>
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Conversion attribution linking orders to specific blocks/email clicks — what let the product prove its own value to merchants.</li>
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Reporting moved off a cost curve that scaled with query volume onto one the team controlled.</li>
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">Complete migration off the legacy architecture.</li>
+      </ul>
+    </section>
+  </article>
+</Layout>

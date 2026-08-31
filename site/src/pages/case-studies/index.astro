@@ -4,7 +4,49 @@ import Layout from '../../layouts/Layout.astro';
 
 <Layout title="Case Studies">
   <section style="padding: 52px 0;">
-    <h1 style="font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 600; margin-bottom: 32px;">Case Studies</h1>
-    <p>Case study index coming soon.</p>
+    <h1 style="font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 600; margin-bottom: 40px;">Case Studies</h1>
+    <div style="display: grid; gap: 24px;">
+      <a href="/case-studies/data-platform" style="text-decoration: none; display: block; padding: 24px; background: var(--panel); border: 1px solid var(--rule-2); border-radius: 4px; transition: border-color 0.2s ease;" class="case-link">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-3); font-weight: 600; margin-bottom: 4px;">01</div>
+        <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--ink);">The Data Platform</h2>
+        <p style="font-size: 14px; color: var(--ink-2); line-height: 1.6; margin-bottom: 12px;">Rebuilt how customer and order data flows through the company — from data arriving days late to under a minute, across 100+ merchant stores on five e-commerce platforms.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <span style="font-size: 11px; background: var(--panel-2); color: var(--ink-3); padding: 4px 8px; border-radius: 3px;">days → under a minute</span>
+          <span style="font-size: 11px; background: var(--panel-2); color: var(--ink-3); padding: 4px 8px; border-radius: 3px;">100+ stores</span>
+          <span style="font-size: 11px; background: var(--panel-2); color: var(--ink-3); padding: 4px 8px; border-radius: 3px;">5 e-commerce platforms</span>
+        </div>
+      </a>
+
+      <a href="/case-studies/segmentation" style="text-decoration: none; display: block; padding: 24px; background: var(--panel); border: 1px solid var(--rule-2); border-radius: 4px; transition: border-color 0.2s ease;" class="case-link">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-3); font-weight: 600; margin-bottom: 4px;">02</div>
+        <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--ink);">Customer Segmentation</h2>
+        <p style="font-size: 14px; color: var(--ink-2); line-height: 1.6; margin-bottom: 12px;">Built the system that lets a non-technical Customer Success rep build audiences without writing a line of code. The hardest thing I built, and the module every marketing campaign ran through.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <span style="font-size: 11px; background: var(--panel-2); color: var(--ink-3); padding: 4px 8px; border-radius: 3px;">4 source systems, 1 query</span>
+          <span style="font-size: 11px; background: var(--panel-2); color: var(--ink-3); padding: 4px 8px; border-radius: 3px;">built on the platform ↑</span>
+        </div>
+      </a>
+
+      <a href="/case-studies/recommendations" style="text-decoration: none; display: block; padding: 24px; background: var(--panel); border: 1px solid var(--rule-2); border-radius: 4px; transition: border-color 0.2s ease;" class="case-link">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-3); font-weight: 600; margin-bottom: 4px;">03</div>
+        <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--ink);">Recommendation Blocks</h2>
+        <p style="font-size: 14px; color: var(--ink-2); line-height: 1.6; margin-bottom: 12px;">Built the company's product recommendation feature from nothing, designed so store owners could trust it enough to turn it on. Most clients who tried it ended up on the fully automated version.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <span style="font-size: 11px; background: var(--panel-2); color: var(--ink-3); padding: 4px 8px; border-radius: 3px;">80%+ adoption, Smart tier</span>
+          <span style="font-size: 11px; background: var(--panel-2); color: var(--ink-3); padding: 4px 8px; border-radius: 3px;">5 regions</span>
+          <span style="font-size: 11px; background: var(--panel-2); color: var(--ink-3); padding: 4px 8px; border-radius: 3px;">built on the platform ↑</span>
+        </div>
+      </a>
+    </div>
   </section>
 </Layout>
+
+<style>
+  .case-link:hover {
+    border-color: var(--accent);
+  }
+  .case-link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+</style>

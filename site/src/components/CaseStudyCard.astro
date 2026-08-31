@@ -1,0 +1,166 @@
+---
+interface Props {
+  href: string;
+  title: string;
+  subtitle: string;
+  metrics?: string[];
+  variant?: "compact" | "spotlight";
+  isMostRelevant?: boolean;
+}
+
+const {
+  href,
+  title,
+  subtitle,
+  metrics = [],
+  variant = "compact",
+  isMostRelevant = false,
+} = Astro.props;
+---
+
+{
+  variant === "spotlight" ? (
+    <a href={href} class="case-study-spotlight reveal">
+      <div class="spotlight-content">
+        <h3>{title}</h3>
+        <p>{subtitle}</p>
+        {metrics.length > 0 && (
+          <div class="metrics">
+            {metrics.map((metric) => (
+              <span class="metric-chip">{metric}</span>
+            ))}
+          </div>
+        )}
+      </div>
+    </a>
+  ) : (
+    <a href={href} class="case-study-card reveal">
+      <div class="card-header">
+        <h4>{title}</h4>
+        {isMostRelevant && <span class="most-relevant">most relevant</span>}
+      </div>
+      <p class="card-subtitle">{subtitle}</p>
+      {metrics.length > 0 && (
+        <div class="metrics">
+          {metrics.map((metric) => (
+            <span class="metric-chip">{metric}</span>
+          ))}
+        </div>
+      )}
+    </a>
+  )
+}
+
+<style>
+  .case-study-card,
+  .case-study-spotlight {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s ease;
+  }
+
+  .case-study-card {
+    padding: var(--space-6);
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+  }
+
+  .case-study-card:hover {
+    background: var(--panel-2);
+    transform: translateY(-2px);
+  }
+
+  .case-study-card:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-4);
+    margin-bottom: var(--space-3);
+  }
+
+  .card-header h4 {
+    margin: 0;
+  }
+
+  .most-relevant {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: var(--fs-11);
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  .card-subtitle {
+    font-size: var(--fs-14);
+    color: var(--ink-2);
+    line-height: 1.6;
+    margin-bottom: var(--space-4);
+  }
+
+  .case-study-spotlight {
+    display: flex;
+    padding: var(--space-8);
+    background: linear-gradient(
+      135deg,
+      var(--accent-wash),
+      var(--sage-wash)
+    );
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    min-height: 200px;
+    align-items: center;
+  }
+
+  .case-study-spotlight:hover {
+    background: linear-gradient(
+      135deg,
+      var(--accent-wash),
+      var(--sage-wash)
+    );
+    transform: translateY(-4px);
+  }
+
+  .case-study-spotlight:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .spotlight-content h3 {
+    margin-bottom: var(--space-2);
+  }
+
+  .spotlight-content p {
+    font-size: var(--fs-16);
+    line-height: 1.6;
+    color: var(--ink);
+    margin-bottom: var(--space-4);
+  }
+
+  .metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .metric-chip {
+    display: inline-block;
+    padding: var(--space-2) var(--space-3);
+    background: var(--accent);
+    color: white;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: var(--fs-11);
+    font-weight: 600;
+    border-radius: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+</style>

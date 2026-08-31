@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" fill="currentColor" opacity="0"/>
+  <!-- Four corner ticks forming a frame -->
+  <g stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none">
+    <!-- Top-left -->
+    <line x1="8" y1="8" x2="8" y2="20"/>
+    <line x1="8" y1="8" x2="20" y2="8"/>
+    <!-- Top-right -->
+    <line x1="56" y1="8" x2="44" y2="8"/>
+    <line x1="56" y1="8" x2="56" y2="20"/>
+    <!-- Bottom-left -->
+    <line x1="8" y1="56" x2="20" y2="56"/>
+    <line x1="8" y1="56" x2="8" y2="44"/>
+    <!-- Bottom-right -->
+    <line x1="56" y1="56" x2="56" y2="44"/>
+    <line x1="56" y1="56" x2="44" y2="56"/>
+  </g>
+</svg>

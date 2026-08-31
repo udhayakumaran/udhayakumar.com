@@ -1,0 +1,47 @@
+---
+interface Props {
+  value: string;
+  label: string;
+  subtext?: string;
+}
+
+const { value, label, subtext } = Astro.props;
+---
+
+<div class="stat-callout reveal">
+  <div class="stat-value">{value}</div>
+  <div class="stat-label">{label}</div>
+  {subtext && <div class="stat-subtext">{subtext}</div>}
+</div>
+
+<style>
+  .stat-callout {
+    padding: var(--space-6);
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    text-align: center;
+    border-radius: 4px;
+  }
+
+  .stat-value {
+    font-family: "Bricolage Grotesque", system-ui, sans-serif;
+    font-size: var(--fs-40);
+    font-weight: 800;
+    line-height: 1;
+    color: var(--accent);
+    margin-bottom: var(--space-2);
+  }
+
+  .stat-label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: var(--fs-14);
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .stat-subtext {
+    font-size: var(--fs-12);
+    color: var(--ink-2);
+    margin-top: var(--space-2);
+  }
+</style>

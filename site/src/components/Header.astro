@@ -1,0 +1,178 @@
+---
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = "/" } = Astro.props;
+
+const navItems = [
+  { href: "/", label: "Home" },
+  { href: "/case-studies", label: "Case Studies" },
+  { href: "/about", label: "About" },
+  { href: "/resume", label: "Resume" },
+];
+---
+
+<header>
+  <nav>
+    <a href="/" class="wordmark">udhayakumar</a>
+    <div class="nav-links">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          aria-current={currentPath === item.href ? "page" : undefined}
+        >
+          {item.label}
+        </a>
+      ))}
+    </div>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+      <span id="theme-icon">🌙</span>
+    </button>
+  </nav>
+</header>
+
+<style>
+  header {
+    border-bottom: 1px solid var(--rule);
+    padding: var(--space-6) 0;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 100;
+  }
+
+  nav {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    gap: var(--space-8);
+    align-items: center;
+  }
+
+  .wordmark {
+    font-family: "Bricolage Grotesque", system-ui, sans-serif;
+    font-size: var(--fs-18);
+    font-weight: 700;
+    color: var(--ink);
+    text-decoration: none;
+    margin-right: auto;
+    transition: color 0.2s ease;
+  }
+
+  .wordmark:hover {
+    color: var(--accent);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: var(--space-8);
+    align-items: center;
+  }
+
+  nav a {
+    text-decoration: none;
+    color: var(--ink);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: var(--fs-14);
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+
+  nav a:hover,
+  nav a[aria-current="page"] {
+    border-bottom-color: var(--accent);
+  }
+
+  nav a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .theme-toggle {
+    background: transparent;
+    border: 1px solid var(--rule-2);
+    color: var(--ink);
+    font-size: var(--fs-14);
+    font-weight: 500;
+    padding: var(--space-2) var(--space-3);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: "IBM Plex Mono", monospace;
+  }
+
+  .theme-toggle:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .theme-toggle:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 768px) {
+    nav {
+      gap: var(--space-5);
+      flex-wrap: wrap;
+    }
+
+    .nav-links {
+      gap: var(--space-5);
+      order: 3;
+      width: 100%;
+    }
+
+    .wordmark {
+      margin-right: 0;
+    }
+
+    .theme-toggle {
+      order: 2;
+    }
+  }
+</style>
+
+<script>
+  const themeToggle = document.getElementById("theme-toggle");
+  const themeIcon = document.getElementById("theme-icon");
+  const html = document.documentElement;
+
+  if (themeToggle && themeIcon) {
+    // Sync icon text to theme already set by head script
+    themeIcon.textContent =
+      html.getAttribute("data-theme") === "dark" ? "☀️" : "🌙";
+
+    // Toggle theme on button click
+    themeToggle.addEventListener("click", () => {
+      const current = html.getAttribute("data-theme");
+      const newTheme = current === "dark" ? "light" : "dark";
+
+      if (newTheme === "dark") {
+        html.setAttribute("data-theme", "dark");
+        themeIcon.textContent = "☀️";
+      } else {
+        html.setAttribute("data-theme", "light");
+        themeIcon.textContent = "🌙";
+      }
+
+      localStorage.setItem("theme", newTheme);
+    });
+
+    // Listen for system theme changes
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+      if (!localStorage.getItem("theme")) {
+        if (e.matches) {
+          html.setAttribute("data-theme", "dark");
+          themeIcon.textContent = "☀️";
+        } else {
+          html.setAttribute("data-theme", "light");
+          themeIcon.textContent = "🌙";
+        }
+      }
+    });
+  }
+</script>

@@ -1,0 +1,46 @@
+---
+interface Props {
+  tools: string[];
+}
+
+const { tools } = Astro.props;
+---
+
+<div class="tool-grid reveal">
+  {tools.map((tool) => (
+    <div class="tool-card">
+      <div class="tool-name">{tool}</div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .tool-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: var(--space-4);
+    margin: var(--space-6) 0;
+  }
+
+  .tool-card {
+    padding: var(--space-4);
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    text-align: center;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .tool-card:hover {
+    background: var(--panel-2);
+    transform: translateY(-2px);
+  }
+
+  .tool-name {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: var(--fs-12);
+    font-weight: 600;
+    color: var(--ink);
+    word-break: break-word;
+  }
+</style>

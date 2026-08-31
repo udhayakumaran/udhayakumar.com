@@ -1,0 +1,70 @@
+---
+interface Props {
+  index: string;
+  years: string;
+  company: string;
+  role: string;
+}
+
+const { index, years, company, role } = Astro.props;
+---
+
+<div class="timeline-entry reveal">
+  <div class="entry-index">{index}</div>
+  <div class="entry-content">
+    <div class="entry-years">{years}</div>
+    <h4>{company}</h4>
+    <p>{role}</p>
+  </div>
+</div>
+
+<style>
+  .timeline-entry {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: var(--space-6);
+    padding: var(--space-6) 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .timeline-entry:last-child {
+    border-bottom: none;
+  }
+
+  .entry-index {
+    font-family: "Bricolage Grotesque", system-ui, sans-serif;
+    font-size: var(--fs-28);
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .entry-content h4 {
+    margin-bottom: var(--space-1);
+  }
+
+  .entry-years {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: var(--fs-12);
+    font-weight: 600;
+    color: var(--ink-2);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-2);
+  }
+
+  .entry-content p {
+    font-size: var(--fs-14);
+    color: var(--ink-2);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 640px) {
+    .timeline-entry {
+      grid-template-columns: 1fr;
+    }
+
+    .entry-index {
+      font-size: var(--fs-20);
+    }
+  }
+</style>

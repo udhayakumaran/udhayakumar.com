@@ -1,0 +1,135 @@
+---
+interface Lens {
+  id: string;
+  label: string;
+  note: string;
+}
+
+interface Props {
+  lenses: Lens[];
+  defaultLens?: string;
+}
+
+const { lenses, defaultLens = "data" } = Astro.props;
+---
+
+<div class="lens-selector">
+  <div class="lens-buttons" id="lens-buttons">
+    {lenses.map((lens) => (
+      <button
+        class={`lens-btn ${defaultLens === lens.id ? "active" : ""}`}
+        data-lens={lens.id}
+        aria-pressed={defaultLens === lens.id}
+      >
+        {lens.label}
+      </button>
+    ))}
+  </div>
+  <div class="lens-note" id="lens-note">
+    {lenses.find((l) => l.id === defaultLens)?.note}
+  </div>
+</div>
+
+<style>
+  .lens-selector {
+    margin: var(--space-6) 0;
+  }
+
+  .lens-buttons {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-6);
+  }
+
+  .lens-btn {
+    padding: var(--space-3) var(--space-5);
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    color: var(--ink);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: var(--fs-14);
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: capitalize;
+  }
+
+  .lens-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .lens-btn.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+
+  .lens-btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .lens-note {
+    padding: var(--space-4);
+    background: var(--sage-wash);
+    border-left: 3px solid var(--sage);
+    font-size: var(--fs-14);
+    line-height: 1.6;
+    color: var(--ink);
+  }
+</style>
+
+<script define:vars={{ lenses, defaultLens }}>
+  const lensButtons = document.getElementById("lens-buttons");
+  const lensNote = document.getElementById("lens-note");
+
+  if (lensButtons) {
+    // Set initial hash from lens
+    function updateHash(lensId) {
+      if (lensId !== "data") {
+        window.location.hash = lensId;
+      } else {
+        window.location.hash = "";
+      }
+    }
+
+    // Sync from hash on page load
+    function syncFromHash() {
+      const hash = window.location.hash.slice(1) || "data";
+      const buttons = lensButtons.querySelectorAll(".lens-btn");
+      buttons.forEach((btn) => {
+        if (btn.dataset.lens === hash) {
+          btn.classList.add("active");
+          btn.setAttribute("aria-pressed", "true");
+        } else {
+          btn.classList.remove("active");
+          btn.setAttribute("aria-pressed", "false");
+        }
+      });
+
+      // Update note (fade, but instant reorder per BUILD-BRIEF)
+      const lens = lenses.find((l) => l.id === hash);
+      if (lens && lensNote) {
+        lensNote.textContent = lens.note;
+      }
+    }
+
+    // Button click handler
+    lensButtons.addEventListener("click", (e) => {
+      if (e.target.classList.contains("lens-btn")) {
+        const lensId = e.target.dataset.lens;
+        updateHash(lensId);
+        syncFromHash();
+      }
+    });
+
+    // Hash change listener
+    window.addEventListener("hashchange", syncFromHash);
+
+    // Initial sync on load
+    syncFromHash();
+  }
+</script>

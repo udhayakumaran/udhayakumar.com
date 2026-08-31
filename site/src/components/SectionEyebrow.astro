@@ -1,0 +1,38 @@
+---
+interface Props {
+  label: string;
+  accent?: "sage" | "accent";
+}
+
+const { label, accent = "accent" } = Astro.props;
+---
+
+<div class={`eyebrow ${accent === "sage" ? "sage" : ""}`}>
+  {label}
+</div>
+
+<style>
+  .eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: var(--fs-12);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+
+  .eyebrow::before {
+    content: "■";
+    font-size: var(--fs-14);
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .eyebrow.sage::before {
+    color: var(--sage);
+  }
+</style>

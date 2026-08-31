@@ -1,0 +1,68 @@
+---
+interface Stat {
+  value: string;
+  label: string;
+  pct?: number; // 0-100 for bar height
+}
+
+interface Props {
+  stats: Stat[];
+}
+
+const { stats } = Astro.props;
+---
+
+<div class="stat-bar-grid">
+  {stats.map((stat) => (
+    <div class="stat-bar-item reveal">
+      <div class="stat-bar-chart" style={`--bar-h: ${stat.pct || 100}%`}></div>
+      <div class="stat-bar-value">{stat.value}</div>
+      <div class="stat-bar-label">{stat.label}</div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .stat-bar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: var(--space-6);
+    margin: var(--space-6) 0;
+  }
+
+  .stat-bar-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-bar-chart {
+    --bar-h: 100%;
+    height: 120px;
+    background: repeating-linear-gradient(
+      45deg,
+      var(--accent-wash) 0 4px,
+      transparent 4px 8px
+    );
+    border: 1px solid var(--rule);
+    margin-bottom: var(--space-4);
+    transition: height 0.6s ease-out;
+  }
+
+  .stat-bar-value {
+    font-family: "Bricolage Grotesque", system-ui, sans-serif;
+    font-size: var(--fs-24);
+    font-weight: 800;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: var(--space-1);
+  }
+
+  .stat-bar-label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: var(--fs-12);
+    font-weight: 600;
+    color: var(--ink-2);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+</style>

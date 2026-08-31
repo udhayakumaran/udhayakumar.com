@@ -1,4 +1,6 @@
 ---
+import '../styles/global.css';
+
 interface Props {
   title: string;
   description?: string;
@@ -33,102 +35,19 @@ const { title, description = "Backend engineer & data platform architect" } = As
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={title}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content="/og-image.png">
 
   <style>
-    :root {
-      --bg: #FCFCFD;
-      --panel: #F3F4F7;
-      --panel-2: #EAECF1;
-      --ink: #15171C;
-      --ink-2: #555B6A;
-      --ink-3: #7C8393;
-      --rule: #E1E4EA;
-      --rule-2: #CBD0DA;
-      --accent: #C85A2E;
-      --accent-ink: #A84420;
-      --accent-wash: #FBE8DC;
-
-      /* Type scale (12px base, 1.25 ratio) */
-      --fs-11: 11px;
-      --fs-12: 12px;
-      --fs-13: 13px;
-      --fs-14: 14px;
-      --fs-16: 16px;
-      --fs-18: 18px;
-      --fs-20: 20px;
-      --fs-28: 28px;
-      --fs-32: 32px;
-      --fs-40: 40px;
-    }
-
-    /* Explicit light theme */
-    [data-theme="light"] {
-      --bg: #FCFCFD;
-      --panel: #F3F4F7;
-      --panel-2: #EAECF1;
-      --ink: #15171C;
-      --ink-2: #555B6A;
-      --ink-3: #7C8393;
-      --rule: #E1E4EA;
-      --rule-2: #CBD0DA;
-      --accent: #C85A2E;
-      --accent-ink: #A84420;
-      --accent-wash: #FBE8DC;
-    }
-
-    /* Explicit dark theme */
-    [data-theme="dark"] {
-      --bg: #0F1217;
-      --panel: #161A21;
-      --panel-2: #1C212A;
-      --ink: #E7E9ED;
-      --ink-2: #9AA1AF;
-      --ink-3: #79808E;
-      --rule: #252A33;
-      --rule-2: #333A45;
-      --accent: #E8A57D;
-      --accent-ink: #F0B899;
-      --accent-wash: #2A1F15;
-    }
-
-    /* System preference dark mode (when no explicit theme set) */
-    @media (prefers-color-scheme: dark) {
-      :root:not([data-theme="light"]) {
-        --bg: #0F1217;
-        --panel: #161A21;
-        --panel-2: #1C212A;
-        --ink: #E7E9ED;
-        --ink-2: #9AA1AF;
-        --ink-3: #79808E;
-        --rule: #252A33;
-        --rule-2: #333A45;
-        --accent: #E8A57D;
-        --accent-ink: #F0B899;
-        --accent-wash: #2A1F15;
-      }
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      background: var(--bg);
-    }
-
-    body {
-      font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-      background: var(--bg);
-      color: var(--ink);
-      line-height: 1.6;
-      font-size: 16px;
-      -webkit-font-smoothing: antialiased;
-    }
-
     main {
       max-width: 860px;
       margin: 0 auto;
@@ -157,7 +76,7 @@ const { title, description = "Backend engineer & data platform architect" } = As
     nav a {
       text-decoration: none;
       color: var(--ink);
-      font-family: "JetBrains Mono", monospace;
+      font-family: "IBM Plex Mono", monospace;
       font-size: 14px;
       font-weight: 500;
       border-bottom: 2px solid transparent;
@@ -184,7 +103,7 @@ const { title, description = "Backend engineer & data platform architect" } = As
       border-radius: 4px;
       cursor: pointer;
       transition: all 0.2s ease;
-      font-family: "JetBrains Mono", monospace;
+      font-family: "IBM Plex Mono", monospace;
       margin-left: auto;
     }
 
@@ -207,7 +126,7 @@ const { title, description = "Backend engineer & data platform architect" } = As
     }
 
     footer a {
-      font-family: "JetBrains Mono", monospace;
+      font-family: "IBM Plex Mono", monospace;
       font-size: 16px;
       font-weight: 600;
       color: var(--accent);

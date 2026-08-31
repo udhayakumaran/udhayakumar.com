@@ -1,11 +1,4 @@
 {
   "outputDirectory": "dist",
-  "buildCommand": "",
-  "redirects": [
-    {
-      "source": "/resume",
-      "destination": "/resume/general.pdf",
-      "permanent": true
-    }
-  ]
+  "buildCommand": ""
 }

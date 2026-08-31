@@ -55,8 +55,39 @@ const { title, description = "Backend engineer & data platform architect" } = As
       --fs-40: 40px;
     }
 
+    /* Explicit light theme */
+    [data-theme="light"] {
+      --bg: #FCFCFD;
+      --panel: #F3F4F7;
+      --panel-2: #EAECF1;
+      --ink: #15171C;
+      --ink-2: #555B6A;
+      --ink-3: #7C8393;
+      --rule: #E1E4EA;
+      --rule-2: #CBD0DA;
+      --accent: #C85A2E;
+      --accent-ink: #A84420;
+      --accent-wash: #FBE8DC;
+    }
+
+    /* Explicit dark theme */
+    [data-theme="dark"] {
+      --bg: #0F1217;
+      --panel: #161A21;
+      --panel-2: #1C212A;
+      --ink: #E7E9ED;
+      --ink-2: #9AA1AF;
+      --ink-3: #79808E;
+      --rule: #252A33;
+      --rule-2: #333A45;
+      --accent: #E8A57D;
+      --accent-ink: #F0B899;
+      --accent-wash: #2A1F15;
+    }
+
+    /* System preference dark mode (when no explicit theme set) */
     @media (prefers-color-scheme: dark) {
-      :root {
+      :root:not([data-theme="light"]) {
         --bg: #0F1217;
         --panel: #161A21;
         --panel-2: #1C212A;

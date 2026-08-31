@@ -22,9 +22,161 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
+  <!-- Thesis -->
+  <section style="padding: 52px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);">
+    <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">Five years owning a data platform end to end — ingestion through serving to reporting — designed and led a team through every step of rebuilding it. Built the segmentation and recommendation engines on top. Three systems, one principle: refuse to normalize where the decision is irreversible; normalize where mistakes are reversible.</p>
+  </section>
+
+  <!-- Metrics strip -->
+  <section style="padding: 0;">
+    <div style="display: flex; flex-wrap: wrap; gap: 32px; padding: 28px 0; border-bottom: 1px solid var(--rule);">
+      <div style="text-align: center;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 600; color: var(--accent);">13+</div>
+        <div style="font-size: 12px; color: var(--ink-2); margin-top: 4px;">Years</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 600; color: var(--accent);">100+</div>
+        <div style="font-size: 12px; color: var(--ink-2); margin-top: 4px;">Stores (5 platforms)</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 600; color: var(--accent);">6</div>
+        <div style="font-size: 12px; color: var(--ink-2); margin-top: 4px;">Engineers led</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 600; color: var(--accent);">&lt;1 min</div>
+        <div style="font-size: 12px; color: var(--ink-2); margin-top: 4px;">Data freshness</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 600; color: var(--accent);">80%+</div>
+        <div style="font-size: 12px; color: var(--ink-2); margin-top: 4px;">Smart tier adoption</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lens selector -->
   <section style="padding: 52px 0;">
-    <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 600; margin-bottom: 20px;">Selected Work</h2>
-    <p style="font-size: 16px; color: var(--ink-2); margin-bottom: 24px;">Featured case studies coming soon.</p>
+    <div style="display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap;">
+      <button class="lens-btn active" data-lens="all" aria-pressed="true" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.05em; padding: 8px 14px; border: 1px solid var(--rule-2); background: transparent; color: var(--ink-2); cursor: pointer; transition: all 0.2s ease; text-transform: uppercase; border-radius: 4px; white-space: nowrap;">All</button>
+      <button class="lens-btn" data-lens="data" aria-pressed="false" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.05em; padding: 8px 14px; border: 1px solid var(--rule-2); background: transparent; color: var(--ink-2); cursor: pointer; transition: all 0.2s ease; text-transform: uppercase; border-radius: 4px; white-space: nowrap;">Data Platform</button>
+      <button class="lens-btn" data-lens="arch" aria-pressed="false" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.05em; padding: 8px 14px; border: 1px solid var(--rule-2); background: transparent; color: var(--ink-2); cursor: pointer; transition: all 0.2s ease; text-transform: uppercase; border-radius: 4px; white-space: nowrap;">Backend Architecture</button>
+      <button class="lens-btn" data-lens="founding" aria-pressed="false" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.05em; padding: 8px 14px; border: 1px solid var(--rule-2); background: transparent; color: var(--ink-2); cursor: pointer; transition: all 0.2s ease; text-transform: uppercase; border-radius: 4px; white-space: nowrap;">Founding Engineer</button>
+      <button class="lens-btn" data-lens="ecom" aria-pressed="false" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.05em; padding: 8px 14px; border: 1px solid var(--rule-2); background: transparent; color: var(--ink-2); cursor: pointer; transition: all 0.2s ease; text-transform: uppercase; border-radius: 4px; white-space: nowrap;">E-commerce Infra</button>
+    </div>
+    <div class="lens-note visible" id="lens-note-all" style="font-size: 14px; color: var(--ink-2); line-height: 1.7; margin-bottom: 32px; opacity: 1; transition: opacity 0.15s ease;">All case studies below. Scroll to read.</div>
+    <div class="lens-note" id="lens-note-data" style="font-size: 14px; color: var(--ink-2); line-height: 1.7; margin-bottom: 32px; opacity: 0; transition: opacity 0.15s ease;">Five years owning a data platform end to end — ingestion, modelling, serving, and the cost of running it. Two CDC paths, a warehouse consolidation, a multi-tenant landing store, and a reporting migration driven by the shape of a billing model rather than a broken system.</div>
+    <div class="lens-note" id="lens-note-arch" style="font-size: 14px; color: var(--ink-2); line-height: 1.7; margin-bottom: 32px; opacity: 0; transition: opacity 0.15s ease;">Every case study below states what I rejected and why. The through-line: refuse to normalise at the ingestion boundary where the decision is irreversible, then normalise in the warehouse where a wrong model is a redefinition rather than a migration. Same judgment applied at two layers.</div>
+    <div class="lens-note" id="lens-note-founding" style="font-size: 14px; color: var(--ink-2); line-height: 1.7; margin-bottom: 32px; opacity: 0; transition: opacity 0.15s ease;">Zero to one twice over — a recommendation product built from scratch inside a startup and taken to 80%+ adoption on its hardest tier, and six products designed, built and shipped alone outside one. Comfortable owning a surface end to end with nobody behind me.</div>
+    <div class="lens-note" id="lens-note-ecom" style="font-size: 14px; color: var(--ink-2); line-height: 1.7; margin-bottom: 32px; opacity: 0; transition: opacity 0.15s ease;">Shopify, BigCommerce, WooCommerce, and Magento 1 and 2 — in production simultaneously for 100+ merchants across five years. Webhook reliability, catalogue sync, storefront latency budgets, conversion attribution, and the constraint that a merchant will absorb no cost for your architecture.</div>
+  </section>
+
+  <!-- Case studies -->
+  <section style="padding: 52px 0;">
+    <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 600; margin-bottom: 40px;">Selected Work</h2>
+    <div style="display: grid; gap: 24px; margin-bottom: 40px;">
+      <a href="/case-studies/data-platform" style="text-decoration: none; display: block; padding: 24px; background: var(--panel); border: 1px solid var(--rule-2); border-radius: 4px; transition: border-color 0.2s ease;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-3); font-weight: 600; margin-bottom: 4px;">01</div>
+        <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--ink);">The Data Platform</h3>
+        <p style="font-size: 14px; color: var(--ink-2); line-height: 1.6; margin-bottom: 12px; max-width: 65ch;">Rebuilt how customer and order data flows through the company — from data arriving days late to under a minute, across 100+ merchant stores on five e-commerce platforms.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <span style="font-size: 11px; background: var(--panel-2); color: var(--ink-3); padding: 4px 8px; border-radius: 3px;">days → under a minute</span>
+          <span style="font-size: 11px; background: var(--panel-2); color: var(--ink-3); padding: 4px 8px; border-radius: 3px;">100+ stores</span>
+        </div>
+      </a>
+
+      <a href="/case-studies/segmentation" style="text-decoration: none; display: block; padding: 24px; background: var(--panel); border: 1px solid var(--rule-2); border-radius: 4px; transition: border-color 0.2s ease;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-3); font-weight: 600; margin-bottom: 4px;">02</div>
+        <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--ink);">Customer Segmentation</h3>
+        <p style="font-size: 14px; color: var(--ink-2); line-height: 1.6; margin-bottom: 12px; max-width: 65ch;">Built the system that lets a non-technical Customer Success rep build audiences without writing a line of code. The hardest thing I built, and the module every marketing campaign ran through.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <span style="font-size: 11px; background: var(--panel-2); color: var(--ink-3); padding: 4px 8px; border-radius: 3px;">4 source systems, 1 query</span>
+          <span style="font-size: 11px; background: var(--panel-2); color: var(--ink-3); padding: 4px 8px; border-radius: 3px;">built on the platform ↑</span>
+        </div>
+      </a>
+
+      <a href="/case-studies/recommendations" style="text-decoration: none; display: block; padding: 24px; background: var(--panel); border: 1px solid var(--rule-2); border-radius: 4px; transition: border-color 0.2s ease;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-3); font-weight: 600; margin-bottom: 4px;">03</div>
+        <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--ink);">Recommendation Blocks</h3>
+        <p style="font-size: 14px; color: var(--ink-2); line-height: 1.6; margin-bottom: 12px; max-width: 65ch;">Built the company's product recommendation feature from nothing, designed so store owners could trust it enough to turn it on. Most clients who tried it ended up on the fully automated version.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <span style="font-size: 11px; background: var(--panel-2); color: var(--ink-3); padding: 4px 8px; border-radius: 3px;">80%+ adoption, Smart tier</span>
+          <span style="font-size: 11px; background: var(--panel-2); color: var(--ink-3); padding: 4px 8px; border-radius: 3px;">built on the platform ↑</span>
+        </div>
+      </a>
+    </div>
+    <div style="text-align: center;">
+      <a href="/case-studies" style="text-decoration: none; color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; border-bottom: 1px solid transparent; transition: border-color 0.2s ease;">View all case studies →</a>
+    </div>
+  </section>
+
+  <!-- Engineering Principles -->
+  <section style="padding: 52px 0;">
+    <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 600; margin-bottom: 40px;">Engineering Principles</h2>
+    <div style="display: grid; gap: 32px;">
+      <div>
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Reversibility</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">Normalise where mistakes are reversible; defer normalisation where they're not. A wrong materialized view is a redefinition away from correction. A wrong schema at ingest is a multi-service migration.</p>
+      </div>
+      <div>
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Match storage to question</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">Recommendations want point lookups; segmentation wants population filtering; reporting wants columnar aggregation. One database cannot efficiently answer all three.</p>
+      </div>
+      <div>
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Operational simplicity beats abstractions</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">Legible systems are easier to debug than clever ones. A Pub/Sub consumer with lag metrics beats a Dataflow job hiding what's happening. When a small team owns it, debuggability under pressure matters most.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Background -->
+  <section style="padding: 52px 0;">
+    <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 600; margin-bottom: 40px;">Background</h2>
+    <p style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 32px; max-width: 65ch;">13 years building backend systems and data infrastructure. Started on the web in 2010. Nearly six years at ConvertCart owning a data platform end to end and leading a team to rebuild it. Built segmentation and recommendation engines on top. Designed and shipped architectures handling 100+ customer stores across five e-commerce platforms. Founded and shipped independent products. Open to Staff/Principal/Founding-Engineer roles at Series A-B startups.</p>
+    <div style="display: grid; gap: 24px;">
+      <div style="padding-bottom: 24px; border-bottom: 1px solid var(--rule);">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">2020–2026</div>
+        <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; margin-bottom: 4px;">ConvertCart</h3>
+        <p style="font-size: 14px; color: var(--ink-2); line-height: 1.6;">Data platform, segmentation, recommendations. Owned, designed, led team rebuild.</p>
+      </div>
+      <div style="padding-bottom: 24px; border-bottom: 1px solid var(--rule);">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">2018–2019</div>
+        <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; margin-bottom: 4px;">Friday Media Group</h3>
+        <p style="font-size: 14px; color: var(--ink-2); line-height: 1.6;">Software Development Lead. Local and Niche Marketplace platforms.</p>
+      </div>
+      <div style="padding-bottom: 24px; border-bottom: 1px solid var(--rule);">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">2014–2018</div>
+        <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; margin-bottom: 4px;">Scientific Games</h3>
+        <p style="font-size: 14px; color: var(--ink-2); line-height: 1.6;">Lottery systems. Built and optimised data warehouse and reporting infrastructure.</p>
+      </div>
+      <div style="padding-bottom: 24px; border-bottom: 1px solid var(--rule);">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">2012–2014</div>
+        <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; margin-bottom: 4px;">Tenlegs</h3>
+        <p style="font-size: 14px; color: var(--ink-2); line-height: 1.6;">E-commerce backend and platform work. Built email tooling, analytics pipeline.</p>
+      </div>
+      <div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">2010–2012</div>
+        <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; margin-bottom: 4px;">ISPG Technologies</h3>
+        <p style="font-size: 14px; color: var(--ink-2); line-height: 1.6;">Early-stage backend engineering. LAMP-stack web projects.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ / Common Questions -->
+  <section style="padding: 52px 0;">
+    <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 600; margin-bottom: 40px;">Common Questions</h2>
+    <div style="display: grid; gap: 32px; max-width: 65ch;">
+      <div>
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Notice period?</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink);">Two weeks. Open to immediate starts after the standard notice.</p>
+      </div>
+      <div>
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Remote, relocation, timezone?</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink);">Remote-first preference. Based in Bengaluru (UTC+5:30). Open to relocation for the right role.</p>
+      </div>
+      <div>
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Salary expectations?</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink);">Competitive with market rates for Staff/Principal engineers at seed-Series B (US$200k–250k + equity). Let's discuss what's fair for your region and stage.</p>
+      </div>
+    </div>
   </section>
 </Layout>
 
@@ -36,4 +188,60 @@ import Layout from '../layouts/Layout.astro';
     outline: 2px solid var(--accent);
     outline-offset: 2px;
   }
+
+  .lens-btn:hover {
+    border-color: var(--accent);
+    color: var(--ink);
+  }
+
+  .lens-btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .lens-btn.active {
+    background: var(--accent-wash);
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .lens-note {
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    pointer-events: none;
+  }
+
+  .lens-note.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  a[href="/case-studies"] {
+    border-color: transparent;
+    transition: border-color 0.2s ease;
+  }
+
+  a[href="/case-studies"]:hover {
+    border-bottom-color: var(--accent);
+  }
 </style>
+
+<script>
+  document.querySelectorAll('.lens-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lens = btn.dataset.lens;
+      document.querySelectorAll('.lens-btn').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
+
+      document.querySelectorAll('.lens-note').forEach(note => {
+        note.classList.remove('visible');
+      });
+      const noteId = `lens-note-${lens}`;
+      document.getElementById(noteId)?.classList.add('visible');
+    });
+  });
+</script>

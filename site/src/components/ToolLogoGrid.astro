@@ -17,7 +17,7 @@ const { tools } = Astro.props;
 <style>
   .tool-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
     gap: var(--space-4);
     margin: var(--space-6) 0;
   }
@@ -41,6 +41,9 @@ const { tools } = Astro.props;
     font-size: var(--fs-12);
     font-weight: 600;
     color: var(--ink);
-    word-break: break-word;
+    word-break: keep-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 </style>

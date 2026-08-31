@@ -11,6 +11,13 @@ const { title, description = "Backend engineer & data platform architect" } = As
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <script is:inline>
+    (function() {
+      const saved = localStorage.getItem('theme');
+      const theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title}</title>
   <meta name="description" content={description}>
@@ -263,19 +270,8 @@ const { title, description = "Backend engineer & data platform architect" } = As
     const themeIcon = document.getElementById('theme-icon');
     const html = document.documentElement;
 
-    // Load saved theme or detect system preference
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
-
-    // Apply initial theme
-    if (initialTheme === 'dark') {
-      html.setAttribute('data-theme', 'dark');
-      themeIcon.textContent = '☀️';
-    } else {
-      html.setAttribute('data-theme', 'light');
-      themeIcon.textContent = '🌙';
-    }
+    // Sync icon text to theme already set by head script
+    themeIcon.textContent = html.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
 
     // Toggle theme on button click
     themeToggle.addEventListener('click', () => {

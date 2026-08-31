@@ -273,7 +273,7 @@ const { title, description = "Backend engineer & data platform architect" } = As
       html.setAttribute('data-theme', 'dark');
       themeIcon.textContent = '☀️';
     } else {
-      html.removeAttribute('data-theme');
+      html.setAttribute('data-theme', 'light');
       themeIcon.textContent = '🌙';
     }
 
@@ -286,7 +286,7 @@ const { title, description = "Backend engineer & data platform architect" } = As
         html.setAttribute('data-theme', 'dark');
         themeIcon.textContent = '☀️';
       } else {
-        html.removeAttribute('data-theme');
+        html.setAttribute('data-theme', 'light');
         themeIcon.textContent = '🌙';
       }
 
@@ -300,7 +300,7 @@ const { title, description = "Backend engineer & data platform architect" } = As
           html.setAttribute('data-theme', 'dark');
           themeIcon.textContent = '☀️';
         } else {
-          html.removeAttribute('data-theme');
+          html.setAttribute('data-theme', 'light');
           themeIcon.textContent = '🌙';
         }
       }

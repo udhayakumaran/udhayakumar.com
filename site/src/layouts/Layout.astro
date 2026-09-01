@@ -7,7 +7,21 @@ interface Props {
   description?: string;
 }
 
-const { title, description = "Staff Backend / Platform Engineer. Data infrastructure, distributed systems, production migrations. Open to Founding Engineer, Backend Architect, and Data Platform Lead roles." } = Astro.props;
+const { title, description = "Backend Engineer with 13+ years building production systems, data platforms, and independent products. India-based and open to remote teams worldwide." } = Astro.props;
+const canonical = new URL(Astro.url.pathname, "https://udhayakumar.com").toString();
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Udhayakumar",
+  url: "https://udhayakumar.com",
+  jobTitle: "Backend Engineer",
+  description,
+  address: { "@type": "PostalAddress", addressCountry: "IN" },
+  sameAs: [
+    "https://linkedin.com/in/udhayakumar",
+    "https://github.com/udhayakumaran",
+  ],
+};
 ---
 
 <!DOCTYPE html>
@@ -24,6 +38,8 @@ const { title, description = "Staff Backend / Platform Engineer. Data infrastruc
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title}</title>
   <meta name="description" content={description}>
+  <meta name="author" content="Udhayakumar">
+  <link rel="canonical" href={canonical}>
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DDRCFD4HSF"></script>
@@ -42,11 +58,13 @@ const { title, description = "Staff Backend / Platform Engineer. Data infrastruc
   <meta property="og:title" content={title}>
   <meta property="og:description" content={description}>
   <meta property="og:type" content="website">
-  <meta property="og:image" content="/og-image.png">
+  <meta property="og:url" content={canonical}>
+  <meta property="og:image" content="https://udhayakumar.com/og-image.svg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content={title}>
   <meta name="twitter:description" content={description}>
-  <meta name="twitter:image" content="/og-image.png">
+  <meta name="twitter:image" content="https://udhayakumar.com/og-image.svg">
+  <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)}></script>
 
   <style>
     main {
@@ -164,14 +182,14 @@ const { title, description = "Staff Backend / Platform Engineer. Data infrastruc
   </style>
 </head>
 <body>
-  <Header />
+  <Header currentPath={Astro.url.pathname} />
 
   <main>
     <slot />
   </main>
 
   <footer>
-    <p>Currently looking for staff-level backend and platform ownership roles. Fully remote. Also open to Founding Engineer, Backend Architect, or Data Platform Lead positions.</p>
+    <p>Currently looking for senior backend roles with high ownership. India-based, remote worldwide.</p>
     <a href="mailto:mail4udhaya@gmail.com">mail4udhaya@gmail.com</a>
   </footer>
 

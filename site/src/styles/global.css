@@ -200,11 +200,7 @@ h4 {
 
 .stat-bar {
   --bar-h: 100%;
-  background: repeating-linear-gradient(
-    45deg,
-    var(--accent-wash) 0 4px,
-    transparent 4px 8px
-  );
+  background: var(--accent-wash);
   height: var(--bar-h);
   border: 1px solid var(--rule);
   transition: height 0.6s ease-out;

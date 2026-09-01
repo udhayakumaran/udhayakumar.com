@@ -8,7 +8,7 @@ interface Props {
 const { quote, name, role } = Astro.props;
 ---
 
-<div style="padding: 24px; background: var(--panel); border-left: 4px solid var(--accent); border-radius: 4px;">
+<div style="padding: 24px; background: var(--panel); border: 1px solid var(--rule); border-radius: 4px;">
   <p style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 16px; font-style: italic;">"{quote}"</p>
   <p style="font-size: 14px; color: var(--accent); font-weight: 600; margin-bottom: 4px;">{name}</p>
   <p style="font-size: 14px; color: var(--ink-2); margin: 0;">{role}</p>

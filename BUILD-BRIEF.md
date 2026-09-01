@@ -70,11 +70,11 @@ Three case studies, same six-heading structure every time: **Context → Problem
 
 **Collapsed view:**
 - Title: *The data platform*
-- Subtitle: *"Rebuilt how customer and order data flows through the company — from data arriving days late to under a minute, across 100+ merchant stores on five e-commerce platforms. Every other product below runs on this."*
-- Metrics: `days → under a minute` · `98%+ uptime` · `100+ stores`
+- Subtitle: *"Rebuilt how customer and order data flows through the company — from data arriving days late to under a minute, across 200+ merchant stores on five e-commerce platforms. Every other product below runs on this."*
+- Metrics: `days → under a minute` · `200+ stores`
 - Stack line: Node.js · MySQL · Debezium · Google Pub/Sub · Datastream · MongoDB · BigQuery · ClickHouse · Redis · GKE
 
-**Context.** ConvertCart is an e-commerce personalisation platform. Everything it sells — segmentation, recommendations, on-site personalisation, triggered email — is downstream of one thing: holding a current, accurate picture of each merchant's shoppers, orders, products and catalogue. When Udhay joined, that picture was days old. He owned this platform for five years, across 100+ merchant stores on Shopify, BigCommerce, WooCommerce and Magento 1 and 2.
+**Context.** ConvertCart is an e-commerce personalisation platform. Everything it sells — segmentation, recommendations, on-site personalisation, triggered email — is downstream of one thing: holding a current, accurate picture of each merchant's shoppers, orders, products and catalogue. When Udhay joined, that picture was days old. He owned this platform for five years, across 200+ merchant stores on Shopify, BigCommerce, WooCommerce and Magento 1 and 2.
 
 **Problem.** Platform sync ran as scheduled batch pulls against each merchant's commerce API, so data landed days late — worst during sale periods, when volume and API rate limiting peak together. Commerce platforms were never the whole picture either — merchants also run loyalty platforms (Zinrelo) and marketing/CRM systems (Microsoft Dynamics), none of which resemble a commerce API or each other. The deeper problem was on the consuming side: recommendations want point lookups, segmentation wants population filtering, reporting wants columnar aggregation — one store can't serve all three, so every new feature meant another bespoke path back to the data.
 
@@ -98,7 +98,7 @@ Three case studies, same six-heading structure every time: **Context → Problem
 
 **Result.**
 - Data freshness: days → under a minute.
-- 98%+ pipeline uptime, 100+ stores, five platforms.
+- 200+ stores, five platforms.
 - New downstream services *and* new source types both land as "subscribe to an existing stream," not "build a pipeline."
 - Conversion attribution linking orders to specific blocks/email clicks — what let the product prove its own value to merchants.
 - Reporting moved off a cost curve that scaled with query volume onto one the team controlled.
@@ -160,7 +160,7 @@ The one piece left unresolved: Kafka Streams is JVM-only, the team was Node/Type
 
 **Problem.** The tempting build is one behavioural engine: collect signals, rank, render. That doesn't get adopted — merchandising is the part of a store owner's job they're least willing to hand to a black box, and blocks were configured by CSMs on the client's behalf, so the person deploying one had to be able to explain exactly what it would show and why. The real problem wasn't ranking quality — it was building something a non-technical CSM could confidently deploy.
 
-**Constraints.** Storefront latency budget in the tens of milliseconds (renders inside page load; slow is worse than absent). Configured by CSMs, not engineers — every capability had to be UI-expressible and client-explainable. Price/stock accuracy (a wrong recommendation damages trust worse than an empty block). Cold start on both sides (new stores, new products). One system across five platforms and 100+ stores with very different traffic profiles.
+**Constraints.** Storefront latency budget in the tens of milliseconds (renders inside page load; slow is worse than absent). Configured by CSMs, not engineers — every capability had to be UI-expressible and client-explainable. Price/stock accuracy (a wrong recommendation damages trust worse than an empty block). Cold start on both sides (new stores, new products). One system across five platforms and 200+ stores with very different traffic profiles.
 
 **Approach — a ladder of control, not one engine:**
 - **Manual:** hand-picked products, zero intelligence, deployable day one with no data history. Deliberately built first despite having no engineering interest, because it got the product in front of clients while the behavioural tier matured.
@@ -212,7 +212,7 @@ LENS = {
   },
   ecom: {
     leadsWith: 'cs-platform',
-    note: "Shopify, BigCommerce, WooCommerce, and Magento 1 and 2 — in production simultaneously for 100+ merchants across five years. Webhook reliability, catalogue sync, storefront latency budgets, conversion attribution, and the constraint that a merchant will absorb no cost for your architecture."
+    note: "Shopify, BigCommerce, WooCommerce, and Magento 1 and 2 — in production simultaneously for 200+ merchants across five years. Webhook reliability, catalogue sync, storefront latency budgets, conversion attribution, and the constraint that a merchant will absorb no cost for your architecture."
   }
 }
 ```
@@ -270,7 +270,7 @@ Wrapped in a horizontally-scrolling container (`overflow-x:auto`) since the diag
 
 - **No internal ConvertCart product names on the public site.** The recommendation feature's actual internal name(s) were removed and replaced with the generic "recommendation blocks" throughout, on the reasoning that a personal job-search site is not the place to guess at what counts as confidential product branding. If there's ever a question about whether some other internal term is safe to use, default to generic/descriptive language rather than guessing yes.
 - **No fabricated numbers.** Every `[TODO: ...]` marker in this document and in the live HTML (`<span class="todo">`) represents a real gap — a number or explanation that was deliberately left unfilled because it wasn't verified, not a placeholder to be creatively filled in by Claude Code. If Claude Code is asked to "finish" this site, it should surface these TODOs to the user for real answers, not invent plausible-sounding figures. An overstated portfolio is a liability in a technical screen, not an asset.
-- **Confidentiality baseline already applied:** no ConvertCart revenue figures, no customer names, no exact traffic/volume numbers, no internal schemas. Relative improvements ("days to under a minute," "80%+ adoption") and order-of-magnitude figures ("100+ stores," "tens of thousands of events/day") are the ceiling of specificity — don't push past that even if a more precise number surfaces later without checking whether it's safe to publish.
+- **Confidentiality baseline already applied:** no ConvertCart revenue figures, no customer names, no exact traffic/volume numbers, no internal schemas. Relative improvements ("days to under a minute," "80%+ adoption") and order-of-magnitude figures ("200+ stores," "tens of thousands of events/day") are the ceiling of specificity — don't push past that even if a more precise number surfaces later without checking whether it's safe to publish.
 
 ---
 

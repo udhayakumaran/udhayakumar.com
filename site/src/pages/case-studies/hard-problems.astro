@@ -51,7 +51,7 @@ import Layout from '../../layouts/Layout.astro';
 
       <div style="margin-bottom: 24px;">
         <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Problem</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Post-cutover response time spiked from seconds to 5+. Root cause: MySQL LOAD DATA holds locks for the entire operation. With 6 parallel threads per client × 100+ clients, hundreds of concurrent lock holders. Everything downstream waited for locks.</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Post-cutover response time spiked from seconds to 5+. Root cause: MySQL LOAD DATA holds locks for the entire operation. With 6 parallel threads per client across 200+ merchants, hundreds of concurrent lock holders. Everything downstream waited for locks.</p>
       </div>
 
       <div style="margin-bottom: 24px;">

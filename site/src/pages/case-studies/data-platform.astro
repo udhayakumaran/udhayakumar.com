@@ -211,7 +211,7 @@ import Layout from '../../layouts/Layout.astro';
         <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Added metrics for data freshness (time from source to landing to serving), lag per store, checkpoint latency. Alerts on 5-minute latency deviation. Page on-call for >15 min delays.</p>
       </div>
 
-      <div style="margin: 32px 0; padding: 24px; background: var(--panel); border-left: 4px solid var(--accent); border-radius: 4px;">
+      <div style="margin: 32px 0; padding: 24px; background: var(--panel); border: 1px solid var(--accent); border-radius: 4px;">
         <h3 style="font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 12px;">The production incident that changed the design</h3>
         <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 12px;">When Debezium attempted to snapshot the 50M-row landing store: the query consumed 60% CPU and blocked production writes. Unacceptable. We stopped the rollout immediately.</p>
         <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 12px;"><strong>What we did:</strong> leveraged the existing Datastream snapshot to seed the baseline, then transitioned tables to Debezium CDC incrementally. This became our dual-replication strategy.</p>

@@ -4,6 +4,7 @@ interface Props {
 }
 
 const { currentPath = "/" } = Astro.props;
+const normalizedPath = currentPath.replace(/\/$/, "") || "/";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -20,7 +21,12 @@ const navItems = [
       {navItems.map((item) => (
         <a
           href={item.href}
-          aria-current={currentPath === item.href ? "page" : undefined}
+          aria-current={
+            normalizedPath === item.href ||
+            (item.href === "/case-studies" && normalizedPath.startsWith("/case-studies/"))
+              ? "page"
+              : undefined
+          }
         >
           {item.label}
         </a>
@@ -79,6 +85,9 @@ const navItems = [
     font-weight: 500;
     border-bottom: 2px solid transparent;
     transition: border-color 0.2s ease;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 
   nav a:hover,
@@ -102,6 +111,8 @@ const navItems = [
     cursor: pointer;
     transition: all 0.2s ease;
     font-family: "IBM Plex Mono", monospace;
+    min-width: 44px;
+    min-height: 44px;
   }
 
   .theme-toggle:hover {

@@ -51,7 +51,7 @@ const { title, skills, activeLens = "" } = Astro.props;
     display: block;
     padding: var(--space-3);
     background: var(--panel-2);
-    border-left: 2px solid var(--rule);
+    border: 1px solid var(--rule);
     font-size: var(--fs-14);
     line-height: 1.5;
     color: var(--ink-2);
@@ -60,7 +60,7 @@ const { title, skills, activeLens = "" } = Astro.props;
 
   .skill-tag.highlighted {
     background: var(--sage-wash);
-    border-left-color: var(--sage);
+    border-color: var(--sage);
     color: var(--ink);
   }
 

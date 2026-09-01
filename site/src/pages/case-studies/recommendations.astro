@@ -70,23 +70,56 @@ import Layout from '../../layouts/Layout.astro';
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Architecture</h2>
       <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 24px;">Three-tier ladder: Manual (CSM hand-picks products for each store), Automated (rules-based: "people who bought X also bought Y"), Smart (live behavioral ranking). Each tier uses different computation: Manual is static, Automated is batch-refreshed, Smart is real-time Redis-backed. Merchants graduate as trust builds. Multi-region MongoDB for serving, ClickHouse for analytics.</p>
 
-      <div style="background: var(--panel); padding: 24px; border-radius: 4px; margin-bottom: 24px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--ink-2); line-height: 1.8; max-width: 65ch;">
-        MANUAL TIER<br/>
-        CSM hand-picks products<br/>
-        <br/>
-        ↓ (trust grows)<br/>
-        <br/>
-        AUTOMATED TIER<br/>
-        Rules-based ranking (batch)<br/>
-        Affinity algorithm, hourly refresh<br/>
-        <br/>
-        ↓ (trust grows)<br/>
-        <br/>
-        SMART TIER (most merchants)<br/>
-        Live behavioral ranking<br/>
-        Redis cache · 5-region replicated<br/>
-        200ms p99 latency SLA
-      </div>
+      <!-- Recommendation Architecture SVG -->
+      <svg viewBox="0 0 640 480" style="max-width: 65ch; width: 100%; margin-bottom: 24px; display: block;" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <style>
+            .rec-box { fill: var(--panel); stroke: var(--rule-2); stroke-width: 1.5; }
+            .rec-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; fill: var(--ink); font-weight: 600; }
+            .rec-label-small { font-family: 'JetBrains Mono', monospace; font-size: 10px; fill: var(--ink-2); }
+            .rec-arrow { stroke: var(--ink-3); stroke-width: 2; fill: none; marker-end: url(#rec-arrowhead); }
+          </style>
+          <marker id="rec-arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="var(--ink-3)" />
+          </marker>
+        </defs>
+
+        <!-- Tier progression (left column) -->
+        <text class="rec-label" x="100" y="25" text-anchor="middle" style="fill: var(--accent);">TIER PROGRESSION</text>
+        <rect class="rec-box" x="20" y="40" width="160" height="60" rx="4"/>
+        <text class="rec-label" x="100" y="65" text-anchor="middle">Manual</text>
+        <text class="rec-label-small" x="100" y="85" text-anchor="middle">CSM hand-picks</text>
+        <line class="rec-arrow" x1="100" y1="100" x2="100" y2="130"/>
+        <text class="rec-label-small" x="100" y="125" text-anchor="middle" style="fill: var(--accent);">trust ↑</text>
+
+        <rect class="rec-box" x="20" y="130" width="160" height="60" rx="4"/>
+        <text class="rec-label" x="100" y="155" text-anchor="middle">Automated</text>
+        <text class="rec-label-small" x="100" y="175" text-anchor="middle">Rules · batch</text>
+        <line class="rec-arrow" x1="100" y1="190" x2="100" y2="220"/>
+        <text class="rec-label-small" x="100" y="215" text-anchor="middle" style="fill: var(--accent);">trust ↑</text>
+
+        <rect class="rec-box" x="20" y="220" width="160" height="80" rx="4"/>
+        <text class="rec-label" x="100" y="250" text-anchor="middle">Smart</text>
+        <text class="rec-label-small" x="100" y="270" text-anchor="middle">(80%+ merchants)</text>
+        <text class="rec-label-small" x="100" y="285" text-anchor="middle">Live ranking · Redis</text>
+
+        <!-- Multi-region serving (right column) -->
+        <text class="rec-label" x="500" y="25" text-anchor="middle" style="fill: var(--accent);">SERVING</text>
+        <rect class="rec-box" x="420" y="40" width="160" height="50" rx="4"/>
+        <text class="rec-label-small" x="500" y="70" text-anchor="middle">US · EU · APAC</text>
+
+        <rect class="rec-box" x="420" y="100" width="160" height="50" rx="4"/>
+        <text class="rec-label-small" x="500" y="130" text-anchor="middle">India · Brazil</text>
+
+        <rect class="rec-box" x="420" y="160" width="160" height="60" rx="4"/>
+        <text class="rec-label-small" x="500" y="185" text-anchor="middle" style="fill: var(--accent); font-weight: 600;">200ms p99</text>
+        <text class="rec-label-small" x="500" y="205" text-anchor="middle">latency SLA</text>
+
+        <!-- Latency tradeoff annotation -->
+        <line style="stroke: var(--rule); stroke-width: 1;" x1="40" y1="340" x2="600" y2="340"/>
+        <text class="rec-label-small" x="320" y="360" text-anchor="middle" style="fill: var(--ink-3);">Latency-freshness tradeoff: read replicas lag 5–10s, acceptable for merchant UX</text>
+        <text class="rec-label-small" x="320" y="380" text-anchor="middle" style="fill: var(--ink-3);">Redis replication lag reduces on slow replica (fallback to cached tier), prioritizes speed over freshness</text>
+      </svg>
     </section>
 
     <!-- Key Decisions -->
@@ -147,7 +180,7 @@ import Layout from '../../layouts/Layout.astro';
           <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Recommendations became first-party product, not third-party tool.</li>
           <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Conversion attribution proved ROI to merchants.</li>
           <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Feature expanded into multi-channel personalisation.</li>
-          <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">Retained merchants longer and increased ARPU.</li>
+          <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">Sales used recommendation attribution as the primary ROI proof point during merchant renewals.</li>
         </ul>
       </div>
 

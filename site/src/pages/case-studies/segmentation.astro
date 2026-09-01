@@ -70,19 +70,55 @@ import Layout from '../../layouts/Layout.astro';
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Architecture</h2>
       <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 24px;">Consolidates four source systems into one unified customer model in BigQuery. Defines reusable customer dimensions (loyalty status, purchase frequency, engagement, churn risk). CSMs compose segments by stacking filters through a UI. Query builder generates SQL, materialized views cache results for exports.</p>
 
-      <div style="background: var(--panel); padding: 24px; border-radius: 4px; margin-bottom: 24px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--ink-2); line-height: 1.8; max-width: 65ch;">
-        CLICK-TRACKING · COMMERCE · ORDERS · LOYALTY<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓<br/>
-        UNIFIED CUSTOMER MODEL (BigQuery)<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓<br/>
-        DIMENSIONS (loyalty_status, purchase_freq, engagement)<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓<br/>
-        QUERY BUILDER (CSM UI)<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓<br/>
-        MATERIALIZED VIEWS (daily cache)<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓<br/>
-        CAMPAIGNS
-      </div>
+      <!-- Segmentation Architecture SVG -->
+      <svg viewBox="0 0 640 500" style="max-width: 65ch; width: 100%; margin-bottom: 24px; display: block;" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <style>
+            .seg-box { fill: var(--panel); stroke: var(--rule-2); stroke-width: 1.5; }
+            .seg-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; fill: var(--ink); font-weight: 600; }
+            .seg-label-small { font-family: 'JetBrains Mono', monospace; font-size: 10px; fill: var(--ink-2); }
+            .seg-arrow { stroke: var(--ink-3); stroke-width: 2; fill: none; marker-end: url(#seg-arrowhead); }
+            .seg-before { fill: #FFE5CC; }
+            .seg-after { fill: #E7EAD6; }
+          </style>
+          <marker id="seg-arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="var(--ink-3)" />
+          </marker>
+        </defs>
+
+        <!-- BEFORE column (left) -->
+        <text class="seg-label" x="80" y="25" text-anchor="middle" style="fill: var(--accent);">BEFORE</text>
+        <rect class="seg-box seg-before" x="20" y="40" width="120" height="50" rx="4"/>
+        <text class="seg-label-small" x="80" y="70" text-anchor="middle">CSM Request</text>
+        <line class="seg-arrow" x1="80" y1="90" x2="80" y2="120"/>
+        <rect class="seg-box seg-before" x="20" y="120" width="120" height="50" rx="4"/>
+        <text class="seg-label-small" x="80" y="150" text-anchor="middle">Engineering Ticket</text>
+        <line class="seg-arrow" x1="80" y1="170" x2="80" y2="200"/>
+        <text class="seg-label-small" x="80" y="220" text-anchor="middle" style="fill: var(--accent);">3–5 days</text>
+        <line class="seg-arrow" x1="80" y1="230" x2="80" y2="260"/>
+        <rect class="seg-box seg-before" x="20" y="260" width="120" height="50" rx="4"/>
+        <text class="seg-label-small" x="80" y="290" text-anchor="middle">Segment Live</text>
+
+        <!-- AFTER column (right) -->
+        <text class="seg-label" x="480" y="25" text-anchor="middle" style="fill: var(--accent);">AFTER</text>
+        <rect class="seg-box seg-after" x="420" y="40" width="120" height="50" rx="4"/>
+        <text class="seg-label-small" x="480" y="70" text-anchor="middle">CSM Query</text>
+        <line class="seg-arrow" x1="480" y1="90" x2="480" y2="120"/>
+        <rect class="seg-box seg-after" x="420" y="120" width="120" height="50" rx="4"/>
+        <text class="seg-label-small" x="480" y="150" text-anchor="middle">Self-Service UI</text>
+        <line class="seg-arrow" x1="480" y1="170" x2="480" y2="200"/>
+        <text class="seg-label-small" x="480" y="220" text-anchor="middle" style="fill: var(--accent);">minutes</text>
+        <line class="seg-arrow" x1="480" y1="230" x2="480" y2="260"/>
+        <rect class="seg-box seg-after" x="420" y="260" width="120" height="50" rx="4"/>
+        <text class="seg-label-small" x="480" y="290" text-anchor="middle">Segment Live</text>
+
+        <!-- Bottom: Architecture components -->
+        <line style="stroke: var(--rule); stroke-width: 1;" x1="40" y1="350" x2="600" y2="350"/>
+        <text class="seg-label-small" x="320" y="375" text-anchor="middle" style="fill: var(--accent);">Powered by</text>
+        <text class="seg-label-small" x="100" y="400" text-anchor="start">Sources: Click, Commerce, Orders, Loyalty</text>
+        <text class="seg-label-small" x="100" y="420" text-anchor="start">→ Unified customer model (BigQuery) → Dimensions (loyalty, engagement, churn)</text>
+        <text class="seg-label-small" x="100" y="440" text-anchor="start">→ Query builder (UI) → Materialized views → Campaign export</text>
+      </svg>
     </section>
 
     <!-- Key Decisions -->
@@ -131,8 +167,8 @@ import Layout from '../../layouts/Layout.astro';
       <div style="margin-bottom: 24px;">
         <h3 style="font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 12px;">Why It Mattered</h3>
         <ul style="max-width: 65ch; list-style: none; padding: 0;">
-          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">CSMs unblocked. Campaigns launched in days, not weeks.</li>
-          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Every marketing campaign ran through segmentation.</li>
+          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Segment request → engineering ticket → 3–5 days became CSM query → self-service UI → minutes.</li>
+          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Every marketing campaign ran through segmentation. No engineering involvement after launch.</li>
           <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">Data literacy grew within CSM team.</li>
         </ul>
       </div>

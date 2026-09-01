@@ -18,7 +18,7 @@ import Layout from '../../layouts/Layout.astro';
     <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 32px;">
       <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">days → sub-minute</span>
       <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">200+ stores</span>
-      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">98%+ uptime</span>
+      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">3-month migration, zero rollbacks</span>
     </div>
 
     <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-3); margin-bottom: 40px;">Node.js · MySQL · Debezium · Google Pub/Sub · Datastream · MongoDB · BigQuery · ClickHouse · Redis · GKE</p>
@@ -26,12 +26,24 @@ import Layout from '../../layouts/Layout.astro';
     <!-- My Role -->
     <section style="margin-bottom: 48px; border-bottom: 1px solid var(--rule); padding-bottom: 48px;">
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 24px;">My Role</h2>
-      <div style="display: grid; gap: 12px; max-width: 65ch;">
-        <div><strong>Architecture owner</strong> — designed ingestion, CDC, and multi-layer serving architecture</div>
-        <div><strong>Migration lead</strong> — planned and executed store-by-store cutover across 200+ merchants</div>
-        <div><strong>Core implementation</strong> — built CDC pipeline, landing store, warehouse consolidation</div>
-        <div><strong>Production ownership</strong> — owned monitoring, alerting, incident response for 5 years (Aug 2021 – May 2026)</div>
-        <div><strong>Team of 4</strong> — coordinated architecture decisions, code review, deployment strategy</div>
+
+      <div style="margin-bottom: 24px;">
+        <h3 style="font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 12px;">What I personally owned</h3>
+        <div style="display: grid; gap: 12px; max-width: 65ch;">
+          <div><strong>Architecture and technical direction</strong> — designed ingestion, CDC, and multi-layer serving architecture</div>
+          <div><strong>CDC strategy</strong> — chose Debezium path, landing-layer design for reversibility</div>
+          <div><strong>Migration strategy</strong> — planned and executed store-by-store cutover across 200+ merchants</div>
+          <div><strong>Production rollout</strong> — owned monitoring, alerting, incident response for 5 years (Aug 2021 – May 2026)</div>
+          <div><strong>Core implementation</strong> — built CDC pipeline, landing store, warehouse consolidation</div>
+        </div>
+      </div>
+
+      <div>
+        <h3 style="font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 12px;">What the team delivered</h3>
+        <div style="display: grid; gap: 12px; max-width: 65ch;">
+          <div><strong>Team of 4 engineers</strong> — coordinated architecture decisions, code review, deployment strategy, technical hiring</div>
+          <div><strong>5-year ownership</strong> — continuous production monitoring, reliability, and incremental optimization</div>
+        </div>
       </div>
     </section>
 
@@ -195,9 +207,11 @@ import Layout from '../../layouts/Layout.astro';
         <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Added metrics for data freshness (time from source to landing to serving), lag per store, checkpoint latency. Alerts on 5-minute latency deviation. Page on-call for >15 min delays.</p>
       </div>
 
-      <div style="margin-bottom: 24px;">
-        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">The 50M-Row Snapshot Problem</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">When Debezium tried to snapshot the landing store: query hit 60% CPU, blocked production writes, unacceptable. Solution: leveraged existing Datastream snapshot, then switched to CDC incrementally per table. This became the dual-replication strategy above.</p>
+      <div style="margin: 32px 0; padding: 24px; background: var(--panel); border-left: 4px solid var(--accent); border-radius: 4px;">
+        <h3 style="font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 12px;">The production incident that changed the design</h3>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 12px;">When Debezium attempted to snapshot the 50M-row landing store: the query consumed 60% CPU and blocked production writes. Unacceptable. We stopped the rollout immediately.</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 12px;"><strong>What we did:</strong> leveraged the existing Datastream snapshot to seed the baseline, then transitioned tables to Debezium CDC incrementally. This became our dual-replication strategy.</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;"><strong>The lesson:</strong> don't optimize for architectural purity when production is at risk. Reversibility and operational safety trump elegance.</p>
       </div>
     </section>
 
@@ -223,9 +237,9 @@ import Layout from '../../layouts/Layout.astro';
       <div>
         <h3 style="font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 12px;">Scale</h3>
         <ul style="max-width: 65ch; list-style: none; padding: 0;">
-          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">200+ stores · 5 platforms · 98%+ uptime · zero visibility loss during 3-month migration</li>
+          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">200+ stores · 5 platforms · zero visibility loss during 3-month migration · zero rollbacks</li>
           <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">New sources (Klaviyo, Zendesk) plugged in as streaming integrations, not custom pipelines</li>
-          <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">Complete migration off legacy architecture within 3 months, zero rollbacks</li>
+          <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">Complete migration off legacy architecture within 3 months, never had to rollback</li>
         </ul>
       </div>
     </section>

@@ -15,14 +15,14 @@ import SkillsColumn from '../components/SkillsColumn.astro';
 import TimelineEntry from '../components/TimelineEntry.astro';
 ---
 
-<Layout title="Udhayakumar — Backend Engineer & Data Platform Architect">
+<Layout title="Udhayakumar — Staff Backend / Platform Engineer">
   <!-- Hero / Masthead -->
   <section style="padding: var(--space-section) 0 0;">
     <div style="font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-12); color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--space-4);">
-      Senior/Staff Backend Engineer — Data Platform
+      Staff Backend / Platform Engineer
     </div>
     <h1 style="margin-bottom: var(--space-4);">
-      I build the backend systems behind data-heavy products.
+      I build and own backend systems that other products depend on.
     </h1>
     <p style="font-size: var(--fs-18); color: var(--ink-2); margin-bottom: var(--space-6); max-width: 65ch;">
       13 years backend systems · 5 years platform ownership
@@ -120,7 +120,7 @@ import TimelineEntry from '../components/TimelineEntry.astro';
     <SectionEyebrow label="By the numbers" />
     <StatBar
       stats={[
-        { value: "98%+", label: "Pipeline uptime", pct: 98 },
+        { value: "3 months", label: "Migration, zero rollbacks", pct: 100 },
         { value: "200+", label: "Stores on 5 platforms", pct: 100 },
         { value: "1,000+", label: "Active segments", pct: 100 },
         { value: "80%+", label: "Smart tier adoption", pct: 80 },
@@ -140,8 +140,8 @@ import TimelineEntry from '../components/TimelineEntry.astro';
       <CaseStudyCard
         href="/case-studies/data-platform"
         title="The data platform"
-        subtitle="Rebuilt how customer and order data flows through the company — from data arriving days late to sub-minute freshness, across 200+ merchant stores on five e-commerce platforms."
-        metrics={["days → sub-minute", "98%+ uptime", "200+ stores"]}
+        subtitle="Rebuilt how customer and order data flows through the company — from data arriving days late to sub-minute freshness, across 200+ merchant stores on five e-commerce platforms. Migrated in 3 months with zero rollbacks, recovered from a production incident that nearly blocked the entire rollout."
+        metrics={["days → sub-minute", "3-month migration", "200+ stores"]}
         variant="spotlight"
       />
       <CaseStudyCard
@@ -186,33 +186,51 @@ import TimelineEntry from '../components/TimelineEntry.astro';
     <ActivityWidget />
   </section>
 
-  <!-- Independent Products -->
+  <!-- Engineering Notes -->
   <section style="padding: var(--space-section) 0; border-bottom: 1px solid var(--rule);">
-    <SectionEyebrow label="Things I built without a product manager" />
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-6);">
-      <ProductCard
-        name="affairsmap.com"
-        description="Current-affairs study platform for UPSC, SSC, Banking, RBI Grade B and Defence exam aspirants."
-        status="In development"
-      />
-      <ProductCard
-        name="Fruggy"
-        description="Grocery shopping planner for Indian FMCG shoppers. Flutter app with a dataset of 1,500+ FMCG items."
-        status="1,000+ downloads"
-        image="/assets/fruggy.png"
-      />
-      <ProductCard
-        name="HitReplAI"
-        description="AI-powered social media reply generator that learns and mimics the user's writing style."
-        status="Live on Chrome Web Store"
-        image="/assets/hitreplai.png"
-      />
-      <ProductCard
-        name="en-bus"
-        description="Tamil Nadu bus routes and timings finder. Real-time route search across TNSTC, SETC, and MTC buses."
-        status="Live · 93K+ trips"
-        image="/assets/enbus.png"
-      />
+    <SectionEyebrow label="Engineering Notes" />
+    <p style="font-size: var(--fs-16); color: var(--ink); margin-bottom: var(--space-6); max-width: 65ch;">Deep-dives into architecture decisions, incident recovery, and systems thinking from building data platforms at scale.</p>
+    <a href="/engineering-notes" style="font-size: var(--fs-14); color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s;">Read the notes →</a>
+  </section>
+
+  <!-- Outside Work -->
+  <section style="padding: var(--space-section) 0; border-bottom: 1px solid var(--rule);">
+    <SectionEyebrow label="Outside work" />
+    <p style="font-size: var(--fs-16); color: var(--ink); margin-bottom: var(--space-6); max-width: 65ch;">I don't stop building when the workday ends. Here's what I've shipped.</p>
+
+    <div style="margin-bottom: var(--space-8);">
+      <h3 style="font-size: var(--fs-14); font-weight: 600; color: var(--accent); margin-bottom: var(--space-6);">Shipped</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-6);">
+        <ProductCard
+          name="Fruggy"
+          description="Grocery shopping planner for Indian FMCG shoppers. Flutter app with a dataset of 1,500+ FMCG items."
+          status="1,000+ downloads"
+          image="/assets/fruggy.png"
+        />
+        <ProductCard
+          name="HitReplAI"
+          description="AI-powered social media reply generator that learns and mimics the user's writing style."
+          status="Live on Chrome Web Store"
+          image="/assets/hitreplai.png"
+        />
+        <ProductCard
+          name="en-bus"
+          description="Tamil Nadu bus routes and timings finder. Real-time route search across TNSTC, SETC, and MTC buses."
+          status="Live · 93K+ trips"
+          image="/assets/enbus.png"
+        />
+      </div>
+    </div>
+
+    <div>
+      <h3 style="font-size: var(--fs-14); font-weight: 600; color: var(--accent); margin-bottom: var(--space-6);">Currently building</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-6);">
+        <ProductCard
+          name="affairsmap.com"
+          description="Current-affairs study platform for UPSC, SSC, Banking, RBI Grade B and Defence exam aspirants."
+          status="In development"
+        />
+      </div>
     </div>
   </section>
 
@@ -285,11 +303,11 @@ import TimelineEntry from '../components/TimelineEntry.astro';
       <SkillsColumn
         title="Leadership & Scale"
         skills={[
-          { text: "Team hiring & evaluation", lenses: [] },
-          { text: "Architecture ownership", lenses: [] },
-          { text: "Production incident response", lenses: [] },
-          { text: "Large-scale migrations", lenses: [] },
-          { text: "Cross-functional partnerships", lenses: [] },
+          { text: "Team growth — grew platform team from 4 to 7 engineers without losing coherence", lenses: [] },
+          { text: "Architecture ownership — moved migration timing by 6–12 months and cost structure through architecture decisions", lenses: [] },
+          { text: "Production incident response — 50M-row snapshot hit production; diagnosed, stopped, re-strategized, recovered", lenses: [] },
+          { text: "Large-scale migrations — store-by-store cutover across 200+ merchants with zero rollback", lenses: [] },
+          { text: "Cross-functional partnerships — moved product segmentation from engineering bottleneck to self-service", lenses: [] },
         ]}
       />
     </div>
@@ -299,7 +317,7 @@ import TimelineEntry from '../components/TimelineEntry.astro';
   <section style="padding: var(--space-section) 0; border-bottom: 1px solid var(--rule);">
     <SectionEyebrow label="Background" />
     <p style="font-size: var(--fs-16); line-height: 1.8; color: var(--ink); margin-bottom: var(--space-8); max-width: 65ch;">
-      13 years building backend systems and data infrastructure. Started building for the web in 2010. Spent nearly six years at ConvertCart owning a data platform end to end and leading a team of engineers to rebuild it. Built segmentation and recommendation engines on top. Founded and shipped independent products. Experienced hiring and evaluating backend/data engineers; comfortable in both IC and multiplier roles.
+      13 years building backend systems and data infrastructure. Started building for the web in 2010. Spent nearly six years at ConvertCart, five of them owning a data platform end to end and leading a team of engineers to rebuild it. Built segmentation and recommendation engines on top. Founded and shipped independent products. Experienced hiring and evaluating backend/data engineers; comfortable in both IC and multiplier roles.
     </p>
     <div style="display: grid; gap: 0;">
       <TimelineEntry index="A1" years="2020–2026" company="ConvertCart" role="Backend Engineer, Platform Ownership — Data ingestion, warehouse consolidation, multi-channel personalisation" />
@@ -313,16 +331,15 @@ import TimelineEntry from '../components/TimelineEntry.astro';
   <!-- CTA -->
   <section style="padding: var(--space-section) 0;">
     <div style="border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: var(--space-8) 0;">
-      <div style="font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-12); color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--space-4);">
-        Open to high-ownership roles
-      </div>
       <h2 style="font-size: var(--fs-32); margin-bottom: var(--space-6);">
-        Senior/Staff Backend Engineer — Data Platform
+        Have a backend problem that needs an owner?
       </h2>
+      <p style="font-size: var(--fs-16); color: var(--ink-2); margin-bottom: var(--space-6); max-width: 65ch;">I'm currently talking to founders and engineering leaders about Staff/Lead backend and platform roles. Fully remote, $60k+ salary floor.</p>
       <div style="display: flex; gap: var(--space-4); flex-wrap: wrap;">
         <CTAButton href="mailto:mail4udhaya@gmail.com" label="Email me" variant="solid" />
         <CTAButton href="/resume" label="View résumé" variant="outline" />
-        <a href="https://linkedin.com/in/udhayakumar" target="_blank" rel="noopener" style="align-self: center; font-size: var(--fs-16); color: var(--ink); border-bottom: 1px solid transparent; transition: border-color 0.2s;">LinkedIn</a>
+        <a href="https://linkedin.com/in/udhayakumark" target="_blank" rel="noopener" style="align-self: center; font-size: var(--fs-16); color: var(--ink); border-bottom: 1px solid transparent; transition: border-color 0.2s;">LinkedIn</a>
+        <a href="https://github.com/udhayakumaran" target="_blank" rel="noopener" style="align-self: center; font-size: var(--fs-16); color: var(--ink); border-bottom: 1px solid transparent; transition: border-color 0.2s;">GitHub</a>
       </div>
     </div>
   </section>

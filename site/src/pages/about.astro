@@ -1,12 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
 ---
 
 <Layout title="About — Udhayakumar" description="Engineer, architect, builder. 13+ years in backend infrastructure and data platforms.">
   <section style="padding: 52px 0; border-bottom: 1px solid var(--rule);">
     <h1 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-40); font-weight: 600; margin-bottom: 32px;">About</h1>
     <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 24px;">I've spent 13 years building backend systems and data infrastructure. Started with web development in 2010, moved through LAMP, Node, and cloud infrastructure at scale. From Aug 2020 to May 2026, I was at ConvertCart, where I owned a data platform end to end — ingestion, modelling, serving, reporting — from Aug 2021 onward (5 years production ownership). Scaled the platform team from 4 to 7 engineers while serving 200+ merchant stores across five e-commerce platforms. Built segmentation and recommendation engines on top of the platform. Hired, trained, and onboarded platform engineers; established project ownership patterns.</p>
-    <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">Looking for fully remote roles — Senior Backend Engineer, Staff Backend Engineer, Founding Engineer, or Principal Engineer — where I can own systems that matter. Interested in products that have outgrown their first architecture but aren't ready for a large platform org.</p>
+    <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">Looking for fully remote roles as a Staff Backend / Platform Engineer. Also open to Lead Engineer, Founding Engineer, Backend Architect, or Data Platform Lead roles where I can own systems that matter. Interested in products that have outgrown their first architecture but aren't ready for a large platform org.</p>
   </section>
 
   <!-- What I get hired for -->
@@ -29,6 +30,33 @@ import Layout from '../layouts/Layout.astro';
         <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Judging tradeoffs honestly</p>
         <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">Every architecture decision trades something off. Value candidates and team members who name the cost admitted, not just the benefit gained. Leads to better hiring and fewer bad surprises post-launch.</p>
       </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section style="padding: 52px 0; border-bottom: 1px solid var(--rule);">
+    <h2 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin-bottom: 40px;">What people say</h2>
+    <div style="display: grid; gap: 24px;">
+      <TestimonialCard
+        quote="I worked with Udhay for the past four years, and calling him just a 'team lead' wouldn't do justice to the role he played in my journey. He has been an exceptional mentor and guide, always approachable, patient, and supportive. His leadership style helped me grow not just in skills, but in confidence and mindset."
+        name="Goutham Kishore"
+        role="Full Stack Developer, reported to Udhaya"
+      />
+      <TestimonialCard
+        quote="Udhaya is an exceptional engineer with strong technical depth and the curiosity to solve complex client challenges. He combines a high ownership mindset with excellent communication, translating technical concepts clearly for non-technical stakeholders. He approaches problems strategically and drives solutions with minimal oversight."
+        name="Mannat Bhalla"
+        role="Customer Success Manager"
+      />
+      <TestimonialCard
+        quote="Udhaya has demonstrated an impressive ability to manage complex product development projects while leading a diverse team. His leadership style fosters a supportive environment where team members can thrive. He has effectively mentored colleagues and consistently ensures strong outcomes for both clients and the team."
+        name="Vasudeva Sagari"
+        role="Engineering Manager / Former Manager"
+      />
+      <TestimonialCard
+        quote="Udhaya is an exceptional leader who sets high standards for his team and inspires them to reach their full potential. His technical expertise has been invaluable to the success of our projects. I believe that Udhaya would be an asset to any organization."
+        name="Piyush Jaiswal"
+        role="Backend Engineer, reported to Udhaya"
+      />
     </div>
   </section>
 

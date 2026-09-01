@@ -1,0 +1,62 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Engineering Notes"
+  description="Technical deep-dives into architecture decisions, incident recovery, and systems thinking."
+>
+  <section style="padding: 52px 0;">
+    <nav style="margin-bottom: 32px;">
+      <a href="/" style="font-size: 14px; color: var(--accent); text-decoration: none;">← Back home</a>
+    </nav>
+
+    <h1 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-40); font-weight: 600; margin-bottom: 24px;">Engineering Notes</h1>
+
+    <p style="font-size: 18px; color: var(--ink-2); margin-bottom: 48px; max-width: 65ch;">Deep-dives into decisions, incidents, and lessons from building data platforms and backend infrastructure at scale.</p>
+
+    <!-- Published Notes -->
+    <section style="margin-bottom: 64px;">
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 24px;">Published</h2>
+      <div style="display: grid; gap: 24px;">
+        <div style="padding: 20px; background: var(--panel); border: 1px solid var(--rule); border-radius: 4px;">
+          <a href="/engineering-notes/debezium-50m-row-snapshot/" style="text-decoration: none; color: inherit;">
+            <h3 style="font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 8px;">The 50M-row Debezium snapshot incident</h3>
+            <p style="font-size: 14px; color: var(--ink-2); margin: 0;">A snapshot operation consumed 60% CPU and nearly blocked a critical migration. How we recovered and what it taught about production risk vs architectural purity.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Coming Soon -->
+    <section>
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 24px;">Coming soon</h2>
+      <div style="display: grid; gap: 24px;">
+        <div style="padding: 20px; background: var(--panel); border: 1px solid var(--rule); border-radius: 4px; opacity: 0.6;">
+          <h3 style="font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 8px;">CDC from the landing layer, not sources</h3>
+          <p style="font-size: 14px; color: var(--ink-2); margin: 0;">Why capturing changes at the landing store instead of at source systems gives you reversibility and a single source of truth.</p>
+        </div>
+        <div style="padding: 20px; background: var(--panel); border: 1px solid var(--rule); border-radius: 4px; opacity: 0.6;">
+          <h3 style="font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 8px;">Designing a multi-tenant MySQL landing store</h3>
+          <p style="font-size: 14px; color: var(--ink-2); margin: 0;">Table-per-tenant vs shared tables: tradeoffs in schema design, operational overhead, and the contention costs you're actually paying.</p>
+        </div>
+        <div style="padding: 20px; background: var(--panel); border: 1px solid var(--rule); border-radius: 4px; opacity: 0.6;">
+          <h3 style="font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 8px;">ClickHouse vs BigQuery for analytics</h3>
+          <p style="font-size: 14px; color: var(--ink-2); margin: 0;">Choosing your analytics layer: latency, cost, operational burden, and when each database makes sense.</p>
+        </div>
+        <div style="padding: 20px; background: var(--panel); border: 1px solid var(--rule); border-radius: 4px; opacity: 0.6;">
+          <h3 style="font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 8px;">Building a query builder without exposing SQL</h3>
+          <p style="font-size: 14px; color: var(--ink-2); margin: 0;">How segmentation lets non-technical users compose complex queries safely and how the architecture enables this.</p>
+        </div>
+        <div style="padding: 20px; background: var(--panel); border: 1px solid var(--rule); border-radius: 4px; opacity: 0.6;">
+          <h3 style="font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 8px;">Multi-region recommendation serving under 200ms p99</h3>
+          <p style="font-size: 14px; color: var(--ink-2); margin: 0;">Designing real-time serving across five regions with consistent latency and handling the edge cases of global distribution.</p>
+        </div>
+        <div style="padding: 20px; background: var(--panel); border: 1px solid var(--rule); border-radius: 4px; opacity: 0.6;">
+          <h3 style="font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 8px;">When table-per-tenant is actually the right decision</h3>
+          <p style="font-size: 14px; color: var(--ink-2); margin: 0;">Understanding operational costs vs multi-tenancy contention, and the hidden costs of shared schema in production.</p>
+        </div>
+      </div>
+    </section>
+  </section>
+</Layout>

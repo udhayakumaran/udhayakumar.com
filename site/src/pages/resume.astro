@@ -8,36 +8,42 @@ import Layout from '../layouts/Layout.astro';
     <p style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 32px; max-width: 65ch;">Different roles require different emphasis. Pick the resume that matches the role you're hiring for — each highlights different case studies and experience to show relevance to the specific kind of work.</p>
   </section>
 
-  <section style="padding: 52px 0;">
-    <div style="display: grid; gap: 16px;">
-      <a href="/resume/general.pdf" style="text-decoration: none; display: block; padding: 24px; background: var(--panel); border: 1px solid var(--rule-2); border-radius: 4px; transition: border-color 0.2s ease;">
-        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 4px;">General</p>
-        <p style="font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 4px;">13 years backend & data infrastructure</p>
-        <p style="font-size: 14px; color: var(--ink-2);">Broad experience across roles and contexts. Best for general backend/systems roles.</p>
-      </a>
+  <!-- Recommended Resume -->
+  <section style="padding: 52px 0; border-bottom: 1px solid var(--rule);">
+    <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Recommended</p>
+    <a href="/resume/general.pdf" style="text-decoration: none; display: block; padding: 32px; background: var(--panel); border: 2px solid var(--accent); border-radius: 4px; transition: border-color 0.2s ease;">
+      <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">General Resume</p>
+      <p style="font-size: 20px; font-weight: 600; color: var(--ink); margin-bottom: 8px;">13 years backend & data infrastructure</p>
+      <p style="font-size: 16px; color: var(--ink-2);">Broad experience across roles and contexts. Best for general backend, platform, and systems roles.</p>
+    </a>
+  </section>
 
+  <!-- Specialized Resumes -->
+  <section style="padding: 52px 0;">
+    <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 24px;">Applying for a specific role?</p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
       <a href="/resume/data.pdf" style="text-decoration: none; display: block; padding: 24px; background: var(--panel); border: 1px solid var(--rule-2); border-radius: 4px; transition: border-color 0.2s ease;">
         <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 4px;">Data Platform</p>
         <p style="font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 4px;">5 years owning a data platform end to end</p>
-        <p style="font-size: 14px; color: var(--ink-2);">CDC, warehouse consolidation, reporting architecture. Best for data-infrastructure-focused roles.</p>
+        <p style="font-size: 14px; color: var(--ink-2);">CDC, warehouse consolidation, reporting architecture.</p>
       </a>
 
       <a href="/resume/arch.pdf" style="text-decoration: none; display: block; padding: 24px; background: var(--panel); border: 1px solid var(--rule-2); border-radius: 4px; transition: border-color 0.2s ease;">
         <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 4px;">Backend Architecture</p>
         <p style="font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 4px;">Systems thinking, tradeoffs, architectural decisions</p>
-        <p style="font-size: 14px; color: var(--ink-2);">Emphasizes design principles and decision-making. Best for architecture and lead-engineer roles.</p>
+        <p style="font-size: 14px; color: var(--ink-2);">Design principles and decision-making for lead roles.</p>
       </a>
 
       <a href="/resume/founding.pdf" style="text-decoration: none; display: block; padding: 24px; background: var(--panel); border: 1px solid var(--rule-2); border-radius: 4px; transition: border-color 0.2s ease;">
         <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 4px;">Founding Engineer</p>
         <p style="font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 4px;">Zero to one, ownership, shipping end-to-end</p>
-        <p style="font-size: 14px; color: var(--ink-2);">Solo shipping experience, team leadership, product thinking. Best for founding/early-stage roles.</p>
+        <p style="font-size: 14px; color: var(--ink-2);">Solo shipping, team leadership, product thinking.</p>
       </a>
 
       <a href="/resume/ecom.pdf" style="text-decoration: none; display: block; padding: 24px; background: var(--panel); border: 1px solid var(--rule-2); border-radius: 4px; transition: border-color 0.2s ease;">
         <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 4px;">E-commerce Infrastructure</p>
-        <p style="font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 4px;">Multi-platform, scale, reliability constraints</p>
-        <p style="font-size: 14px; color: var(--ink-2);">5 platforms, 200+ merchants, production constraints. Best for e-commerce/scale-focused roles.</p>
+        <p style="font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 4px;">Multi-platform, scale, reliability</p>
+        <p style="font-size: 14px; color: var(--ink-2);">5 platforms, 200+ merchants, production constraints.</p>
       </a>
     </div>
   </section>

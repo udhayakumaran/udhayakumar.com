@@ -153,11 +153,15 @@ import Layout from '../../layouts/Layout.astro';
         <text class="arch-label-small" x="450" y="355" text-anchor="middle">(historical)</text>
         <text class="arch-label-small" x="450" y="370" text-anchor="middle">audit trail</text>
 
+        <!-- Ownership & SLO annotations -->
+        <text class="arch-label-small" x="290" y="190" text-anchor="middle" style="fill: var(--accent); font-size: 9px;">Platform team owns</text>
+        <text class="arch-label-small" x="290" y="280" text-anchor="middle" style="fill: var(--accent); font-size: 9px;">5min alert, 15min page</text>
+
         <!-- Consumption callout -->
         <text class="arch-label-small" x="290" y="430" text-anchor="middle" style="fill: var(--accent);">← Recommendations, Segmentation, Attribution, Reporting</text>
       </svg>
 
-      <p style="font-size: 14px; color: var(--ink-2); max-width: 65ch;">New sources plug into the landing layer. New consumers subscribe to Pub/Sub. No custom integrations required.</p>
+      <p style="font-size: 14px; color: var(--ink-2); max-width: 65ch;">New sources plug into the landing layer. New consumers subscribe to Pub/Sub. No custom integrations required. Platform team owns the landing layer and CDC; 5-minute latency alerts, 15-minute on-call page threshold.</p>
     </section>
 
     <!-- Key Decisions -->

@@ -1,13 +1,28 @@
 ---
 import '../styles/global.css';
 import Header from '../components/Header.astro';
+import { profile } from '../data/profile';
 
 interface Props {
   title: string;
   description?: string;
 }
 
-const { title, description = "Staff Backend / Platform Engineer. Data infrastructure, distributed systems, production migrations. Open to Founding Engineer, Backend Architect, and Data Platform Lead roles." } = Astro.props;
+const { title, description = `${profile.primaryTitle} with ${profile.experience} building production systems, data platforms, and independent products. India-based and open to international, remote, and hybrid opportunities.` } = Astro.props;
+const canonical = new URL(Astro.url.pathname, "https://udhayakumar.com").toString();
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Udhayakumar",
+  url: "https://udhayakumar.com",
+  jobTitle: profile.primaryTitle,
+  description,
+  address: { "@type": "PostalAddress", addressCountry: "IN" },
+  sameAs: [
+    profile.links.linkedin,
+    profile.links.github,
+  ],
+};
 ---
 
 <!DOCTYPE html>
@@ -24,6 +39,8 @@ const { title, description = "Staff Backend / Platform Engineer. Data infrastruc
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title}</title>
   <meta name="description" content={description}>
+  <meta name="author" content="Udhayakumar">
+  <link rel="canonical" href={canonical}>
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DDRCFD4HSF"></script>
@@ -42,11 +59,15 @@ const { title, description = "Staff Backend / Platform Engineer. Data infrastruc
   <meta property="og:title" content={title}>
   <meta property="og:description" content={description}>
   <meta property="og:type" content="website">
-  <meta property="og:image" content="/og-image.png">
+  <meta property="og:url" content={canonical}>
+  <meta property="og:image" content="https://udhayakumar.com/og-image.svg">
+  <meta property="og:image:type" content="image/svg+xml">
+  <meta property="og:image:alt" content="Udhaya Kumar — Senior Backend Engineer">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content={title}>
   <meta name="twitter:description" content={description}>
-  <meta name="twitter:image" content="/og-image.png">
+  <meta name="twitter:image" content="https://udhayakumar.com/og-image.svg">
+  <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)}></script>
 
   <style>
     main {
@@ -164,53 +185,17 @@ const { title, description = "Staff Backend / Platform Engineer. Data infrastruc
   </style>
 </head>
 <body>
-  <Header />
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <Header currentPath={Astro.url.pathname} />
 
-  <main>
+  <main id="main-content">
     <slot />
   </main>
 
   <footer>
-    <p>Currently looking for staff-level backend and platform ownership roles. Fully remote. Also open to Founding Engineer, Backend Architect, or Data Platform Lead positions.</p>
-    <a href="mailto:mail4udhaya@gmail.com">mail4udhaya@gmail.com</a>
+    <p>Open to senior backend, platform, data infrastructure, and technical leadership roles.</p>
+    <a href={`mailto:${profile.email}`}>{profile.email}</a>
   </footer>
 
-  <script>
-    const themeToggle = document.getElementById('theme-toggle');
-    const themeIcon = document.getElementById('theme-icon');
-    const html = document.documentElement;
-
-    // Sync icon text to theme already set by head script
-    themeIcon.textContent = html.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
-
-    // Toggle theme on button click
-    themeToggle.addEventListener('click', () => {
-      const current = html.getAttribute('data-theme');
-      const newTheme = current === 'dark' ? 'light' : 'dark';
-
-      if (newTheme === 'dark') {
-        html.setAttribute('data-theme', 'dark');
-        themeIcon.textContent = '☀️';
-      } else {
-        html.setAttribute('data-theme', 'light');
-        themeIcon.textContent = '🌙';
-      }
-
-      localStorage.setItem('theme', newTheme);
-    });
-
-    // Listen for system theme changes
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-      if (!localStorage.getItem('theme')) {
-        if (e.matches) {
-          html.setAttribute('data-theme', 'dark');
-          themeIcon.textContent = '☀️';
-        } else {
-          html.setAttribute('data-theme', 'light');
-          themeIcon.textContent = '🌙';
-        }
-      }
-    });
-  </script>
 </body>
 </html>

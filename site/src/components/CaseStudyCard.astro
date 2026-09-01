@@ -20,7 +20,7 @@ const {
 
 {
   variant === "spotlight" ? (
-    <a href={href} class="case-study-spotlight reveal">
+    <a href={href} class="case-study-spotlight">
       <div class="spotlight-content">
         <h3>{title}</h3>
         <p>{subtitle}</p>
@@ -34,7 +34,7 @@ const {
       </div>
     </a>
   ) : (
-    <a href={href} class="case-study-card reveal">
+    <a href={href} class="case-study-card">
       <div class="card-header">
         <h4>{title}</h4>
         {isMostRelevant && <span class="most-relevant">most relevant</span>}
@@ -109,11 +109,7 @@ const {
   .case-study-spotlight {
     display: flex;
     padding: var(--space-8);
-    background: linear-gradient(
-      135deg,
-      var(--accent-wash),
-      var(--sage-wash)
-    );
+    background: var(--panel);
     border: 1px solid var(--rule);
     border-radius: 4px;
     min-height: 200px;
@@ -121,11 +117,7 @@ const {
   }
 
   .case-study-spotlight:hover {
-    background: linear-gradient(
-      135deg,
-      var(--accent-wash),
-      var(--sage-wash)
-    );
+    background: var(--panel-2);
     transform: translateY(-4px);
   }
 
@@ -155,7 +147,7 @@ const {
     display: inline-block;
     padding: var(--space-2) var(--space-3);
     background: var(--accent);
-    color: white;
+    color: var(--bg);
     font-family: "IBM Plex Mono", monospace;
     font-size: var(--fs-11);
     font-weight: 600;

@@ -63,7 +63,7 @@ const { lenses, defaultLens = "data" } = Astro.props;
 
   .lens-btn.active {
     background: var(--accent);
-    color: white;
+    color: var(--bg);
     border-color: var(--accent);
   }
 
@@ -75,7 +75,7 @@ const { lenses, defaultLens = "data" } = Astro.props;
   .lens-note {
     padding: var(--space-4);
     background: var(--sage-wash);
-    border-left: 3px solid var(--sage);
+    border: 1px solid var(--sage);
     font-size: var(--fs-14);
     line-height: 1.6;
     color: var(--ink);

@@ -4,15 +4,16 @@ import Layout from '../../layouts/Layout.astro';
 
 <Layout title="Case Studies" description="Three complete systems I owned: a data platform with CDC and warehouse consolidation, a segmentation engine for non-technical users, and a real-time recommendation system serving multiple regions.">
   <section style="padding: 52px 0;">
-    <h1 style="font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 600; margin-bottom: 40px;">Case Studies</h1>
+    <h1 style="font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 600; margin-bottom: 16px;">Case Studies</h1>
+    <p style="font-size: 16px; color: var(--ink-2); max-width: 65ch; margin-bottom: 40px;">Read in order: data platform for architecture and migration, incident note for production judgment, then segmentation and recommendations for product outcomes.</p>
     <div style="display: grid; gap: 24px;">
       <a href="/case-studies/data-platform" style="text-decoration: none; display: block; padding: 24px; background: var(--panel); border: 1px solid var(--rule-2); border-radius: 4px; transition: border-color 0.2s ease;" class="case-link">
         <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-3); font-weight: 600; margin-bottom: 4px;">01</div>
-        <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--ink);">The Data Platform</h2>
-        <p style="font-size: 14px; color: var(--ink-2); line-height: 1.6; margin-bottom: 12px;">Rebuilt how customer and order data flows through the company — from data arriving days late to sub-minute freshness, across 200+ merchant stores on five e-commerce platforms.</p>
+        <p class="case-label">Primary case study · recommended first read</p><h2 style="font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--ink);">The Data Platform</h2>
+        <p style="font-size: 14px; color: var(--ink-2); line-height: 1.6; margin-bottom: 12px;">Owned the rebuild of customer and order data infrastructure across 200+ merchants on five commerce platforms; webhook freshness moved from days-late batch data to sub-minute.</p>
         <div style="display: flex; flex-wrap: wrap; gap: 8px;">
           <span style="font-size: 11px; background: var(--panel-2); color: var(--ink-3); padding: 4px 8px; border-radius: 3px;">days → sub-minute</span>
-          <span style="font-size: 11px; background: var(--panel-2); color: var(--ink-3); padding: 4px 8px; border-radius: 3px;">200+ stores</span>
+          <span style="font-size: 11px; background: var(--panel-2); color: var(--ink-3); padding: 4px 8px; border-radius: 3px;">200+ merchants</span>
           <span style="font-size: 11px; background: var(--panel-2); color: var(--ink-3); padding: 4px 8px; border-radius: 3px;">5 e-commerce platforms</span>
         </div>
       </a>
@@ -20,7 +21,7 @@ import Layout from '../../layouts/Layout.astro';
       <a href="/case-studies/segmentation" style="text-decoration: none; display: block; padding: 24px; background: var(--panel); border: 1px solid var(--rule-2); border-radius: 4px; transition: border-color 0.2s ease;" class="case-link">
         <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-3); font-weight: 600; margin-bottom: 4px;">02</div>
         <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--ink);">Customer Segmentation</h2>
-        <p style="font-size: 14px; color: var(--ink-2); line-height: 1.6; margin-bottom: 12px;">Built the system that lets a non-technical Customer Success rep build audiences without writing a line of code. The module every marketing campaign ran through.</p>
+        <p style="font-size: 14px; color: var(--ink-2); line-height: 1.6; margin-bottom: 12px;">Owned the query model and builder that let Customer Success create audiences from four source systems without routine engineering tickets.</p>
         <div style="display: flex; flex-wrap: wrap; gap: 8px;">
           <span style="font-size: 11px; background: var(--panel-2); color: var(--ink-3); padding: 4px 8px; border-radius: 3px;">4 source systems, 1 query</span>
           <span style="font-size: 11px; background: var(--panel-2); color: var(--ink-3); padding: 4px 8px; border-radius: 3px;">built on the platform ↑</span>
@@ -30,7 +31,7 @@ import Layout from '../../layouts/Layout.astro';
       <a href="/case-studies/recommendations" style="text-decoration: none; display: block; padding: 24px; background: var(--panel); border: 1px solid var(--rule-2); border-radius: 4px; transition: border-color 0.2s ease;" class="case-link">
         <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-3); font-weight: 600; margin-bottom: 4px;">03</div>
         <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--ink);">Recommendation Blocks</h2>
-        <p style="font-size: 14px; color: var(--ink-2); line-height: 1.6; margin-bottom: 12px;">Built the company's product recommendation feature from nothing, designed so store owners could trust it enough to turn it on. Most clients who tried it ended up on the fully automated version.</p>
+        <p style="font-size: 14px; color: var(--ink-2); line-height: 1.6; margin-bottom: 12px;">Owned the trust ladder, serving system, and adoption measurement for a recommendation product built from zero.</p>
         <div style="display: flex; flex-wrap: wrap; gap: 8px;">
           <span style="font-size: 11px; background: var(--panel-2); color: var(--ink-3); padding: 4px 8px; border-radius: 3px;">80%+ adoption, Smart tier</span>
           <span style="font-size: 11px; background: var(--panel-2); color: var(--ink-3); padding: 4px 8px; border-radius: 3px;">5 regions</span>
@@ -51,6 +52,10 @@ import Layout from '../../layouts/Layout.astro';
     </div>
   </section>
 </Layout>
+
+<style>
+  .case-label { color: var(--accent); font-family: "IBM Plex Mono", monospace; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; }
+</style>
 
 <style>
   .case-link:hover {

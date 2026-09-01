@@ -1,13 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import TestimonialCard from '../components/TestimonialCard.astro';
+import { profile } from '../data/profile';
 ---
 
-<Layout title="About — Udhayakumar" description="Staff backend and platform engineer. 13+ years building backend infrastructure and data platforms — also open to Founding Engineer and Architect roles.">
+<Layout title="About — Udhaya Kumar" description="About Udhaya Kumar, Senior Backend Engineer with 13+ years building backend systems, data infrastructure, and production platforms.">
   <section style="padding: 52px 0; border-bottom: 1px solid var(--rule);">
     <h1 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-40); font-weight: 600; margin-bottom: 32px;">About</h1>
-    <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 24px;">I've spent 13 years building backend systems and data infrastructure. Started with web development in 2010, moved through LAMP, Node, and cloud infrastructure at scale. From Aug 2020 to May 2026, I was at ConvertCart, where I owned a data platform end to end — ingestion, modelling, serving, reporting — from Aug 2021 onward (5 years production ownership). Scaled the platform team from 4 to 7 engineers while serving 200+ merchant stores across five e-commerce platforms. Built segmentation and recommendation engines on top of the platform. Hired, trained, and onboarded platform engineers; established project ownership patterns.</p>
-    <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">Looking for fully remote roles as a Staff Backend / Platform Engineer. Also open to Lead Engineer, Founding Engineer, Backend Architect, or Data Platform Lead roles where I can own systems that matter. Interested in products that have outgrown their first architecture but aren't ready for a large platform org.</p>
+    <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 24px;">I've spent {profile.experience} building backend systems and data infrastructure. From {profile.convertCart.tenure}, I was at ConvertCart, where I owned a data platform end to end — ingestion, modelling, serving, and reporting — for {profile.convertCart.platformOwnership}. I helped grow the platform team from {profile.convertCart.teamGrowth} while serving {profile.proof.merchants}.</p>
+    <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">I'm a {profile.primaryTitle} open to backend, platform, data infrastructure, technical lead, and founding-engineer roles across Indian, international, remote, and hybrid teams.</p>
   </section>
 
   <!-- What I get hired for -->
@@ -87,5 +88,6 @@ import TestimonialCard from '../components/TestimonialCard.astro';
   <section style="padding: 52px 0; text-align: center;">
     <p style="font-size: 18px; line-height: 1.8; color: var(--ink); margin-bottom: 16px;">Let's talk about infrastructure, data, and building at scale.</p>
     <a href="mailto:mail4udhaya@gmail.com" style="text-decoration: none; color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; border-bottom: 1px solid transparent; transition: border-color 0.2s ease;">mail4udhaya@gmail.com</a>
+    <p style="margin-top: 24px;"><a href="/resume">View resume →</a></p>
   </section>
 </Layout>

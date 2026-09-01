@@ -13,7 +13,7 @@ import Layout from '../../layouts/Layout.astro';
 
     <h1 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin-bottom: 24px;">Recommendation Blocks</h1>
 
-    <p style="font-size: 16px; color: var(--ink-2); margin-bottom: 32px; max-width: 65ch;">Built the company's product recommendation feature from nothing. Designed a three-tier trust ladder so merchants could start with high certainty and graduate as confidence grew. Most who tried it ended up on the fully live tier.</p>
+    <p style="font-size: 16px; color: var(--ink-2); margin-bottom: 32px; max-width: 65ch;">I built the company's product recommendation feature from zero. A three-tier trust ladder let merchants start with high certainty and graduate as confidence grew; 80%+ of merchants who trialled Smart tier adopted it.</p>
 
     <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 32px;">
       <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">80%+ adoption, Smart tier</span>
@@ -40,7 +40,7 @@ import Layout from '../../layouts/Layout.astro';
       <div>
         <h3 style="font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 12px;">What the product achieved</h3>
         <div style="display: grid; gap: 12px; max-width: 65ch;">
-          <div><strong>80%+ adoption on Smart tier</strong> — most merchants who tried any tier graduated to full automation</div>
+          <div><strong>80%+ Smart-tier adoption</strong> — among merchants who trialled the tier</div>
           <div><strong>Multi-region latency</strong> — 200ms p99 across five regions with real-time ranking</div>
           <div><strong>Merchant trust</strong> — low-friction trust ladder moved from "risky feature" to default-on</div>
         </div>
@@ -164,7 +164,7 @@ import Layout from '../../layouts/Layout.astro';
 
       <div style="margin-bottom: 24px;">
         <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Adoption Measurement</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Built tier progression tracking. Monitor which merchants enable, which tier, how long they stay on each. Found that 80%+ of merchants who tried Smart tier stayed on it — the proof that it works.</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Built tier progression tracking to measure which merchants enabled each tier and how adoption changed over time. The available result: 80%+ of merchants who trialled Smart tier adopted it; timeframe and trial count are not published here.</p>
       </div>
 
       <div style="margin-bottom: 24px;">
@@ -174,7 +174,7 @@ import Layout from '../../layouts/Layout.astro';
 
       <div>
         <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Multi-Region Challenge</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Building 200ms p99 across five regions: US, EU, APAC, India, Brazil. MongoDB replication acceptable latency, but Redis replication lag caused stale rankings. Solution: eventual consistency model with fallback to cached results on replica lag. Merchants accepted slightly older data over slow pages.</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">The serving target was 200ms p99 across five regions: US, EU, APAC, India, and Brazil. Redis replication lag could produce stale rankings, so I used eventual consistency with cached-result fallback when replicas lagged. The page stayed responsive at the cost of slightly older data.</p>
       </div>
     </section>
 
@@ -193,13 +193,13 @@ import Layout from '../../layouts/Layout.astro';
           <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Recommendations became first-party product, not third-party tool.</li>
           <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Conversion attribution proved ROI to merchants.</li>
           <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Feature expanded into multi-channel personalisation.</li>
-          <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">Sales used recommendation attribution as the primary ROI proof point during merchant renewals.</li>
+          <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">Recommendation attribution gave Sales and Customer Success a concrete ROI story for merchant conversations.</li>
         </ul>
       </div>
 
       <div>
         <h3 style="font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 12px;">Scale</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">80%+ adoption on hardest tier · 5 regions · 200ms p99 latency · zero downtime during rollout · merchants generating revenue through recommendations</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">80%+ Smart-tier adoption among trial merchants · five regions · 200ms p99 serving target · attribution used in merchant ROI conversations</p>
       </div>
     </section>
 
@@ -217,5 +217,13 @@ import Layout from '../../layouts/Layout.astro';
         <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Would invest more in A/B testing infrastructure early (Smart tier had minor bugs that could have been caught faster). Also would have built more merchant-facing dashboards to show performance data in product, not just to sales/success.</p>
       </div>
     </section>
+    <nav class="case-next" aria-label="Related work">
+      <a href="/case-studies/data-platform">Related: The data platform →</a>
+      <a href="/resume">View resume →</a>
+    </nav>
   </article>
 </Layout>
+
+<style>
+  .case-next { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 32px; margin-top: 48px; border-top: 1px solid var(--rule); }
+</style>

@@ -11,21 +11,22 @@ import Layout from '../../layouts/Layout.astro';
       <a href="/engineering-notes" style="font-size: 14px; color: var(--accent); text-decoration: none;">← Back to engineering notes</a>
     </nav>
 
-    <h1 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin-bottom: 24px;">The 50M-row Debezium snapshot incident</h1>
+    <h1 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin-bottom: 24px;">I stopped a production migration when a 50M-row CDC snapshot blocked writes</h1>
 
-    <p style="font-size: 16px; color: var(--ink-2); margin-bottom: 32px; max-width: 65ch;">During a data platform migration across 200+ merchant stores, Debezium's snapshot operation consumed 60% CPU and began blocking production writes. We stopped the migration, changed strategy, and recovered. What this taught about production risk vs architectural purity.</p>
+    <p style="font-size: 16px; color: var(--ink-2); margin-bottom: 32px; max-width: 65ch;">During a data platform migration across 200+ merchants, Debezium's snapshot operation consumed 60% CPU and began blocking production writes. I stopped the snapshot, used an existing Datastream path to recover, and changed the rollout strategy.</p>
+    <p class="note-meta">Engineering note · Production reliability · By Udhaya Kumar</p>
 
     <!-- Context -->
     <section style="margin-bottom: 48px;">
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Context</h2>
-      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">We were migrating the data platform to a new architecture: raw MySQL landing layer → Debezium CDC → Google Pub/Sub → specialized serving layers (MongoDB, ClickHouse, BigQuery). The landing layer was the single source of truth for all downstream systems — recommendations, segmentation, reporting, attribution.</p>
+      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">We were migrating the data platform to a new architecture: raw MySQL landing layer → Debezium CDC → Google Pub/Sub → specialized serving layers (MongoDB, ClickHouse, BigQuery). The landing layer was the shared CDC boundary for recommendations, segmentation, reporting, and attribution.</p>
       <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-top: 16px;">We'd already done a store-by-store cutover for 200+ merchants without issues. But the initial rollout of Debezium on the landing layer itself hit a wall.</p>
     </section>
 
     <!-- The Problem -->
     <section style="margin-bottom: 48px;">
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">What went wrong</h2>
-      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">Debezium uses snapshots to bootstrap the replication state when first connecting to a database. For a fresh Debezium deployment, the initial snapshot reads the entire landing table, acquires a read lock, and streams every row to Kafka.</p>
+      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">Debezium uses snapshots to bootstrap replication state when first connecting to a database. For this deployment, the initial snapshot read the entire landing table and streamed rows into our CDC event transport.</p>
       <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-top: 16px;">The landing table was ~50M rows. When Debezium started:</p>
       <ul style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-top: 16px; list-style: none; padding: 0;">
         <li style="margin-bottom: 12px;"><strong>The snapshot query hit 60% CPU.</strong> MySQL's query planner picked a suboptimal execution path.</li>
@@ -35,11 +36,18 @@ import Layout from '../../layouts/Layout.astro';
       <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-top: 16px;">Within minutes, we had requests piling up. Dashboards weren't updating. Customer-facing systems were degrading.</p>
     </section>
 
-    <!-- What We Did -->
+    <!-- Timeline and recovery -->
     <section style="margin-bottom: 48px;">
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">The recovery</h2>
+      <ol class="incident-timeline">
+        <li><strong>Detection</strong><span>Snapshot drove CPU to 60%; writes began queueing.</span></li>
+        <li><strong>Diagnosis</strong><span>The ~50M-row snapshot and lock behavior, not downstream consumers, were saturating MySQL.</span></li>
+        <li><strong>Stop decision</strong><span>I stopped the Debezium job and killed the snapshot before migration progress outweighed production risk.</span></li>
+        <li><strong>Recovery</strong><span>Production writes recovered within seconds; Datastream bootstrapped the baseline.</span></li>
+        <li><strong>Permanent change</strong><span>We moved to incremental table migration with a rollback path and production-scale snapshot testing.</span></li>
+      </ol>
       <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 16px;"><strong>Immediate:</strong> stopped the Debezium job and killed the snapshot. Production writes recovered within seconds.</p>
-      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 16px;"><strong>Short term:</strong> we'd built the system with a fallback — Google Cloud's Datastream service was already capturing changes from the same landing layer as a parallel replication path. We pivoted: use Datastream to bootstrap the initial snapshot (it's a managed service optimized for this), then switch tables to Debezium CDC incrementally.</p>
+      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 16px;"><strong>Short term:</strong> we'd built the system with a fallback — Google Cloud's Datastream service was already capturing changes from the same landing layer as a parallel replication path. We pivoted: use Datastream to bootstrap the initial snapshot, then switch tables to Debezium CDC incrementally.</p>
       <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;"><strong>Long term:</strong> this dual-replication strategy (Datastream + Debezium) became our production design for several months. It gave us:</p>
       <ul style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-top: 16px; list-style: none; padding: 0;">
         <li style="margin-bottom: 12px;">Safe snapshots (Datastream handles them at scale).</li>
@@ -79,5 +87,20 @@ import Layout from '../../layouts/Layout.astro';
         <li style="margin-bottom: 12px;"><strong>We design migrations with rollback paths.</strong> If something breaks at production scale, we can revert and try again without data loss.</li>
       </ul>
     </section>
+
+    <nav class="case-next" aria-label="Related work">
+      <a href="/case-studies/data-platform">Related: The data platform →</a>
+      <a href="/resume">View resume →</a>
+    </nav>
   </article>
 </Layout>
+
+<style>
+  .note-meta { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--ink-3); margin-bottom: 40px; }
+  .incident-timeline { display: grid; gap: 12px; max-width: 65ch; list-style: none; padding: 0; margin: 0 0 24px; }
+  .incident-timeline li { display: grid; grid-template-columns: 140px 1fr; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--rule); line-height: 1.6; }
+  .incident-timeline strong { color: var(--accent); }
+  .incident-timeline span { color: var(--ink); }
+  .case-next { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 32px; margin-top: 48px; border-top: 1px solid var(--rule); }
+  @media (max-width: 640px) { .incident-timeline li { grid-template-columns: 1fr; gap: 4px; } }
+</style>

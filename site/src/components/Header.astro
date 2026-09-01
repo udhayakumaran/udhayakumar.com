@@ -3,7 +3,10 @@ interface Props {
   currentPath?: string;
 }
 
+import { profile } from '../data/profile';
+
 const { currentPath = "/" } = Astro.props;
+const normalizedPath = currentPath.replace(/\/$/, "") || "/";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -14,19 +17,25 @@ const navItems = [
 ---
 
 <header>
-  <nav>
-    <a href="/" class="wordmark">udhayakumar</a>
+  <nav aria-label="Primary navigation">
+    <a href="/" class="wordmark">{profile.name}</a>
     <div class="nav-links">
       {navItems.map((item) => (
         <a
           href={item.href}
-          aria-current={currentPath === item.href ? "page" : undefined}
+          aria-current={
+            normalizedPath === item.href ||
+            (item.href === "/case-studies" && normalizedPath.startsWith("/case-studies/"))
+              ? "page"
+              : undefined
+          }
         >
           {item.label}
         </a>
       ))}
+      <a href={`mailto:${profile.email}`}>Contact</a>
     </div>
-    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+    <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode" aria-pressed="false">
       <span id="theme-icon">🌙</span>
     </button>
   </nav>
@@ -79,6 +88,9 @@ const navItems = [
     font-weight: 500;
     border-bottom: 2px solid transparent;
     transition: border-color 0.2s ease;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 
   nav a:hover,
@@ -102,6 +114,8 @@ const navItems = [
     cursor: pointer;
     transition: all 0.2s ease;
     font-family: "IBM Plex Mono", monospace;
+    min-width: 44px;
+    min-height: 44px;
   }
 
   .theme-toggle:hover {
@@ -143,8 +157,9 @@ const navItems = [
 
   if (themeToggle && themeIcon) {
     // Sync icon text to theme already set by head script
-    themeIcon.textContent =
+      themeIcon.textContent =
       html.getAttribute("data-theme") === "dark" ? "☀️" : "🌙";
+    themeToggle.setAttribute("aria-pressed", html.getAttribute("data-theme") === "dark" ? "true" : "false");
 
     // Toggle theme on button click
     themeToggle.addEventListener("click", () => {
@@ -158,6 +173,9 @@ const navItems = [
         html.setAttribute("data-theme", "light");
         themeIcon.textContent = "🌙";
       }
+
+      themeToggle.setAttribute("aria-label", newTheme === "dark" ? "Switch to light mode" : "Switch to dark mode");
+      themeToggle.setAttribute("aria-pressed", newTheme === "dark" ? "true" : "false");
 
       localStorage.setItem("theme", newTheme);
     });

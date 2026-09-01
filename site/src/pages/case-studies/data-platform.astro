@@ -18,7 +18,7 @@ import Layout from '../../layouts/Layout.astro';
     <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 32px;">
       <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">days → sub-minute</span>
       <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">200+ merchants</span>
-      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">3-month migration · rollback path unused</span>
+      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">3-month migration · rollback path designed</span>
     </div>
 
     <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-3); margin-bottom: 40px;">Node.js · MySQL · Debezium · Google Pub/Sub · Datastream · MongoDB · BigQuery · ClickHouse · Redis · GKE</p>
@@ -122,7 +122,7 @@ import Layout from '../../layouts/Layout.astro';
         <!-- MySQL Landing Layer -->
         <rect class="arch-box" x="60" y="110" width="440" height="60" rx="4"/>
         <text class="arch-label" x="290" y="138" text-anchor="middle" font-weight="600">MySQL Landing Layer</text>
-        <text class="arch-label-small" x="290" y="155" text-anchor="middle">(raw, per-source schemas, source of truth)</text>
+        <text class="arch-label-small" x="290" y="155" text-anchor="middle">(raw, per-source schemas, reversible landing layer)</text>
 
         <!-- Arrow to CDC -->
         <line class="arch-arrow" x1="290" y1="170" x2="290" y2="210"/>
@@ -216,6 +216,13 @@ import Layout from '../../layouts/Layout.astro';
         <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 12px;">When Debezium attempted to snapshot the 50M-row landing store: the query consumed 60% CPU and blocked production writes. Unacceptable. We stopped the rollout immediately.</p>
         <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 12px;"><strong>What we did:</strong> leveraged the existing Datastream snapshot to seed the baseline, then transitioned tables to Debezium CDC incrementally. This became our dual-replication strategy.</p>
         <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;"><strong>The lesson:</strong> don't optimize for architectural purity when production is at risk. Reversibility and operational safety trump elegance.</p>
+      </div>
+
+      <div style="margin: 32px 0; padding: 24px; background: var(--panel); border: 1px solid var(--accent); border-radius: 4px;">
+        <h3 style="font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 12px;">The consumer crashes that weren't a memory leak</h3>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 12px;">As client volume grew, Pub/Sub-consuming services began crashing intermittently. Looked like a code-level memory leak — local testing showed nothing, because the failure only surfaced under production traffic volume and real message throughput.</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 12px;"><strong>What we did:</strong> traced it to Kubernetes pod memory limits, not application code. Consumers were pulling messages as fast as Pub/Sub delivered them with no regard for available headroom. The pod's memory ceiling (not the app) was what triggered the crash. Fixed by adding backpressure: monitor heap usage in real time, pause message consumption when it climbs to a high water mark, resume once it drops to a safe level. Messages queue safely in Pub/Sub in the meantime.</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;"><strong>The lesson:</strong> crashes went from a recurring operational problem to essentially eliminated. The pattern was reused in other Pub/Sub consumers across the platform. Constraints matter more than code — a pod memory limit is real, and feedback loops (pause/resume) beat throwing resources at the symptom.</p>
       </div>
     </section>
 

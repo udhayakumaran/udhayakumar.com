@@ -103,6 +103,25 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+.skip-link {
+  position: fixed;
+  left: 16px;
+  top: -100px;
+  z-index: 200;
+  padding: 10px 14px;
+  background: var(--ink);
+  color: var(--bg);
+  border: 2px solid var(--accent);
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+img {
+  max-width: 100%;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -291,5 +310,11 @@ section:first-of-type {
 
   h2 {
     font-size: var(--fs-24);
+  }
+}
+
+@media (max-width: 640px) {
+  .incident-progression {
+    grid-template-columns: 1fr !important;
   }
 }

@@ -11,9 +11,9 @@ import Layout from '../../layouts/Layout.astro';
       <a href="/case-studies" style="font-size: 14px; color: var(--accent); text-decoration: none;">← Back to case studies</a>
     </nav>
 
-    <h1 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin-bottom: 24px;">Hard Problems</h1>
+    <h1 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin-bottom: 24px;">Production Incidents</h1>
 
-    <p style="font-size: 16px; color: var(--ink-2); margin-bottom: 32px; max-width: 65ch;">Eight production incidents. Root causes ranged from query architecture to database constraints to process gaps to leadership judgment. Organized by severity and learning.</p>
+    <p style="font-size: 16px; color: var(--ink-2); margin-bottom: 32px; max-width: 65ch;">Eight incidents where production pressure exposed a deeper problem. Each follows failure → diagnosis → decision → recovery → lesson.</p>
 
     <!-- Problem 1 -->
     <section style="margin-bottom: 56px; border-bottom: 1px solid var(--rule); padding-bottom: 48px;">
@@ -86,7 +86,7 @@ import Layout from '../../layouts/Layout.astro';
 
       <div>
         <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Result</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Complaints and churn disappeared. CSMs now escalate directly to you (organizational credibility shift). Key insight: listen to customers, not just tickets.</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Recommendation freshness improved from a 24-hour batch cycle to a maximum five-minute lag for product changes. Key insight: listen to customer-facing teams, not only tickets.</p>
       </div>
     </section>
 
@@ -237,7 +237,7 @@ import Layout from '../../layouts/Layout.astro';
 
       <div style="margin-bottom: 24px;">
         <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Solution: Batched Hashing with cityHash64</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Instead of joining all members: (1) Use cityHash64 to partition both old and new segments deterministically. (2) Same email always falls into same bucket in both datasets. (3) Compare bucket-by-bucket via hashes. (4) Any hash mismatch detects changes in that bucket. Avoids O(n²) memory explosion entirely.</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Instead of comparing all members in one memory-heavy operation: (1) Use cityHash64 to partition both old and new segments deterministically. (2) The same email falls into the same bucket in both datasets. (3) Compare bucket by bucket via hashes. (4) Investigate only buckets whose hashes differ. This kept memory bounded instead of scaling with the full comparison.</p>
       </div>
 
       <div>
@@ -251,19 +251,19 @@ import Layout from '../../layouts/Layout.astro';
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 600; color: var(--ink); margin-bottom: 24px;">Eight Incidents as a Progression</h2>
 
       <div style="display: grid; gap: 12px; max-width: 100%; font-size: 14px; line-height: 1.6; color: var(--ink);">
-        <div style="display: grid; grid-template-columns: 50px 150px 200px auto; gap: 12px;">
+        <div class="incident-progression" style="display: grid; grid-template-columns: 50px 150px 200px auto; gap: 12px;">
           <div style="font-weight: 600; color: var(--accent);">01–03</div>
           <div><strong>Senior</strong></div>
           <div>Query shape, lock contention, customer insight</div>
           <div>Foundation of technical judgment</div>
         </div>
-        <div style="display: grid; grid-template-columns: 50px 150px 200px auto; gap: 12px;">
+        <div class="incident-progression" style="display: grid; grid-template-columns: 50px 150px 200px auto; gap: 12px;">
           <div style="font-weight: 600; color: var(--accent);">04–05</div>
           <div><strong>Staff</strong></div>
           <div>Architecture under deadline, process improvement</div>
           <div>Own systems, build process</div>
         </div>
-        <div style="display: grid; grid-template-columns: 50px 150px 200px auto; gap: 12px;">
+        <div class="incident-progression" style="display: grid; grid-template-columns: 50px 150px 200px auto; gap: 12px;">
           <div style="font-weight: 600; color: var(--accent);">06–08</div>
           <div><strong>Principal</strong></div>
           <div>Leadership under crisis, systemic patterns, algorithmic optimization</div>

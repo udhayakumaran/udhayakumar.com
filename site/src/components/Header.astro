@@ -3,6 +3,8 @@ interface Props {
   currentPath?: string;
 }
 
+import { profile } from '../data/profile';
+
 const { currentPath = "/" } = Astro.props;
 const normalizedPath = currentPath.replace(/\/$/, "") || "/";
 
@@ -15,8 +17,8 @@ const navItems = [
 ---
 
 <header>
-  <nav>
-    <a href="/" class="wordmark">udhayakumar</a>
+  <nav aria-label="Primary navigation">
+    <a href="/" class="wordmark">{profile.name}</a>
     <div class="nav-links">
       {navItems.map((item) => (
         <a
@@ -31,8 +33,9 @@ const navItems = [
           {item.label}
         </a>
       ))}
+      <a href={`mailto:${profile.email}`}>Contact</a>
     </div>
-    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+    <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode" aria-pressed="false">
       <span id="theme-icon">🌙</span>
     </button>
   </nav>
@@ -154,8 +157,9 @@ const navItems = [
 
   if (themeToggle && themeIcon) {
     // Sync icon text to theme already set by head script
-    themeIcon.textContent =
+      themeIcon.textContent =
       html.getAttribute("data-theme") === "dark" ? "☀️" : "🌙";
+    themeToggle.setAttribute("aria-pressed", html.getAttribute("data-theme") === "dark" ? "true" : "false");
 
     // Toggle theme on button click
     themeToggle.addEventListener("click", () => {
@@ -169,6 +173,9 @@ const navItems = [
         html.setAttribute("data-theme", "light");
         themeIcon.textContent = "🌙";
       }
+
+      themeToggle.setAttribute("aria-label", newTheme === "dark" ? "Switch to light mode" : "Switch to dark mode");
+      themeToggle.setAttribute("aria-pressed", newTheme === "dark" ? "true" : "false");
 
       localStorage.setItem("theme", newTheme);
     });

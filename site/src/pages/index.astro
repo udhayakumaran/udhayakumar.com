@@ -3,496 +3,72 @@ import Layout from '../layouts/Layout.astro';
 import CTAButton from '../components/CTAButton.astro';
 import SectionEyebrow from '../components/SectionEyebrow.astro';
 import CaseStudyCard from '../components/CaseStudyCard.astro';
-import ToolLogoGrid from '../components/ToolLogoGrid.astro';
-import ActivityWidget from '../components/ActivityWidget.astro';
-import ProductCard from '../components/ProductCard.astro';
-import SkillsColumn from '../components/SkillsColumn.astro';
-import TimelineEntry from '../components/TimelineEntry.astro';
+import { profile } from '../data/profile';
 ---
 
-<Layout title="Udhayakumar — Backend Engineer" description="Backend Engineer with 13+ years building production systems, data platforms, and independent products. India-based and open to remote teams worldwide.">
-  <!-- Hero / Masthead -->
-  <section style="padding: var(--space-section) 0 0;">
-    <div style="font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-12); color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--space-4);">
-      Backend Engineer
-    </div>
-    <h1 style="margin-bottom: var(--space-4);">
-      I build difficult backend systems and take ambiguous products all the way to production.
-    </h1>
-    <p style="font-size: var(--fs-18); color: var(--ink-2); margin-bottom: var(--space-6); max-width: 65ch;">
-      13+ years in backend engineering · 5 years owning production data infrastructure
-      <span class="hero-location">India-based · remote worldwide · UTC+5:30</span>
-    </p>
-
-
-    <div style="display: flex; gap: var(--space-4); flex-wrap: wrap; margin-bottom: var(--space-section);">
-      <CTAButton href="/resume" label="View résumé" variant="solid" />
-      <CTAButton href="mailto:mail4udhaya@gmail.com" label="Get in touch" variant="outline" />
-      <a href="https://linkedin.com/in/udhayakumar" target="_blank" rel="noopener noreferrer" style="align-self: center; font-size: var(--fs-14); border-bottom: 1px solid transparent; transition: border-color 0.2s;">LinkedIn</a>
-      <a href="https://github.com/udhayakumaran" target="_blank" rel="noopener noreferrer" style="align-self: center; font-size: var(--fs-14); border-bottom: 1px solid transparent; transition: border-color 0.2s;">GitHub</a>
-    </div>
+<Layout title="Udhaya Kumar — Senior Backend Engineer" description="Senior Backend Engineer with 13+ years building reliable backend systems and data infrastructure for data-intensive products. India-based and open to international, remote, and hybrid opportunities.">
+  <section class="hero">
+    <p class="eyebrow">Hiring profile</p>
+    <h1>{profile.primaryTitle}</h1>
+    <p class="hero-lede">I build reliable backend and data systems where architecture, migration, production operation, and recovery all matter.</p>
+    <p class="hero-meta">{profile.experience} · {profile.convertCart.platformOwnership} owning production data infrastructure · India-based · remote worldwide</p>
+    <div class="hero-actions"><CTAButton href="#selected-work" label="View my work" variant="solid" /><CTAButton href="/resume" label="Resume" variant="outline" /><CTAButton href={`mailto:${profile.email}`} label="Email me" variant="outline" /></div>
+    <p class="hero-links"><a href={profile.links.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a><a href={profile.links.github} target="_blank" rel="noopener noreferrer">GitHub</a></p>
   </section>
 
-  <!-- Three Proof Points -->
-  <section style="padding: var(--space-section) 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);">
-    <SectionEyebrow label="Production proof" />
+  <section class="hiring-thesis"><SectionEyebrow label="Hiring thesis" /><p class="thesis-copy">I work best on ambiguous backend problems that need architecture ownership, safe migrations, production responsibility, and measurable product outcomes.</p><p class="role-fit"><strong>Relevant role fit:</strong> {profile.roleFit.join(' · ')}</p></section>
 
-    <div style="display: grid; gap: var(--space-8); max-width: 65ch;">
-      <div style="padding: var(--space-6); background: var(--panel); border: 1px solid var(--rule-2); border-radius: 4px;">
-        <div style="font-size: var(--fs-14); font-weight: 600; color: var(--accent); margin-bottom: var(--space-3);">ConvertCart · data platform</div>
-        <p style="font-size: var(--fs-16); line-height: 1.6; color: var(--ink); margin: 0 0 var(--space-4) 0;">Owned the rebuild of the customer and order data platform serving 200+ merchants across five commerce platforms. Freshness moved from days to sub-minute for webhooks.</p>
-        <div style="font-size: var(--fs-12); color: var(--accent); font-weight: 600;">sub-minute freshness</div>
-      </div>
-      <div style="padding: var(--space-6); background: var(--panel); border: 1px solid var(--rule-2); border-radius: 4px;">
-        <div style="font-size: var(--fs-14); font-weight: 600; color: var(--accent); margin-bottom: var(--space-3);">Self-serve segmentation</div>
-        <p style="font-size: var(--fs-16); line-height: 1.6; color: var(--ink); margin: 0 0 var(--space-4) 0;">Unified four source systems into one query interface, letting non-technical Customer Success staff build 1,000+ behavioural segments without engineering involvement.</p>
-        <div style="font-size: var(--fs-12); color: var(--accent); font-weight: 600;">Zero engineering involvement after launch</div>
-      </div>
-      <div style="padding: var(--space-6); background: var(--panel); border: 1px solid var(--rule-2); border-radius: 4px;">
-        <div style="font-size: var(--fs-14); font-weight: 600; color: var(--accent); margin-bottom: var(--space-3);">Recommendation systems</div>
-        <p style="font-size: var(--fs-16); line-height: 1.6; color: var(--ink); margin: 0 0 var(--space-4) 0;">Initiated and built a recommendation product, then expanded it into a three-tier system. 80%+ adoption on its Smart tier, served across five regions.</p>
-        <div style="font-size: var(--fs-12); color: var(--accent); font-weight: 600;">80%+ adoption</div>
-      </div>
-    </div>
-  </section>
+  <section class="production-proof"><SectionEyebrow label="Production proof" /><div class="proof-list">
+    <article><p class="proof-kicker">Ownership · system · scale</p><h2>Data platform</h2><p>I owned the rebuild of customer and order data infrastructure serving {profile.proof.merchants} across five commerce platforms. Webhook freshness moved from days-late batch data to sub-minute.</p><strong>Days → sub-minute webhook freshness</strong></article>
+    <article><p class="proof-kicker">Ownership · product · adoption</p><h2>Recommendation system</h2><p>I initiated and built a three-tier recommendation product, from trust-first manual blocks to live ranking across five regions.</p><strong>{profile.proof.recommendations}</strong></article>
+    <article><p class="proof-kicker">Ownership · data product · rollout</p><h2>Customer segmentation</h2><p>I owned the query model and builder that unified four source systems for Customer Success teams.</p><strong>{profile.proof.segmentation}</strong></article>
+  </div></section>
 
-  <!-- Selected Work -->
-  <section style="padding: var(--space-section) 0; border-bottom: 1px solid var(--rule);">
-    <SectionEyebrow label="Selected work" />
-    <div style="display: grid; gap: var(--space-6);">
-      <CaseStudyCard
-        href="/case-studies/data-platform"
-        title="The data platform"
-        subtitle="Rebuilt how customer and order data flows through the company — from data arriving days late to sub-minute freshness, across 200+ merchant stores on five e-commerce platforms. Migrated in 3 months with zero rollbacks, recovered from a production incident that nearly blocked the entire rollout."
-        metrics={["days → sub-minute", "3-month migration", "200+ stores"]}
-        variant="spotlight"
-      />
-      <CaseStudyCard
-        href="/case-studies/segmentation"
-        title="Customer segmentation"
-        subtitle="Built the system that lets a non-technical Customer Success rep build audiences without writing a line of code or filing an engineering ticket. Unified four disconnected data sources into one query interface."
-        metrics={["4 source systems", "1 query", "1,000+ segments"]}
-        variant="spotlight"
-      />
-      <CaseStudyCard
-        href="/case-studies/recommendations"
-        title="Recommendation blocks"
-        subtitle="Built the company's product recommendation feature from nothing, designed so store owners could trust it enough to turn it on. 80%+ adoption on the hardest tier."
-        metrics={["80%+ adoption", "5 regions", "200ms p99"]}
-        variant="spotlight"
-      />
-    </div>
-  </section>
+  <section id="selected-work" class="selected-work"><SectionEyebrow label="Selected work · recommended reading order" /><p class="section-intro">Start with the data platform, then read the production incident. These show architecture ownership and operational judgment fastest.</p><div class="case-list">
+    <div class="case-entry recommended"><p class="case-label">Primary case study · recommended first read</p><CaseStudyCard href="/case-studies/data-platform" title="The data platform" subtitle="I owned architecture, migration, and rollout for customer and order data across 200+ merchants on five commerce platforms. Freshness moved from days-late batch data to sub-minute webhook freshness." metrics={["days → sub-minute", "3-month migration", "200+ merchants"]} variant="spotlight" /></div>
+    <div class="case-entry"><p class="case-label">Product system · recommendations</p><CaseStudyCard href="/case-studies/recommendations" title="Recommendation blocks" subtitle="I owned the trust ladder, serving system, and adoption measurement for a recommendation product built from zero." metrics={["80%+ trial adoption", "5 regions", "200ms p99"]} variant="spotlight" /></div>
+    <div class="case-entry"><p class="case-label">Customer data product · self-serve</p><CaseStudyCard href="/case-studies/segmentation" title="Customer segmentation" subtitle="I owned the query model, builder, and production operation that turned four source systems into self-serve audience creation." metrics={["4 source systems", "1,000+ active segments", "minutes not days"]} variant="spotlight" /></div>
+  </div></section>
 
-  <section class="incident-feature" style="padding: var(--space-6) 0; border-bottom: 1px solid var(--rule);">
-    <div>
-      <p class="item-kicker">Production incident · technical deep dive</p>
-      <h3>When a 50M-row CDC snapshot hit production</h3>
-      <p>Debezium pushed CPU to 60% and blocked writes. Recovery used an existing Datastream path, then changed the migration strategy. Concrete evidence of diagnosis, rollback thinking, and operational judgment.</p>
-    </div>
-    <a href="/engineering-notes/debezium-50m-row-snapshot/">Read the incident case study →</a>
-  </section>
+  <section class="incident-feature"><div><p class="item-kicker">Production incident · technical deep dive</p><h2>I stopped a production migration when a 50M-row CDC snapshot began blocking writes.</h2><p>Debezium consumed 60% CPU. I stopped the snapshot, used the existing Datastream path to recover, and changed the rollout strategy.</p></div><a href="/engineering-notes/debezium-50m-row-snapshot/">Read the incident and recovery decisions →</a></section>
 
-  <details class="supporting-evidence">
-    <summary>More production evidence</summary>
+  <section class="independent-work"><SectionEyebrow label="Independent products" /><p class="section-intro">Supporting evidence of founding-engineer range: product decisions, backend, UX, AI integration, and deployment.</p><div class="independent-list">
+    <article><p class="item-kicker">AI product · live build</p><h2>BriefMyDoctor</h2><p>Controlled-content and LLM-assisted product that helps people prepare for doctor visits.</p></article>
+    <article><p class="item-kicker">Chrome extension · shipped</p><h2>HitReplAI</h2><p>Built browser interaction, backend persistence, AI integration, marketing site, and deployment path.</p></article>
+    <article><p class="item-kicker">Public data product · live</p><h2>enbus</h2><p>Tamil Nadu bus route search powered by PostgreSQL, fuzzy/full-text search, and an indexed route model.</p></article>
+  </div></section>
 
-  <!-- Also Shipped -->
-  <section style="padding: var(--space-section) 0; border-bottom: 1px solid var(--rule);">
-    <SectionEyebrow label="Also shipped" />
-    <div style="display: grid; gap: var(--space-6);">
-      <div class="shipped-item reveal">
-        <h4>Microservice fleet at ConvertCart</h4>
-        <p>Recommendation ranking, email delivery, analytics ingestion, webhook distribution — split from the monolith into coordinated services. Owned deployment, configuration, and observability across the fleet. Built CI/CD automation and multi-service observability across 57+ microservices.</p>
-      </div>
-      <div class="shipped-item reveal">
-        <h4>MySQL optimisation at Scientific Games</h4>
-        <p>Lottery reporting queries running 45 minutes daily on an un-indexed 20M-row schema. Analysed and restructured queries, designed covering indexes, partitioned tables by date. Reduced the same workload from 45 minutes to 3.</p>
-      </div>
-      <div class="shipped-item reveal">
-        <h4>Email infrastructure at Tenlegs</h4>
-        <p>Built the data infrastructure supporting millions of emails/day — recommendation feeds and transactional data pipelines providing all data to the email delivery system. Worked with the email team to ensure data freshness and reliability for high-volume sending.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Activity -->
-  <section style="padding: var(--space-section) 0; border-bottom: 1px solid var(--rule);">
-    <SectionEyebrow label="Activity" />
-    <ActivityWidget />
-  </section>
-
-  <!-- Engineering Notes -->
-  <section style="padding: var(--space-section) 0; border-bottom: 1px solid var(--rule);">
-    <SectionEyebrow label="Engineering Notes" />
-    <p style="font-size: var(--fs-16); color: var(--ink); margin-bottom: var(--space-6); max-width: 65ch;">Deep-dives into architecture decisions, incident recovery, and systems thinking from building data platforms at scale.</p>
-    <a href="/engineering-notes" style="font-size: var(--fs-14); color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s;">Read the notes →</a>
-  </section>
-
-  </details>
-
-  <!-- Independent execution -->
-  <section class="independent-work" style="padding: var(--space-section) 0; border-bottom: 1px solid var(--rule);">
-    <SectionEyebrow label="Independent products" />
-    <p class="section-intro">Outside work, I repeatedly take a problem from idea to shipped software — including product decisions, backend, UX, AI integration, deployment, and operating constraints.</p>
-    <div class="independent-list">
-      <article class="independent-item">
-        <div><p class="item-kicker">AI product · live build</p><h3>BriefMyDoctor</h3></div>
-        <p>Turns medical information into a clearer brief for a doctor visit. Built with Next.js, TypeScript, Supabase, Claude Haiku, and the Vercel AI SDK. Hybrid architecture keeps curated condition content deterministic while streaming personalized explanation where it helps.</p>
-        <p class="item-proof">Product judgment: use an LLM for personalization, not for facts that should remain controlled.</p>
-      </article>
-      <article class="independent-item">
-        <div><p class="item-kicker">Chrome extension · product launch</p><h3>HitReplAI</h3></div>
-        <p>AI reply assistant that rewrites social replies in four tones while learning the user's writing style. Built the vanilla-JS content scripts, Cloudflare Worker, D1 persistence, AI integration, marketing site, and deployment path.</p>
-        <p class="item-proof">Ownership signal: one person carried the product from browser interaction to backend and launch.</p>
-      </article>
-      <article class="independent-item">
-        <div><p class="item-kicker">Public data product · live</p><h3>enbus</h3></div>
-        <p>Tamil Nadu bus route search across TNSTC, SETC, and MTC. The interesting problem was making inconsistent real-world transit data searchable: PostgreSQL, fuzzy/full-text search, and an indexed route model power the query experience.</p>
-        <p class="item-proof">Verified scale: 93K+ trips and 2,200+ stops.</p>
-      </article>
-    </div>
-  </section>
-
-  <details class="supporting-evidence">
-    <summary>Supporting projects and technical inventory</summary>
-
-  <!-- Outside Work -->
-  <section style="padding: var(--space-section) 0; border-bottom: 1px solid var(--rule);">
-    <SectionEyebrow label="Other shipped work" />
-    <p style="font-size: var(--fs-16); color: var(--ink); margin-bottom: var(--space-6); max-width: 65ch;">A few smaller products and experiments. The flagship independent builds are above.</p>
-
-    <div style="margin-bottom: var(--space-8);">
-      <h3 style="font-size: var(--fs-14); font-weight: 600; color: var(--accent); margin-bottom: var(--space-6);">Shipped</h3>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-6);">
-        <ProductCard
-          name="Fruggy"
-          description="Grocery shopping planner for Indian FMCG shoppers. Flutter app with a dataset of 1,500+ FMCG items."
-          status="1,000+ downloads"
-          image="/assets/fruggy.png"
-        />
-        <ProductCard
-          name="HitReplAI"
-          description="AI-powered social media reply generator that learns and mimics the user's writing style."
-          status="Live on Chrome Web Store"
-          image="/assets/hitreplai.png"
-        />
-        <ProductCard
-          name="en-bus"
-          description="Tamil Nadu bus routes and timings finder. Real-time route search across TNSTC, SETC, and MTC buses."
-          status="Live · 93K+ trips"
-          image="/assets/enbus.png"
-        />
-      </div>
-    </div>
-
-    <div>
-      <h3 style="font-size: var(--fs-14); font-weight: 600; color: var(--accent); margin-bottom: var(--space-6);">Currently building</h3>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-6);">
-        <ProductCard
-          name="affairsmap.com"
-          description="Current-affairs study platform for UPSC, SSC, Banking, RBI Grade B and Defence exam aspirants."
-          status="In development"
-        />
-      </div>
-    </div>
-  </section>
-
-  <!-- Tech Stack -->
-  <section style="padding: var(--space-section) 0; border-bottom: 1px solid var(--rule);">
-    <SectionEyebrow label="Stack" />
-    <ToolLogoGrid
-      tools={[
-        "Node.js",
-        "TypeScript",
-        "MySQL",
-        "Debezium",
-        "Pub/Sub",
-        "MongoDB",
-        "BigQuery",
-        "ClickHouse",
-        "Redis",
-        "GKE",
-      ]}
-    />
-  </section>
-
-  <!-- Engineering Principles -->
-  <section style="padding: var(--space-section) 0; border-bottom: 1px solid var(--rule);">
-    <SectionEyebrow label="Principles" />
-    <div style="display: grid; gap: var(--space-6);">
-      <div class="principle reveal">
-        <h4>Reversibility</h4>
-        <p>Refuse to normalize at ingestion where the decision is irreversible. Normalize in the warehouse where a wrong model is a redefinition, not a migration.</p>
-      </div>
-      <div class="principle reveal">
-        <h4>Operational simplicity</h4>
-        <p>Abstractions cost clarity under pressure. Ship what's straightforward to operate and debug. Only abstract where the operational burden actually drives the design.</p>
-      </div>
-      <div class="principle reveal">
-        <h4>Ship in trust order, not sophistication order</h4>
-        <p>Built manual recommendation blocks first (zero intelligence, but deployable day one), then automated, then smart. Clients who started on manual graduated to smart. Sophistication matters less than adoption; adoption requires trust.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Skills -->
-  <section style="padding: var(--space-section) 0; border-bottom: 1px solid var(--rule);">
-    <SectionEyebrow label="Skills" />
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-6);">
-      <SkillsColumn
-        title="Deep"
-        skills={[
-          { text: "Data pipeline design — end-to-end ingestion, CDC, multi-layer serving", lenses: ["data", "arch"] },
-          { text: "Streaming & CDC — Debezium fan-out to Pub/Sub", lenses: ["data", "arch"] },
-          { text: "BigQuery & analytics — Datastream replication, materialized views", lenses: ["data"] },
-          { text: "ClickHouse — schema design, partitioning, ORDER BY tuning", lenses: ["data"] },
-          { text: "System design — microservices, distributed tracing, reliability", lenses: ["arch"] },
-          { text: "E-commerce platforms — Shopify, BigCommerce, WooCommerce, Magento", lenses: ["ecom"] },
-        ]}
-      />
-      <SkillsColumn
-        title="Working knowledge"
-        skills={[
-          { text: "Kafka", lenses: ["data"] },
-          { text: "Apache Beam", lenses: ["data"] },
-          { text: "Kubernetes", lenses: ["arch"] },
-          { text: "GCP infrastructure", lenses: ["arch"] },
-          { text: "React", lenses: ["founding"] },
-          { text: "React Native", lenses: ["founding"] },
-          { text: "Redis", lenses: [] },
-          { text: "PostgreSQL", lenses: [] },
-        ]}
-      />
-      <SkillsColumn
-        title="Leadership & Scale"
-        skills={[
-          { text: "Team growth — grew platform team from 4 to 7 engineers without losing coherence", lenses: [] },
-          { text: "Architecture ownership — moved migration timing by 6–12 months and cost structure through architecture decisions", lenses: [] },
-          { text: "Production incident response — 50M-row snapshot hit production; diagnosed, stopped, re-strategized, recovered", lenses: [] },
-          { text: "Large-scale migrations — store-by-store cutover across 200+ merchants with zero rollback", lenses: [] },
-          { text: "Cross-functional partnerships — moved product segmentation from engineering bottleneck to self-service", lenses: [] },
-        ]}
-      />
-    </div>
-  </section>
-
-  <!-- Background -->
-  <section style="padding: var(--space-section) 0; border-bottom: 1px solid var(--rule);">
-    <SectionEyebrow label="Background" />
-    <p style="font-size: var(--fs-16); line-height: 1.8; color: var(--ink); margin-bottom: var(--space-8); max-width: 65ch;">
-      13 years building backend systems and data infrastructure. Started building for the web in 2010. Spent nearly six years at ConvertCart, five of them owning a data platform end to end and leading a team of engineers to rebuild it. Built segmentation and recommendation engines on top. Founded and shipped independent products. Experienced hiring and evaluating backend/data engineers; comfortable in both IC and multiplier roles.
-    </p>
-    <div style="display: grid; gap: 0;">
-      <TimelineEntry index="A1" years="2020–2026" company="ConvertCart" role="Backend Engineer, Platform Ownership — Data ingestion, warehouse consolidation, multi-channel personalisation" />
-      <TimelineEntry index="A2" years="2018–2019" company="Friday Media Group" role="Backend Engineer, Founding Team — Marketplace APIs, content ingestion, data pipeline" />
-      <TimelineEntry index="A3" years="2014–2018" company="Scientific Games" role="Backend Engineer — Lottery reporting, data optimization, microservices" />
-      <TimelineEntry index="A4" years="2012–2014" company="Tenlegs" role="Full-stack Engineer — Email systems, logistics APIs, operational tools" />
-      <TimelineEntry index="A5" years="2010–2012" company="ISPG Technologies" role="Junior Developer — E-commerce backend, MySQL optimization" />
-    </div>
-  </section>
-
-  </details>
-
-  <!-- Remote working -->
-  <section class="remote-working" style="padding: var(--space-section) 0; border-bottom: 1px solid var(--rule);">
-    <SectionEyebrow label="How I work remotely" />
-    <p class="section-intro">I work best where ownership is explicit and written context matters. I turn ambiguous work into small decisions, document trade-offs, ship in increments, and stay responsible for what happens after deployment. Comfortable collaborating asynchronously across time zones, with overlap when the work needs it.</p>
-  </section>
-
-  <!-- CTA -->
-  <section style="padding: var(--space-section) 0;">
-    <div style="border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: var(--space-8) 0;">
-      <h2 style="font-size: var(--fs-32); margin-bottom: var(--space-6);">
-        Have a backend problem that needs an owner?
-      </h2>
-      <p style="font-size: var(--fs-16); color: var(--ink-2); margin-bottom: var(--space-6); max-width: 65ch;">I'm currently talking to founders and engineering leaders about senior backend roles with high ownership. India-based, remote worldwide.</p>
-      <div style="display: flex; gap: var(--space-4); flex-wrap: wrap;">
-        <CTAButton href="mailto:mail4udhaya@gmail.com" label="Email me" variant="solid" />
-        <CTAButton href="/resume" label="View résumé" variant="outline" />
-        <a href="https://linkedin.com/in/udhayakumar" target="_blank" rel="noopener noreferrer" style="align-self: center; font-size: var(--fs-16); color: var(--ink); border-bottom: 1px solid transparent; transition: border-color 0.2s;">LinkedIn</a>
-        <a href="https://github.com/udhayakumaran" target="_blank" rel="noopener" style="align-self: center; font-size: var(--fs-16); color: var(--ink); border-bottom: 1px solid transparent; transition: border-color 0.2s;">GitHub</a>
-      </div>
-    </div>
-  </section>
+  <section class="final-cta"><SectionEyebrow label="Next step" /><h2>Hiring for a senior backend engineer who can own a difficult system end to end?</h2><p>Start with the general resume, then email me with the system you need owned.</p><div class="hero-actions"><CTAButton href="/resume" label="View Resume" variant="solid" /><CTAButton href={`mailto:${profile.email}`} label="Email Udhaya" variant="outline" /></div></section>
 </Layout>
 
 <style>
-  .shipped-item {
-    padding: var(--space-6);
-    background: var(--panel);
-    border: 1px solid var(--rule);
-    border-radius: 4px;
-  }
-
-  .shipped-item h4 {
-    margin-bottom: var(--space-2);
-  }
-
-  .shipped-item p {
-    font-size: var(--fs-14);
-    line-height: 1.6;
-    color: var(--ink-2);
-    margin: 0;
-  }
-
-  .principle {
-    padding: var(--space-6);
-    background: var(--sage-wash);
-    border: 1px solid var(--rule);
-    border-radius: 4px;
-  }
-
-  .hero-location {
-    display: block;
-    margin-top: var(--space-2);
-  }
-
-  .section-intro {
-    max-width: 65ch;
-    margin-bottom: var(--space-7);
-  }
-
-  .supporting-evidence {
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .supporting-evidence > summary {
-    padding: var(--space-6) 0;
-    color: var(--accent);
-    font-family: "IBM Plex Mono", monospace;
-    font-size: var(--fs-14);
-    font-weight: 600;
-    cursor: pointer;
-  }
-
-  .supporting-evidence > summary:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 4px;
-  }
-
-  .incident-feature {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: var(--space-6);
-    align-items: end;
-  }
-
-  .incident-feature h3 {
-    margin: var(--space-2) 0;
-  }
-
-  .incident-feature p:not(.item-kicker) {
-    color: var(--ink-2);
-    max-width: 65ch;
-    margin: 0;
-  }
-
-  .incident-feature a {
-    white-space: nowrap;
-  }
-
-  .independent-list {
-    display: grid;
-    gap: var(--space-7);
-  }
-
-  .independent-item {
-    display: grid;
-    grid-template-columns: minmax(160px, 0.7fr) 1.5fr;
-    gap: var(--space-6);
-    padding-top: var(--space-6);
-    border-top: 1px solid var(--rule);
-  }
-
-  .independent-item h3,
-  .independent-item p {
-    margin: 0;
-  }
-
-  .independent-item > p {
-    color: var(--ink-2);
-  }
-
-  .item-kicker,
-  .item-proof {
-    font-family: "IBM Plex Mono", monospace;
-    font-size: var(--fs-12);
-    color: var(--accent) !important;
-    line-height: 1.5;
-  }
-
-  .item-proof {
-    grid-column: 2;
-    margin-top: calc(var(--space-6) * -1) !important;
-  }
-
-  @media (max-width: 640px) {
-    .incident-feature {
-      grid-template-columns: 1fr;
-      align-items: start;
-    }
-
-    .independent-item {
-      grid-template-columns: 1fr;
-      gap: var(--space-3);
-    }
-
-    .item-proof {
-      grid-column: 1;
-      margin-top: 0 !important;
-    }
-  }
-
-  .principle h4 {
-    margin-bottom: var(--space-2);
-  }
-
-  .principle p {
-    font-size: var(--fs-14);
-    line-height: 1.6;
-    color: var(--ink);
-    margin: 0;
-  }
-
-  .faq-item {
-    padding: var(--space-4);
-    background: var(--panel);
-    border: 1px solid var(--rule);
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  .faq-item summary {
-    font-family: "IBM Plex Mono", monospace;
-    font-weight: 600;
-    font-size: var(--fs-14);
-    user-select: none;
-  }
-
-  .faq-item summary:hover {
-    color: var(--accent);
-  }
-
-  .faq-item p {
-    font-size: var(--fs-14);
-    line-height: 1.6;
-    color: var(--ink-2);
-    margin-top: var(--space-3);
-    margin-bottom: 0;
-  }
+  .hero { padding: var(--space-section) 0 var(--space-10); }
+  .hero h1 { max-width: 12ch; margin-bottom: var(--space-4); }
+  .hero-lede { max-width: 58ch; font-size: clamp(20px, 3vw, 28px); line-height: 1.35; margin-bottom: var(--space-4); }
+  .hero-meta, .role-fit { color: var(--ink-2); max-width: 70ch; }
+  .hero-actions { display: flex; gap: var(--space-3); flex-wrap: wrap; margin-top: var(--space-6); }
+  .hero-links { display: flex; gap: var(--space-4); margin-top: var(--space-4); font-size: var(--fs-14); }
+  .hiring-thesis, .production-proof, .selected-work, .incident-feature, .independent-work, .final-cta { border-top: 1px solid var(--rule); padding: var(--space-section) 0; }
+  .thesis-copy { max-width: 64ch; font-size: var(--fs-24); line-height: 1.45; margin-bottom: var(--space-4); }
+  .proof-list, .independent-list { display: grid; gap: var(--space-6); }
+  .proof-list article { padding: var(--space-6) 0; border-bottom: 1px solid var(--rule); max-width: 70ch; }
+  .proof-list h2 { font-size: var(--fs-20); margin-bottom: var(--space-2); }
+  .proof-list p { max-width: 65ch; color: var(--ink-2); }
+  .proof-list strong { display: block; margin-top: var(--space-3); color: var(--accent); font-family: "IBM Plex Mono", monospace; font-size: var(--fs-13); }
+  .proof-kicker, .case-label, .item-kicker { color: var(--accent); font-family: "IBM Plex Mono", monospace; font-size: var(--fs-12); text-transform: uppercase; letter-spacing: .08em; margin-bottom: var(--space-2); }
+  .section-intro { max-width: 65ch; color: var(--ink-2); margin-bottom: var(--space-6); }
+  .case-list { display: grid; gap: var(--space-6); }
+  .case-label { margin-bottom: var(--space-2); }
+  .case-entry.recommended { border: 1px solid var(--accent); padding: var(--space-4); }
+  .case-entry.recommended .case-label { font-weight: 600; }
+  .incident-feature { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-8); align-items: end; }
+  .incident-feature h2 { max-width: 26ch; font-size: clamp(24px, 4vw, 36px); }
+  .incident-feature p:not(.item-kicker) { max-width: 65ch; color: var(--ink-2); }
+  .independent-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .independent-list article { padding-top: var(--space-4); border-top: 1px solid var(--rule); }
+  .independent-list h2 { font-size: var(--fs-20); margin-bottom: var(--space-2); }
+  .independent-list p:not(.item-kicker), .final-cta p { color: var(--ink-2); }
+  .final-cta { border-bottom: 1px solid var(--rule); }
+  .final-cta h2 { max-width: 32ch; }
+  @media (max-width: 640px) { .hero h1 { max-width: none; } .incident-feature, .independent-list { grid-template-columns: 1fr; } }
 </style>
-
-<script>
-  // Initialize reveal script on scroll
-  const revealElements = document.querySelectorAll(".reveal");
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible");
-      }
-    });
-  });
-
-  revealElements.forEach((el) => observer.observe(el));
-</script>

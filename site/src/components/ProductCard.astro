@@ -9,14 +9,14 @@ interface Props {
 const { name, description, status, image } = Astro.props;
 ---
 
-<div class="product-card reveal">
+<article class="product-card reveal">
   {image && (
-    <img src={image} alt={name} class="product-image" />
+    <img src={image} alt={`${name} product screenshot`} class="product-image" loading="lazy" width="1280" height="800" />
   )}
   <h4>{name}</h4>
   <p>{description}</p>
   <span class="product-status">{status}</span>
-</div>
+</article>
 
 <style>
   .product-card {

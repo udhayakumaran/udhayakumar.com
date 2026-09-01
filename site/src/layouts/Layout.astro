@@ -1,25 +1,26 @@
 ---
 import '../styles/global.css';
 import Header from '../components/Header.astro';
+import { profile } from '../data/profile';
 
 interface Props {
   title: string;
   description?: string;
 }
 
-const { title, description = "Backend Engineer with 13+ years building production systems, data platforms, and independent products. India-based and open to remote teams worldwide." } = Astro.props;
+const { title, description = `${profile.primaryTitle} with ${profile.experience} building production systems, data platforms, and independent products. India-based and open to international, remote, and hybrid opportunities.` } = Astro.props;
 const canonical = new URL(Astro.url.pathname, "https://udhayakumar.com").toString();
 const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Udhayakumar",
   url: "https://udhayakumar.com",
-  jobTitle: "Backend Engineer",
+  jobTitle: profile.primaryTitle,
   description,
   address: { "@type": "PostalAddress", addressCountry: "IN" },
   sameAs: [
-    "https://linkedin.com/in/udhayakumar",
-    "https://github.com/udhayakumaran",
+    profile.links.linkedin,
+    profile.links.github,
   ],
 };
 ---
@@ -60,6 +61,8 @@ const personJsonLd = {
   <meta property="og:type" content="website">
   <meta property="og:url" content={canonical}>
   <meta property="og:image" content="https://udhayakumar.com/og-image.svg">
+  <meta property="og:image:type" content="image/svg+xml">
+  <meta property="og:image:alt" content="Udhaya Kumar — Senior Backend Engineer">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content={title}>
   <meta name="twitter:description" content={description}>
@@ -182,15 +185,16 @@ const personJsonLd = {
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <Header currentPath={Astro.url.pathname} />
 
-  <main>
+  <main id="main-content">
     <slot />
   </main>
 
   <footer>
-    <p>Currently looking for senior backend roles with high ownership. India-based, remote worldwide.</p>
-    <a href="mailto:mail4udhaya@gmail.com">mail4udhaya@gmail.com</a>
+    <p>Open to senior backend, platform, data infrastructure, and technical leadership roles.</p>
+    <a href={`mailto:${profile.email}`}>{profile.email}</a>
   </footer>
 
 </body>

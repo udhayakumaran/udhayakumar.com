@@ -4,7 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 
 <Layout
   title="The Data Platform — Case Study"
-  description="Rebuilt customer and order data flows from days-late to sub-minute freshness across 200+ merchant stores on five e-commerce platforms."
+  description="Owned customer and order data infrastructure across 200+ merchants on five e-commerce platforms; webhook freshness moved from days-late batch data to sub-minute."
 >
   <article style="padding: 52px 0;">
     <nav style="margin-bottom: 32px;">
@@ -13,12 +13,12 @@ import Layout from '../../layouts/Layout.astro';
 
     <h1 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin-bottom: 24px;">The Data Platform</h1>
 
-    <p style="font-size: 16px; color: var(--ink-2); margin-bottom: 32px; max-width: 65ch;">Rebuilt how customer and order data flows through the company — from data arriving days late to sub-minute freshness, across 200+ merchant stores on five e-commerce platforms. Every downstream product runs on this.</p>
+    <p style="font-size: 16px; color: var(--ink-2); margin-bottom: 32px; max-width: 65ch;">I owned the rebuild of customer and order data infrastructure across 200+ merchants on five commerce platforms. Webhook freshness moved from days-late batch data to sub-minute.</p>
 
     <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 32px;">
       <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">days → sub-minute</span>
-      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">200+ stores</span>
-      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">3-month migration, zero rollbacks</span>
+      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">200+ merchants</span>
+      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">3-month migration · rollback path unused</span>
     </div>
 
     <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-3); margin-bottom: 40px;">Node.js · MySQL · Debezium · Google Pub/Sub · Datastream · MongoDB · BigQuery · ClickHouse · Redis · GKE</p>
@@ -33,7 +33,7 @@ import Layout from '../../layouts/Layout.astro';
           <div><strong>Architecture and technical direction</strong> — designed ingestion, CDC, and multi-layer serving architecture</div>
           <div><strong>CDC strategy</strong> — chose Debezium path, landing-layer design for reversibility</div>
           <div><strong>Migration strategy</strong> — planned and executed store-by-store cutover across 200+ merchants</div>
-          <div><strong>Production rollout</strong> — owned monitoring, alerting, incident response for 5 years (Aug 2021 – May 2026)</div>
+          <div><strong>Production rollout</strong> — owned monitoring, alerting, and incident response across about five years of platform ownership</div>
           <div><strong>Core implementation</strong> — built CDC pipeline, landing store, warehouse consolidation</div>
         </div>
       </div>
@@ -41,8 +41,8 @@ import Layout from '../../layouts/Layout.astro';
       <div>
         <h3 style="font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 12px;">What the team delivered</h3>
         <div style="display: grid; gap: 12px; max-width: 65ch;">
-          <div><strong>Team of 4 engineers</strong> — coordinated architecture decisions, code review, deployment strategy, technical hiring</div>
-          <div><strong>5-year ownership</strong> — continuous production monitoring, reliability, and incremental optimization</div>
+          <div><strong>Platform team grew from 4 to 7 engineers</strong> — coordinated architecture decisions, code review, deployment strategy, and technical hiring</div>
+          <div><strong>Team delivery</strong> — continuous production monitoring, reliability work, and incremental optimization</div>
         </div>
       </div>
     </section>
@@ -174,7 +174,7 @@ import Layout from '../../layouts/Layout.astro';
         </li>
         <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 20px;">
           <strong>CDC from landing store, not sources</strong><br/>
-          <span style="color: var(--ink-2);">Costs: one more moving part. Benefit: single source of truth that can't diverge from actual data.</span>
+          <span style="color: var(--ink-2);">Costs: one more moving part. Benefit: CDC from a consolidated landing layer with replay and validation boundaries.</span>
         </li>
         <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 20px;">
           <strong>Two replication paths (Datastream + Debezium)</strong><br/>
@@ -198,7 +198,7 @@ import Layout from '../../layouts/Layout.astro';
 
       <div style="margin-bottom: 24px;">
         <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Backfill & Validation</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Dual-write to both old and new landing layer for 2 weeks. Ran hourly checksums across all tables. Validated row counts, key distributions, timestamp ranges. Only switched when checksums matched 100%.</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Dual-wrote to old and new landing layers for 2 weeks. Hourly validation compared row counts, key distributions, timestamp ranges, and checksums across migrated tables before each cutover.</p>
       </div>
 
       <div style="margin-bottom: 24px;">
@@ -241,9 +241,9 @@ import Layout from '../../layouts/Layout.astro';
       <div>
         <h3 style="font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 12px;">Scale</h3>
         <ul style="max-width: 65ch; list-style: none; padding: 0;">
-          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">200+ stores · 5 platforms · zero visibility loss during 3-month migration · zero rollbacks</li>
+          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">200+ merchants · 5 platforms · 3-month migration · rollback path remained available and was not used</li>
           <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">New sources (Klaviyo, Zendesk) plugged in as streaming integrations, not custom pipelines</li>
-          <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">Complete migration off legacy architecture within 3 months, never had to rollback</li>
+          <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">Completed migration off legacy architecture within 3 months with the rollback path available throughout cutover</li>
         </ul>
       </div>
     </section>
@@ -256,7 +256,7 @@ import Layout from '../../layouts/Layout.astro';
         <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">What I'd Preserve</h3>
         <ul style="max-width: 65ch; list-style: none; padding: 0;">
           <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Raw landing layer (reversibility principle held)</li>
-          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">CDC at the landing store, not sources (single source of truth)</li>
+          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">CDC at the landing store, not each source, to keep downstream replay and validation centralized</li>
           <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">Table-per-tenant for isolation (multi-tenant contention is worse than ops cost)</li>
         </ul>
       </div>
@@ -270,5 +270,13 @@ import Layout from '../../layouts/Layout.astro';
         </ul>
       </div>
     </section>
+    <nav class="case-next" aria-label="Related work">
+      <a href="/case-studies/segmentation">Next: Customer segmentation →</a>
+      <a href="/resume">View resume →</a>
+    </nav>
   </article>
 </Layout>
+
+<style>
+  .case-next { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 32px; margin-top: 48px; border-top: 1px solid var(--rule); }
+</style>

@@ -1,0 +1,106 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Architecture Decisions — Udhaya Kumar" description="Architectural tradeoffs and design decisions under production constraints. How I choose between correctness, complexity, and operational overhead.">
+  <section style="padding: 52px 0; border-bottom: 1px solid var(--rule);">
+    <h1 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-40); font-weight: 600; margin-bottom: 32px;">Architecture Under Constraints</h1>
+    <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 24px;">Big architectural decisions aren't about what's theoretically best—they're about trading off what you're willing to pay for what you need. At scale, operational overhead becomes the real constraint.</p>
+  </section>
+
+  <!-- Tradeoff 1 -->
+  <section style="padding: 52px 0; border-bottom: 1px solid var(--rule);">
+    <h2 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin-bottom: 24px;">01. Land Raw vs. Normalize at Ingest</h2>
+
+    <div style="display: grid; gap: 16px; max-width: 70ch;">
+      <div>
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Problem</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink);">Four e-commerce platforms (Shopify, BigCommerce, WooCommerce, Magento 1, Magento 2) each send customer data in different schemas. Need unified model for downstream products (recommendations, segmentation, attribution).</p>
+      </div>
+      <div>
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Our choice</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink);"><strong>Land raw.</strong> Preserve each source's schema, normalize downstream via views and query models.</p>
+      </div>
+      <div>
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Cost</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink);">Thousands of tables (not one unified schema). Schema migrations run across all client tables (complex coordination). Operational overhead (index management, backups).</p>
+      </div>
+      <div>
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Benefit</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink);">Reversibility. Wrong normalization at ingest means multi-service migration. Wrong view is a redefinition away. New downstream consumer can ask for data shaped differently without changing the landing layer.</p>
+      </div>
+      <div>
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Lesson</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink);">At scale, operational overhead is worth buying architectural flexibility. Normalize where mistakes are cheap (views, query models). Don't commit the whole system to a wrong ingest decision.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tradeoff 2 -->
+  <section style="padding: 52px 0; border-bottom: 1px solid var(--rule);">
+    <h2 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin-bottom: 24px;">02. Eventual Consistency (5-10s lag) vs. Strong Consistency</h2>
+
+    <div style="display: grid; gap: 16px; max-width: 70ch;">
+      <div>
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Problem</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink);">Recommendation system serves 5 regions (US, EU, APAC, India, Brazil). Need 200ms p99 latency for good UX.</p>
+      </div>
+      <div>
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Our choice</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink);"><strong>Regional replicas with 5-10s lag.</strong> Central Redis + Pub/Sub in one region would guarantee consistency but cause 300-500ms latency from distant regions.</p>
+      </div>
+      <div>
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Cost</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink);">5-10 second data lag. Recommendations might be stale. Fallback complexity if replica lags too much.</p>
+      </div>
+      <div>
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Benefit</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink);">200ms p99 latency achievable. Merchants in India don't wait 500ms for a recommendation. No central bottleneck—each region serves from local Redis.</p>
+      </div>
+      <div>
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Lesson</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink);">Latency matters more than freshness for UX. 5-10s stale is acceptable; 500ms slow is not. Trade off the consistency you don't need for the performance you do.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tradeoff 3 -->
+  <section style="padding: 52px 0; border-bottom: 1px solid var(--rule);">
+    <h2 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin-bottom: 24px;">03. Table-per-Tenant vs. Shared Tables</h2>
+
+    <div style="display: grid; gap: 16px; max-width: 70ch;">
+      <div>
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Problem</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink);">200+ merchants, each with orders/customers/products data. How to structure MySQL? One shared table or separate tables per tenant?</p>
+      </div>
+      <div>
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Our choice</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink);"><strong>Table-per-tenant.</strong> Each merchant has isolated tables. Validates via Incident 2: production lock contention at 100+ concurrent customers proved shared tables break at scale.</p>
+      </div>
+      <div>
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Cost</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink);">Thousands of tables (not manageable with simple SQL). Schema migrations run across all tables (complex coordination). Operational overhead (index management, backups).</p>
+      </div>
+      <div>
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Benefit</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink);">Isolation. Merchant A's slow query doesn't block Merchant B. Lock contention prevented. Per-tenant resync is faster (don't have to filter by customer_id). Cascading failures prevented.</p>
+      </div>
+      <div>
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Lesson</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink);">Shared tables look cheaper until you hit production scale. At 100+ concurrent customers with LOAD DATA parallelism, lock contention becomes unbearable. Table-per-tenant costs more to operate but prevents silent cascading failures.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Common pattern -->
+  <section style="padding: 52px 0; border-bottom: 1px solid var(--rule);">
+    <h2 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin-bottom: 24px;">Pattern Across All Three</h2>
+    <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 70ch;">Each decision: Problem → Alternatives → Choice → Cost → Benefit → Lesson. Common thread: At scale, operational overhead beats architectural purity. Accept the complexity of thousands of tables if it buys isolation. Accept the complexity of regional replicas if it buys latency. Accept the complexity of landing raw if it buys reversibility.</p>
+  </section>
+
+  <!-- Related reading -->
+  <section style="padding: 52px 0; text-align: center;">
+    <p style="font-size: 18px; line-height: 1.8; color: var(--ink); margin-bottom: 24px;">These decisions are validated by production experience.</p>
+    <a href="/case-studies/hard-problems" style="color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s ease;">Read ten production incidents →</a>
+  </section>
+</Layout>

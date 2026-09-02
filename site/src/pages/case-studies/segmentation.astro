@@ -21,7 +21,7 @@ import Layout from '../../layouts/Layout.astro';
       <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">built on the platform ↑</span>
     </div>
 
-    <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-3); margin-bottom: 40px;">BigQuery · Google Datastream · MySQL · Materialised views · Query builder UI</p>
+    <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-3); margin-bottom: 40px;">BigQuery · Google Datastream · MySQL · Views · Scheduled queries · Query builder UI</p>
 
     <!-- My Role -->
     <section style="margin-bottom: 48px; border-bottom: 1px solid var(--rule); padding-bottom: 48px;">
@@ -30,7 +30,7 @@ import Layout from '../../layouts/Layout.astro';
       <div style="margin-bottom: 24px;">
         <h3 style="font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 12px;">What I personally owned</h3>
         <div style="display: grid; gap: 12px; max-width: 65ch;">
-          <div><strong>Architecture and product design</strong> — designed unified data model, query composition system, and materialized view strategy</div>
+          <div><strong>Architecture and product design</strong> — designed unified data model, query composition system, and precomputation strategy (scheduled queries + views)</div>
           <div><strong>Core implementation</strong> — architected and directed the query builder, materialization pipeline, and customer data model; team built and launched</div>
           <div><strong>Product partnership</strong> — worked with CSM team to understand audience composition needs, iterated on UI and launch strategy</div>
           <div><strong>Production ownership</strong> — monitored BigQuery costs, query performance, materialization latency; incident response</div>
@@ -80,7 +80,7 @@ import Layout from '../../layouts/Layout.astro';
     <!-- Architecture -->
     <section style="margin-bottom: 48px;">
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Architecture</h2>
-      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 24px;">Consolidates four source systems into one unified customer model in BigQuery. Defines reusable customer dimensions (loyalty status, purchase frequency, engagement, churn risk). CSMs compose segments by stacking filters through a UI. Query builder generates SQL, materialized views cache results for exports.</p>
+      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 24px;">Consolidates four source systems into one unified customer model in BigQuery. Defines reusable customer dimensions (loyalty status, purchase frequency, engagement, churn risk). CSMs compose segments by stacking filters through a UI. Scheduled queries precompute expensive derived subsets (e.g., order-level product rollups); views join these with raw and dimension data. Query builder composes CSM filter stacks as SQL against those views.</p>
 
       <!-- Segmentation Architecture SVG -->
       <svg viewBox="0 0 640 500" style="max-width: 65ch; width: 100%; margin-bottom: 24px; display: block;" xmlns="http://www.w3.org/2000/svg">
@@ -128,8 +128,8 @@ import Layout from '../../layouts/Layout.astro';
         <line style="stroke: var(--rule); stroke-width: 1;" x1="40" y1="350" x2="600" y2="350"/>
         <text class="seg-label-small" x="320" y="375" text-anchor="middle" style="fill: var(--accent);">Powered by</text>
         <text class="seg-label-small" x="100" y="400" text-anchor="start">Sources: Click, Commerce, Orders, Loyalty</text>
-        <text class="seg-label-small" x="100" y="420" text-anchor="start">→ Unified customer model (BigQuery) → Dimensions (loyalty, engagement, churn)</text>
-        <text class="seg-label-small" x="100" y="440" text-anchor="start">→ Query builder (UI) → Materialized views → Campaign export</text>
+        <text class="seg-label-small" x="100" y="420" text-anchor="start">→ Unified customer model (BigQuery) → Scheduled queries (derived subsets) → Dimensions (views)</text>
+        <text class="seg-label-small" x="100" y="440" text-anchor="start">→ Query builder (UI) → Views → Campaign export</text>
       </svg>
     </section>
 

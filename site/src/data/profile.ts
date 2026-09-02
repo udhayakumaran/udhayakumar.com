@@ -31,6 +31,7 @@ export const profile = {
     recommendations: "80%+ of merchants who trialled Smart tier adopted it",
     mysql: "45 minutes → 3 minutes for a recurring reporting workload",
     dataIncident: "50M-row CDC snapshot consumed 60% CPU and blocked production writes",
+    clickhouseMigration: "Cut customer segmentation cost 66% by migrating from BigQuery Views to ClickHouse; cityHash64-based dedup keys reduced compute requirement 4x (64GB→16GB)",
   },
   technologies: [
     "Node.js",
@@ -49,13 +50,14 @@ export const profile = {
     "Senior Platform Engineer",
     "Senior Data Platform Engineer",
     "Senior Data Infrastructure Engineer",
+    "Founding Engineer",
   ],
   resumes: [
-    { label: "General", file: "/resume/general.pdf", description: "Backend systems and data infrastructure" },
-    { label: "Data Platform", file: "/resume/data.pdf", description: "CDC, warehouses, and data architecture" },
-    { label: "Backend Architecture", file: "/resume/arch.pdf", description: "System design and technical leadership" },
-    { label: "Founding Engineer", file: "/resume/founding.pdf", description: "Zero-to-one and end-to-end ownership" },
-    { label: "E-commerce Infrastructure", file: "/resume/ecom.pdf", description: "Multi-platform commerce systems" },
+    { label: "General", file: "/resume/general.pdf", description: "Recommended: backend systems, distributed systems, and data infrastructure" },
+    { label: "Data Platform", file: "/resume/data.pdf", description: "CDC, warehouses, migrations, and data operations" },
+    { label: "Backend Architecture", file: "/resume/arch.pdf", description: "System boundaries, tradeoffs, and production reliability" },
+    { label: "Founding Engineer", file: "/resume/founding.pdf", description: "Product judgment and end-to-end ownership" },
+    { label: "E-commerce Infrastructure", file: "/resume/ecom.pdf", description: "Multi-platform commerce systems and webhooks" },
   ],
   experienceTimeline: [
     { index: "A1", years: "2020–2026", company: "ConvertCart", role: "Backend Engineer, Platform Ownership — data ingestion, warehouse consolidation, and multi-channel personalisation" },

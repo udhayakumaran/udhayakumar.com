@@ -11,7 +11,10 @@ import Layout from '../../layouts/Layout.astro';
       <a href="/case-studies" style="font-size: 14px; color: var(--accent); text-decoration: none;">← Back to case studies</a>
     </nav>
 
-    <h1 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin-bottom: 24px;">The Data Platform</h1>
+    <div style="display: flex; gap: 16px; align-items: flex-start; margin-bottom: 24px;">
+      <h1 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin: 0; flex: 1;">The Data Platform</h1>
+      <button onclick="navigator.clipboard.writeText(window.location.href); this.textContent='Copied!'; setTimeout(() => this.textContent='Copy link', 2000);" style="padding: 8px 16px; border: 1px solid var(--rule); background: transparent; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); white-space: nowrap; border-radius: 3px; transition: all 0.2s ease;" onmouseenter="this.style.borderColor='var(--accent)'" onmouseleave="this.style.borderColor='var(--rule)'">Copy link</button>
+    </div>
 
     <p style="font-size: 16px; color: var(--ink-2); margin-bottom: 32px; max-width: 65ch;">I owned the rebuild of customer and order data infrastructure across 200+ merchants on five commerce platforms. Webhook freshness moved from days-late batch data to sub-minute.</p>
 

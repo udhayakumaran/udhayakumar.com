@@ -52,13 +52,7 @@ export const profile = {
     "Senior Data Infrastructure Engineer",
     "Founding Engineer",
   ],
-  resumes: [
-    { label: "General", file: "/resume/general.pdf", description: "Recommended: backend systems, distributed systems, and data infrastructure" },
-    { label: "Data Platform", file: "/resume/data.pdf", description: "CDC, warehouses, migrations, and data operations" },
-    { label: "Backend Architecture", file: "/resume/arch.pdf", description: "System boundaries, tradeoffs, and production reliability" },
-    { label: "Founding Engineer", file: "/resume/founding.pdf", description: "Product judgment and end-to-end ownership" },
-    { label: "E-commerce Infrastructure", file: "/resume/ecom.pdf", description: "Multi-platform commerce systems and webhooks" },
-  ],
+  resume: { label: "Senior Backend Engineer", file: "/resume/general.pdf", description: "13+ years backend infrastructure, data platforms, and production systems" },
   experienceTimeline: [
     { index: "A1", years: "2020–2026", company: "ConvertCart", role: "Backend Engineer, Platform Ownership — data ingestion, warehouse consolidation, and multi-channel personalisation" },
     { index: "A2", years: "2018–2019", company: "Friday Media Group", role: "Backend Engineer, Founding Team — marketplace APIs, content ingestion, and data pipeline" },

@@ -3,95 +3,23 @@ import Layout from '../layouts/Layout.astro';
 import { profile } from '../data/profile';
 ---
 
-<Layout title="Resume — Udhaya Kumar" description="Download the general resume for Udhaya Kumar, Senior Backend Engineer, or choose a secondary role-focused version.">
+<Layout title="Resume — Udhaya Kumar" description="Download the resume for Udhaya Kumar, Senior Backend Engineer and Data Platform Architect.">
   <section style="padding: 52px 0; border-bottom: 1px solid var(--rule);">
     <h1 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-40); font-weight: 600; margin-bottom: 32px;">Resume</h1>
-    <p style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 32px; max-width: 65ch;">Start with the General Resume — recommended for Senior Backend Engineer roles. It covers backend systems, distributed systems, data infrastructure, migrations, observability, and production ownership.</p>
-    <p style="font-size: 14px; color: var(--ink-2); max-width: 65ch;">Each version now foregrounds incident evidence: performance diagnosis, migration recovery, correctness under scale, and resilience patterns.</p>
+    <p style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 32px; max-width: 65ch;">Architect and operate high-scale data systems where every layer (ingestion, modeling, serving, operations) matters. Rearchitected data platform at ConvertCart from batch-sync (days-late latency) to real-time CDC (sub-minute latency) serving 200+ e-commerce merchants. Designed segmentation engine (1,000+ active segments, 80% merchant adoption) and built recommendation system from zero-to-one. Grew backend platform team from 4 to 7 engineers.</p>
+    <p style="font-size: 14px; color: var(--ink-2); max-width: 65ch;">Seeking: Staff Engineer, Principal Engineer, or Founding Engineer roles in data infrastructure or platform systems. Remote-first.</p>
   </section>
 
-  <!-- Recommended Resume -->
+  <!-- Download Resume -->
   <section style="padding: 52px 0; border-bottom: 1px solid var(--rule);">
-    <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Recommended · General Resume</p>
     <a href="/resume/general.pdf" style="text-decoration: none; display: block; padding: 32px; background: var(--panel); border: 2px solid var(--accent); border-radius: 4px; transition: border-color 0.2s ease;">
-      <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">General Resume · PDF</p>
-      <p style="font-size: 20px; font-weight: 600; color: var(--ink); margin-bottom: 8px;">{profile.experience} backend & data infrastructure</p>
-      <p style="font-size: 16px; color: var(--ink-2);">Broad experience across roles and contexts. Best for general backend, platform, and systems roles.</p>
+      <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Download Resume · PDF</p>
+      <p style="font-size: 20px; font-weight: 600; color: var(--ink); margin-bottom: 8px;">Senior Backend Engineer | Data Platform Architect</p>
+      <p style="font-size: 16px; color: var(--ink-2);">Backend infrastructure, data platforms, distributed systems, and production operations.</p>
     </a>
   </section>
 
-  <!-- Resume guidance -->
-  <section style="padding: 52px 0; border-bottom: 1px solid var(--rule); margin-bottom: 32px;">
-    <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 24px;">Which version is right for you?</h2>
-    <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 24px;">Choose one resume, or start with General and explore others:</p>
-
-    <ul style="list-style: none; padding: 0; margin: 0; max-width: 70ch;">
-      <li style="margin-bottom: 16px;">
-        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 4px;">IC Backend → General Resume (recommended first pick)</p>
-        <p style="font-size: 14px; color: var(--ink-2);">13+ years backend & data infrastructure. Broad experience across roles and contexts. Best for general backend, platform, and systems roles.</p>
-      </li>
-      <li style="margin-bottom: 16px;">
-        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 4px;">Staff / Tech Lead → Backend Architecture</p>
-        <p style="font-size: 14px; color: var(--ink-2);">Systems thinking, architectural tradeoffs, team scaling. For staff/tech lead roles.</p>
-      </li>
-      <li style="margin-bottom: 16px;">
-        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 4px;">Data Specialist → Data Platform</p>
-        <p style="font-size: 14px; color: var(--ink-2);">CDC, warehouse consolidation, reporting architecture. 5 years owning data platform end-to-end.</p>
-      </li>
-      <li style="margin-bottom: 16px;">
-        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 4px;">Founding / Early-stage → Founding Engineer</p>
-        <p style="font-size: 14px; color: var(--ink-2);">End-to-end ownership, product decisions, infrastructure, deployment. Zero-to-one experience.</p>
-      </li>
-      <li style="margin-bottom: 16px;">
-        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 4px;">E-commerce focused → E-commerce Infrastructure</p>
-        <p style="font-size: 14px; color: var(--ink-2);">Multi-platform integration, scaling to 200+ merchants, payment systems, compliance.</p>
-      </li>
-    </ul>
-
-    <p style="font-size: 14px; color: var(--ink-2); margin-top: 24px; max-width: 70ch;"><strong>Not sure?</strong> Start with General.</p>
-  </section>
-
-  <!-- Specialized Resumes -->
-  <section style="padding: 52px 0;">
-    <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 24px;">Download all versions</p>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
-      <a href="/resume/data.pdf" style="text-decoration: none; display: block; padding: 24px; background: var(--panel); border: 1px solid var(--rule-2); border-radius: 4px; transition: border-color 0.2s ease;">
-        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 4px;">Data Platform</p>
-        <p style="font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 4px;">5 years owning a data platform end to end</p>
-        <p style="font-size: 14px; color: var(--ink-2);">CDC, warehouse consolidation, reporting architecture.</p>
-      </a>
-
-      <a href="/resume/arch.pdf" style="text-decoration: none; display: block; padding: 24px; background: var(--panel); border: 1px solid var(--rule-2); border-radius: 4px; transition: border-color 0.2s ease;">
-        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 4px;">Backend Architecture</p>
-        <p style="font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 4px;">Systems thinking, tradeoffs, architectural decisions</p>
-        <p style="font-size: 14px; color: var(--ink-2);">Design principles and decision-making for lead roles.</p>
-      </a>
-
-      <a href="/resume/founding.pdf" style="text-decoration: none; display: block; padding: 24px; background: var(--panel); border: 1px solid var(--rule-2); border-radius: 4px; transition: border-color 0.2s ease;">
-        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 4px;">Founding Engineer</p>
-        <p style="font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 4px;">Zero to one, ownership, shipping end-to-end</p>
-        <p style="font-size: 14px; color: var(--ink-2);">Solo shipping, team leadership, product thinking.</p>
-      </a>
-
-      <a href="/resume/ecom.pdf" style="text-decoration: none; display: block; padding: 24px; background: var(--panel); border: 1px solid var(--rule-2); border-radius: 4px; transition: border-color 0.2s ease;">
-        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 4px;">E-commerce Infrastructure</p>
-        <p style="font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 4px;">Multi-platform, scale, reliability</p>
-        <p style="font-size: 14px; color: var(--ink-2);">5 platforms, 200+ merchants, production constraints.</p>
-      </a>
-    </div>
-  </section>
-
   <section style="padding: 28px 0 0;">
-    <a href="/engineering-notes/incidents/" style="color: var(--accent); font-family: 'IBM Plex Mono', monospace; font-size: 14px;">Read the ten incident records behind these resumes →</a>
+    <a href="/engineering-notes/incidents/" style="color: var(--accent); font-family: 'IBM Plex Mono', monospace; font-size: 14px;">Read the ten incident records behind this resume →</a>
   </section>
 </Layout>
-
-<style>
-  a:hover {
-    border-color: var(--accent);
-  }
-  a:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
-</style>

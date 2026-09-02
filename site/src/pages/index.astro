@@ -32,10 +32,18 @@ import { profile } from '../data/profile';
 
   <section class="incident-feature"><div><p class="item-kicker">Production incident · technical deep dive</p><h2>I stopped a production migration when a 50M-row CDC snapshot began blocking writes.</h2><p>Debezium consumed 60% CPU. I stopped the snapshot, used the existing Datastream path to recover, and changed the rollout strategy.</p></div><a href="/engineering-notes/debezium-50m-row-snapshot/">Read the incident and recovery decisions →</a></section>
 
+  <section class="incident-record"><SectionEyebrow label="Incident record · ten hard problems" /><p class="section-intro">A decade of production lessons: query shape, lock contention, silent data failure, memory pressure, database constraints, resilience patterns, and the judgment to trade freshness for stability when the system needs it.</p><div class="incident-grid">
+    <a href="/case-studies/hard-problems#incident-01" class="incident-item"><span class="incident-number">01</span><div><h2>360× query recovery</h2><p>Reversed join-before-limit pagination and cut a 3+ minute query to under 500ms.</p></div><span class="incident-arrow">→</span></a>
+    <a href="/case-studies/hard-problems#incident-02" class="incident-item"><span class="incident-number">02</span><div><h2>Production-scale lock contention</h2><p>Isolated a post-migration regression across 100+ merchants and restored baseline by reducing load parallelism.</p></div><span class="incident-arrow">→</span></a>
+    <a href="/case-studies/hard-problems#incident-08" class="incident-item"><span class="incident-number">08</span><div><h2>Silent failure, fixed algorithmically</h2><p>Replaced an unfit full join with deterministic bucketed hashing: fixed memory, correct diffs, 6× lower cycle cost.</p></div><span class="incident-arrow">→</span></a>
+    <a href="/case-studies/hard-problems#incident-10" class="incident-item"><span class="incident-number">10</span><div><h2>Backpressure as a platform pattern</h2><p>Turned daily Pub/Sub consumer OOM crashes into a pause/resume pattern adopted across consuming services.</p></div><span class="incident-arrow">→</span></a>
+  </div><a class="incident-record-link" href="/case-studies/hard-problems">Read all ten incident records →</a></section>
+
   <section class="independent-work"><SectionEyebrow label="Independent products" /><p class="section-intro">Supporting evidence of founding-engineer range: product decisions, backend, UX, AI integration, and deployment.</p><div class="independent-list">
-    <article><p class="item-kicker">AI product · live build</p><h2>BriefMyDoctor</h2><p>Controlled-content and LLM-assisted product that helps people prepare for doctor visits.</p></article>
-    <article><p class="item-kicker">Chrome extension · shipped</p><h2>HitReplAI</h2><p>Built browser interaction, backend persistence, AI integration, marketing site, and deployment path.</p></article>
-    <article><p class="item-kicker">Public data product · live</p><h2>enbus</h2><p>Tamil Nadu bus route search powered by PostgreSQL, fuzzy/full-text search, and an indexed route model.</p></article>
+    <article><a href={profile.links.briefMyDoctor} target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;"><p class="item-kicker">AI product · live</p><h2>BriefMyDoctor</h2><p>Controlled-content and LLM-assisted product that helps people prepare for doctor visits.</p></a></article>
+    <article><a href="https://chromewebstore.google.com/detail/hitreplai-%E2%80%94-ai-linkedin-c/dgajfbmalpiehfogbemkjpfgmjmcnafb?pli=1" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;"><p class="item-kicker">Chrome extension · live</p><h2>HitReplAI</h2><p>Built browser interaction, backend persistence, AI integration, marketing site, and deployment path.</p></a></article>
+    <article><a href={profile.links.enbus} target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;"><p class="item-kicker">Public data product · live</p><h2>enbus</h2><p>Tamil Nadu bus route search powered by PostgreSQL, fuzzy/full-text search, and an indexed route model.</p></a></article>
+    <article><a href={profile.links.fruggy} target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;"><p class="item-kicker">Grocery app · live</p><h2>Fruggy</h2><p>Helps Indian shoppers know real prices before checkout, compare pack sizes, and stay within budget—offline, private, no login.</p></a></article>
   </div></section>
 
   <section class="final-cta"><SectionEyebrow label="Next step" /><h2>Hiring for a senior backend engineer who can own a difficult system end to end?</h2><p>Start with the general resume, then email me with the system you need owned.</p><div class="hero-actions"><CTAButton href="/resume" label="View Resume" variant="solid" /><CTAButton href={`mailto:${profile.email}`} label="Email Udhaya" variant="outline" /></div></section>
@@ -64,11 +72,20 @@ import { profile } from '../data/profile';
   .incident-feature { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-8); align-items: end; }
   .incident-feature h2 { max-width: 26ch; font-size: clamp(24px, 4vw, 36px); }
   .incident-feature p:not(.item-kicker) { max-width: 65ch; color: var(--ink-2); }
+  .incident-record { border-top: 1px solid var(--rule); padding: var(--space-section) 0; }
+  .incident-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+  .incident-item { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--space-4); align-items: start; padding: var(--space-5); background: var(--bg); text-decoration: none; color: inherit; }
+  .incident-item:hover h2, .incident-item:focus-visible h2 { color: var(--accent); }
+  .incident-number { color: var(--accent); font: 600 var(--fs-12) / 1.2 "IBM Plex Mono", monospace; letter-spacing: .08em; }
+  .incident-item h2 { font-size: var(--fs-18); margin-bottom: var(--space-2); transition: color 150ms ease; }
+  .incident-item p { color: var(--ink-2); font-size: var(--fs-14); }
+  .incident-arrow { color: var(--accent); font-size: var(--fs-18); }
+  .incident-record-link { display: inline-block; margin-top: var(--space-5); color: var(--accent); font-family: "IBM Plex Mono", monospace; font-size: var(--fs-14); }
   .independent-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .independent-list article { padding-top: var(--space-4); border-top: 1px solid var(--rule); }
   .independent-list h2 { font-size: var(--fs-20); margin-bottom: var(--space-2); }
   .independent-list p:not(.item-kicker), .final-cta p { color: var(--ink-2); }
   .final-cta { border-bottom: 1px solid var(--rule); }
   .final-cta h2 { max-width: 32ch; }
-  @media (max-width: 640px) { .hero h1 { max-width: none; } .incident-feature, .independent-list { grid-template-columns: 1fr; } }
+  @media (max-width: 640px) { .hero h1 { max-width: none; } .incident-feature, .independent-list, .incident-grid { grid-template-columns: 1fr; } }
 </style>

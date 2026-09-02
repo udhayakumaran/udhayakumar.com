@@ -7,6 +7,7 @@ import { profile } from '../data/profile';
   <section style="padding: 52px 0; border-bottom: 1px solid var(--rule);">
     <h1 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-40); font-weight: 600; margin-bottom: 32px;">Resume</h1>
     <p style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 32px; max-width: 65ch;">Start with the General Resume — recommended for Senior Backend Engineer roles. It covers backend systems, distributed systems, data infrastructure, migrations, observability, and production ownership.</p>
+    <p style="font-size: 14px; color: var(--ink-2); max-width: 65ch;">Each version now foregrounds incident evidence: performance diagnosis, migration recovery, correctness under scale, and resilience patterns.</p>
   </section>
 
   <!-- Recommended Resume -->
@@ -19,9 +20,21 @@ import { profile } from '../data/profile';
     </a>
   </section>
 
+  <!-- Resume guidance -->
+  <section style="padding: 52px 0; border-bottom: 1px solid var(--rule); margin-bottom: 32px;">
+    <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Choose by role type</h2>
+    <ul style="max-width: 65ch; list-style: none; padding: 0; font-size: 14px; color: var(--ink);">
+      <li style="margin-bottom: 8px;"><strong>IC backend / Senior engineer</strong> → General Resume (broad, recommended)</li>
+      <li style="margin-bottom: 8px;"><strong>Staff / Tech lead</strong> → Backend Architecture (systems thinking, tradeoffs)</li>
+      <li style="margin-bottom: 8px;"><strong>Data/Platform specialist</strong> → Data Platform (CDC, warehouse, ops)</li>
+      <li style="margin-bottom: 8px;"><strong>Founding/Early stage</strong> → Founding Engineer (end-to-end ownership)</li>
+      <li><strong>Commerce/E-commerce focused</strong> → E-commerce Infrastructure (multi-platform, scale)</li>
+    </ul>
+  </section>
+
   <!-- Specialized Resumes -->
   <section style="padding: 52px 0;">
-    <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 24px;">Applying for a specific role? View tailored PDFs</p>
+    <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 24px;">Download all versions</p>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
       <a href="/resume/data.pdf" style="text-decoration: none; display: block; padding: 24px; background: var(--panel); border: 1px solid var(--rule-2); border-radius: 4px; transition: border-color 0.2s ease;">
         <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 4px;">Data Platform</p>
@@ -47,6 +60,10 @@ import { profile } from '../data/profile';
         <p style="font-size: 14px; color: var(--ink-2);">5 platforms, 200+ merchants, production constraints.</p>
       </a>
     </div>
+  </section>
+
+  <section style="padding: 28px 0 0;">
+    <a href="/engineering-notes/incidents/" style="color: var(--accent); font-family: 'IBM Plex Mono', monospace; font-size: 14px;">Read the ten incident records behind these resumes →</a>
   </section>
 </Layout>
 

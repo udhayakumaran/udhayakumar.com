@@ -1,0 +1,51 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const incidents = [
+  ['01', 'Query shape, not tuning', 'Pagination joined millions of rows before applying LIMIT. Reversed the order and moved 3+ minutes to under 500ms - a 360× improvement.', 'Diagnosis · query architecture'],
+  ['02', 'Production lock contention', 'A cutover pushed response times above five seconds across 100+ merchants. Isolated ingestion, traced MySQL lock waits, and reduced per-client LOAD DATA parallelism from six jobs to three.', 'Crisis · production isolation'],
+  ['03', 'Customer problem nobody asked about', 'Out-of-stock recommendations stayed live for up to 24 hours. Reused webhook and CDC infrastructure to propagate product changes within five minutes, removing the recurring complaint.', 'Product judgment · customer signal'],
+  ['04', 'Views to destination-shaped consumers', 'MySQL views pushed worst-case latency above 30 seconds. CTEs bought runway at 1.5-2 seconds; Debezium and Pub/Sub consumers made that serving shape durable.', 'Architecture · deadline judgment'],
+  ['05', 'Missing index, missing process', 'An unindexed MongoDB filter caused intermittent slow queries. Added the index, then added production query monitoring so this class of regression surfaced in minutes.', 'Operational discipline · prevention'],
+  ['06', 'Christmas production pressure', 'Real-time ClickHouse updates exhausted RAM during peak sales. Scaled resources to recover, reverted to an acceptable 24-hour batch, and added guardrails for database-specific constraints.', 'Leadership · stability tradeoff'],
+  ['07', 'Repeated ordering failure', 'Unspecified result ordering broke twice across BigQuery and ClickHouse. Fixed producer and consumer contracts, then added continuous validation instead of relying on incidental order.', 'Pattern recognition · systems thinking'],
+  ['08', 'Silent failure, fixed algorithmically', 'A full join corrupted 100M-member segment diffs without errors. Deterministic cityHash64 bucketing made comparison fit within 16GB and reduced cycle cost 6×.', 'Algorithms · correctness under constraint'],
+  ['09', 'Materialized-view scale mismatch', 'ClickHouse triggers repeatedly rescanned large tables at hundreds of events per second. Replaced them with hourly batch refresh: stable CPU, predictable cost, reports under 30 seconds.', 'Database behavior · scale judgment'],
+  ['10', 'Node.js memory and backpressure', 'Pub/Sub consumers hit daily OOMs at a 512MiB pod limit. Pause at 80% memory, resume at 60%, and combine with HPA; the pattern became a standard across consuming services.', 'Resilience · platform pattern'],
+];
+---
+
+<Layout title="Incident Record — Udhaya Kumar" description="Ten production incidents showing Udhaya Kumar's approach to diagnosis, architecture, reliability, and leadership under pressure.">
+  <section class="incident-page">
+    <a class="back-link" href="/engineering-notes/">← Engineering notes</a>
+    <p class="eyebrow">Production evidence · 10 records</p>
+    <h1>Hard problems leave patterns.</h1>
+    <p class="lede">These are not outage trophies. They are a record of how I diagnose under pressure, recognize system constraints, and turn one incident into a better operating pattern.</p>
+    <div class="records">
+      {incidents.map(([number, title, summary, category]) => (
+        <article class="record">
+          <span class="record-number">{number}</span>
+          <div><p class="record-category">{category}</p><h2>{title}</h2><p>{summary}</p><a href={`/case-studies/hard-problems#incident-${number}`} style="font-size: 14px; color: var(--accent); font-family: 'IBM Plex Mono', monospace; margin-top: 8px; display: inline-block;">→ full breakdown</a></div>
+        </article>
+      ))}
+    </div>
+    <div class="record-cta"><p>Want the full incident details?</p><a href="/case-studies/hard-problems">Read the full incident breakdowns →</a><p style="margin-top: 16px; font-size: 14px; color: var(--ink-2);">Or dive into the specific deep-dive on the Debezium snapshot:</p><a href="/engineering-notes/debezium-50m-row-snapshot/">The 50M-row CDC snapshot incident →</a><a href="/resume" style="margin-top: 16px; display: block;">View the role-focused resumes →</a></div>
+  </section>
+</Layout>
+
+<style>
+  .incident-page { padding: var(--space-section) 0; }
+  .back-link { display: inline-block; margin-bottom: var(--space-10); color: var(--accent); font: 500 var(--fs-14) / 1.4 "IBM Plex Mono", monospace; }
+  .incident-page h1 { max-width: 12ch; margin-bottom: var(--space-4); }
+  .lede { max-width: 60ch; color: var(--ink-2); font-size: clamp(18px, 2.5vw, 22px); line-height: 1.5; margin-bottom: var(--space-10); }
+  .records { border-top: 1px solid var(--rule); }
+  .record { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: var(--space-5); padding: var(--space-6) 0; border-bottom: 1px solid var(--rule); }
+  .record-number { color: var(--accent); font: 600 var(--fs-14) / 1.4 "IBM Plex Mono", monospace; }
+  .record-category { color: var(--accent); font: 500 var(--fs-12) / 1.4 "IBM Plex Mono", monospace; text-transform: uppercase; letter-spacing: .08em; margin-bottom: var(--space-2); }
+  .record h2 { font-size: clamp(19px, 2.5vw, 24px); margin-bottom: var(--space-2); }
+  .record p:last-child { max-width: 68ch; color: var(--ink-2); }
+  .record-cta { display: grid; gap: var(--space-3); padding: var(--space-8) 0; }
+  .record-cta p { color: var(--ink-2); }
+  .record-cta a { color: var(--accent); font-family: "IBM Plex Mono", monospace; font-size: var(--fs-14); }
+  @media (max-width: 640px) { .record { grid-template-columns: 36px minmax(0, 1fr); gap: var(--space-3); } }
+</style>

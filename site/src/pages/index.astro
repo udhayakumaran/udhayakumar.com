@@ -10,19 +10,19 @@ import { profile } from '../data/profile';
   <section class="hero">
     <p class="eyebrow">Hiring profile</p>
     <h1>{profile.primaryTitle}</h1>
-    <p class="hero-lede">I build reliable backend and data systems where architecture, migration, production operation, and recovery all matter.</p>
-    <p class="hero-meta">{profile.experience} · {profile.convertCart.platformOwnership} owning production data infrastructure · India-based · remote worldwide</p>
+    <p class="hero-lede">I own backend and data infrastructure systems that scale to 200+ customers under production constraints. Rebuilt data ingestion from days-late batch processing to real-time sub-minute freshness across five e-commerce platforms.</p>
+    <p class="hero-meta">{profile.experience} · {profile.convertCart.platformOwnership} leading data infrastructure at ConvertCart · India-based · remote worldwide</p>
     <div class="hero-actions"><CTAButton href="#selected-work" label="View my work" variant="solid" /><CTAButton href="/resume" label="Resume" variant="outline" /><CTAButton href={`mailto:${profile.email}`} label="Email me" variant="outline" /></div>
     <p class="hero-links"><a href={profile.links.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a><a href={profile.links.github} target="_blank" rel="noopener noreferrer">GitHub</a></p>
   </section>
 
-  <section class="hiring-thesis"><SectionEyebrow label="Hiring thesis" /><p class="thesis-copy">I work best on ambiguous backend problems that need architecture ownership, safe migrations, production responsibility, and measurable product outcomes.</p><p class="role-fit"><strong>Relevant role fit:</strong> {profile.roleFit.join(' · ')}</p></section>
+  <section class="hiring-thesis"><SectionEyebrow label="Hiring thesis" /><p class="thesis-copy">I work best owning backend and data infrastructure systems end-to-end. I'm drawn to roles where I can influence architecture across multiple teams, lead small teams through scaling, and own both technical direction and operational reliability.</p><p class="role-fit"><strong>Relevant role fit:</strong> {profile.roleFit.join(' · ')}</p></section>
 
   <section class="production-proof"><SectionEyebrow label="Production proof" /><div class="proof-list">
     <article><p class="proof-kicker">Ownership · system · scale</p><h2>Data platform</h2><p>I owned the rebuild of customer and order data infrastructure serving {profile.proof.merchants} across five commerce platforms. Webhook freshness moved from days-late batch data to sub-minute.</p><strong>Days → sub-minute webhook freshness</strong></article>
     <article><p class="proof-kicker">Ownership · product · adoption</p><h2>Recommendation system</h2><p>I initiated and built a three-tier recommendation product, from trust-first manual blocks to live ranking across five regions.</p><strong>{profile.proof.recommendations}</strong></article>
     <article><p class="proof-kicker">Ownership · data product · rollout</p><h2>Customer segmentation</h2><p>I owned the query model and builder that unified four source systems for Customer Success teams.</p><strong>{profile.proof.segmentation}</strong></article>
-    <article><p class="proof-kicker">Platform · cost · optimization</p><h2>ClickHouse migration</h2><p>Migrated customer segmentation from BigQuery Views to ClickHouse, reducing cost and compute.</p><strong>{profile.proof.clickhouseMigration}</strong></article>
+    <article><p class="proof-kicker">Cost optimization · data infrastructure</p><h2>ClickHouse cost optimization</h2><p>Migrated customer segmentation from BigQuery Views to ClickHouse, reducing monthly cost from ₹1.8 lakhs to ₹40K (77.8% savings). Achieved through batched deterministic hashing (cityHash64) and right-sizing compute.</p><strong>₹1.4 lakhs/month savings · 64GB → 16GB RAM</strong></article>
   </div></section>
 
   <section id="selected-work" class="selected-work"><SectionEyebrow label="Selected work · recommended reading order" /><p class="section-intro">Start with the data platform, then read the production incident. These show architecture ownership and operational judgment fastest.</p><div class="case-list">
@@ -47,7 +47,7 @@ import { profile } from '../data/profile';
     <article><a href={profile.links.fruggy} target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;"><p class="item-kicker">Grocery app · live</p><h2>Fruggy</h2><p>Helps Indian shoppers know real prices before checkout, compare pack sizes, and stay within budget—offline, private, no login.</p></a></article>
   </div></section>
 
-  <section class="final-cta"><SectionEyebrow label="Next step" /><h2>Let's talk about your hardest backend problem.</h2><p>Download my resume and tell me what you're building.</p><div class="hero-actions"><CTAButton href="/resume" label="Download Resume" variant="solid" /><CTAButton href={`mailto:${profile.email}`} label="Email me" variant="outline" /></div></section>
+  <section class="final-cta"><SectionEyebrow label="Next step" /><h2>Let's talk about the infrastructure problem you need owned end-to-end.</h2><p>Download my resume and tell me what you're building.</p><div class="hero-actions"><CTAButton href="/resume" label="Download Resume" variant="solid" /><CTAButton href={`mailto:${profile.email}`} label="Email me" variant="outline" /></div></section>
 </Layout>
 
 <style>

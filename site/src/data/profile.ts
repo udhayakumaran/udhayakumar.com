@@ -17,7 +17,7 @@ export const profile = {
   },
   convertCart: {
     tenure: "Aug 2020 – May 2026",
-    platformOwnership: "About five years",
+    platformOwnership: "5+ years (Aug 2020 – May 2026)",
     merchants: "200+",
     commercePlatforms: "5",
     microservices: "50+",
@@ -31,7 +31,8 @@ export const profile = {
     recommendations: "80%+ of merchants who trialled Smart tier adopted it",
     mysql: "45 minutes → 3 minutes for a recurring reporting workload",
     dataIncident: "50M-row CDC snapshot consumed 60% CPU and blocked production writes",
-    clickhouseMigration: "Cut customer segmentation cost 66% by migrating from BigQuery Views to ClickHouse; cityHash64-based dedup keys reduced compute requirement 4x (64GB→16GB)",
+    clickhouseMigration: "Reduced customer segmentation cost from ₹1.8 lakhs/month (BigQuery, 60% of total bill) to ₹40K/month (ClickHouse Scale on GCP). cityHash64-based batched hashing reduced compute from 64GB → 16GB (minimum ClickHouse Cloud Production limit). Savings: ₹1.4 lakhs/month (77.8% reduction).",
+    segmentationCSMTimeSaved: "CSM time saved: ~15 hours/week on manual segment creation",
   },
   technologies: [
     "Node.js",
@@ -50,6 +51,8 @@ export const profile = {
     "Senior Platform Engineer",
     "Senior Data Platform Engineer",
     "Senior Data Infrastructure Engineer",
+    "Staff Backend Engineer",
+    "Staff Platform Engineer",
     "Founding Engineer",
   ],
   resume: { label: "Senior Backend Engineer", file: "/resume/general.pdf", description: "13+ years backend infrastructure, data platforms, and production systems" },

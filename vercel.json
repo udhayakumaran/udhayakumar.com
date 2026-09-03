@@ -1,11 +1,4 @@
 {
   "buildCommand": "cd site && npm install && npm run build",
-  "outputDirectory": "site/dist",
-  "redirects": [
-    {
-      "source": "/:path+(?<!/$)",
-      "destination": "/:path+/",
-      "permanent": true
-    }
-  ]
+  "outputDirectory": "site/dist"
 }

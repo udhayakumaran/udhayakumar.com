@@ -210,6 +210,10 @@ const breadcrumbJsonLd = {
   <footer>
     <p>Open to senior backend, platform, data infrastructure, and technical leadership roles.</p>
     <a href={`mailto:${profile.email}`}>{profile.email}</a>
+    <nav style="margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--rule); display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+      <a href="/engineering-notes" style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s ease;">Incident Log & Postmortems</a>
+      <a href="/architecture-decisions" style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s ease;">Architecture Decision Records</a>
+    </nav>
   </footer>
 
   <button id="back-to-top" aria-label="Back to top" style="position: fixed; bottom: 24px; right: 24px; width: 48px; height: 48px; border: 1px solid var(--rule); background: var(--bg); color: var(--ink); cursor: pointer; border-radius: 4px; font-size: 20px; display: none; z-index: 999; transition: all 0.2s ease;">↑</button>

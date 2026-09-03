@@ -142,7 +142,7 @@ import Layout from '../../layouts/Layout.astro';
 
     <!-- Key Decisions -->
     <section class="mb-12">
-      <h2 class="section-heading">Key Decisions</h2>
+      <h2 class="section-heading">Key decisions</h2>
       <ol class="max-w-[65ch] list-none p-0">
         <li class="text-16 leading-[1.8] text-ink mb-5">
           <strong>Tier selection driven by CSM judgment, not data triggers</strong><br/>
@@ -168,17 +168,17 @@ import Layout from '../../layouts/Layout.astro';
       <h2 class="section-heading">Execution</h2>
 
       <div class="mb-6">
-        <h3 class="text-14 font-semibold mb-3">Data Pipeline</h3>
+        <h3 class="text-14 font-semibold mb-3">Data pipeline</h3>
         <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">Behavioral events collected live into Redis. After 30 minutes of session inactivity or session close, data migrates to BigQuery for historical analysis. All logic and filtering happens backend; client is rendering only. Tier selection and ranking computed server-side, not pushed client-side.</p>
       </div>
 
       <div class="mb-6">
-        <h3 class="text-14 font-semibold mb-3">Multi-Region Serving Under Latency SLA</h3>
+        <h3 class="text-14 font-semibold mb-3">Multi-region serving under latency SLA</h3>
         <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">Target: 200ms p99 across five regions (US, EU, APAC, India, Brazil). Deployed MongoDB instances in each region. Redis ranking cache replicated to regional instances with 5-10s lag. On replica lag, served cached tier (fallback to Automated) instead of blocking. Prioritized latency over freshness.</p>
       </div>
 
       <div class="mb-6">
-        <h3 class="text-14 font-semibold mb-3">Model Validation Before Deploy</h3>
+        <h3 class="text-14 font-semibold mb-3">Model validation before deploy</h3>
         <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">Smart ranking trained on historical data. Before serving live, validated against held-out test sets. Checked for cardinality issues (one customer type over-indexed), signal stability (weights don't swing per retraining), and tail behavior (edge cases don't rank anomalously). Rejected models that failed validation.</p>
       </div>
 
@@ -198,7 +198,7 @@ import Layout from '../../layouts/Layout.astro';
       </div>
 
       <div class="mb-6">
-        <h3 class="text-14 font-semibold text-accent mb-3">Technical Achievement</h3>
+        <h3 class="text-14 font-semibold text-accent mb-3">Technical achievement</h3>
         <ul class="max-w-[65ch] list-none p-0">
           <li class="text-16 leading-[1.8] text-ink mb-3">Cold-start solved by CSM-driven tier selection + three independent engines. CSMs choose tier (Curated, Automated, Smart) per merchant based on confidence and use case, not algorithm-triggered progression.</li>
           <li class="text-16 leading-[1.8] text-ink mb-3">Data pipeline: live to Redis, migrate to BigQuery after 30min inactivity or session close. All backend logic; client renders only. No client-side filtering or ranking logic.</li>

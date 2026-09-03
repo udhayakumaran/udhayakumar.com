@@ -5,6 +5,7 @@ export default defineConfig({
   outDir: './dist',
   publicDir: './public',
   srcDir: './src',
+  trailingSlash: 'always',
   vite: {
     plugins: [tailwindcss()],
   },

@@ -4,7 +4,10 @@ import TestimonialCard from '../components/TestimonialCard.astro';
 import { profile } from '../data/profile';
 ---
 
-<Layout title="About — Udhaya Kumar" description="About Udhaya Kumar, Senior Backend Engineer with 13+ years building backend systems, data infrastructure, and production platforms.">
+<Layout title="About — Udhaya Kumar" description="About Udhaya Kumar, Senior Backend Engineer with 13+ years building backend systems, data infrastructure, and production platforms." article={{
+    datePublished: "2025-09-03",
+    dateModified: "2025-09-03",
+  }}>
   <section class="section-block">
     <h1 class="font-code text-40 font-semibold mb-8">About</h1>
     <p class="prose-body mb-6"><strong>Thirteen years backend. Five years owning a data platform end to end. Scaled team {profile.convertCart.teamGrowth}, served {profile.proof.merchants}, reduced costs 77.8%.</strong></p>

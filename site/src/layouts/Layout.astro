@@ -7,9 +7,14 @@ import { profile } from '../data/profile';
 interface Props {
   title: string;
   description?: string;
+  article?: {
+    datePublished?: string;
+    dateModified?: string;
+    image?: string;
+  };
 }
 
-const { title, description = `${profile.primaryTitle} with ${profile.experience} building production systems, data platforms, and independent products. India-based and open to international, remote, and hybrid opportunities.` } = Astro.props;
+const { title, description = `${profile.primaryTitle} with ${profile.experience} building production systems, data platforms, and independent products. India-based and open to international, remote, and hybrid opportunities.`, article } = Astro.props;
 const canonical = new URL(Astro.url.pathname, "https://udhayakumar.com").toString();
 const personJsonLd = {
   "@context": "https://schema.org",
@@ -27,17 +32,75 @@ const personJsonLd = {
 
 const breadcrumbItems = [];
 breadcrumbItems.push({ "@type": "ListItem", position: 1, name: "Home", item: "https://udhayakumar.com" });
+
+let position = 2;
 if (Astro.url.pathname.startsWith("/case-studies")) {
-  breadcrumbItems.push({ "@type": "ListItem", position: 2, name: "Case Studies", item: "https://udhayakumar.com/case-studies" });
+  breadcrumbItems.push({ "@type": "ListItem", position, name: "Case Studies", item: "https://udhayakumar.com/case-studies" });
+  position++;
+  const caseStudyMatch = Astro.url.pathname.match(/^\/case-studies\/([^/]+)\/?$/);
+  if (caseStudyMatch) {
+    const slug = caseStudyMatch[1];
+    const titleMap: Record<string, string> = {
+      "data-platform": "The Data Platform",
+      "segmentation": "Segmentation & Analytics",
+      "recommendations": "Recommendation Engine",
+      "hard-problems": "Hard Problems & Learnings",
+    };
+    if (titleMap[slug]) {
+      breadcrumbItems.push({ "@type": "ListItem", position, name: titleMap[slug], item: `https://udhayakumar.com/case-studies/${slug}/` });
+    }
+  }
+} else if (Astro.url.pathname === "/case-studies/") {
+  breadcrumbItems.push({ "@type": "ListItem", position, name: "Case Studies", item: "https://udhayakumar.com/case-studies/" });
 }
+
 if (Astro.url.pathname.startsWith("/resume")) {
   breadcrumbItems.push({ "@type": "ListItem", position: 2, name: "Resume", item: "https://udhayakumar.com/resume" });
+}
+
+if (Astro.url.pathname.startsWith("/architecture-decisions")) {
+  breadcrumbItems.push({ "@type": "ListItem", position: 2, name: "Architecture Decisions", item: "https://udhayakumar.com/architecture-decisions" });
+}
+
+if (Astro.url.pathname.startsWith("/engineering-notes")) {
+  breadcrumbItems.push({ "@type": "ListItem", position: 2, name: "Engineering Notes", item: "https://udhayakumar.com/engineering-notes/" });
+  position++;
+  const incidentMatch = Astro.url.pathname.match(/^\/engineering-notes\/([^/]+)\/?$/);
+  if (incidentMatch) {
+    const slug = incidentMatch[1];
+    const titleMap: Record<string, string> = {
+      "debezium-50m-row-snapshot": "The 50M-row Debezium Snapshot",
+      "incidents": "Incident Records",
+    };
+    if (titleMap[slug]) {
+      breadcrumbItems.push({ "@type": "ListItem", position, name: titleMap[slug], item: `https://udhayakumar.com/engineering-notes/${slug}/` });
+    }
+  }
 }
 const breadcrumbJsonLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: breadcrumbItems,
 };
+
+const isArticle = Astro.url.pathname.startsWith("/case-studies") || Astro.url.pathname.startsWith("/engineering-notes") || Astro.url.pathname === "/about";
+const ogType = isArticle ? "article" : "website";
+
+const articleJsonLd = article ? {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: title.replace(" — Udhaya Kumar", "").replace(" — Case Study", ""),
+  description,
+  url: canonical,
+  image: article.image || "https://udhayakumar.com/og-image.png",
+  author: {
+    "@type": "Person",
+    name: "Udhayakumar",
+    url: "https://udhayakumar.com"
+  },
+  ...(article.datePublished && { datePublished: article.datePublished }),
+  ...(article.dateModified && { dateModified: article.dateModified }),
+} : null;
 ---
 
 <!DOCTYPE html>
@@ -68,22 +131,24 @@ const breadcrumbJsonLd = {
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
+  <meta name="google-site-verification" content="ADD_YOUR_VERIFICATION_CODE_HERE">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <meta property="og:title" content={title}>
   <meta property="og:description" content={description}>
-  <meta property="og:type" content="website">
+  <meta property="og:type" content={ogType}>
   <meta property="og:url" content={canonical}>
-  <meta property="og:image" content="https://udhayakumar.com/og-image.svg">
-  <meta property="og:image:type" content="image/svg+xml">
+  <meta property="og:image" content="https://udhayakumar.com/og-image.png">
+  <meta property="og:image:type" content="image/png">
   <meta property="og:image:alt" content="Udhaya Kumar — Senior Backend Engineer">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content={title}>
   <meta name="twitter:description" content={description}>
-  <meta name="twitter:image" content="https://udhayakumar.com/og-image.svg">
+  <meta name="twitter:image" content="https://udhayakumar.com/og-image.png">
   <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)}></script>
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)}></script>
+  {articleJsonLd && <script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)}></script>}
 
   <style>
     main {

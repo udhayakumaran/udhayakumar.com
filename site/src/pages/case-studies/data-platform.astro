@@ -4,7 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 
 <Layout
   title="The Data Platform — Case Study"
-  description="Owned customer and order data infrastructure across 200+ merchants on five e-commerce platforms; webhook freshness moved from days-late batch data to sub-minute."
+  description="Owned customer and order data infrastructure across 200+ merchants on five e-commerce platforms; freshness ranges from sub-5-minute (webhooks) to ~6 hours (legacy) vs. days-late baseline."
 >
   <article style="padding: 52px 0;">
     <nav style="margin-bottom: 32px;">
@@ -16,10 +16,10 @@ import Layout from '../../layouts/Layout.astro';
       <button onclick="navigator.clipboard.writeText(window.location.href); this.textContent='Copied!'; setTimeout(() => this.textContent='Copy link', 2000);" style="padding: 8px 16px; border: 1px solid var(--rule); background: transparent; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); white-space: nowrap; border-radius: 3px; transition: all 0.2s ease;" onmouseenter="this.style.borderColor='var(--accent)'" onmouseleave="this.style.borderColor='var(--rule)'">Copy link</button>
     </div>
 
-    <p style="font-size: 16px; color: var(--ink-2); margin-bottom: 32px; max-width: 65ch;">I owned the rebuild of customer and order data infrastructure across 200+ merchants on five commerce platforms. Webhook freshness moved from days-late batch data to sub-minute.</p>
+    <p style="font-size: 16px; color: var(--ink-2); margin-bottom: 32px; max-width: 65ch;">I owned the rebuild of customer and order data infrastructure across 200+ merchants on five commerce platforms. Freshness: sub-5-minute for webhook platforms, ~1–6 hours for others (vs. days-late baseline).</p>
 
     <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 32px;">
-      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">days → sub-minute</span>
+      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">sub-5-minute to 6-hour tiered</span>
       <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">200+ merchants</span>
       <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">3-month migration · rollback path designed</span>
     </div>
@@ -227,16 +227,14 @@ import Layout from '../../layouts/Layout.astro';
 
       <div style="margin: 32px 0; padding: 24px; background: var(--panel); border: 1px solid var(--accent); border-radius: 4px;">
         <h3 style="font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 12px;">The production incident that changed the design</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 12px;">When Debezium attempted to snapshot the 50M-row landing store: the query consumed 60% CPU and blocked production writes. Unacceptable. We stopped the rollout immediately.</p>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 12px;"><strong>What we did:</strong> leveraged the existing Datastream snapshot to seed the baseline, then transitioned tables to Debezium CDC incrementally. This became our dual-replication strategy.</p>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;"><strong>The lesson:</strong> don't optimize for architectural purity when production is at risk. Reversibility and operational safety trump elegance.</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 12px;">Debezium's snapshot query on 50M rows consumed 60% CPU and blocked production writes. We stopped rollout immediately and used Datastream to seed the baseline instead, then transitioned tables to Debezium incrementally.</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;"><a href="/engineering-notes/debezium-50m-row-snapshot/" style="color: var(--accent); text-decoration: none;">Read the full incident and recovery decisions →</a></p>
       </div>
 
       <div style="margin: 32px 0; padding: 24px; background: var(--panel); border: 1px solid var(--accent); border-radius: 4px;">
         <h3 style="font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 12px;">The consumer crashes that weren't a memory leak</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 12px;">As client volume grew, Pub/Sub-consuming services began crashing intermittently. Looked like a code-level memory leak — local testing showed nothing, because the failure only surfaced under production traffic volume and real message throughput.</p>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 12px;"><strong>What we did:</strong> traced it to Kubernetes pod memory limits, not application code. Consumers were pulling messages as fast as Pub/Sub delivered them with no regard for available headroom. The pod's memory ceiling (not the app) was what triggered the crash. Fixed by adding backpressure: monitor heap usage in real time, pause message consumption when it climbs to a high water mark, resume once it drops to a safe level. Messages queue safely in Pub/Sub in the meantime.</p>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;"><strong>The lesson:</strong> crashes went from a recurring operational problem to essentially eliminated. The pattern was reused in other Pub/Sub consumers across the platform. Constraints matter more than code — a pod memory limit is real, and feedback loops (pause/resume) beat throwing resources at the symptom.</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 12px;">Pub/Sub consumers crashing at scale. Root cause: Kubernetes pod memory limits, not application code. Consumers pulled messages as fast as possible with no backpressure. Fixed by monitoring heap usage and pausing consumption at a high-water mark, resuming when safe.</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;"><a href="/case-studies/hard-problems#incident-10" style="color: var(--accent); text-decoration: none;">Read the full incident analysis →</a></p>
       </div>
     </section>
 
@@ -244,9 +242,40 @@ import Layout from '../../layouts/Layout.astro';
     <section style="margin-bottom: 48px;">
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Impact</h2>
 
-      <div style="text-align: center; margin-bottom: 32px; padding: 32px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);">
-        <div style="font-size: var(--fs-56); font-weight: 600; color: var(--accent); margin-bottom: 12px;">DAYS → SUB-MINUTE</div>
-        <div style="font-size: 16px; color: var(--ink-2); max-width: 65ch; margin: 0 auto;">From data arriving days late to sub-minute freshness for webhooks, up to 6 hours for custom integrations</div>
+      <div style="margin-bottom: 32px; padding: 32px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);">
+        <h3 style="font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 24px; text-align: center;">Data Freshness by Platform Capability</h3>
+        <div style="overflow-x: auto; max-width: 65ch;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.6;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--rule);">
+                <th style="text-align: left; padding: 12px 8px; font-weight: 600; color: var(--accent);">Client platform capability</th>
+                <th style="text-align: left; padding: 12px 8px; font-weight: 600; color: var(--accent);">Data freshness</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid var(--rule);">
+                <td style="padding: 12px 8px; color: var(--ink);">Native webhook support (e.g. Shopify, BigCommerce)</td>
+                <td style="padding: 12px 8px; color: var(--ink); font-family: 'JetBrains Mono', monospace; font-weight: 500;">&lt; 5 minutes</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--rule);">
+                <td style="padding: 12px 8px; color: var(--ink);">REST API support, no webhooks</td>
+                <td style="padding: 12px 8px; color: var(--ink); font-family: 'JetBrains Mono', monospace; font-weight: 500;">~1 hour</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--rule);">
+                <td style="padding: 12px 8px; color: var(--ink);">Incremental sync only</td>
+                <td style="padding: 12px 8px; color: var(--ink); font-family: 'JetBrains Mono', monospace; font-weight: 500;">~2 hours</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--rule);">
+                <td style="padding: 12px 8px; color: var(--ink);">Full data resync required every time</td>
+                <td style="padding: 12px 8px; color: var(--ink); font-family: 'JetBrains Mono', monospace; font-weight: 500;">6 hours</td>
+              </tr>
+              <tr>
+                <td style="padding: 12px 8px; color: var(--ink);">Legacy cron-based system (before rearchitecture, large clients)</td>
+                <td style="padding: 12px 8px; color: var(--ink); font-family: 'JetBrains Mono', monospace; font-weight: 500;">up to several days</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <div style="margin-bottom: 24px;">

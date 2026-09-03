@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 import { profile } from '../data/profile';
 
 interface Props {
@@ -91,111 +92,32 @@ const breadcrumbJsonLd = {
       padding: 0 20px;
     }
 
-    /* Header */
-    header {
-      border-bottom: 1px solid var(--rule);
-      padding: 24px 0;
-      position: sticky;
-      top: 0;
-      background: var(--bg);
-      z-index: 100;
-    }
-
-    nav {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 0 20px;
-      display: flex;
-      gap: 32px;
-      align-items: center;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: var(--ink);
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 14px;
-      font-weight: 500;
-      border-bottom: 2px solid transparent;
-      transition: border-color 0.2s ease;
-    }
-
-    nav a:hover,
-    nav a[aria-current="page"] {
-      border-bottom-color: var(--accent);
-    }
-
-    nav a:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-    }
-
-    .theme-toggle {
-      background: transparent;
-      border: 1px solid var(--rule-2);
-      color: var(--ink);
-      font-size: 14px;
-      font-weight: 500;
-      padding: 8px 12px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-family: "IBM Plex Mono", monospace;
-      margin-left: auto;
-    }
-
-    .theme-toggle:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    .theme-toggle:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-    }
-
-    /* Footer */
-    footer {
+    .footer-nav {
+      margin-top: var(--space-6);
+      padding-top: var(--space-6);
       border-top: 1px solid var(--rule);
-      padding: 60px 0;
-      text-align: center;
-      margin-top: 80px;
+      display: flex;
+      gap: var(--space-4);
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
-    footer a {
+    .footer-nav a {
       font-family: "IBM Plex Mono", monospace;
-      font-size: 16px;
-      font-weight: 600;
+      font-size: 14px;
       color: var(--accent);
       text-decoration: none;
-      border-bottom: 2px solid transparent;
+      border-bottom: 1px solid transparent;
       transition: border-color 0.2s ease;
-      display: inline-block;
-      margin: 8px 0;
     }
 
-    footer a:hover,
-    footer a:focus {
+    .footer-nav a:hover {
       border-bottom-color: var(--accent);
     }
 
-    footer a:focus-visible {
+    .footer-nav a:focus-visible {
       outline: 2px solid var(--accent);
-      outline-offset: 4px;
-    }
-
-    footer p {
-      font-size: 14px;
-      color: var(--ink-2);
-      margin-bottom: 16px;
-    }
-
-    @media (max-width: 640px) {
-      nav {
-        gap: 16px;
-        flex-direction: column;
-        align-items: flex-start;
-      }
+      outline-offset: 2px;
     }
   </style>
 </head>
@@ -207,16 +129,14 @@ const breadcrumbJsonLd = {
     <slot />
   </main>
 
-  <footer>
-    <p>Open to senior backend, platform, data infrastructure, and technical leadership roles.</p>
-    <a href={`mailto:${profile.email}`}>{profile.email}</a>
-    <nav style="margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--rule); display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-      <a href="/engineering-notes" style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s ease;">Incident Log & Postmortems</a>
-      <a href="/architecture-decisions" style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s ease;">Architecture Decision Records</a>
+  <Footer>
+    <nav class="footer-nav">
+      <a href="/engineering-notes">Incident Log & Postmortems</a>
+      <a href="/architecture-decisions">Architecture Decision Records</a>
     </nav>
-  </footer>
+  </Footer>
 
-  <button id="back-to-top" aria-label="Back to top" style="position: fixed; bottom: 24px; right: 24px; width: 48px; height: 48px; border: 1px solid var(--rule); background: var(--bg); color: var(--ink); cursor: pointer; border-radius: 4px; font-size: 20px; display: none; z-index: 999; transition: all 0.2s ease;">↑</button>
+  <button id="back-to-top" aria-label="Back to top" class="fixed bottom-6 right-6 w-12 h-12 border border-rule bg-bg text-ink cursor-pointer rounded font-[20px] hidden z-[999] transition-all ease-[0.2s]">↑</button>
 
   <script>
     const backToTopBtn = document.getElementById('back-to-top');

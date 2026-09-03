@@ -6,33 +6,33 @@ import Layout from '../../layouts/Layout.astro';
   title="Recommendation Blocks — Case Study"
   description="Built product recommendations from zero to 80%+ adoption across five regions by designing trust-building three-tier ladder: Manual → Automated → Smart."
 >
-  <article style="padding: 52px 0;">
-    <nav style="margin-bottom: 32px;">
-      <a href="/case-studies" style="font-size: 14px; color: var(--accent); text-decoration: none;">← Back to case studies</a>
+  <article class="py-13">
+    <nav class="mb-8">
+      <a href="/case-studies" class="text-14 text-accent no-underline">← Back to case studies</a>
     </nav>
 
-    <div style="display: flex; gap: 16px; align-items: flex-start; margin-bottom: 24px;">
+    <div class="flex gap-4 items-start mb-6">
       <h1 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin: 0; flex: 1;">Recommendation Blocks</h1>
-      <button onclick="navigator.clipboard.writeText(window.location.href); this.textContent='Copied!'; setTimeout(() => this.textContent='Copy link', 2000);" style="padding: 8px 16px; border: 1px solid var(--rule); background: transparent; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); white-space: nowrap; border-radius: 3px; transition: all 0.2s ease;" onmouseenter="this.style.borderColor='var(--accent)'" onmouseleave="this.style.borderColor='var(--rule)'">Copy link</button>
+      <button onclick="navigator.clipboard.writeText(window.location.href); this.textContent='Copied!'; setTimeout(() => this.textContent='Copy link', 2000);" class="px-4 py-2 border border-rule bg-transparent cursor-pointer font-code text-12 text-accent whitespace-nowrap rounded-[3px] transition-all duration-200" onmouseenter="this.style.borderColor='var(--accent)'" onmouseleave="this.style.borderColor='var(--rule)'">Copy link</button>
     </div>
 
-    <p style="font-size: 16px; color: var(--ink-2); margin-bottom: 32px; max-width: 65ch;">I built the company's product recommendation system from zero. Solved cold-start through three independent engines with CSM-driven tier selection: Curated (day 1, zero risk), Automated (pattern rules), Smart (live behavioral ranking). Multi-region serving under latency SLA.</p>
+    <p class="text-16 text-ink-2 mb-8 max-w-[65ch]">I built the company's product recommendation system from zero. Solved cold-start through three independent engines with CSM-driven tier selection: Curated (day 1, zero risk), Automated (pattern rules), Smart (live behavioral ranking). Multi-region serving under latency SLA.</p>
 
-    <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 32px;">
-      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">day-1 deployment · no data required</span>
-      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">5 regions · 200ms p99</span>
+    <div class="flex gap-4 flex-wrap mb-8">
+      <span class="metric-chip">day-1 deployment · no data required</span>
+      <span class="metric-chip">5 regions · 200ms p99</span>
       <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">built on the platform ↑</span>
     </div>
 
     <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-3); margin-bottom: 40px;">Node.js · Redis · MongoDB Atlas (multi-region) · ClickHouse · Google Pub/Sub</p>
 
     <!-- My Role -->
-    <section style="margin-bottom: 48px; border-bottom: 1px solid var(--rule); padding-bottom: 48px;">
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 24px;">My Role</h2>
+    <section class="mb-12 border-b border-rule pb-12">
+      <h2 class="section-heading mb-6">My Role</h2>
 
-      <div style="margin-bottom: 24px;">
-        <h3 style="font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 12px;">What I personally owned</h3>
-        <div style="display: grid; gap: 12px; max-width: 65ch;">
+      <div class="mb-6">
+        <h3 class="text-14 font-semibold text-accent mb-3">What I personally owned</h3>
+        <div class="grid gap-3 max-w-[65ch]">
           <div><strong>Product architecture</strong> — designed three-tier trust model (Manual/Automated/Smart) to reduce merchant risk and enable gradual adoption</div>
           <div><strong>System design</strong> — architected multi-region serving, latency SLAs, and real-time ranking engine</div>
           <div><strong>Core implementation</strong> — architected and directed the Redis-backed live tier, MongoDB serving layer, and ranking algorithm; a small team (2–3 engineers) built and scaled it while I stayed close to product decisions and tradeoffs</div>
@@ -41,8 +41,8 @@ import Layout from '../../layouts/Layout.astro';
       </div>
 
       <div>
-        <h3 style="font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 12px;">What the product achieved</h3>
-        <div style="display: grid; gap: 12px; max-width: 65ch;">
+        <h3 class="text-14 font-semibold text-accent mb-3">What the product achieved</h3>
+        <div class="grid gap-3 max-w-[65ch]">
           <div><strong>80%+ Smart-tier adoption</strong> — among merchants who trialled the tier</div>
           <div><strong>Multi-region latency</strong> — 200ms p99 across five regions with real-time ranking</div>
           <div><strong>Merchant trust</strong> — low-friction trust ladder moved from "risky feature" to default-on</div>
@@ -51,42 +51,42 @@ import Layout from '../../layouts/Layout.astro';
     </section>
 
     <!-- Context -->
-    <section style="margin-bottom: 48px;">
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Context</h2>
-      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">The platform serves 200+ merchants across five regions. Merchants are SMBs with low transaction volume on day 1. Recommendation systems require behavioral data to produce quality results. Architecture challenge: ship day 1 with zero data, scale to algorithmic sophistication as data accumulates. Multi-region serving introduces latency constraints.</p>
+    <section class="mb-12">
+      <h2 class="section-heading">Context</h2>
+      <p class="prose-body">The platform serves 200+ merchants across five regions. Merchants are SMBs with low transaction volume on day 1. Recommendation systems require behavioral data to produce quality results. Architecture challenge: ship day 1 with zero data, scale to algorithmic sophistication as data accumulates. Multi-region serving introduces latency constraints.</p>
     </section>
 
     <!-- Problem -->
-    <section style="margin-bottom: 48px;">
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Problem</h2>
-      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 24px;">New merchant on day 1: zero behavioral data. Live recommendation ranking needs statistical significance to produce quality results. Ship live ranking immediately and recommendations are garbage—merchants disable the feature. By day 30 when data exists, trust is already destroyed. Cannot recover.</p>
+    <section class="mb-12">
+      <h2 class="section-heading">Problem</h2>
+      <p class="prose-body mb-6">New merchant on day 1: zero behavioral data. Live recommendation ranking needs statistical significance to produce quality results. Ship live ranking immediately and recommendations are garbage—merchants disable the feature. By day 30 when data exists, trust is already destroyed. Cannot recover.</p>
 
-      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 24px;">Architectural constraint: you need immediate value (day 1) with zero data, then scale to algorithmic sophistication as data accumulates. Cannot ship confident recommendations without data. Cannot gather data unless merchants use recommendations. Bootstrap problem.</p>
+      <p class="prose-body mb-6">Architectural constraint: you need immediate value (day 1) with zero data, then scale to algorithmic sophistication as data accumulates. Cannot ship confident recommendations without data. Cannot gather data unless merchants use recommendations. Bootstrap problem.</p>
 
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 24px;">
-        <div style="padding: 20px; background: var(--panel); border-radius: 4px;">
+        <div class="p-5 bg-panel rounded">
           <div style="font-weight: 600; color: var(--accent); margin-bottom: 12px;">NAIVE APPROACH</div>
-          <ul style="list-style: none; padding: 0; margin: 0;">
-            <li style="font-size: 14px; line-height: 1.6; color: var(--ink); margin-bottom: 8px;">Ship live ranking day 1</li>
-            <li style="font-size: 14px; line-height: 1.6; color: var(--ink); margin-bottom: 8px;">Trains on zero data</li>
-            <li style="font-size: 14px; line-height: 1.6; color: var(--ink);">Produces noise → merchants distrust system</li>
+          <ul class="list-none p-0 m-0">
+            <li class="text-14 leading-[1.6] text-ink mb-2">Ship live ranking day 1</li>
+            <li class="text-14 leading-[1.6] text-ink mb-2">Trains on zero data</li>
+            <li class="text-14 leading-[1.6] text-ink">Produces noise → merchants distrust system</li>
           </ul>
         </div>
-        <div style="padding: 20px; background: var(--panel); border-radius: 4px;">
+        <div class="p-5 bg-panel rounded">
           <div style="font-weight: 600; color: var(--accent); margin-bottom: 12px;">ARCHITECTURAL CHALLENGE</div>
-          <ul style="list-style: none; padding: 0; margin: 0;">
-            <li style="font-size: 14px; line-height: 1.6; color: var(--ink); margin-bottom: 8px;">Immediate value, zero data required</li>
-            <li style="font-size: 14px; line-height: 1.6; color: var(--ink); margin-bottom: 8px;">Bootstrap into sophisticated algorithms</li>
-            <li style="font-size: 14px; line-height: 1.6; color: var(--ink);">Serve multi-region under 200ms latency</li>
+          <ul class="list-none p-0 m-0">
+            <li class="text-14 leading-[1.6] text-ink mb-2">Immediate value, zero data required</li>
+            <li class="text-14 leading-[1.6] text-ink mb-2">Bootstrap into sophisticated algorithms</li>
+            <li class="text-14 leading-[1.6] text-ink">Serve multi-region under 200ms latency</li>
           </ul>
         </div>
       </div>
     </section>
 
     <!-- Architecture -->
-    <section style="margin-bottom: 48px;">
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Architecture</h2>
-      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 24px;">Three independent engines (Curated, Automated, Smart), tier selection driven by CSM discretion, not data availability. CSMs choose which tier per merchant based on trust and use case. Data flows live to Redis, then migrates to BigQuery after 30 minutes of session inactivity or session close. All logic and serving handled backend; client renders. Multi-region MongoDB for serving, ClickHouse for analytics.</p>
+    <section class="mb-12">
+      <h2 class="section-heading">Architecture</h2>
+      <p class="prose-body mb-6">Three independent engines (Curated, Automated, Smart), tier selection driven by CSM discretion, not data availability. CSMs choose which tier per merchant based on trust and use case. Data flows live to Redis, then migrates to BigQuery after 30 minutes of session inactivity or session close. All logic and serving handled backend; client renders. Multi-region MongoDB for serving, ClickHouse for analytics.</p>
 
       <!-- Recommendation Architecture SVG -->
       <svg viewBox="0 0 640 480" style="max-width: 65ch; width: 100%; margin-bottom: 24px; display: block;" xmlns="http://www.w3.org/2000/svg">
@@ -141,69 +141,69 @@ import Layout from '../../layouts/Layout.astro';
     </section>
 
     <!-- Key Decisions -->
-    <section style="margin-bottom: 48px;">
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Key Decisions</h2>
+    <section class="mb-12">
+      <h2 class="section-heading">Key Decisions</h2>
       <ol style="max-width: 65ch; list-style: none; padding: 0;">
         <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 20px;">
           <strong>Tier selection driven by CSM judgment, not data triggers</strong><br/>
-          <span style="color: var(--ink-2);">CSMs choose which tier per merchant—Curated for cautious starts, Automated for merchants with early transaction history, Smart for established stores ready for live behavioral ranking. No automatic progression based on transaction thresholds. Puts control in the hands of customer success, not an algorithm.</span>
+          <span class="text-ink-2">CSMs choose which tier per merchant—Curated for cautious starts, Automated for merchants with early transaction history, Smart for established stores ready for live behavioral ranking. No automatic progression based on transaction thresholds. Puts control in the hands of customer success, not an algorithm.</span>
         </li>
         <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 20px;">
           <strong>Computation matched to data maturity</strong><br/>
-          <span style="color: var(--ink-2);">Curated is static (no computation). Automated is batch rules (frequency > threshold). Smart is live ranking (statistical model). Cannot compute live ranking on day-7 data; would overfit.</span>
+          <span class="text-ink-2">Curated is static (no computation). Automated is batch rules (frequency > threshold). Smart is live ranking (statistical model). Cannot compute live ranking on day-7 data; would overfit.</span>
         </li>
         <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 20px;">
           <strong>Redis-first serving, accept eventual consistency</strong><br/>
-          <span style="color: var(--ink-2);">In-flight ranking state lost on Redis failure is acceptable for recommendations. Would not accept this for transactional orders. Latency requirement (200ms p99) demands in-memory serving.</span>
+          <span class="text-ink-2">In-flight ranking state lost on Redis failure is acceptable for recommendations. Would not accept this for transactional orders. Latency requirement (200ms p99) demands in-memory serving.</span>
         </li>
-        <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">
+        <li class="text-16 leading-[1.8] text-ink">
           <strong>Read replicas trade freshness for latency across regions</strong><br/>
-          <span style="color: var(--ink-2);">Serving from regional replicas incurs 5-10s replication lag. Acceptable cost for 200ms p99 serving. Alternative: central Redis for all regions means 300-500ms network latency. Chose lower latency.</span>
+          <span class="text-ink-2">Serving from regional replicas incurs 5-10s replication lag. Acceptable cost for 200ms p99 serving. Alternative: central Redis for all regions means 300-500ms network latency. Chose lower latency.</span>
         </li>
       </ol>
     </section>
 
     <!-- Execution -->
-    <section style="margin-bottom: 48px;">
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Execution</h2>
+    <section class="mb-12">
+      <h2 class="section-heading">Execution</h2>
 
-      <div style="margin-bottom: 24px;">
-        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Data Pipeline</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Behavioral events collected live into Redis. After 30 minutes of session inactivity or session close, data migrates to BigQuery for historical analysis. All logic and filtering happens backend; client is rendering only. Tier selection and ranking computed server-side, not pushed client-side.</p>
+      <div class="mb-6">
+        <h3 class="text-14 font-semibold mb-3">Data Pipeline</h3>
+        <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">Behavioral events collected live into Redis. After 30 minutes of session inactivity or session close, data migrates to BigQuery for historical analysis. All logic and filtering happens backend; client is rendering only. Tier selection and ranking computed server-side, not pushed client-side.</p>
       </div>
 
-      <div style="margin-bottom: 24px;">
-        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Multi-Region Serving Under Latency SLA</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Target: 200ms p99 across five regions (US, EU, APAC, India, Brazil). Deployed MongoDB instances in each region. Redis ranking cache replicated to regional instances with 5-10s lag. On replica lag, served cached tier (fallback to Automated) instead of blocking. Prioritized latency over freshness.</p>
+      <div class="mb-6">
+        <h3 class="text-14 font-semibold mb-3">Multi-Region Serving Under Latency SLA</h3>
+        <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">Target: 200ms p99 across five regions (US, EU, APAC, India, Brazil). Deployed MongoDB instances in each region. Redis ranking cache replicated to regional instances with 5-10s lag. On replica lag, served cached tier (fallback to Automated) instead of blocking. Prioritized latency over freshness.</p>
       </div>
 
-      <div style="margin-bottom: 24px;">
-        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Model Validation Before Deploy</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Smart ranking trained on historical data. Before serving live, validated against held-out test sets. Checked for cardinality issues (one customer type over-indexed), signal stability (weights don't swing per retraining), and tail behavior (edge cases don't rank anomalously). Rejected models that failed validation.</p>
+      <div class="mb-6">
+        <h3 class="text-14 font-semibold mb-3">Model Validation Before Deploy</h3>
+        <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">Smart ranking trained on historical data. Before serving live, validated against held-out test sets. Checked for cardinality issues (one customer type over-indexed), signal stability (weights don't swing per retraining), and tail behavior (edge cases don't rank anomalously). Rejected models that failed validation.</p>
       </div>
 
       <div>
-        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Monitoring & Rollback</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Tracked block click-through rate and block latency per tier. Anomalies (CTR drop >10%, latency spike) paged on-call. Could disable tiers independently if quality degraded. Built canary deployment for Smart tier: new model runs on 5% of traffic first, compared metrics to incumbent.</p>
+        <h3 class="text-14 font-semibold mb-3">Monitoring & Rollback</h3>
+        <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">Tracked block click-through rate and block latency per tier. Anomalies (CTR drop >10%, latency spike) paged on-call. Could disable tiers independently if quality degraded. Built canary deployment for Smart tier: new model runs on 5% of traffic first, compared metrics to incumbent.</p>
       </div>
     </section>
 
     <!-- Impact -->
-    <section style="margin-bottom: 48px;">
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Impact</h2>
+    <section class="mb-12">
+      <h2 class="section-heading">Impact</h2>
 
       <div style="text-align: center; margin-bottom: 32px; padding: 32px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);">
         <div style="font-size: var(--fs-56); font-weight: 600; color: var(--accent); margin-bottom: 12px;">200ms P99 · DAY 1</div>
         <div style="font-size: 16px; color: var(--ink-2); max-width: 65ch; margin: 0 auto;">Deployed Curated recommendations on day 1 across five regions under latency SLA</div>
       </div>
 
-      <div style="margin-bottom: 24px;">
-        <h3 style="font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 12px;">Technical Achievement</h3>
+      <div class="mb-6">
+        <h3 class="text-14 font-semibold text-accent mb-3">Technical Achievement</h3>
         <ul style="max-width: 65ch; list-style: none; padding: 0;">
           <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Cold-start solved by CSM-driven tier selection + three independent engines. CSMs choose tier (Curated, Automated, Smart) per merchant based on confidence and use case, not algorithm-triggered progression.</li>
           <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Data pipeline: live to Redis, migrate to BigQuery after 30min inactivity or session close. All backend logic; client renders only. No client-side filtering or ranking logic.</li>
           <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Multi-region serving with regional Redis + fallback caching. 200ms p99 latency across five regions despite 5-10s replication lag.</li>
-          <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">Model validation gate ensured Smart tier only served high-confidence rankings. Prevented garbage output from ruining system trust.</li>
+          <li class="text-16 leading-[1.8] text-ink">Model validation gate ensured Smart tier only served high-confidence rankings. Prevented garbage output from ruining system trust.</li>
         </ul>
       </div>
 
@@ -215,10 +215,10 @@ import Layout from '../../layouts/Layout.astro';
 
     <!-- What I'd Change Today -->
     <section>
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">What I'd Change Today</h2>
+      <h2 class="section-heading">What I'd Change Today</h2>
 
       <div style="margin-bottom: 24px;">
-        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">What I'd Preserve</h3>
+        <h3 class="text-14 font-semibold mb-3">What I'd Preserve</h3>
         <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Three-tier architecture with CSM control. Giving customer success ownership over tier selection (not automation) meant we could start with Curated (zero risk), and CSMs could upgrade merchants to Automated/Smart as they gained confidence. Prevented shipping garbage output and losing trust on day 1.</p>
       </div>
 
@@ -227,15 +227,15 @@ import Layout from '../../layouts/Layout.astro';
         <ul style="max-width: 65ch; list-style: none; padding: 0;">
           <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;"><strong>Canary deployments from day one.</strong> Built it later, but early validation would have caught model quality issues faster.</li>
           <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;"><strong>Feature flag for Smart tier per merchant.</strong> All-or-nothing rollout was risky. Gradual merchant cohort rollout would allow faster issue detection.</li>
-          <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">​<strong>Separate model retraining from serving.</strong> Current design retrains synchronously, risks latency spikes. Async retraining into separate cache layer would decouple.</li>
+          <li class="text-16 leading-[1.8] text-ink">​<strong>Separate model retraining from serving.</strong> Current design retrains synchronously, risks latency spikes. Async retraining into separate cache layer would decouple.</li>
         </ul>
       </div>
     </section>
     <section style="padding: 52px 0; border-top: 1px solid var(--rule); margin-top: 52px;">
-      <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 16px;">Next steps</p>
+      <p class="font-code text-12 text-accent font-semibold mb-4">Next steps</p>
       <ul style="list-style: none; padding: 0; margin: 0;">
-        <li style="margin-bottom: 12px;">→ <a href="/case-studies/hard-problems" style="color: var(--accent); text-decoration: none;">See production incidents that shaped this design</a></li>
-        <li style="margin-bottom: 12px;">→ <a href="/resume" style="color: var(--accent); text-decoration: none;">Download my resume</a></li>
+        <li class="mb-3">→ <a href="/case-studies/hard-problems" class="plain-link">See production incidents that shaped this design</a></li>
+        <li class="mb-3">→ <a href="/resume" class="plain-link">Download my resume</a></li>
       </ul>
     </section>
   </article>

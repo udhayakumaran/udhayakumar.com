@@ -5,16 +5,16 @@ import { profile } from '../data/profile';
 ---
 
 <Layout title="About — Udhaya Kumar" description="About Udhaya Kumar, Senior Backend Engineer with 13+ years building backend systems, data infrastructure, and production platforms.">
-  <section style="padding: 52px 0; border-bottom: 1px solid var(--rule);">
-    <h1 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-40); font-weight: 600; margin-bottom: 32px;">About</h1>
-    <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 24px;"><strong>Thirteen years backend. Five years owning a data platform end to end. Scaled team {profile.convertCart.teamGrowth}, served {profile.proof.merchants}, reduced costs 77.8%.</strong></p>
-    <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">I'm a {profile.primaryTitle} open to Staff, Principal, or Founding-Engineer roles where I can own a backend or data infrastructure system with the same scope and have real influence on how a team scales.</p>
+  <section class="section-block">
+    <h1 class="font-code text-40 font-semibold mb-8">About</h1>
+    <p class="prose-body mb-6"><strong>Thirteen years backend. Five years owning a data platform end to end. Scaled team {profile.convertCart.teamGrowth}, served {profile.proof.merchants}, reduced costs 77.8%.</strong></p>
+    <p class="prose-body">I'm a {profile.primaryTitle} open to Staff, Principal, or Founding-Engineer roles where I can own a backend or data infrastructure system with the same scope and have real influence on how a team scales.</p>
   </section>
 
   <!-- Testimonials -->
-  <section style="padding: 52px 0; border-bottom: 1px solid var(--rule);">
-    <h2 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin-bottom: 40px;">What people say</h2>
-    <div style="display: grid; gap: 24px;">
+  <section class="section-block">
+    <h2 class="font-code text-32 font-semibold mb-10">What people say</h2>
+    <div class="grid gap-6">
       <TestimonialCard
         quote="I worked with Udhay for the past four years, and calling him just a 'team lead' wouldn't do justice to the role he played in my journey. He has been an exceptional mentor and guide, always approachable, patient, and supportive. His leadership style helped me grow not just in skills, but in confidence and mindset."
         name="Goutham Kishore"
@@ -39,107 +39,107 @@ import { profile } from '../data/profile';
   </section>
 
   <!-- What I get hired for -->
-  <section style="padding: 52px 0; border-bottom: 1px solid var(--rule);">
-    <h2 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin-bottom: 40px;">What I get hired for</h2>
-    <div style="display: grid; gap: 32px;">
+  <section class="section-block">
+    <h2 class="font-code text-32 font-semibold mb-10">What I get hired for</h2>
+    <div class="grid gap-8">
       <div>
-        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Platform ownership</p>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">End-to-end responsibility for systems serving multiple internal teams and hundreds of external users. Comfortable holding both the design decisions and the operational debt. Own systems from architecture through production, incident response, and technical direction.</p>
+        <p class="label-mono">Platform ownership</p>
+        <p class="prose-body">End-to-end responsibility for systems serving multiple internal teams and hundreds of external users. Comfortable holding both the design decisions and the operational debt. Own systems from architecture through production, incident response, and technical direction.</p>
       </div>
       <div>
-        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Design for reversibility</p>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">Ship simpler systems by deferring normalization to layers where mistakes are cheap to fix. Trade off one-time complexity at ingest for ongoing flexibility. Spend operations cost to buy reversibility.</p>
+        <p class="label-mono">Design for reversibility</p>
+        <p class="prose-body">Ship simpler systems by deferring normalization to layers where mistakes are cheap to fix. Trade off one-time complexity at ingest for ongoing flexibility. Spend operations cost to buy reversibility.</p>
       </div>
       <div>
-        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Scaling with small teams</p>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">Scaled a platform team from 4 to 7 engineers over 5 years while serving 200+ merchants across five commerce platforms. Focused on: (1) hiring for architectural thinking, not just coding speed, (2) clear ownership of systems, (3) choosing abstractions that let a small team scale without burning out. The result: team grew without losing quality or increasing on-call burden.</p>
+        <p class="label-mono">Scaling with small teams</p>
+        <p class="prose-body">Scaled a platform team from 4 to 7 engineers over 5 years while serving 200+ merchants across five commerce platforms. Focused on: (1) hiring for architectural thinking, not just coding speed, (2) clear ownership of systems, (3) choosing abstractions that let a small team scale without burning out. The result: team grew without losing quality or increasing on-call burden.</p>
       </div>
       <div>
-        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Judging tradeoffs honestly</p>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">Every architecture decision trades something off. Value candidates and team members who name the cost admitted, not just the benefit gained. Leads to better hiring and fewer bad surprises post-launch.</p>
+        <p class="label-mono">Judging tradeoffs honestly</p>
+        <p class="prose-body">Every architecture decision trades something off. Value candidates and team members who name the cost admitted, not just the benefit gained. Leads to better hiring and fewer bad surprises post-launch.</p>
       </div>
     </div>
   </section>
 
   <!-- How I influenced engineering culture -->
-  <section style="padding: 52px 0; border-bottom: 1px solid var(--rule);">
-    <h2 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin-bottom: 40px;">How I influenced engineering culture</h2>
+  <section class="section-block">
+    <h2 class="font-code text-32 font-semibold mb-10">How I influenced engineering culture</h2>
     <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 32px;">Beyond my platform role, I shaped how the broader engineering team approached infrastructure:</p>
-    <ul style="list-style: none; padding: 0; margin: 0; max-width: 65ch;">
-      <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 24px;"><strong>Established code review standards for Pub/Sub consumers:</strong> Every new consumer had to implement backpressure monitoring and memory high-water marks before deployment. This pattern prevented OOM crashes across 15+ services company-wide.</li>
-      <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 24px;"><strong>Designed system design interviews for backend hiring:</strong> I led hiring for 3 backend engineers. I focused questions on tradeoffs and reversibility, not algorithm complexity. This raised the bar for architectural thinking across the company.</li>
-      <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 24px;"><strong>Ran monthly architecture sync across teams:</strong> Platform, Recommendations, and Segmentation teams aligned on shared systems. This is where we caught the stale recommendation churn driver before it spiraled.</li>
-      <li style="font-size: 16px; line-height: 1.8; color: var(--ink);"><strong>Mentored engineers to Staff-level impact:</strong> Goutham Kishore and Piyush Jaiswal both reported to me. I focused on helping them own systems end-to-end, make tradeoff decisions, and communicate architecture to non-technical stakeholders. Both are now leading sub-systems independently.</li>
+    <ul class="list-none p-0 m-0 max-w-[65ch]">
+      <li class="text-16 leading-[1.8] text-ink mb-6"><strong>Established code review standards for Pub/Sub consumers:</strong> Every new consumer had to implement backpressure monitoring and memory high-water marks before deployment. This pattern prevented OOM crashes across 15+ services company-wide.</li>
+      <li class="text-16 leading-[1.8] text-ink mb-6"><strong>Designed system design interviews for backend hiring:</strong> I led hiring for 3 backend engineers. I focused questions on tradeoffs and reversibility, not algorithm complexity. This raised the bar for architectural thinking across the company.</li>
+      <li class="text-16 leading-[1.8] text-ink mb-6"><strong>Ran monthly architecture sync across teams:</strong> Platform, Recommendations, and Segmentation teams aligned on shared systems. This is where we caught the stale recommendation churn driver before it spiraled.</li>
+      <li class="text-16 leading-[1.8] text-ink"><strong>Mentored engineers to Staff-level impact:</strong> Goutham Kishore and Piyush Jaiswal both reported to me. I focused on helping them own systems end-to-end, make tradeoff decisions, and communicate architecture to non-technical stakeholders. Both are now leading sub-systems independently.</li>
     </ul>
   </section>
 
   <!-- What I've learned -->
-  <section style="padding: 52px 0; border-bottom: 1px solid var(--rule);">
-    <h2 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin-bottom: 40px;">What I've learned</h2>
-    <div style="display: grid; gap: 32px;">
+  <section class="section-block">
+    <h2 class="font-code text-32 font-semibold mb-10">What I've learned</h2>
+    <div class="grid gap-8">
       <div>
-        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Reversibility</p>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">Normalise where mistakes are reversible; defer normalisation where they're not. A wrong view is a redefinition away from correction. A wrong schema at ingest is a multi-service migration. Applied at the data platform: land raw, fan-out shaped. Applied at segmentation: consolidate first, model at the analytics layer second.</p>
+        <p class="label-mono">Reversibility</p>
+        <p class="prose-body">Normalise where mistakes are reversible; defer normalisation where they're not. A wrong view is a redefinition away from correction. A wrong schema at ingest is a multi-service migration. Applied at the data platform: land raw, fan-out shaped. Applied at segmentation: consolidate first, model at the analytics layer second.</p>
       </div>
       <div>
-        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Match storage to question</p>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">Recommendations want point lookups; segmentation wants population filtering; reporting wants columnar aggregation. One database cannot efficiently answer all three. Choose the storage pattern for the access pattern, not the other way around.</p>
+        <p class="label-mono">Match storage to question</p>
+        <p class="prose-body">Recommendations want point lookups; segmentation wants population filtering; reporting wants columnar aggregation. One database cannot efficiently answer all three. Choose the storage pattern for the access pattern, not the other way around.</p>
       </div>
       <div>
-        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Operational simplicity beats sophisticated abstractions</p>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">Legible systems are easier to debug than clever ones. A Pub/Sub consumer publishing lag metrics and failing visibly beats a Dataflow job hiding what's actually happening in an execution graph. When a small team owns it, debuggability under pressure beats a better abstraction on paper.</p>
+        <p class="label-mono">Operational simplicity beats sophisticated abstractions</p>
+        <p class="prose-body">Legible systems are easier to debug than clever ones. A Pub/Sub consumer publishing lag metrics and failing visibly beats a Dataflow job hiding what's actually happening in an execution graph. When a small team owns it, debuggability under pressure beats a better abstraction on paper.</p>
       </div>
       <div>
-        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Ship in trust order, not sophistication order</p>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">Built manual recommendation blocks first (zero intelligence, but deployable day one), then automated, then smart. Clients who started on manual graduated to smart. Sophistication matters less than adoption; adoption requires trust.</p>
+        <p class="label-mono">Ship in trust order, not sophistication order</p>
+        <p class="prose-body">Built manual recommendation blocks first (zero intelligence, but deployable day one), then automated, then smart. Clients who started on manual graduated to smart. Sophistication matters less than adoption; adoption requires trust.</p>
       </div>
     </div>
   </section>
 
   <!-- Leadership & Mentorship -->
-  <section style="padding: 52px 0; border-bottom: 1px solid var(--rule);">
-    <h2 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin-bottom: 40px;">Team Growth & Mentorship</h2>
-    <div style="display: grid; gap: 32px; max-width: 65ch;">
+  <section class="section-block">
+    <h2 class="font-code text-32 font-semibold mb-10">Team Growth & Mentorship</h2>
+    <div class="grid gap-8 max-w-[65ch]">
       <div>
-        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Scaling with intent</p>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink);">Started with 4 engineers (2020). Grew to 7 engineers (2025) through direct management: 1:1s, hiring decisions, technical direction. Retained 3 of 4 hired (75% retention).</p>
+        <p class="label-mono">Scaling with intent</p>
+        <p class="text-16 leading-[1.8] text-ink">Started with 4 engineers (2020). Grew to 7 engineers (2025) through direct management: 1:1s, hiring decisions, technical direction. Retained 3 of 4 hired (75% retention).</p>
       </div>
       <div>
-        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Mentorship in practice</p>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink);">Mentored Goutham for 4 years—from full-stack developer to system thinker. Pair programming on high-stakes migrations, delegating increasing responsibility, teaching WHY not just WHAT. Result: confident engineer who owns components end-to-end.</p>
+        <p class="label-mono">Mentorship in practice</p>
+        <p class="text-16 leading-[1.8] text-ink">Mentored Goutham for 4 years—from full-stack developer to system thinker. Pair programming on high-stakes migrations, delegating increasing responsibility, teaching WHY not just WHAT. Result: confident engineer who owns components end-to-end.</p>
       </div>
       <div>
-        <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Organizational impact</p>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink);">7 engineers supporting 200+ merchants. Small team, big impact through architecture and automation. Platform team influences all consuming services. Knowledge transfer means the system doesn't depend on me.</p>
+        <p class="label-mono">Organizational impact</p>
+        <p class="text-16 leading-[1.8] text-ink">7 engineers supporting 200+ merchants. Small team, big impact through architecture and automation. Platform team influences all consuming services. Knowledge transfer means the system doesn't depend on me.</p>
       </div>
     </div>
     <p style="font-size: 14px; line-height: 1.8; color: var(--ink-2); margin-top: 32px; max-width: 65ch;"><strong>Signal:</strong> Grow people, not just systems. At Staff+ levels, that's the job.</p>
     <p style="margin-top: 32px; max-width: 65ch;">
-      <a href="/engineering-notes" style="color: var(--accent); text-decoration: none;">Incident log and postmortems →</a> ·
-      <a href="/architecture-decisions" style="color: var(--accent); text-decoration: none;">Architectural tradeoffs →</a>
+      <a href="/engineering-notes" class="plain-link">Incident log and postmortems →</a> ·
+      <a href="/architecture-decisions" class="plain-link">Architectural tradeoffs →</a>
     </p>
   </section>
 
   <!-- Next chapter -->
-  <section style="padding: 52px 0; border-bottom: 1px solid var(--rule);">
-    <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Next chapter</p>
+  <section class="section-block">
+    <p class="label-mono">Next chapter</p>
     <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">I concluded my most recent role in May 2026 after 5+ years owning data infrastructure end-to-end. I'm looking for Staff, Principal, or Founding-Engineer roles where I can own a backend or data infrastructure system with the same scope and have real influence on how a team scales. I'm most excited by remote-first startups solving hard problems at scale.</p>
   </section>
 
   <!-- Areas I'm actively growing -->
-  <section style="padding: 52px 0; border-bottom: 1px solid var(--rule);">
-    <h2 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin-bottom: 40px;">Areas I'm actively growing</h2>
+  <section class="section-block">
+    <h2 class="font-code text-32 font-semibold mb-10">Areas I'm actively growing</h2>
     <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 32px;">I'm deliberately expanding into two areas:</p>
-    <ul style="list-style: none; padding: 0; margin: 0; max-width: 65ch;">
-      <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 24px;"><strong>Production LLM systems:</strong> I'm building expertise in production-grade LLM patterns, RAG pipelines, and embedding freshness. <a href="https://medium.com/@mail4udhaya/from-6-hours-to-under-a-minute-evolving-an-e-commerce-sync-pipeline-into-real-time-9d2b4a76cab0" style="color: var(--accent); text-decoration: none;">Read my Medium article on CDC pipeline evolution →</a></li>
-      <li style="font-size: 16px; line-height: 1.8; color: var(--ink);"><strong>Python production depth:</strong> Historically Node.js-focused, I'm deepening Python skills for production systems and exploring FastAPI.</li>
+    <ul class="list-none p-0 m-0 max-w-[65ch]">
+      <li class="text-16 leading-[1.8] text-ink mb-6"><strong>Production LLM systems:</strong> I'm building expertise in production-grade LLM patterns, RAG pipelines, and embedding freshness. <a href="https://medium.com/@mail4udhaya/from-6-hours-to-under-a-minute-evolving-an-e-commerce-sync-pipeline-into-real-time-9d2b4a76cab0" class="plain-link">Read my Medium article on CDC pipeline evolution →</a></li>
+      <li class="text-16 leading-[1.8] text-ink"><strong>Python production depth:</strong> Historically Node.js-focused, I'm deepening Python skills for production systems and exploring FastAPI.</li>
     </ul>
   </section>
 
   <!-- Contact CTA -->
   <section style="padding: 52px 0; text-align: center;">
-    <p style="font-size: 18px; line-height: 1.8; color: var(--ink); margin-bottom: 16px;">Let's talk about infrastructure, data, and building at scale.</p>
+    <p class="text-18 leading-[1.8] text-ink mb-4">Let's talk about infrastructure, data, and building at scale.</p>
     <a href="mailto:mail4udhaya@gmail.com" style="text-decoration: none; color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; border-bottom: 1px solid transparent; transition: border-color 0.2s ease;">mail4udhaya@gmail.com</a>
-    <p style="margin-top: 24px;"><a href="/resume">View resume →</a></p>
+    <p class="mt-6"><a href="/resume">View resume →</a></p>
   </section>
 </Layout>

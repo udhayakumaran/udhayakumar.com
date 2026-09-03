@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 /* Design tokens */
 :root {
   /* Light palette */
@@ -81,6 +83,79 @@
   --sage-wash: #232A1C;
   --flag: #D9A05B;
   --flag-wash: #2A2015;
+}
+
+@theme {
+  /* Colors */
+  --color-bg: var(--bg);
+  --color-panel: var(--panel);
+  --color-panel-2: var(--panel-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-rule: var(--rule);
+  --color-rule-2: var(--rule-2);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-wash: var(--accent-wash);
+  --color-sage: var(--sage);
+  --color-sage-wash: var(--sage-wash);
+  --color-flag: var(--flag);
+  --color-flag-wash: var(--flag-wash);
+
+  /* Fonts */
+  --font-sans: "IBM Plex Sans", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+  --font-code: "JetBrains Mono", monospace;
+
+  /* Font sizes */
+  --text-11: var(--fs-11);
+  --text-12: var(--fs-12);
+  --text-13: var(--fs-13);
+  --text-14: var(--fs-14);
+  --text-16: var(--fs-16);
+  --text-18: var(--fs-18);
+  --text-20: var(--fs-20);
+  --text-24: var(--fs-24);
+  --text-28: var(--fs-28);
+  --text-32: var(--fs-32);
+  --text-40: var(--fs-40);
+  --text-56: var(--fs-56);
+
+  /* Spacing: Tailwind v4 computes spacing for any integer N */
+  --spacing-section: var(--space-section);
+}
+
+@layer components {
+  /* Composed classes for repeated inline style patterns */
+  .prose-body {
+    @apply text-16 leading-[1.8] text-ink max-w-[65ch];
+  }
+
+  .label-mono {
+    @apply font-code text-12 text-accent font-semibold mb-2;
+  }
+
+  .section-heading {
+    @apply font-code text-14 font-semibold text-accent uppercase tracking-[0.1em] mb-4;
+  }
+
+  .section-block {
+    @apply py-13 border-b border-rule;
+  }
+
+  .tag-chip {
+    @apply text-11 bg-panel-2 text-ink-3 px-2 py-1 rounded-[3px];
+  }
+
+  .metric-chip {
+    @apply bg-accent-wash text-accent px-3 py-2 rounded-[3px] text-13;
+  }
+
+  .plain-link {
+    @apply text-accent no-underline;
+  }
 }
 
 /* Base reset */

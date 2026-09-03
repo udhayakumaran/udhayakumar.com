@@ -6,39 +6,39 @@ import Layout from '../../layouts/Layout.astro';
   title="The 50M-row Debezium snapshot incident — Engineering Note"
   description="How a snapshot operation nearly derailed a critical migration, and what it taught about production risk vs architectural purity."
 >
-  <article style="padding: 52px 0;">
-    <nav style="margin-bottom: 32px;">
-      <a href="/engineering-notes" style="font-size: 14px; color: var(--accent); text-decoration: none;">← Back to engineering notes</a>
+  <article class="py-13">
+    <nav class="mb-8">
+      <a href="/engineering-notes" class="text-14 text-accent no-underline">← Back to engineering notes</a>
     </nav>
 
     <h1 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin-bottom: 24px;">I stopped a production migration when a 50M-row CDC snapshot blocked writes</h1>
 
-    <p style="font-size: 16px; color: var(--ink-2); margin-bottom: 32px; max-width: 65ch;">During a data platform migration across 200+ merchants, Debezium's snapshot operation consumed 60% CPU and began blocking production writes. I stopped the snapshot, used an existing Datastream path to recover, and changed the rollout strategy.</p>
+    <p class="text-16 text-ink-2 mb-8 max-w-[65ch]">During a data platform migration across 200+ merchants, Debezium's snapshot operation consumed 60% CPU and began blocking production writes. I stopped the snapshot, used an existing Datastream path to recover, and changed the rollout strategy.</p>
     <p class="note-meta">Engineering note · Production reliability · By Udhaya Kumar</p>
 
     <!-- Context -->
-    <section style="margin-bottom: 48px;">
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Context</h2>
-      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">We were migrating the data platform to a new architecture: raw MySQL landing layer → Debezium CDC → Google Pub/Sub → specialized serving layers (MongoDB, ClickHouse, BigQuery). The landing layer was the shared CDC boundary for recommendations, segmentation, reporting, and attribution.</p>
+    <section class="mb-12">
+      <h2 class="section-heading">Context</h2>
+      <p class="prose-body">We were migrating the data platform to a new architecture: raw MySQL landing layer → Debezium CDC → Google Pub/Sub → specialized serving layers (MongoDB, ClickHouse, BigQuery). The landing layer was the shared CDC boundary for recommendations, segmentation, reporting, and attribution.</p>
       <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-top: 16px;">We'd already done a store-by-store cutover for 200+ merchants without issues. But the initial rollout of Debezium on the landing layer itself hit a wall.</p>
     </section>
 
     <!-- The Problem -->
-    <section style="margin-bottom: 48px;">
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">What went wrong</h2>
-      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">Debezium uses snapshots to bootstrap replication state when first connecting to a database. For this deployment, the initial snapshot read the entire landing table and streamed rows into our CDC event transport.</p>
+    <section class="mb-12">
+      <h2 class="section-heading">What went wrong</h2>
+      <p class="prose-body">Debezium uses snapshots to bootstrap replication state when first connecting to a database. For this deployment, the initial snapshot read the entire landing table and streamed rows into our CDC event transport.</p>
       <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-top: 16px;">The landing table was ~50M rows. When Debezium started:</p>
       <ul style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-top: 16px; list-style: none; padding: 0;">
-        <li style="margin-bottom: 12px;"><strong>The snapshot query hit 60% CPU.</strong> MySQL's query planner picked a suboptimal execution path.</li>
-        <li style="margin-bottom: 12px;"><strong>The read lock held longer than expected.</strong> Downstream code hitting the landing layer started timing out.</li>
+        <li class="mb-3"><strong>The snapshot query hit 60% CPU.</strong> MySQL's query planner picked a suboptimal execution path.</li>
+        <li class="mb-3"><strong>The read lock held longer than expected.</strong> Downstream code hitting the landing layer started timing out.</li>
         <li><strong>Production writes began queueing.</strong> The database connection pool saturated.</li>
       </ul>
       <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-top: 16px;">Within minutes, we had requests piling up. Dashboards weren't updating. Customer-facing systems were degrading.</p>
     </section>
 
     <!-- Timeline and recovery -->
-    <section style="margin-bottom: 48px;">
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">The recovery</h2>
+    <section class="mb-12">
+      <h2 class="section-heading">The recovery</h2>
       <ol class="incident-timeline">
         <li><strong>Detection</strong><span>Snapshot drove CPU to 60%; writes began queueing.</span></li>
         <li><strong>Diagnosis</strong><span>The ~50M-row snapshot and lock behavior, not downstream consumers, were saturating MySQL.</span></li>
@@ -46,45 +46,45 @@ import Layout from '../../layouts/Layout.astro';
         <li><strong>Recovery</strong><span>Production writes recovered within seconds; Datastream bootstrapped the baseline.</span></li>
         <li><strong>Permanent change</strong><span>We moved to incremental table migration with a rollback path and production-scale snapshot testing.</span></li>
       </ol>
-      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 16px;"><strong>Immediate:</strong> stopped the Debezium job and killed the snapshot. Production writes recovered within seconds.</p>
-      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 16px;"><strong>Short term:</strong> we'd built the system with a fallback — Google Cloud's Datastream service was already capturing changes from the same landing layer as a parallel replication path. We pivoted: use Datastream to bootstrap the initial snapshot, then switch tables to Debezium CDC incrementally.</p>
-      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;"><strong>Long term:</strong> this dual-replication strategy (Datastream + Debezium) became our production design for several months. It gave us:</p>
+      <p class="text-16 leading-[1.8] text-ink max-w-[65ch] mb-4"><strong>Immediate:</strong> stopped the Debezium job and killed the snapshot. Production writes recovered within seconds.</p>
+      <p class="text-16 leading-[1.8] text-ink max-w-[65ch] mb-4"><strong>Short term:</strong> we'd built the system with a fallback — Google Cloud's Datastream service was already capturing changes from the same landing layer as a parallel replication path. We pivoted: use Datastream to bootstrap the initial snapshot, then switch tables to Debezium CDC incrementally.</p>
+      <p class="prose-body"><strong>Long term:</strong> this dual-replication strategy (Datastream + Debezium) became our production design for several months. It gave us:</p>
       <ul style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-top: 16px; list-style: none; padding: 0;">
-        <li style="margin-bottom: 12px;">Safe snapshots (Datastream handles them at scale).</li>
-        <li style="margin-bottom: 12px;">Gradual transition to pure Debezium (one table at a time).</li>
-        <li style="margin-bottom: 12px;">A rollback path if Debezium had issues on any table.</li>
+        <li class="mb-3">Safe snapshots (Datastream handles them at scale).</li>
+        <li class="mb-3">Gradual transition to pure Debezium (one table at a time).</li>
+        <li class="mb-3">A rollback path if Debezium had issues on any table.</li>
       </ul>
     </section>
 
     <!-- Why It Happened -->
-    <section style="margin-bottom: 48px;">
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Why we didn't see it coming</h2>
-      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;"><strong>1. Scale assumptions.</strong> We'd tested Debezium snapshots on dev tables (10M rows) and they were fast. Production was 5x larger, and performance doesn't scale linearly.</p>
+    <section class="mb-12">
+      <h2 class="section-heading">Why we didn't see it coming</h2>
+      <p class="prose-body"><strong>1. Scale assumptions.</strong> We'd tested Debezium snapshots on dev tables (10M rows) and they were fast. Production was 5x larger, and performance doesn't scale linearly.</p>
       <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-top: 16px;"><strong>2. Architectural purity.</strong> We wanted a single CDC path — Debezium from landing layer CDC. Two tools felt redundant. This desire for elegance made us skip the safety net.</p>
       <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-top: 16px;"><strong>3. Query optimization assumption.</strong> We assumed the snapshot query would use an index. MySQL's query planner chose differently under real load.</p>
     </section>
 
     <!-- The Lesson -->
-    <section style="margin-bottom: 48px;">
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">The lesson</h2>
-      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;"><strong>Don't optimize for architectural purity when production is at risk.</strong></p>
+    <section class="mb-12">
+      <h2 class="section-heading">The lesson</h2>
+      <p class="prose-body"><strong>Don't optimize for architectural purity when production is at risk.</strong></p>
       <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-top: 16px;">We had a perfectly good tool (Datastream) already in place. Using it alongside Debezium wasn't inelegant — it was pragmatic. It meant:</p>
       <ul style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-top: 16px; list-style: none; padding: 0;">
-        <li style="margin-bottom: 12px;">We never risked production stability for consistency.</li>
-        <li style="margin-bottom: 12px;">We had a recovery path.</li>
-        <li style="margin-bottom: 12px;">We could migrate gradually instead of all-or-nothing.</li>
-        <li style="margin-bottom: 12px;">We bought time to understand Debezium's behavior at our scale.</li>
+        <li class="mb-3">We never risked production stability for consistency.</li>
+        <li class="mb-3">We had a recovery path.</li>
+        <li class="mb-3">We could migrate gradually instead of all-or-nothing.</li>
+        <li class="mb-3">We bought time to understand Debezium's behavior at our scale.</li>
       </ul>
       <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-top: 16px;">The best architecture for production is the one that lets you recover quickly. Redundancy — even redundancy that feels "inelegant" — is not waste. It's insurance.</p>
     </section>
 
     <!-- Takeaway -->
     <section>
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">What changed</h2>
+      <h2 class="section-heading">What changed</h2>
       <ul style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; list-style: none; padding: 0;">
-        <li style="margin-bottom: 12px;"><strong>We now load-test snapshots at production scale</strong> before deploying new CDC approaches.</li>
-        <li style="margin-bottom: 12px;"><strong>We keep backup replication paths</strong> for critical data flows. Managed services (Datastream) handle the heavy lifting of snapshots; custom tools (Debezium) handle ongoing CDC.</li>
-        <li style="margin-bottom: 12px;"><strong>We design migrations with rollback paths.</strong> If something breaks at production scale, we can revert and try again without data loss.</li>
+        <li class="mb-3"><strong>We now load-test snapshots at production scale</strong> before deploying new CDC approaches.</li>
+        <li class="mb-3"><strong>We keep backup replication paths</strong> for critical data flows. Managed services (Datastream) handle the heavy lifting of snapshots; custom tools (Debezium) handle ongoing CDC.</li>
+        <li class="mb-3"><strong>We design migrations with rollback paths.</strong> If something breaks at production scale, we can revert and try again without data loss.</li>
       </ul>
     </section>
 

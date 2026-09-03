@@ -6,9 +6,9 @@ import Layout from '../../layouts/Layout.astro';
   title="Engineering Notes"
   description="Technical deep-dives into architecture decisions, incident recovery, and systems thinking."
 >
-  <section style="padding: 52px 0;">
-    <nav style="margin-bottom: 32px;">
-      <a href="/" style="font-size: 14px; color: var(--accent); text-decoration: none;">← Back home</a>
+  <section class="py-13">
+    <nav class="mb-8">
+      <a href="/" class="text-14 text-accent no-underline">← Back home</a>
     </nav>
 
     <h1 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-40); font-weight: 600; margin-bottom: 24px;">Engineering Notes</h1>
@@ -16,20 +16,20 @@ import Layout from '../../layouts/Layout.astro';
     <p style="font-size: 18px; color: var(--ink-2); margin-bottom: 48px; max-width: 65ch;">Deep-dives into decisions, incidents, and lessons from building data platforms and backend infrastructure at scale.</p>
 
     <!-- Published Notes -->
-    <section style="margin-bottom: 64px;">
+    <section class="mb-16">
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 24px;">Published</h2>
-      <div style="display: grid; gap: 24px;">
-        <div style="padding: 20px; background: var(--panel); border: 1px solid var(--rule); border-radius: 4px;">
-          <a href="/engineering-notes/debezium-50m-row-snapshot/" style="text-decoration: none; color: inherit;">
+      <div class="grid gap-6">
+        <div class="p-5 bg-panel border border-rule rounded">
+          <a href="/engineering-notes/debezium-50m-row-snapshot/" class="no-underline text-inherit">
             <h3 style="font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 8px;">The 50M-row Debezium snapshot incident</h3>
-            <p style="font-size: 14px; color: var(--ink-2); margin: 0;">A snapshot operation consumed 60% CPU and nearly blocked a critical migration. How we recovered and what it taught about production risk vs architectural purity.</p>
+            <p class="text-14 text-ink-2">A snapshot operation consumed 60% CPU and nearly blocked a critical migration. How we recovered and what it taught about production risk vs architectural purity.</p>
           </a>
         </div>
       </div>
     </section>
 
     <section style="padding-top: 8px;">
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Incident record</h2>
+      <h2 class="font-code text-16 font-semibold text-accent uppercase tracking-[0.1em] mb-4">Incident record</h2>
       <p style="font-size: 16px; color: var(--ink-2); max-width: 65ch; margin-bottom: 16px;">Ten production problems covering diagnosis, architecture, customer judgment, correctness, resilience, and leadership under pressure.</p>
       <a href="/engineering-notes/incidents/" style="color: var(--accent); font-family: 'IBM Plex Mono', monospace; font-size: 14px;">Read all ten incident records →</a>
     </section>

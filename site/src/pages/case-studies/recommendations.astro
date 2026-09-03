@@ -24,7 +24,7 @@ import Layout from '../../layouts/Layout.astro';
       <span class="metric-chip">built on the platform ↑</span>
     </div>
 
-    <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-3); margin-bottom: 40px;">Node.js · Redis · MongoDB Atlas (multi-region) · ClickHouse · Google Pub/Sub</p>
+    <p class="font-code text-12 text-ink-3 mb-10">Node.js · Redis · MongoDB Atlas (multi-region) · ClickHouse · Google Pub/Sub</p>
 
     <!-- My Role -->
     <section class="mb-12 border-b border-rule pb-12">
@@ -152,7 +152,7 @@ import Layout from '../../layouts/Layout.astro';
           <strong>Computation matched to data maturity</strong><br/>
           <span class="text-ink-2">Curated is static (no computation). Automated is batch rules (frequency > threshold). Smart is live ranking (statistical model). Cannot compute live ranking on day-7 data; would overfit.</span>
         </li>
-        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 20px;">
+        <li class="text-16 leading-[1.8] text-ink mb-5">
           <strong>Redis-first serving, accept eventual consistency</strong><br/>
           <span class="text-ink-2">In-flight ranking state lost on Redis failure is acceptable for recommendations. Would not accept this for transactional orders. Latency requirement (200ms p99) demands in-memory serving.</span>
         </li>
@@ -193,7 +193,7 @@ import Layout from '../../layouts/Layout.astro';
       <h2 class="section-heading">Impact</h2>
 
       <div class="text-center mb-8 py-8 border-t border-b border-rule">
-        <div style="font-size: var(--fs-56); font-weight: 600; color: var(--accent); margin-bottom: 12px;">200ms P99 · DAY 1</div>
+        <div class="text-56 font-semibold text-accent mb-3">200ms P99 · DAY 1</div>
         <div class="text-16 text-ink-2 max-w-[65ch] mx-auto">Deployed Curated recommendations on day 1 across five regions under latency SLA</div>
       </div>
 
@@ -219,14 +219,14 @@ import Layout from '../../layouts/Layout.astro';
 
       <div class="mb-6">
         <h3 class="text-14 font-semibold mb-3">What I'd Preserve</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Three-tier architecture with CSM control. Giving customer success ownership over tier selection (not automation) meant we could start with Curated (zero risk), and CSMs could upgrade merchants to Automated/Smart as they gained confidence. Prevented shipping garbage output and losing trust on day 1.</p>
+        <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">Three-tier architecture with CSM control. Giving customer success ownership over tier selection (not automation) meant we could start with Curated (zero risk), and CSMs could upgrade merchants to Automated/Smart as they gained confidence. Prevented shipping garbage output and losing trust on day 1.</p>
       </div>
 
       <div>
         <h3 class="text-14 font-semibold mb-3">What I'd Change</h3>
         <ul class="max-w-[65ch] list-none p-0">
-          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;"><strong>Canary deployments from day one.</strong> Built it later, but early validation would have caught model quality issues faster.</li>
-          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;"><strong>Feature flag for Smart tier per merchant.</strong> All-or-nothing rollout was risky. Gradual merchant cohort rollout would allow faster issue detection.</li>
+          <li class="text-16 leading-[1.8] text-ink mb-3"><strong>Canary deployments from day one.</strong> Built it later, but early validation would have caught model quality issues faster.</li>
+          <li class="text-16 leading-[1.8] text-ink mb-3"><strong>Feature flag for Smart tier per merchant.</strong> All-or-nothing rollout was risky. Gradual merchant cohort rollout would allow faster issue detection.</li>
           <li class="text-16 leading-[1.8] text-ink">​<strong>Separate model retraining from serving.</strong> Current design retrains synchronously, risks latency spikes. Async retraining into separate cache layer would decouple.</li>
         </ul>
       </div>

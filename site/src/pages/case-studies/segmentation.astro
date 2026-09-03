@@ -24,7 +24,7 @@ import Layout from '../../layouts/Layout.astro';
       <span class="metric-chip">built on the platform ↑</span>
     </div>
 
-    <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-3); margin-bottom: 40px;">BigQuery · Google Datastream · MySQL · Views · Scheduled queries · Query builder UI</p>
+    <p class="font-code text-12 text-ink-3 mb-10">BigQuery · Google Datastream · MySQL · Views · Scheduled queries · Query builder UI</p>
 
     <!-- My Role -->
     <section class="mb-12 border-b border-rule pb-12">
@@ -150,7 +150,7 @@ import Layout from '../../layouts/Layout.astro';
           <strong>UI-first, SQL later</strong><br/>
           <span class="text-ink-2">CSMs weren't comfortable with raw SQL. A drag-and-drop builder got adoption faster than 80% of use cases. Trade-off: less expressive queries (no complex WHERE, no window functions). After 6 months of adoption, demand for SQL grew, so we added a "SQL mode" toggle.</span>
         </li>
-        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 20px;">
+        <li class="text-16 leading-[1.8] text-ink mb-5">
           <strong>No query approvals, trust CSMs</strong><br/>
           <span class="text-ink-2">Gave CSMs ownership of audience quality. Risk: bad segment definition = bad email campaign. Mitigation: "Preview" step shows sample customers before deploy (human review).</span>
         </li>
@@ -173,7 +173,7 @@ import Layout from '../../layouts/Layout.astro';
       <div>
         <h3 class="text-14 font-semibold mb-3">The Hard Part</h3>
         <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">Unified customer model required consolidating conflicting definitions. What's "churn"? 30 days without order? 60? Cross-platform or per-store? Built dimension tables with multiple definitions, let CSMs pick. Learned CSMs needed explainability: why is this customer in this segment? Added audit trail.</p>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-top: 16px;">The deeper challenge: many segment filters had no single source of truth. A segment like "high-value recent customers with abandoned carts" required stitching data together from three independent stores simultaneously: MySQL (order totals for lifetime value, campaign exclusions), ClickHouse (behavior events for recency windows and product-page visits, UTM tracking for competitor browsing), and MongoDB (active shopping carts). No query layer bridges these three; the segment builder had to enforce consistency across federated filters rather than rely on a single normalized schema. This taught me that the right storage solution for "match storage to question" means accepting complexity at the integration layer when the question spans multiple systems.</p>
+        <p class="text-16 leading-[1.8] text-ink max-w-[65ch] mt-4">The deeper challenge: many segment filters had no single source of truth. A segment like "high-value recent customers with abandoned carts" required stitching data together from three independent stores simultaneously: MySQL (order totals for lifetime value, campaign exclusions), ClickHouse (behavior events for recency windows and product-page visits, UTM tracking for competitor browsing), and MongoDB (active shopping carts). No query layer bridges these three; the segment builder had to enforce consistency across federated filters rather than rely on a single normalized schema. This taught me that the right storage solution for "match storage to question" means accepting complexity at the integration layer when the question spans multiple systems.</p>
       </div>
     </section>
 
@@ -182,7 +182,7 @@ import Layout from '../../layouts/Layout.astro';
       <h2 class="section-heading">Impact</h2>
 
       <div class="text-center mb-8 py-8 border-t border-b border-rule">
-        <div style="font-size: var(--fs-56); font-weight: 600; color: var(--accent); margin-bottom: 12px;">1,000+ SEGMENTS</div>
+        <div class="text-56 font-semibold text-accent mb-3">1,000+ SEGMENTS</div>
         <div class="text-16 text-ink-2 max-w-[65ch] mx-auto">Routine segment requests no longer required engineering tickets</div>
       </div>
 
@@ -190,7 +190,7 @@ import Layout from '../../layouts/Layout.astro';
         <h3 class="text-14 font-semibold text-accent mb-3">Why It Mattered</h3>
         <ul class="max-w-[65ch] list-none p-0">
           <li class="text-16 leading-[1.8] text-ink mb-3">Segment request → engineering ticket → 3–5 days became CSM query → self-service UI → minutes.</li>
-          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Customer Success teams handled routine segment creation without engineering intervention.</li>
+          <li class="text-16 leading-[1.8] text-ink mb-3">Customer Success teams handled routine segment creation without engineering intervention.</li>
           <li class="text-16 leading-[1.8] text-ink">Data literacy grew within CSM team.</li>
         </ul>
       </div>

@@ -12,7 +12,7 @@ import Layout from '../../layouts/Layout.astro';
     </nav>
 
     <div class="flex gap-4 items-start mb-6">
-      <h1 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin: 0; flex: 1;">The Data Platform</h1>
+      <h1 class="font-code text-32 font-semibold m-0 flex-1">The Data Platform</h1>
       <button onclick="navigator.clipboard.writeText(window.location.href); this.textContent='Copied!'; setTimeout(() => this.textContent='Copy link', 2000);" class="px-4 py-2 border border-rule bg-transparent cursor-pointer font-code text-12 text-accent whitespace-nowrap rounded-[3px] transition-all duration-200" onmouseenter="this.style.borderColor='var(--accent)'" onmouseleave="this.style.borderColor='var(--rule)'">Copy link</button>
     </div>
 
@@ -21,7 +21,7 @@ import Layout from '../../layouts/Layout.astro';
     <div class="flex gap-4 flex-wrap mb-8">
       <span class="metric-chip">sub-5-minute to 6-hour tiered</span>
       <span class="metric-chip">200+ merchants</span>
-      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">3-month migration · rollback path designed</span>
+      <span class="metric-chip">3-month migration · rollback path designed</span>
     </div>
 
     <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-3); margin-bottom: 40px;">Node.js · MySQL · Debezium · Google Pub/Sub · Datastream · MongoDB · BigQuery · ClickHouse · Redis · GKE</p>
@@ -61,7 +61,7 @@ import Layout from '../../layouts/Layout.astro';
       <h2 class="section-heading">Problem</h2>
       <p class="prose-body mb-6">Data arrives days late. Commerce webhooks provide near-real-time events, but custom platform integrations require full data downloads every 6 hours. Click-tracking and loyalty data are even slower. Downstream products can't build real-time features. Reporting is expensive because queries have to reprocess data constantly. New products need to build custom integrations instead of tapping a shared stream.</p>
 
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 24px;">
+      <div class="grid grid-cols-2 gap-8 mt-6">
         <div class="p-5 bg-panel rounded">
           <div style="font-weight: 600; color: var(--accent); margin-bottom: 12px;">BEFORE</div>
           <ul class="list-none p-0 m-0">
@@ -172,8 +172,8 @@ import Layout from '../../layouts/Layout.astro';
       <h2 class="section-heading">ClickHouse Tuning</h2>
       <p class="prose-body mb-6">Migrated segmentation analytics from BigQuery to ClickHouse to reduce cost 77.8% (₹1.8L → ₹40K/month) and achieved sub-second response latency on million-row aggregations. Tuning choices:</p>
       <ul class="list-none p-0 m-0 max-w-[65ch]">
-        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;"><strong>Partitioning:</strong> <code class="font-code text-accent">(client_id, date)</code> to isolate per-store backfills and date-range scans.</li>
-        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;"><strong>Order by:</strong> <code class="font-code text-accent">date</code> for both segmentation filters and time-series reporting queries.</li>
+        <li class="text-16 leading-[1.8] text-ink mb-3"><strong>Partitioning:</strong> <code class="font-code text-accent">(client_id, date)</code> to isolate per-store backfills and date-range scans.</li>
+        <li class="text-16 leading-[1.8] text-ink mb-3"><strong>Order by:</strong> <code class="font-code text-accent">date</code> for both segmentation filters and time-series reporting queries.</li>
         <li class="text-16 leading-[1.8] text-ink">Materialized views: Hourly batch refresh instead of real-time (stable CPU, predictable cost).</li>
       </ul>
     </section>
@@ -181,12 +181,12 @@ import Layout from '../../layouts/Layout.astro';
     <!-- Key Decisions -->
     <section class="mb-12">
       <h2 class="section-heading">Key Decisions</h2>
-      <ol style="max-width: 65ch; list-style: none; padding: 0;">
-        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 20px;">
+      <ol class="max-w-[65ch] list-none p-0">
+        <li class="text-16 leading-[1.8] text-ink mb-5">
           <strong>Landed raw instead of normalizing at ingest</strong><br/>
           <span class="text-ink-2">Costs: five schemas instead of one. Benefit: reversibility. Wrong normalization at ingest means multi-service migration. Wrong view is a redefinition away from correction.</span>
         </li>
-        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 20px;">
+        <li class="text-16 leading-[1.8] text-ink mb-5">
           <strong>CDC from landing store, not sources</strong><br/>
           <span class="text-ink-2">Costs: one more moving part. Benefit: CDC from a consolidated landing layer with replay and validation boundaries.</span>
         </li>
@@ -222,7 +222,7 @@ import Layout from '../../layouts/Layout.astro';
 
       <div class="mb-6">
         <h3 class="text-14 font-semibold mb-3">Monitoring & Alerting</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Added metrics for data freshness (time from source to landing to serving), lag per store, checkpoint latency. Alerts on 5-minute latency deviation. Page on-call for >15 min delays.</p>
+        <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">Added metrics for data freshness (time from source to landing to serving), lag per store, checkpoint latency. Alerts on 5-minute latency deviation. Page on-call for >15 min delays.</p>
       </div>
 
       <div style="margin: 32px 0; padding: 24px; background: var(--panel); border: 1px solid var(--accent); border-radius: 4px;">
@@ -245,33 +245,33 @@ import Layout from '../../layouts/Layout.astro';
       <div style="margin-bottom: 32px; padding: 32px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);">
         <h3 style="font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 24px; text-align: center;">Data Freshness by Platform Capability</h3>
         <div class="overflow-x-auto max-w-[65ch]">
-          <table style="width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.6;">
+          <table class="w-full border-collapse text-14 leading-[1.6]">
             <thead>
-              <tr style="border-bottom: 2px solid var(--rule);">
-                <th style="text-align: left; padding: 12px 8px; font-weight: 600; color: var(--accent);">Client platform capability</th>
-                <th style="text-align: left; padding: 12px 8px; font-weight: 600; color: var(--accent);">Data freshness</th>
+              <tr class="border-b-2 border-rule">
+                <th class="text-left px-2 py-3 font-semibold text-accent">Client platform capability</th>
+                <th class="text-left px-2 py-3 font-semibold text-accent">Data freshness</th>
               </tr>
             </thead>
             <tbody>
               <tr class="border-b border-rule">
-                <td style="padding: 12px 8px; color: var(--ink);">Native webhook support (e.g. Shopify, BigCommerce)</td>
-                <td style="padding: 12px 8px; color: var(--ink); font-family: 'JetBrains Mono', monospace; font-weight: 500;">&lt; 5 minutes</td>
+                <td class="px-2 py-3 text-ink">Native webhook support (e.g. Shopify, BigCommerce)</td>
+                <td class="px-2 py-3 text-ink font-code font-medium">&lt; 5 minutes</td>
               </tr>
               <tr class="border-b border-rule">
-                <td style="padding: 12px 8px; color: var(--ink);">REST API support, no webhooks</td>
-                <td style="padding: 12px 8px; color: var(--ink); font-family: 'JetBrains Mono', monospace; font-weight: 500;">~1 hour</td>
+                <td class="px-2 py-3 text-ink">REST API support, no webhooks</td>
+                <td class="px-2 py-3 text-ink font-code font-medium">~1 hour</td>
               </tr>
               <tr class="border-b border-rule">
-                <td style="padding: 12px 8px; color: var(--ink);">Incremental sync only</td>
-                <td style="padding: 12px 8px; color: var(--ink); font-family: 'JetBrains Mono', monospace; font-weight: 500;">~2 hours</td>
+                <td class="px-2 py-3 text-ink">Incremental sync only</td>
+                <td class="px-2 py-3 text-ink font-code font-medium">~2 hours</td>
               </tr>
               <tr class="border-b border-rule">
-                <td style="padding: 12px 8px; color: var(--ink);">Full data resync required every time</td>
-                <td style="padding: 12px 8px; color: var(--ink); font-family: 'JetBrains Mono', monospace; font-weight: 500;">6 hours</td>
+                <td class="px-2 py-3 text-ink">Full data resync required every time</td>
+                <td class="px-2 py-3 text-ink font-code font-medium">6 hours</td>
               </tr>
               <tr>
-                <td style="padding: 12px 8px; color: var(--ink);">Legacy cron-based system (before rearchitecture, large clients)</td>
-                <td style="padding: 12px 8px; color: var(--ink); font-family: 'JetBrains Mono', monospace; font-weight: 500;">up to several days</td>
+                <td class="px-2 py-3 text-ink">Legacy cron-based system (before rearchitecture, large clients)</td>
+                <td class="px-2 py-3 text-ink font-code font-medium">up to several days</td>
               </tr>
             </tbody>
           </table>
@@ -280,19 +280,19 @@ import Layout from '../../layouts/Layout.astro';
 
       <div class="mb-6">
         <h3 class="text-14 font-semibold text-accent mb-3">Why It Mattered</h3>
-        <ul style="max-width: 65ch; list-style: none; padding: 0;">
-          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Real-time recommendations became possible. Merchants could see recommendations update within seconds of customer actions.</li>
-          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Conversion attribution could link orders to specific blocks and email clicks — what proved to merchants that recommendations were actually working.</li>
-          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Segmentation worked with fresh data. Audiences updated in minutes, not hours.</li>
+        <ul class="max-w-[65ch] list-none p-0">
+          <li class="text-16 leading-[1.8] text-ink mb-3">Real-time recommendations became possible. Merchants could see recommendations update within seconds of customer actions.</li>
+          <li class="text-16 leading-[1.8] text-ink mb-3">Conversion attribution could link orders to specific blocks and email clicks — what proved to merchants that recommendations were actually working.</li>
+          <li class="text-16 leading-[1.8] text-ink mb-3">Segmentation worked with fresh data. Audiences updated in minutes, not hours.</li>
           <li class="text-16 leading-[1.8] text-ink">Reporting moved off a cost curve that scaled with query volume onto one the team controlled.</li>
         </ul>
       </div>
 
       <div>
-        <h3 style="font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 12px;">Scale</h3>
-        <ul style="max-width: 65ch; list-style: none; padding: 0;">
-          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">200+ merchants · 5 platforms · 3-month migration · rollback path remained available and was not used</li>
-          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">New sources (Klaviyo, Zendesk) plugged in as streaming integrations, not custom pipelines</li>
+        <h3 class="text-14 font-semibold text-accent mb-3">Scale</h3>
+        <ul class="max-w-[65ch] list-none p-0">
+          <li class="text-16 leading-[1.8] text-ink mb-3">200+ merchants · 5 platforms · 3-month migration · rollback path remained available and was not used</li>
+          <li class="text-16 leading-[1.8] text-ink mb-3">New sources (Klaviyo, Zendesk) plugged in as streaming integrations, not custom pipelines</li>
           <li class="text-16 leading-[1.8] text-ink">Completed migration off legacy architecture within 3 months with the rollback path available throughout cutover</li>
         </ul>
       </div>
@@ -302,17 +302,17 @@ import Layout from '../../layouts/Layout.astro';
     <section>
       <h2 class="section-heading">What I'd Change Today</h2>
 
-      <div style="margin-bottom: 24px;">
+      <div class="mb-6">
         <h3 class="text-14 font-semibold mb-3">What I'd Preserve</h3>
-        <ul style="max-width: 65ch; list-style: none; padding: 0;">
-          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Raw landing layer (reversibility principle held)</li>
+        <ul class="max-w-[65ch] list-none p-0">
+          <li class="text-16 leading-[1.8] text-ink mb-3">Raw landing layer (reversibility principle held)</li>
           <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">CDC at the landing store, not each source, to keep downstream replay and validation centralized</li>
           <li class="text-16 leading-[1.8] text-ink">Table-per-tenant for isolation (multi-tenant contention is worse than ops cost)</li>
         </ul>
       </div>
 
       <div>
-        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">What I'd Change</h3>
+        <h3 class="text-14 font-semibold mb-3">What I'd Change</h3>
         <ul style="max-width: 65ch; list-style: none; padding: 0;">
           <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;"><strong>Datastream → pure Debezium from day one.</strong> Datastream was our transition strategy; we could have earned off it faster. Debezium proved itself in production.</li>
           <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;"><strong>Consider separate CDC per domain.</strong> Commerce CDC vs. click-tracking CDC would reduce blast radius of unplanned events.</li>
@@ -322,7 +322,7 @@ import Layout from '../../layouts/Layout.astro';
     </section>
     <section style="padding: 52px 0; border-top: 1px solid var(--rule); margin-top: 52px;">
       <p class="font-code text-12 text-accent font-semibold mb-4">Next steps</p>
-      <ul style="list-style: none; padding: 0; margin: 0;">
+      <ul class="list-none p-0 m-0">
         <li class="mb-3">→ <a href="/case-studies/hard-problems" class="plain-link">See production incidents that shaped this design</a></li>
         <li class="mb-3">→ <a href="/resume" class="plain-link">Download my resume</a></li>
       </ul>

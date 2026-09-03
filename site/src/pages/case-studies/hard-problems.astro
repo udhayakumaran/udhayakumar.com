@@ -19,7 +19,7 @@ import Layout from '../../layouts/Layout.astro';
     <!-- Problem 1 -->
     <section id="incident-01" class="mb-14 border-b border-rule pb-12">
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 600; color: var(--accent); margin-bottom: 16px;">01. Query Shape, Not Tuning</h2>
-      <div style="display: grid; gap: 8px; margin-bottom: 24px;">
+      <div class="grid gap-2 mb-6">
         <div><strong>When:</strong> 2022</div>
         <div><strong>Duration:</strong> 3 hours to diagnosis + fix</div>
         <div><strong>Impact:</strong> Cross-team, blocking</div>
@@ -44,7 +44,7 @@ import Layout from '../../layouts/Layout.astro';
     <!-- Problem 2 -->
     <section id="incident-02" class="mb-14 border-b border-rule pb-12">
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 600; color: var(--accent); margin-bottom: 16px;">02. MySQL Lock Contention at Scale</h2>
-      <div style="display: grid; gap: 8px; margin-bottom: 24px;">
+      <div class="grid gap-2 mb-6">
         <div><strong>When:</strong> Early 2022, production cutover</div>
         <div><strong>Duration:</strong> 1-1.5 days from escalation to fix</div>
         <div><strong>Impact:</strong> Production-wide regression, all 200+ merchants</div>
@@ -69,7 +69,7 @@ import Layout from '../../layouts/Layout.astro';
     <!-- Problem 3 -->
     <section id="incident-03" class="mb-14 border-b border-rule pb-12">
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 600; color: var(--accent); margin-bottom: 16px;">03. Real-Time Product Changes in Recommendations</h2>
-      <div style="display: grid; gap: 8px; margin-bottom: 24px;">
+      <div class="grid gap-2 mb-6">
         <div><strong>When:</strong> 2022-2023</div>
         <div><strong>Duration:</strong> 3-4 days to build + ship</div>
         <div><strong>Impact:</strong> Churn driver (merchants seeing stale recommendations)</div>
@@ -94,7 +94,7 @@ import Layout from '../../layouts/Layout.astro';
     <!-- Problem 4 -->
     <section id="incident-04" class="mb-14 border-b border-rule pb-12">
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 600; color: var(--accent); margin-bottom: 16px;">04. MySQL Views → Debezium CDC</h2>
-      <div style="display: grid; gap: 8px; margin-bottom: 24px;">
+      <div class="grid gap-2 mb-6">
         <div><strong>When:</strong> 2022-2023</div>
         <div><strong>Duration:</strong> Phase 1: 2 months (tactical); Phase 2: 1 month (architectural)</div>
         <div><strong>Impact:</strong> Foundation of data platform architecture</div>
@@ -126,7 +126,7 @@ import Layout from '../../layouts/Layout.astro';
     <!-- Problem 5 -->
     <section id="incident-05" class="mb-14 border-b border-rule pb-12">
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 600; color: var(--accent); margin-bottom: 16px;">05. Missing Index on Production Query</h2>
-      <div style="display: grid; gap: 8px; margin-bottom: 24px;">
+      <div class="grid gap-2 mb-6">
         <div><strong>When:</strong> One week after deployment</div>
         <div><strong>Duration:</strong> 3-4 hours to diagnose + fix</div>
         <div><strong>Impact:</strong> Intermittent performance degradation</div>
@@ -158,7 +158,7 @@ import Layout from '../../layouts/Layout.astro';
     <!-- Problem 6 -->
     <section id="incident-06" class="mb-14 border-b border-rule pb-12">
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 600; color: var(--accent); margin-bottom: 16px;">06. Real-Time Optimization Gone Wrong</h2>
-      <div style="display: grid; gap: 8px; margin-bottom: 24px;">
+      <div class="grid gap-2 mb-6">
         <div><strong>When:</strong> December 24, 2025 (Christmas Eve)</div>
         <div><strong>Duration:</strong> 12 hours troubleshooting</div>
         <div><strong>Impact:</strong> Production-wide, peak sales, org-wide panic</div>
@@ -190,7 +190,7 @@ import Layout from '../../layouts/Layout.astro';
     <!-- Problem 7 -->
     <section id="incident-07" class="mb-14 border-b border-rule pb-12">
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 600; color: var(--accent); margin-bottom: 16px;">07. Repeated Pattern: Segment Ordering</h2>
-      <div style="display: grid; gap: 8px; margin-bottom: 24px;">
+      <div class="grid gap-2 mb-6">
         <div><strong>When:</strong> First incident 2023; second incident 2023-2024</div>
         <div><strong>Duration:</strong> 4 days (first); 4 hours (second)</div>
         <div><strong>Impact:</strong> Wrong audience got emails</div>
@@ -203,24 +203,24 @@ import Layout from '../../layouts/Layout.astro';
 
       <div class="mb-6">
         <h3 class="text-14 font-semibold mb-3">Second Incident (BQ → ClickHouse Migration)</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Copied query from BigQuery to ClickHouse. Didn't realize ClickHouse's ORDER BY semantics differ (NULL handling, tie-breaking). Same problem: ordering changed. Same customer churned twice.</p>
+        <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">Copied query from BigQuery to ClickHouse. Didn't realize ClickHouse's ORDER BY semantics differ (NULL handling, tie-breaking). Same problem: ordering changed. Same customer churned twice.</p>
       </div>
 
       <div class="mb-6">
         <h3 class="text-14 font-semibold mb-3">Systemic Fix</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Three layers: (1) Producer maintains API contract and ordering guarantee. (2) Consumers validate incoming data matches expected ordering before sending emails. (3) Continuous QA validation across all services.</p>
+        <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">Three layers: (1) Producer maintains API contract and ordering guarantee. (2) Consumers validate incoming data matches expected ordering before sending emails. (3) Continuous QA validation across all services.</p>
       </div>
 
       <div>
         <h3 class="text-14 font-semibold mb-3">Result</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Ordering validated continuously. Key insight: recognize when problems repeat, build systems to prevent it.</p>
+        <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">Ordering validated continuously. Key insight: recognize when problems repeat, build systems to prevent it.</p>
       </div>
     </section>
 
     <!-- Problem 8 -->
     <section id="incident-08" class="mb-12 border-b border-rule pb-12">
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 600; color: var(--accent); margin-bottom: 16px;">08. Silent Failure + Algorithmic Insight</h2>
-      <div style="display: grid; gap: 8px; margin-bottom: 24px;">
+      <div class="grid gap-2 mb-6">
         <div><strong>When:</strong> BQ → ClickHouse migration (2023-2024)</div>
         <div><strong>Duration:</strong> 2.5 weeks (diagnosis + batched hashing solution)</div>
         <div><strong>Impact:</strong> Correctness issue (silent failure) + cost issue</div>
@@ -228,29 +228,29 @@ import Layout from '../../layouts/Layout.astro';
 
       <div class="mb-6">
         <h3 class="text-14 font-semibold mb-3">Problem</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Segment comparison: identify new/removed/unchanged members. On BigQuery: full outer join (expensive but works). Migrated to ClickHouse. Hit memory limits: comparing 100M members requires O(n²) memory. Scaled up RAM. System showed success. But results were silently wrong.</p>
+        <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">Segment comparison: identify new/removed/unchanged members. On BigQuery: full outer join (expensive but works). Migrated to ClickHouse. Hit memory limits: comparing 100M members requires O(n²) memory. Scaled up RAM. System showed success. But results were silently wrong.</p>
       </div>
 
       <div class="mb-6">
         <h3 class="text-14 font-semibold mb-3">Root Cause</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Trying to move BigQuery's unlimited-memory join model into ClickHouse's tight-memory budget. Incompatibility, not a tuning problem.</p>
+        <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">Trying to move BigQuery's unlimited-memory join model into ClickHouse's tight-memory budget. Incompatibility, not a tuning problem.</p>
       </div>
 
       <div class="mb-6">
         <h3 class="text-14 font-semibold mb-3">Solution: Batched Hashing with cityHash64</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Instead of comparing all members in one memory-heavy operation: (1) Use cityHash64 to partition both old and new segments deterministically. (2) The same email falls into the same bucket in both datasets. (3) Compare bucket by bucket via hashes. (4) Investigate only buckets whose hashes differ. This kept memory bounded instead of scaling with the full comparison.</p>
+        <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">Instead of comparing all members in one memory-heavy operation: (1) Use cityHash64 to partition both old and new segments deterministically. (2) The same email falls into the same bucket in both datasets. (3) Compare bucket by bucket via hashes. (4) Investigate only buckets whose hashes differ. This kept memory bounded instead of scaling with the full comparison.</p>
       </div>
 
       <div>
         <h3 class="text-14 font-semibold mb-3">Result</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;"><strong>Memory:</strong> unlimited → 16GB fixed. <strong>Cost:</strong> ₹3+ lakhs → <sub>₹</sub>50K (6x reduction). <strong>Correctness:</strong> now produces correct results. Key insight: recognize incompatibility, solve algorithmically instead of throwing resources.</p>
+        <p class="text-16 leading-[1.8] text-ink max-w-[65ch]"><strong>Memory:</strong> unlimited → 16GB fixed. <strong>Cost:</strong> ₹3+ lakhs → <sub>₹</sub>50K (6x reduction). <strong>Correctness:</strong> now produces correct results. Key insight: recognize incompatibility, solve algorithmically instead of throwing resources.</p>
       </div>
     </section>
 
     <!-- Problem 9 -->
     <section id="incident-09" class="mb-14 border-b border-rule pb-12">
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 600; color: var(--accent); margin-bottom: 16px;">09. ClickHouse Materialized-View Scale Mismatch</h2>
-      <div style="display: grid; gap: 8px; margin-bottom: 24px;">
+      <div class="grid gap-2 mb-6">
         <div><strong>When:</strong> BigQuery → ClickHouse migration (2023–2024)</div>
         <div><strong>Duration:</strong> ~2 weeks to diagnose + fix</div>
         <div><strong>Impact:</strong> Production reports degrading, query latency unacceptable</div>
@@ -258,24 +258,24 @@ import Layout from '../../layouts/Layout.astro';
 
       <div class="mb-6">
         <h3 class="text-14 font-semibold mb-3">Problem</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">ClickHouse materialized views auto-refresh when underlying tables change. But the materialized-view queries (aggregations + joins) were rescanning large tables at hundreds of events per second. CPU spiked. Reports took minutes to return.</p>
+        <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">ClickHouse materialized views auto-refresh when underlying tables change. But the materialized-view queries (aggregations + joins) were rescanning large tables at hundreds of events per second. CPU spiked. Reports took minutes to return.</p>
       </div>
 
       <div class="mb-6">
         <h3 class="text-14 font-semibold mb-3">Solution</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Replaced real-time materialized views with a scheduled hourly batch refresh. Instead of re-aggregating on every single row arrival, precompute aggregations once per hour. Simple: stable CPU, predictable cost, reports under 30 seconds.</p>
+        <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">Replaced real-time materialized views with a scheduled hourly batch refresh. Instead of re-aggregating on every single row arrival, precompute aggregations once per hour. Simple: stable CPU, predictable cost, reports under 30 seconds.</p>
       </div>
 
       <div>
         <h3 class="text-14 font-semibold mb-3">Result</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Reports stabilized. CPU utilization became predictable. Key insight: database-specific behavior (trigger refresh frequency) matters more than architectural desire for real-time.</p>
+        <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">Reports stabilized. CPU utilization became predictable. Key insight: database-specific behavior (trigger refresh frequency) matters more than architectural desire for real-time.</p>
       </div>
     </section>
 
     <!-- Problem 10 -->
     <section id="incident-10" class="mb-14 border-b border-rule pb-12">
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 600; color: var(--accent); margin-bottom: 16px;">10. Node.js Backpressure as a Platform Pattern</h2>
-      <div style="display: grid; gap: 8px; margin-bottom: 24px;">
+      <div class="grid gap-2 mb-6">
         <div><strong>When:</strong> Early 2024, ongoing data platform growth</div>
         <div><strong>Duration:</strong> ~3 weeks to diagnose, design, deploy</div>
         <div><strong>Impact:</strong> Recurring daily OOM crashes, on-call burden, platform unreliability</div>
@@ -283,19 +283,19 @@ import Layout from '../../layouts/Layout.astro';
 
       <div class="mb-6">
         <h3 class="text-14 font-semibold mb-3">Problem</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 12px;">Pub/Sub-consuming services (Node.js) hit daily OOMs at a 512MiB pod limit. They were pulling messages as fast as Pub/Sub delivered them, with no regard for available heap. The pod's memory ceiling (not application code) triggered the crash.</p>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Looked like a code-level memory leak — but local testing showed nothing. The failure only surfaced under production traffic volume and real message throughput.</p>
+        <p class="text-16 leading-[1.8] text-ink max-w-[65ch] mb-3">Pub/Sub-consuming services (Node.js) hit daily OOMs at a 512MiB pod limit. They were pulling messages as fast as Pub/Sub delivered them, with no regard for available heap. The pod's memory ceiling (not application code) triggered the crash.</p>
+        <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">Looked like a code-level memory leak — but local testing showed nothing. The failure only surfaced under production traffic volume and real message throughput.</p>
       </div>
 
       <div class="mb-6">
         <h3 class="text-14 font-semibold mb-3">Solution</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Implement backpressure: monitor heap usage in real time, pause message consumption when it climbs to a high water mark (80%), resume once it drops to a safe level (60%). Messages queue safely in Pub/Sub in the meantime. Combine with Kubernetes HPA (horizontal pod autoscaling) for burst traffic.</p>
+        <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">Implement backpressure: monitor heap usage in real time, pause message consumption when it climbs to a high water mark (80%), resume once it drops to a safe level (60%). Messages queue safely in Pub/Sub in the meantime. Combine with Kubernetes HPA (horizontal pod autoscaling) for burst traffic.</p>
       </div>
 
       <div>
         <h3 class="text-14 font-semibold mb-3">Result</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 12px;">Crashes went from recurring to essentially eliminated. The pause/resume pattern was adopted across consuming services in the platform.</p>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Key insight: constraints matter more than code. A pod memory limit is real, and feedback loops (pause/resume) beat throwing resources at the symptom.</p>
+        <p class="text-16 leading-[1.8] text-ink max-w-[65ch] mb-3">Crashes went from recurring to essentially eliminated. The pause/resume pattern was adopted across consuming services in the platform.</p>
+        <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">Key insight: constraints matter more than code. A pod memory limit is real, and feedback loops (pause/resume) beat throwing resources at the symptom.</p>
       </div>
     </section>
 
@@ -304,7 +304,7 @@ import Layout from '../../layouts/Layout.astro';
     <section style="margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--rule);">
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 600; color: var(--ink); margin-bottom: 24px;">Ten Incidents as a Progression</h2>
 
-      <div style="display: grid; gap: 12px; max-width: 100%; font-size: 14px; line-height: 1.6; color: var(--ink);">
+      <div class="grid gap-3 w-full text-14 leading-[1.6] text-ink">
         <div class="incident-progression" style="display: grid; grid-template-columns: 50px 150px 200px auto; gap: 12px;">
           <div class="font-semibold text-accent">01–03</div>
           <div><strong>Senior</strong></div>

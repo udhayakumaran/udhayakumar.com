@@ -12,7 +12,7 @@ import Layout from '../../layouts/Layout.astro';
     </nav>
 
     <div class="flex gap-4 items-start mb-6">
-      <h1 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin: 0; flex: 1;">Recommendation Blocks</h1>
+      <h1 class="font-code text-32 font-semibold m-0 flex-1">Recommendation Blocks</h1>
       <button onclick="navigator.clipboard.writeText(window.location.href); this.textContent='Copied!'; setTimeout(() => this.textContent='Copy link', 2000);" class="px-4 py-2 border border-rule bg-transparent cursor-pointer font-code text-12 text-accent whitespace-nowrap rounded-[3px] transition-all duration-200" onmouseenter="this.style.borderColor='var(--accent)'" onmouseleave="this.style.borderColor='var(--rule)'">Copy link</button>
     </div>
 
@@ -21,7 +21,7 @@ import Layout from '../../layouts/Layout.astro';
     <div class="flex gap-4 flex-wrap mb-8">
       <span class="metric-chip">day-1 deployment · no data required</span>
       <span class="metric-chip">5 regions · 200ms p99</span>
-      <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">built on the platform ↑</span>
+      <span class="metric-chip">built on the platform ↑</span>
     </div>
 
     <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-3); margin-bottom: 40px;">Node.js · Redis · MongoDB Atlas (multi-region) · ClickHouse · Google Pub/Sub</p>
@@ -63,7 +63,7 @@ import Layout from '../../layouts/Layout.astro';
 
       <p class="prose-body mb-6">Architectural constraint: you need immediate value (day 1) with zero data, then scale to algorithmic sophistication as data accumulates. Cannot ship confident recommendations without data. Cannot gather data unless merchants use recommendations. Bootstrap problem.</p>
 
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 24px;">
+      <div class="grid grid-cols-2 gap-8 mt-6">
         <div class="p-5 bg-panel rounded">
           <div style="font-weight: 600; color: var(--accent); margin-bottom: 12px;">NAIVE APPROACH</div>
           <ul class="list-none p-0 m-0">
@@ -143,12 +143,12 @@ import Layout from '../../layouts/Layout.astro';
     <!-- Key Decisions -->
     <section class="mb-12">
       <h2 class="section-heading">Key Decisions</h2>
-      <ol style="max-width: 65ch; list-style: none; padding: 0;">
-        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 20px;">
+      <ol class="max-w-[65ch] list-none p-0">
+        <li class="text-16 leading-[1.8] text-ink mb-5">
           <strong>Tier selection driven by CSM judgment, not data triggers</strong><br/>
           <span class="text-ink-2">CSMs choose which tier per merchant—Curated for cautious starts, Automated for merchants with early transaction history, Smart for established stores ready for live behavioral ranking. No automatic progression based on transaction thresholds. Puts control in the hands of customer success, not an algorithm.</span>
         </li>
-        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 20px;">
+        <li class="text-16 leading-[1.8] text-ink mb-5">
           <strong>Computation matched to data maturity</strong><br/>
           <span class="text-ink-2">Curated is static (no computation). Automated is batch rules (frequency > threshold). Smart is live ranking (statistical model). Cannot compute live ranking on day-7 data; would overfit.</span>
         </li>
@@ -199,17 +199,17 @@ import Layout from '../../layouts/Layout.astro';
 
       <div class="mb-6">
         <h3 class="text-14 font-semibold text-accent mb-3">Technical Achievement</h3>
-        <ul style="max-width: 65ch; list-style: none; padding: 0;">
-          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Cold-start solved by CSM-driven tier selection + three independent engines. CSMs choose tier (Curated, Automated, Smart) per merchant based on confidence and use case, not algorithm-triggered progression.</li>
-          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Data pipeline: live to Redis, migrate to BigQuery after 30min inactivity or session close. All backend logic; client renders only. No client-side filtering or ranking logic.</li>
-          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Multi-region serving with regional Redis + fallback caching. 200ms p99 latency across five regions despite 5-10s replication lag.</li>
+        <ul class="max-w-[65ch] list-none p-0">
+          <li class="text-16 leading-[1.8] text-ink mb-3">Cold-start solved by CSM-driven tier selection + three independent engines. CSMs choose tier (Curated, Automated, Smart) per merchant based on confidence and use case, not algorithm-triggered progression.</li>
+          <li class="text-16 leading-[1.8] text-ink mb-3">Data pipeline: live to Redis, migrate to BigQuery after 30min inactivity or session close. All backend logic; client renders only. No client-side filtering or ranking logic.</li>
+          <li class="text-16 leading-[1.8] text-ink mb-3">Multi-region serving with regional Redis + fallback caching. 200ms p99 latency across five regions despite 5-10s replication lag.</li>
           <li class="text-16 leading-[1.8] text-ink">Model validation gate ensured Smart tier only served high-confidence rankings. Prevented garbage output from ruining system trust.</li>
         </ul>
       </div>
 
       <div>
-        <h3 style="font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 12px;">Scale</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Day-1 deployment (Curated tier, zero risk) · five regions · 200ms p99 latency · CSM-driven tier progression from Curated → Automated → Smart as merchants gain confidence</p>
+        <h3 class="text-14 font-semibold text-accent mb-3">Scale</h3>
+        <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">Day-1 deployment (Curated tier, zero risk) · five regions · 200ms p99 latency · CSM-driven tier progression from Curated → Automated → Smart as merchants gain confidence</p>
       </div>
     </section>
 
@@ -217,14 +217,14 @@ import Layout from '../../layouts/Layout.astro';
     <section>
       <h2 class="section-heading">What I'd Change Today</h2>
 
-      <div style="margin-bottom: 24px;">
+      <div class="mb-6">
         <h3 class="text-14 font-semibold mb-3">What I'd Preserve</h3>
         <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Three-tier architecture with CSM control. Giving customer success ownership over tier selection (not automation) meant we could start with Curated (zero risk), and CSMs could upgrade merchants to Automated/Smart as they gained confidence. Prevented shipping garbage output and losing trust on day 1.</p>
       </div>
 
       <div>
-        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">What I'd Change</h3>
-        <ul style="max-width: 65ch; list-style: none; padding: 0;">
+        <h3 class="text-14 font-semibold mb-3">What I'd Change</h3>
+        <ul class="max-w-[65ch] list-none p-0">
           <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;"><strong>Canary deployments from day one.</strong> Built it later, but early validation would have caught model quality issues faster.</li>
           <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;"><strong>Feature flag for Smart tier per merchant.</strong> All-or-nothing rollout was risky. Gradual merchant cohort rollout would allow faster issue detection.</li>
           <li class="text-16 leading-[1.8] text-ink">​<strong>Separate model retraining from serving.</strong> Current design retrains synchronously, risks latency spikes. Async retraining into separate cache layer would decouple.</li>
@@ -233,7 +233,7 @@ import Layout from '../../layouts/Layout.astro';
     </section>
     <section style="padding: 52px 0; border-top: 1px solid var(--rule); margin-top: 52px;">
       <p class="font-code text-12 text-accent font-semibold mb-4">Next steps</p>
-      <ul style="list-style: none; padding: 0; margin: 0;">
+      <ul class="list-none p-0 m-0">
         <li class="mb-3">→ <a href="/case-studies/hard-problems" class="plain-link">See production incidents that shaped this design</a></li>
         <li class="mb-3">→ <a href="/resume" class="plain-link">Download my resume</a></li>
       </ul>

@@ -11,13 +11,13 @@ import Layout from '../../layouts/Layout.astro';
       <a href="/" class="text-14 text-accent no-underline">← Back home</a>
     </nav>
 
-    <h1 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-40); font-weight: 600; margin-bottom: 24px;">Engineering Notes</h1>
+    <h1 class="font-code text-40 font-semibold mb-6">Engineering Notes</h1>
 
     <p style="font-size: 18px; color: var(--ink-2); margin-bottom: 48px; max-width: 65ch;">Deep-dives into decisions, incidents, and lessons from building data platforms and backend infrastructure at scale.</p>
 
     <!-- Published Notes -->
     <section class="mb-16">
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 24px;">Published</h2>
+      <h2 class="font-code text-16 font-semibold text-accent uppercase tracking-[0.1em] mb-6">Published</h2>
       <div class="grid gap-6">
         <div class="p-5 bg-panel border border-rule rounded">
           <a href="/engineering-notes/debezium-50m-row-snapshot/" class="no-underline text-inherit">
@@ -30,7 +30,7 @@ import Layout from '../../layouts/Layout.astro';
 
     <section style="padding-top: 8px;">
       <h2 class="font-code text-16 font-semibold text-accent uppercase tracking-[0.1em] mb-4">Incident record</h2>
-      <p style="font-size: 16px; color: var(--ink-2); max-width: 65ch; margin-bottom: 16px;">Ten production problems covering diagnosis, architecture, customer judgment, correctness, resilience, and leadership under pressure.</p>
+      <p class="text-16 text-ink-2 max-w-[65ch] mb-4">Ten production problems covering diagnosis, architecture, customer judgment, correctness, resilience, and leadership under pressure.</p>
       <a href="/engineering-notes/incidents/" style="color: var(--accent); font-family: 'IBM Plex Mono', monospace; font-size: 14px;">Read all ten incident records →</a>
     </section>
 

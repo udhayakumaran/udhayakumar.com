@@ -19,5 +19,8 @@
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.2.9",
     "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "playwright": "^1.62.1"
   }
 }

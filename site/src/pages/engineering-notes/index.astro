@@ -13,7 +13,7 @@ import Layout from '../../layouts/Layout.astro';
 
     <h1 class="font-code text-40 font-semibold mb-6">Engineering Notes</h1>
 
-    <p style="font-size: 18px; color: var(--ink-2); margin-bottom: 48px; max-width: 65ch;">Deep-dives into decisions, incidents, and lessons from building data platforms and backend infrastructure at scale.</p>
+    <p class="text-18 text-ink-2 mb-12 max-w-[65ch]">Deep-dives into decisions, incidents, and lessons from building data platforms and backend infrastructure at scale.</p>
 
     <!-- Published Notes -->
     <section class="mb-16">
@@ -21,17 +21,17 @@ import Layout from '../../layouts/Layout.astro';
       <div class="grid gap-6">
         <div class="p-5 bg-panel border border-rule rounded">
           <a href="/engineering-notes/debezium-50m-row-snapshot/" class="no-underline text-inherit">
-            <h3 style="font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 8px;">The 50M-row Debezium snapshot incident</h3>
+            <h3 class="text-18 font-semibold text-ink mb-2">The 50M-row Debezium snapshot incident</h3>
             <p class="text-14 text-ink-2">A snapshot operation consumed 60% CPU and nearly blocked a critical migration. How we recovered and what it taught about production risk vs architectural purity.</p>
           </a>
         </div>
       </div>
     </section>
 
-    <section style="padding-top: 8px;">
+    <section class="pt-2">
       <h2 class="font-code text-16 font-semibold text-accent uppercase tracking-[0.1em] mb-4">Incident record</h2>
       <p class="text-16 text-ink-2 max-w-[65ch] mb-4">Ten production problems covering diagnosis, architecture, customer judgment, correctness, resilience, and leadership under pressure.</p>
-      <a href="/engineering-notes/incidents/" style="color: var(--accent); font-family: 'IBM Plex Mono', monospace; font-size: 14px;">Read all ten incident records →</a>
+      <a href="/engineering-notes/incidents/" class="text-accent font-mono text-14">Read all ten incident records →</a>
     </section>
 
   </section>

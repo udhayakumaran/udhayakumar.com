@@ -65,7 +65,7 @@ import Layout from '../../layouts/Layout.astro';
 
       <div class="grid grid-cols-2 gap-8 mt-6">
         <div class="p-5 bg-panel rounded">
-          <div style="font-weight: 600; color: var(--accent); margin-bottom: 12px;">NAIVE APPROACH</div>
+          <div class="font-semibold text-accent mb-3">NAIVE APPROACH</div>
           <ul class="list-none p-0 m-0">
             <li class="text-14 leading-[1.6] text-ink mb-2">Ship live ranking day 1</li>
             <li class="text-14 leading-[1.6] text-ink mb-2">Trains on zero data</li>
@@ -73,7 +73,7 @@ import Layout from '../../layouts/Layout.astro';
           </ul>
         </div>
         <div class="p-5 bg-panel rounded">
-          <div style="font-weight: 600; color: var(--accent); margin-bottom: 12px;">ARCHITECTURAL CHALLENGE</div>
+          <div class="font-semibold text-accent mb-3">ARCHITECTURAL CHALLENGE</div>
           <ul class="list-none p-0 m-0">
             <li class="text-14 leading-[1.6] text-ink mb-2">Immediate value, zero data required</li>
             <li class="text-14 leading-[1.6] text-ink mb-2">Bootstrap into sophisticated algorithms</li>
@@ -89,7 +89,7 @@ import Layout from '../../layouts/Layout.astro';
       <p class="prose-body mb-6">Three independent engines (Curated, Automated, Smart), tier selection driven by CSM discretion, not data availability. CSMs choose which tier per merchant based on trust and use case. Data flows live to Redis, then migrates to BigQuery after 30 minutes of session inactivity or session close. All logic and serving handled backend; client renders. Multi-region MongoDB for serving, ClickHouse for analytics.</p>
 
       <!-- Recommendation Architecture SVG -->
-      <svg viewBox="0 0 640 480" style="max-width: 65ch; width: 100%; margin-bottom: 24px; display: block;" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 640 480" class="max-w-[65ch] w-full mb-6 block" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <style>
             .rec-box { fill: var(--panel); stroke: var(--rule-2); stroke-width: 1.5; }
@@ -192,9 +192,9 @@ import Layout from '../../layouts/Layout.astro';
     <section class="mb-12">
       <h2 class="section-heading">Impact</h2>
 
-      <div style="text-align: center; margin-bottom: 32px; padding: 32px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);">
+      <div class="text-center mb-8 py-8 border-t border-b border-rule">
         <div style="font-size: var(--fs-56); font-weight: 600; color: var(--accent); margin-bottom: 12px;">200ms P99 · DAY 1</div>
-        <div style="font-size: 16px; color: var(--ink-2); max-width: 65ch; margin: 0 auto;">Deployed Curated recommendations on day 1 across five regions under latency SLA</div>
+        <div class="text-16 text-ink-2 max-w-[65ch] mx-auto">Deployed Curated recommendations on day 1 across five regions under latency SLA</div>
       </div>
 
       <div class="mb-6">
@@ -231,7 +231,7 @@ import Layout from '../../layouts/Layout.astro';
         </ul>
       </div>
     </section>
-    <section style="padding: 52px 0; border-top: 1px solid var(--rule); margin-top: 52px;">
+    <section class="py-13 border-t border-rule mt-13">
       <p class="font-code text-12 text-accent font-semibold mb-4">Next steps</p>
       <ul class="list-none p-0 m-0">
         <li class="mb-3">→ <a href="/case-studies/hard-problems" class="plain-link">See production incidents that shaped this design</a></li>

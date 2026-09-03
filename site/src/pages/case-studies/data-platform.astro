@@ -63,7 +63,7 @@ import Layout from '../../layouts/Layout.astro';
 
       <div class="grid grid-cols-2 gap-8 mt-6">
         <div class="p-5 bg-panel rounded">
-          <div style="font-weight: 600; color: var(--accent); margin-bottom: 12px;">BEFORE</div>
+          <div class="font-semibold text-accent mb-3">BEFORE</div>
           <ul class="list-none p-0 m-0">
             <li class="text-14 leading-[1.6] text-ink mb-2">6+ hour batch delays</li>
             <li class="text-14 leading-[1.6] text-ink mb-2">Custom integrations per product</li>
@@ -72,7 +72,7 @@ import Layout from '../../layouts/Layout.astro';
           </ul>
         </div>
         <div class="p-5 bg-panel rounded">
-          <div style="font-weight: 600; color: var(--accent); margin-bottom: 12px;">WHY IT MATTERED</div>
+          <div class="font-semibold text-accent mb-3">WHY IT MATTERED</div>
           <ul class="list-none p-0 m-0">
             <li class="text-14 leading-[1.6] text-ink mb-2">Real-time recommendations impossible</li>
             <li class="text-14 leading-[1.6] text-ink mb-2">Segmentation used stale data</li>
@@ -89,7 +89,7 @@ import Layout from '../../layouts/Layout.astro';
       <p class="prose-body mb-6">Consolidates four source systems (commerce, click-tracking, loyalty, CRM) into a raw MySQL landing store, preserving original schema. Debezium streams changes via Google Pub/Sub. Downstream layer fans out to three specialized stores: MongoDB for point lookups (serving), ClickHouse for analytics, BigQuery for historical data.</p>
 
       <!-- Architecture SVG Diagram -->
-      <svg viewBox="0 0 640 480" style="max-width: 65ch; width: 100%; margin-bottom: 24px; display: block;" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 640 480" class="max-w-[65ch] w-full mb-6 block" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <style>
             .arch-box { fill: var(--panel); stroke: var(--rule-2); stroke-width: 1.5; }
@@ -225,13 +225,13 @@ import Layout from '../../layouts/Layout.astro';
         <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">Added metrics for data freshness (time from source to landing to serving), lag per store, checkpoint latency. Alerts on 5-minute latency deviation. Page on-call for >15 min delays.</p>
       </div>
 
-      <div style="margin: 32px 0; padding: 24px; background: var(--panel); border: 1px solid var(--accent); border-radius: 4px;">
+      <div class="my-8 p-6 bg-panel border border-accent rounded">
         <h3 class="text-14 font-semibold text-accent mb-3">The production incident that changed the design</h3>
         <p class="text-16 leading-[1.8] text-ink max-w-[65ch] mb-3">Debezium's snapshot query on 50M rows consumed 60% CPU and blocked production writes. We stopped rollout immediately and used Datastream to seed the baseline instead, then transitioned tables to Debezium incrementally.</p>
         <p class="prose-body"><a href="/engineering-notes/debezium-50m-row-snapshot/" class="plain-link">Read the full incident and recovery decisions →</a></p>
       </div>
 
-      <div style="margin: 32px 0; padding: 24px; background: var(--panel); border: 1px solid var(--accent); border-radius: 4px;">
+      <div class="my-8 p-6 bg-panel border border-accent rounded">
         <h3 class="text-14 font-semibold text-accent mb-3">The consumer crashes that weren't a memory leak</h3>
         <p class="text-16 leading-[1.8] text-ink max-w-[65ch] mb-3">Pub/Sub consumers crashing at scale. Root cause: Kubernetes pod memory limits, not application code. Consumers pulled messages as fast as possible with no backpressure. Fixed by monitoring heap usage and pausing consumption at a high-water mark, resuming when safe.</p>
         <p class="prose-body"><a href="/case-studies/hard-problems#incident-10" class="plain-link">Read the full incident analysis →</a></p>
@@ -243,7 +243,7 @@ import Layout from '../../layouts/Layout.astro';
       <h2 class="section-heading">Impact</h2>
 
       <div style="margin-bottom: 32px; padding: 32px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);">
-        <h3 style="font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 24px; text-align: center;">Data Freshness by Platform Capability</h3>
+        <h3 class="text-14 font-semibold text-accent mb-6 text-center">Data Freshness by Platform Capability</h3>
         <div class="overflow-x-auto max-w-[65ch]">
           <table class="w-full border-collapse text-14 leading-[1.6]">
             <thead>
@@ -320,7 +320,7 @@ import Layout from '../../layouts/Layout.astro';
         </ul>
       </div>
     </section>
-    <section style="padding: 52px 0; border-top: 1px solid var(--rule); margin-top: 52px;">
+    <section class="py-13 border-t border-rule mt-13">
       <p class="font-code text-12 text-accent font-semibold mb-4">Next steps</p>
       <ul class="list-none p-0 m-0">
         <li class="mb-3">→ <a href="/case-studies/hard-problems" class="plain-link">See production incidents that shaped this design</a></li>

@@ -11,14 +11,14 @@ import Layout from '../../layouts/Layout.astro';
       <a href="/case-studies" class="text-14 text-accent no-underline">← Back to case studies</a>
     </nav>
 
-    <h1 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin-bottom: 24px;">Production Incidents</h1>
+    <h1 class="font-code text-32 font-semibold mb-6">Production Incidents</h1>
 
     <p class="text-16 text-ink-2 mb-8 max-w-[65ch]">Ten incidents where production pressure exposed a deeper problem. Each follows failure → diagnosis → decision → recovery → lesson.</p>
     <p class="text-14 text-accent mb-8 max-w-[65ch]">See also: <a href="/engineering-notes/" class="plain-link">full incident log</a> and <a href="/engineering-notes/debezium-50m-row-snapshot/" class="plain-link">Debezium 50M-row snapshot deep-dive</a>.</p>
 
     <!-- Problem 1 -->
     <section id="incident-01" class="mb-14 border-b border-rule pb-12">
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 600; color: var(--accent); margin-bottom: 16px;">01. Query Shape, Not Tuning</h2>
+      <h2 class="font-code text-24 font-semibold text-accent mb-4">01. Query Shape, Not Tuning</h2>
       <div class="grid gap-2 mb-6">
         <div><strong>When:</strong> 2022</div>
         <div><strong>Duration:</strong> 3 hours to diagnosis + fix</div>
@@ -43,7 +43,7 @@ import Layout from '../../layouts/Layout.astro';
 
     <!-- Problem 2 -->
     <section id="incident-02" class="mb-14 border-b border-rule pb-12">
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 600; color: var(--accent); margin-bottom: 16px;">02. MySQL Lock Contention at Scale</h2>
+      <h2 class="font-code text-24 font-semibold text-accent mb-4">02. MySQL Lock Contention at Scale</h2>
       <div class="grid gap-2 mb-6">
         <div><strong>When:</strong> Early 2022, production cutover</div>
         <div><strong>Duration:</strong> 1-1.5 days from escalation to fix</div>
@@ -68,7 +68,7 @@ import Layout from '../../layouts/Layout.astro';
 
     <!-- Problem 3 -->
     <section id="incident-03" class="mb-14 border-b border-rule pb-12">
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 600; color: var(--accent); margin-bottom: 16px;">03. Real-Time Product Changes in Recommendations</h2>
+      <h2 class="font-code text-24 font-semibold text-accent mb-4">03. Real-Time Product Changes in Recommendations</h2>
       <div class="grid gap-2 mb-6">
         <div><strong>When:</strong> 2022-2023</div>
         <div><strong>Duration:</strong> 3-4 days to build + ship</div>
@@ -93,7 +93,7 @@ import Layout from '../../layouts/Layout.astro';
 
     <!-- Problem 4 -->
     <section id="incident-04" class="mb-14 border-b border-rule pb-12">
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 600; color: var(--accent); margin-bottom: 16px;">04. MySQL Views → Debezium CDC</h2>
+      <h2 class="font-code text-24 font-semibold text-accent mb-4">04. MySQL Views → Debezium CDC</h2>
       <div class="grid gap-2 mb-6">
         <div><strong>When:</strong> 2022-2023</div>
         <div><strong>Duration:</strong> Phase 1: 2 months (tactical); Phase 2: 1 month (architectural)</div>
@@ -108,11 +108,11 @@ import Layout from '../../layouts/Layout.astro';
       <div class="mb-6">
         <h3 class="text-14 font-semibold mb-3">Two-Phase Approach</h3>
         <div class="mb-3">
-          <p style="font-size: 14px; font-weight: 600; margin: 0; margin-bottom: 8px;">Phase 1 (Urgent):</p>
+          <p class="text-14 font-semibold m-0 mb-2">Phase 1 (Urgent):</p>
           <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">Convert views to CTEs. Apply filters before joins. Bought 2 months. 30s → 1.5-2s.</p>
         </div>
         <div>
-          <p style="font-size: 14px; font-weight: 600; margin: 0; margin-bottom: 8px;">Phase 2 (Proper Fix):</p>
+          <p class="text-14 font-semibold m-0 mb-2">Phase 2 (Proper Fix):</p>
           <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">Debezium tails MySQL → Pub/Sub. Services normalize into purpose-shaped stores: MongoDB (point lookups), ClickHouse (aggregation). Query denormalized stores directly.</p>
         </div>
       </div>
@@ -125,7 +125,7 @@ import Layout from '../../layouts/Layout.astro';
 
     <!-- Problem 5 -->
     <section id="incident-05" class="mb-14 border-b border-rule pb-12">
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 600; color: var(--accent); margin-bottom: 16px;">05. Missing Index on Production Query</h2>
+      <h2 class="font-code text-24 font-semibold text-accent mb-4">05. Missing Index on Production Query</h2>
       <div class="grid gap-2 mb-6">
         <div><strong>When:</strong> One week after deployment</div>
         <div><strong>Duration:</strong> 3-4 hours to diagnose + fix</div>
@@ -140,11 +140,11 @@ import Layout from '../../layouts/Layout.astro';
       <div class="mb-6">
         <h3 class="text-14 font-semibold mb-3">Solution</h3>
         <div class="mb-3">
-          <p style="font-size: 14px; font-weight: 600; margin: 0; margin-bottom: 8px;">Immediate:</p>
+          <p class="text-14 font-semibold m-0 mb-2">Immediate:</p>
           <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">Added the index.</p>
         </div>
         <div>
-          <p style="font-size: 14px; font-weight: 600; margin: 0; margin-bottom: 8px;">Permanent:</p>
+          <p class="text-14 font-semibold m-0 mb-2">Permanent:</p>
           <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">Added query-performance monitoring. If response drops below threshold, alert immediately. Catches regressions in minutes, not days.</p>
         </div>
       </div>
@@ -157,7 +157,7 @@ import Layout from '../../layouts/Layout.astro';
 
     <!-- Problem 6 -->
     <section id="incident-06" class="mb-14 border-b border-rule pb-12">
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 600; color: var(--accent); margin-bottom: 16px;">06. Real-Time Optimization Gone Wrong</h2>
+      <h2 class="font-code text-24 font-semibold text-accent mb-4">06. Real-Time Optimization Gone Wrong</h2>
       <div class="grid gap-2 mb-6">
         <div><strong>When:</strong> December 24, 2025 (Christmas Eve)</div>
         <div><strong>Duration:</strong> 12 hours troubleshooting</div>
@@ -172,11 +172,11 @@ import Layout from '../../layouts/Layout.astro';
       <div class="mb-6">
         <h3 class="text-14 font-semibold mb-3">Solution</h3>
         <div class="mb-3">
-          <p style="font-size: 14px; font-weight: 600; margin: 0; margin-bottom: 8px;">Immediate:</p>
+          <p class="text-14 font-semibold m-0 mb-2">Immediate:</p>
           <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">Scale ClickHouse RAM to buy breathing room.</p>
         </div>
         <div class="mb-3">
-          <p style="font-size: 14px; font-weight: 600; margin: 0; margin-bottom: 8px;">Permanent:</p>
+          <p class="text-14 font-semibold m-0 mb-2">Permanent:</p>
           <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">Implement 24-hour batch solution. Had her own the fix (how junior engineers learn). Added AI-assisted code review to flag problematic patterns.</p>
         </div>
       </div>
@@ -189,7 +189,7 @@ import Layout from '../../layouts/Layout.astro';
 
     <!-- Problem 7 -->
     <section id="incident-07" class="mb-14 border-b border-rule pb-12">
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 600; color: var(--accent); margin-bottom: 16px;">07. Repeated Pattern: Segment Ordering</h2>
+      <h2 class="font-code text-24 font-semibold text-accent mb-4">07. Repeated Pattern: Segment Ordering</h2>
       <div class="grid gap-2 mb-6">
         <div><strong>When:</strong> First incident 2023; second incident 2023-2024</div>
         <div><strong>Duration:</strong> 4 days (first); 4 hours (second)</div>
@@ -219,7 +219,7 @@ import Layout from '../../layouts/Layout.astro';
 
     <!-- Problem 8 -->
     <section id="incident-08" class="mb-12 border-b border-rule pb-12">
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 600; color: var(--accent); margin-bottom: 16px;">08. Silent Failure + Algorithmic Insight</h2>
+      <h2 class="font-code text-24 font-semibold text-accent mb-4">08. Silent Failure + Algorithmic Insight</h2>
       <div class="grid gap-2 mb-6">
         <div><strong>When:</strong> BQ → ClickHouse migration (2023-2024)</div>
         <div><strong>Duration:</strong> 2.5 weeks (diagnosis + batched hashing solution)</div>
@@ -249,7 +249,7 @@ import Layout from '../../layouts/Layout.astro';
 
     <!-- Problem 9 -->
     <section id="incident-09" class="mb-14 border-b border-rule pb-12">
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 600; color: var(--accent); margin-bottom: 16px;">09. ClickHouse Materialized-View Scale Mismatch</h2>
+      <h2 class="font-code text-24 font-semibold text-accent mb-4">09. ClickHouse Materialized-View Scale Mismatch</h2>
       <div class="grid gap-2 mb-6">
         <div><strong>When:</strong> BigQuery → ClickHouse migration (2023–2024)</div>
         <div><strong>Duration:</strong> ~2 weeks to diagnose + fix</div>
@@ -274,7 +274,7 @@ import Layout from '../../layouts/Layout.astro';
 
     <!-- Problem 10 -->
     <section id="incident-10" class="mb-14 border-b border-rule pb-12">
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 600; color: var(--accent); margin-bottom: 16px;">10. Node.js Backpressure as a Platform Pattern</h2>
+      <h2 class="font-code text-24 font-semibold text-accent mb-4">10. Node.js Backpressure as a Platform Pattern</h2>
       <div class="grid gap-2 mb-6">
         <div><strong>When:</strong> Early 2024, ongoing data platform growth</div>
         <div><strong>Duration:</strong> ~3 weeks to diagnose, design, deploy</div>
@@ -301,7 +301,7 @@ import Layout from '../../layouts/Layout.astro';
 
 
     <!-- Summary -->
-    <section style="margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--rule);">
+    <section class="mt-14 pt-12 border-t border-rule">
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 600; color: var(--ink); margin-bottom: 24px;">Ten Incidents as a Progression</h2>
 
       <div class="grid gap-3 w-full text-14 leading-[1.6] text-ink">

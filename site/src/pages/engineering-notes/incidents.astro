@@ -25,11 +25,11 @@ const incidents = [
       {incidents.map(([number, title, summary, category]) => (
         <article class="record">
           <span class="record-number">{number}</span>
-          <div><p class="record-category">{category}</p><h2>{title}</h2><p>{summary}</p><a href={`/case-studies/hard-problems#incident-${number}`} style="font-size: 14px; color: var(--accent); font-family: 'IBM Plex Mono', monospace; margin-top: 8px; display: inline-block;">→ full breakdown</a></div>
+          <div><p class="record-category">{category}</p><h2>{title}</h2><p>{summary}</p><a href={`/case-studies/hard-problems#incident-${number}`} class="text-14 text-accent font-mono mt-2 inline-block">→ full breakdown</a></div>
         </article>
       ))}
     </div>
-    <div class="record-cta"><p>Want the full incident details?</p><a href="/case-studies/hard-problems">Read the full incident breakdowns →</a><p style="margin-top: 16px; font-size: 14px; color: var(--ink-2);">Or dive into the specific deep-dive on the Debezium snapshot:</p><a href="/engineering-notes/debezium-50m-row-snapshot/">The 50M-row CDC snapshot incident →</a><a href="/resume" class="mt-4 block">View the role-focused resumes →</a></div>
+    <div class="record-cta"><p>Want the full incident details?</p><a href="/case-studies/hard-problems">Read the full incident breakdowns →</a><p class="mt-4 text-14 text-ink-2">Or dive into the specific deep-dive on the Debezium snapshot:</p><a href="/engineering-notes/debezium-50m-row-snapshot/">The 50M-row CDC snapshot incident →</a><a href="/resume" class="mt-4 block">View the role-focused resumes →</a></div>
   </section>
 </Layout>
 

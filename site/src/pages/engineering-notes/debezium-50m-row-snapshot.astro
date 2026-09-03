@@ -11,7 +11,7 @@ import Layout from '../../layouts/Layout.astro';
       <a href="/engineering-notes" class="text-14 text-accent no-underline">← Back to engineering notes</a>
     </nav>
 
-    <h1 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin-bottom: 24px;">I stopped a production migration when a 50M-row CDC snapshot blocked writes</h1>
+    <h1 class="font-code text-32 font-semibold mb-6">I stopped a production migration when a 50M-row CDC snapshot blocked writes</h1>
 
     <p class="text-16 text-ink-2 mb-8 max-w-[65ch]">During a data platform migration across 200+ merchants, Debezium's snapshot operation consumed 60% CPU and began blocking production writes. I stopped the snapshot, used an existing Datastream path to recover, and changed the rollout strategy.</p>
     <p class="note-meta">Engineering note · Production reliability · By Udhaya Kumar</p>
@@ -81,7 +81,7 @@ import Layout from '../../layouts/Layout.astro';
     <!-- Takeaway -->
     <section>
       <h2 class="section-heading">What changed</h2>
-      <ul style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; list-style: none; padding: 0;">
+      <ul class="text-16 leading-[1.8] text-ink max-w-[65ch] list-none p-0">
         <li class="mb-3"><strong>We now load-test snapshots at production scale</strong> before deploying new CDC approaches.</li>
         <li class="mb-3"><strong>We keep backup replication paths</strong> for critical data flows. Managed services (Datastream) handle the heavy lifting of snapshots; custom tools (Debezium) handle ongoing CDC.</li>
         <li class="mb-3"><strong>We design migrations with rollback paths.</strong> If something breaks at production scale, we can revert and try again without data loss.</li>

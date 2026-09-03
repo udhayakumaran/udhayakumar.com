@@ -55,7 +55,7 @@ export const profile = {
     "Staff Platform Engineer",
     "Founding Engineer",
   ],
-  resume: { label: "Senior Backend Engineer", file: "/resume/general.pdf", description: "13+ years backend infrastructure, data platforms, and production systems" },
+  resume: { label: "Senior Backend Engineer", file: "/Udhayakumar-Resume.pdf", description: "13+ years backend infrastructure, data platforms, and production systems" },
   experienceTimeline: [
     { index: "A1", years: "2020–2026", company: "ConvertCart", role: "Backend Engineer, Platform Ownership — data ingestion, warehouse consolidation, and multi-channel personalisation" },
     { index: "A2", years: "2018–2019", company: "Friday Media Group", role: "Backend Engineer, Founding Team — marketplace APIs, content ingestion, and data pipeline" },

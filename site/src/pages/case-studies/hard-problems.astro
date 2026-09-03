@@ -298,9 +298,69 @@ import Layout from '../../layouts/Layout.astro';
       </div>
     </section>
 
+    <!-- Problem 11 -->
+    <section id="incident-11" style="margin-bottom: 56px; border-bottom: 1px solid var(--rule); padding-bottom: 48px;">
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 600; color: var(--accent); margin-bottom: 16px;">11. The Over-Engineered Landing Layer</h2>
+      <div style="display: grid; gap: 8px; margin-bottom: 24px;">
+        <div><strong>When:</strong> Early 2021, post-data platform launch</div>
+        <div><strong>Duration:</strong> ~3 months to realize, 2 months to simplify</div>
+        <div><strong>Impact:</strong> Operational overhead, team confusion</div>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Problem</h3>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">I designed the raw MySQL landing layer with 15 fields per source table, thinking "we need all this context for flexibility." But in practice, we used only 5. The extra 10 fields became operational debt: schema migrations had to touch all 15 fields across 200+ merchants, every change rippled through the system, and team members asked "why do we have this field?" constantly.</p>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">The Mistake</h3>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Optimizing for hypothetical flexibility instead of actual usage patterns. Over-normalized when simplicity would have been better.</p>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">The Fix</h3>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">After 3 months, I simplified the schema down to the essential 5 fields. Migration was painful (had to null out the extra columns safely), but it reduced schema migration time by 40% afterward.</p>
+      </div>
+
+      <div>
+        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Lesson</h3>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Start simple, add complexity when evidence demands it. Don't architect for "what if?" — architect for "what is?" and iterate. The cost of over-engineering is ongoing operational pain.</p>
+      </div>
+    </section>
+
+    <!-- Problem 12 -->
+    <section id="incident-12" style="margin-bottom: 56px; border-bottom: 1px solid var(--rule); padding-bottom: 48px;">
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 600; color: var(--accent); margin-bottom: 16px;">12. When I Lost the CDC vs Batch Argument</h2>
+      <div style="display: grid; gap: 8px; margin-bottom: 24px;">
+        <div><strong>When:</strong> Late 2021, team discussion on segmentation approach</div>
+        <div><strong>Duration:</strong> 1 week of debate, 2 weeks to prove I was wrong</div>
+        <div><strong>Impact:</strong> Team morale, technical credibility</div>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Problem</h3>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">I was convinced segmentation should use real-time CDC from the landing layer (like everything else). A team member pushed back: "Segmentation updates only daily. We don't need real-time." I thought they were being lazy or didn't understand the architecture.</p>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">The Evidence</h3>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">They ran a 2-week experiment. Real-time segmentation cost 3x more, delivered no user benefit (CSMs only ran campaigns once daily anyway), and added complexity to monitoring. The data proved them right.</p>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">What I Did</h3>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">I admitted I was wrong in the team meeting. We switched to daily batch refresh for segmentation. Simpler, cheaper, same outcome. And importantly, I thanked them for pushing back and for running the experiment.</p>
+      </div>
+
+      <div>
+        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Lesson</h3>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">The right architecture depends on the actual constraints, not theoretical ideals. Sometimes the "simpler" path is the right path. And team members who challenge you are doing you a favor — listen to them.</p>
+      </div>
+    </section>
+
     <!-- Summary -->
     <section style="margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--rule);">
-      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 600; color: var(--ink); margin-bottom: 24px;">Ten Incidents as a Progression</h2>
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 600; color: var(--ink); margin-bottom: 24px;">Twelve Incidents as a Progression</h2>
 
       <div style="display: grid; gap: 12px; max-width: 100%; font-size: 14px; line-height: 1.6; color: var(--ink);">
         <div class="incident-progression" style="display: grid; grid-template-columns: 50px 150px 200px auto; gap: 12px;">
@@ -316,10 +376,10 @@ import Layout from '../../layouts/Layout.astro';
           <div>Own systems, build process</div>
         </div>
         <div class="incident-progression" style="display: grid; grid-template-columns: 50px 150px 200px auto; gap: 12px;">
-          <div style="font-weight: 600; color: var(--accent);">06–10</div>
+          <div style="font-weight: 600; color: var(--accent);">06–12</div>
           <div><strong>Principal</strong></div>
-          <div>Leadership under crisis, systemic patterns, algorithmic optimization, database-specific constraints, resilience patterns</div>
-          <div>Mentor, recognize incompatibility, solve elegantly, adopt platform patterns</div>
+          <div>Leadership under crisis, systemic patterns, algorithmic optimization, database-specific constraints, resilience patterns, learning from failure, humility under pressure</div>
+          <div>Mentor, recognize incompatibility, solve elegantly, adopt platform patterns, listen to challenge, own mistakes</div>
         </div>
       </div>
     </section>

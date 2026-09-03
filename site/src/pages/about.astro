@@ -25,13 +25,25 @@ import { profile } from '../data/profile';
       </div>
       <div>
         <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Scaling with small teams</p>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">Scaled a platform team from 4 to 7 engineers while serving 200+ merchants across five commerce platforms. Focus on automation, clear ownership, and choosing the right abstractions so humans don't become the bottleneck.</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">Scaled a platform team from 4 to 7 engineers over 5 years while serving 200+ merchants across five commerce platforms. Focused on: (1) hiring for architectural thinking, not just coding speed, (2) clear ownership of systems, (3) choosing abstractions that let a small team scale without burning out. The result: team grew without losing quality or increasing on-call burden.</p>
       </div>
       <div>
         <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Judging tradeoffs honestly</p>
         <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">Every architecture decision trades something off. Value candidates and team members who name the cost admitted, not just the benefit gained. Leads to better hiring and fewer bad surprises post-launch.</p>
       </div>
     </div>
+  </section>
+
+  <!-- How I influenced engineering culture -->
+  <section style="padding: 52px 0; border-bottom: 1px solid var(--rule);">
+    <h2 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin-bottom: 40px;">How I influenced engineering culture</h2>
+    <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 32px;">Beyond my platform role, I shaped how the broader engineering team approached infrastructure:</p>
+    <ul style="list-style: none; padding: 0; margin: 0; max-width: 65ch;">
+      <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 24px;"><strong>Established code review standards for Pub/Sub consumers:</strong> Every new consumer had to implement backpressure monitoring and memory high-water marks before deployment. This pattern prevented OOM crashes across 15+ services company-wide.</li>
+      <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 24px;"><strong>Designed system design interviews for backend hiring:</strong> I led hiring for 3 backend engineers. I focused questions on tradeoffs and reversibility, not algorithm complexity. This raised the bar for architectural thinking across the company.</li>
+      <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 24px;"><strong>Ran monthly architecture sync across teams:</strong> Platform, Recommendations, and Segmentation teams aligned on shared systems. This is where we caught the stale recommendation churn driver before it spiraled.</li>
+      <li style="font-size: 16px; line-height: 1.8; color: var(--ink);"><strong>Mentored engineers to Staff-level impact:</strong> Goutham Kishore and Piyush Jaiswal both reported to me. I focused on helping them own systems end-to-end, make tradeoff decisions, and communicate architecture to non-technical stakeholders. Both are now leading sub-systems independently.</li>
+    </ul>
   </section>
 
   <!-- Testimonials -->
@@ -105,17 +117,20 @@ import { profile } from '../data/profile';
     <p style="margin-top: 32px;"><a href="/architecture-decisions" style="color: var(--accent); text-decoration: none;">Read architectural tradeoffs →</a></p>
   </section>
 
-  <!-- Next challenge -->
+  <!-- Next chapter -->
   <section style="padding: 52px 0; border-bottom: 1px solid var(--rule);">
     <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Next chapter</p>
-    <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">Looking for my next challenge. I've owned infrastructure systems at ConvertCart for five years. Now seeking:</p>
-    <ul style="list-style: none; padding: 0; margin: 16px 0; font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">
-      <li>• Staff/Principal roles (system ownership at scale)</li>
-      <li>• Founding Engineer (zero-to-one, end-to-end)</li>
-      <li>• Companies 100–1000 people (deep ownership, not committees)</li>
-      <li>• Remote worldwide (India-based)</li>
+    <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">I concluded my tenure at ConvertCart in May 2026 after 5+ years owning data infrastructure end-to-end. I'm now looking for roles where I can own a backend or data infrastructure system with the same scope and have real influence on how a team scales. I'm most excited by remote-first startups solving hard problems at scale.</p>
+  </section>
+
+  <!-- Areas I'm actively growing -->
+  <section style="padding: 52px 0; border-bottom: 1px solid var(--rule);">
+    <h2 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin-bottom: 40px;">Areas I'm actively growing</h2>
+    <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 32px;">I'm deliberately expanding into two areas:</p>
+    <ul style="list-style: none; padding: 0; margin: 0; max-width: 65ch;">
+      <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 24px;"><strong>Production LLM systems:</strong> I'm building expertise in production-grade LLM patterns, RAG pipelines, and embedding freshness. (See Affairs Map project for current work.)</li>
+      <li style="font-size: 16px; line-height: 1.8; color: var(--ink);"><strong>Python production depth:</strong> Historically Node.js-focused, I'm deepening Python skills via Affairs Map and exploring FastAPI for production systems.</li>
     </ul>
-    <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-top: 16px;">What I'm looking for: scale, constraints, and ownership. Tell me about your hardest backend problem.</p>
   </section>
 
   <!-- Contact CTA -->

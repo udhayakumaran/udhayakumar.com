@@ -98,9 +98,51 @@ import Layout from '../layouts/Layout.astro';
     <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 70ch;">Each decision: Problem → Alternatives → Choice → Cost → Benefit → Lesson. Common thread: At scale, operational overhead beats architectural purity. Accept the complexity of thousands of tables if it buys isolation. Accept the complexity of regional replicas if it buys latency. Accept the complexity of landing raw if it buys reversibility.</p>
   </section>
 
+  <!-- Five Principles -->
+  <section style="padding: 52px 0; border-bottom: 1px solid var(--rule);">
+    <h2 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin-bottom: 40px;">Five Principles That Guide These Decisions</h2>
+
+    <div style="display: grid; gap: 48px;">
+      <!-- Principle 1 -->
+      <div style="display: grid; gap: 16px; max-width: 70ch;">
+        <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 600; color: var(--accent);">Reversibility Over Purity</h3>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink);">Normalize data where mistakes are reversible; defer normalization where they're expensive to fix. A wrong materialized view is a redefinition away from correction. A wrong schema at ingest is a multi-service migration.</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink-2);">At ConvertCart: landed raw data first, then fanned out shaped copies (MongoDB, ClickHouse, BigQuery), not the other way around. Mistakes in views are cheap; mistakes in the landing layer are catastrophic.</p>
+      </div>
+
+      <!-- Principle 2 -->
+      <div style="display: grid; gap: 16px; max-width: 70ch;">
+        <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 600; color: var(--accent);">Match Storage to Question</h3>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink);">Point lookups → MongoDB. Population filtering → ClickHouse or BigQuery. One database can't efficiently answer all three questions. Denormalization-in-consumers beats materialization-in-database.</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink-2);">At ConvertCart: recommendations wanted fast point lookups (MongoDB), segmentation wanted population filtering (BigQuery then ClickHouse), reporting wanted columnar aggregation (BigQuery). Used three storage systems, not one-size-fits-all database.</p>
+      </div>
+
+      <!-- Principle 3 -->
+      <div style="display: grid; gap: 16px; max-width: 70ch;">
+        <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 600; color: var(--accent);">Operational Simplicity Over Sophistication</h3>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink);">A legible system is easier to debug than a clever one. A Pub/Sub consumer publishing lag metrics and failing visibly beats a Dataflow job hiding execution details. When a small team owns it, debuggability under pressure beats abstraction elegance.</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink-2);">At ConvertCart: chose explicit Pub/Sub consumers over Dataflow pipelines. Observable, debuggable, no hidden execution state. Backpressure pattern became adoptable company-wide because it was legible.</p>
+      </div>
+
+      <!-- Principle 4 -->
+      <div style="display: grid; gap: 16px; max-width: 70ch;">
+        <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 600; color: var(--accent);">Ship in Trust Order, Not Sophistication Order</h3>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink);">Recommendations: manual blocks first (day 1), then automated (month 2), then smart (month 6). Clients who started on manual graduated to smart. Adoption requires trust; trust requires shipping something usable first.</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink-2);">At ConvertCart: launched with manual recommendation blocks (literally "we pick these products for you"), proved value, then built ranking. By then merchants trusted the system enough to adopt sophistication.</p>
+      </div>
+
+      <!-- Principle 5 -->
+      <div style="display: grid; gap: 16px; max-width: 70ch;">
+        <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 600; color: var(--accent);">Constraints Matter More Than Code</h3>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink);">A pod memory limit is real; a network timeout is real; data growth rate is real. Feedback loops (backpressure, pause/resume) beat throwing resources at symptoms. Database-specific behavior (ClickHouse refresh frequency, BigQuery slot pricing) matters as much as architectural desire for real-time.</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink-2);">At ConvertCart: segmentation daily batch beats real-time CDC because the actual constraint was "CSMs run campaigns once daily," not theoretical freshness ideals. Pub/Sub backpressure beats heap allocation because the constraint is memory, not code elegance.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- Related reading -->
   <section style="padding: 52px 0; text-align: center;">
-    <p style="font-size: 18px; line-height: 1.8; color: var(--ink); margin-bottom: 24px;">These decisions are validated by production experience.</p>
-    <a href="/case-studies/hard-problems" style="color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s ease;">Read ten production incidents →</a>
+    <p style="font-size: 18px; line-height: 1.8; color: var(--ink); margin-bottom: 24px;">These principles emerged from 13+ years of building systems and 5+ years of production operations at scale.</p>
+    <a href="/case-studies/hard-problems" style="color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s ease;">Read twelve production incidents →</a>
   </section>
 </Layout>

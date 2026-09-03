@@ -80,6 +80,12 @@ import Layout from '../../layouts/Layout.astro';
       </div>
     </section>
 
+    <!-- Solution -->
+    <section style="margin-bottom: 48px;">
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Solution</h2>
+      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 24px;">Built a self-serve query builder on top of the unified data platform. CSMs compose segments by dragging filters (no SQL required initially). The query builder converts these filters into SQL against MongoDB (normalized serving layer). Segments stored in BigQuery for historical analysis. Launch strategy: manual mode first (CSMs describe segment in Slack, engineering creates it), then templates (pre-defined segments CSMs filter), then full query builder (self-serve).</p>
+    </section>
+
     <!-- Architecture -->
     <section style="margin-bottom: 48px;">
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Architecture</h2>
@@ -141,16 +147,16 @@ import Layout from '../../layouts/Layout.astro';
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Key Decisions</h2>
       <ol style="max-width: 65ch; list-style: none; padding: 0;">
         <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 20px;">
-          <strong>Consolidated, not federated</strong><br/>
-          <span style="color: var(--ink-2);">Costs: second data copy and continuous replication. Benefit: one query language, genuinely possible joins across sources.</span>
+          <strong>UI-first, SQL later</strong><br/>
+          <span style="color: var(--ink-2);">CSMs weren't comfortable with raw SQL. A drag-and-drop builder got adoption faster than 80% of use cases. Trade-off: less expressive queries (no complex WHERE, no window functions). After 6 months of adoption, demand for SQL grew, so we added a "SQL mode" toggle.</span>
         </li>
         <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 20px;">
-          <strong>Normalize at analytics layer, not ingest</strong><br/>
-          <span style="color: var(--ink-2);">Mirror of platform's ingest decision. Same modelling work, moved to where mistakes are cheap to fix.</span>
+          <strong>No query approvals, trust CSMs</strong><br/>
+          <span style="color: var(--ink-2);">Gave CSMs ownership of audience quality. Risk: bad segment definition = bad email campaign. Mitigation: "Preview" step shows sample customers before deploy (human review).</span>
         </li>
         <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">
-          <strong>Precomputed daily, not live</strong><br/>
-          <span style="color: var(--ink-2);">Right for campaign cadence. Recommendations needed live serving; segmentation didn't.</span>
+          <strong>Point-in-time snapshots, not real-time freshness</strong><br/>
+          <span style="color: var(--ink-2);">Segments computed once daily (midnight). Predictable cost, predictable performance. Trade-off: up to 24 hours stale. Fine for most use cases (retention campaigns don't need fresher-than-hourly). For retention use cases, daily freshness was sufficient. Didn't need to over-engineer for real-time.</span>
         </li>
       </ol>
     </section>
@@ -211,6 +217,7 @@ import Layout from '../../layouts/Layout.astro';
     <section style="padding: 52px 0; border-top: 1px solid var(--rule); margin-top: 52px;">
       <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 16px;">Next steps</p>
       <ul style="list-style: none; padding: 0; margin: 0;">
+        <li style="margin-bottom: 12px;">→ Read the technical deep dive on Medium: <span style="color: var(--ink-2);">[link TBD]</span></li>
         <li style="margin-bottom: 12px;">→ <a href="/case-studies/hard-problems" style="color: var(--accent); text-decoration: none;">See production incidents that shaped this design</a></li>
         <li style="margin-bottom: 12px;">→ <a href="/resume" style="color: var(--accent); text-decoration: none;">Download my resume</a></li>
       </ul>

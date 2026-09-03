@@ -173,6 +173,7 @@ import Layout from '../../layouts/Layout.astro';
       <div>
         <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">The Hard Part</h3>
         <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Unified customer model required consolidating conflicting definitions. What's "churn"? 30 days without order? 60? Cross-platform or per-store? Built dimension tables with multiple definitions, let CSMs pick. Learned CSMs needed explainability: why is this customer in this segment? Added audit trail.</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-top: 16px;">The deeper challenge: many segment filters had no single source of truth. A segment like "high-value recent customers with abandoned carts" required stitching data together from three independent stores simultaneously: MySQL (order totals for lifetime value, campaign exclusions), ClickHouse (behavior events for recency windows and product-page visits, UTM tracking for competitor browsing), and MongoDB (active shopping carts). No query layer bridges these three; the segment builder had to enforce consistency across federated filters rather than rely on a single normalized schema. This taught me that the right storage solution for "match storage to question" means accepting complexity at the integration layer when the question spans multiple systems.</p>
       </div>
     </section>
 

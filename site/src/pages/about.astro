@@ -7,8 +7,35 @@ import { profile } from '../data/profile';
 <Layout title="About — Udhaya Kumar" description="About Udhaya Kumar, Senior Backend Engineer with 13+ years building backend systems, data infrastructure, and production platforms.">
   <section style="padding: 52px 0; border-bottom: 1px solid var(--rule);">
     <h1 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-40); font-weight: 600; margin-bottom: 32px;">About</h1>
-    <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 24px;">I've spent {profile.experience} building backend systems and data infrastructure. From {profile.convertCart.tenure}, I was at ConvertCart, where I owned a data platform end to end — ingestion, modelling, serving, and reporting — for {profile.convertCart.platformOwnership}. I helped grow the platform team from {profile.convertCart.teamGrowth} while serving {profile.proof.merchants}.</p>
-    <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">I'm a {profile.primaryTitle} open to backend, platform, data infrastructure, technical lead, and founding-engineer roles across Indian, international, remote, and hybrid teams.</p>
+    <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 24px;"><strong>Thirteen years backend. Five years owning ConvertCart's data platform end to end. Scaled team {profile.convertCart.teamGrowth}, served {profile.proof.merchants}, reduced costs 77.8%.</strong></p>
+    <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">I'm a {profile.primaryTitle} open to Staff, Principal, or Founding-Engineer roles where I can own a backend or data infrastructure system with the same scope and have real influence on how a team scales.</p>
+  </section>
+
+  <!-- Testimonials -->
+  <section style="padding: 52px 0; border-bottom: 1px solid var(--rule);">
+    <h2 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin-bottom: 40px;">What people say</h2>
+    <div style="display: grid; gap: 24px;">
+      <TestimonialCard
+        quote="I worked with Udhay for the past four years, and calling him just a 'team lead' wouldn't do justice to the role he played in my journey. He has been an exceptional mentor and guide, always approachable, patient, and supportive. His leadership style helped me grow not just in skills, but in confidence and mindset."
+        name="Goutham Kishore"
+        role="Full Stack Developer, reported to Udhaya"
+      />
+      <TestimonialCard
+        quote="Udhaya is an exceptional engineer with strong technical depth and the curiosity to solve complex client challenges. He combines a high ownership mindset with excellent communication, translating technical concepts clearly for non-technical stakeholders. He approaches problems strategically and drives solutions with minimal oversight."
+        name="Mannat Bhalla"
+        role="Customer Success Manager"
+      />
+      <TestimonialCard
+        quote="Udhaya has demonstrated an impressive ability to manage complex product development projects while leading a diverse team. His leadership style fosters a supportive environment where team members can thrive. He has effectively mentored colleagues and consistently ensures strong outcomes for both clients and the team."
+        name="Vasudeva Sagari"
+        role="Engineering Manager / Former Manager"
+      />
+      <TestimonialCard
+        quote="Udhaya is an exceptional leader who sets high standards for his team and inspires them to reach their full potential. His technical expertise has been invaluable to the success of our projects. I believe that Udhaya would be an asset to any organization."
+        name="Piyush Jaiswal"
+        role="Backend Engineer, reported to Udhaya"
+      />
+    </div>
   </section>
 
   <!-- What I get hired for -->
@@ -46,36 +73,9 @@ import { profile } from '../data/profile';
     </ul>
   </section>
 
-  <!-- Testimonials -->
+  <!-- What I've learned -->
   <section style="padding: 52px 0; border-bottom: 1px solid var(--rule);">
-    <h2 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin-bottom: 40px;">What people say</h2>
-    <div style="display: grid; gap: 24px;">
-      <TestimonialCard
-        quote="I worked with Udhay for the past four years, and calling him just a 'team lead' wouldn't do justice to the role he played in my journey. He has been an exceptional mentor and guide, always approachable, patient, and supportive. His leadership style helped me grow not just in skills, but in confidence and mindset."
-        name="Goutham Kishore"
-        role="Full Stack Developer, reported to Udhaya"
-      />
-      <TestimonialCard
-        quote="Udhaya is an exceptional engineer with strong technical depth and the curiosity to solve complex client challenges. He combines a high ownership mindset with excellent communication, translating technical concepts clearly for non-technical stakeholders. He approaches problems strategically and drives solutions with minimal oversight."
-        name="Mannat Bhalla"
-        role="Customer Success Manager"
-      />
-      <TestimonialCard
-        quote="Udhaya has demonstrated an impressive ability to manage complex product development projects while leading a diverse team. His leadership style fosters a supportive environment where team members can thrive. He has effectively mentored colleagues and consistently ensures strong outcomes for both clients and the team."
-        name="Vasudeva Sagari"
-        role="Engineering Manager / Former Manager"
-      />
-      <TestimonialCard
-        quote="Udhaya is an exceptional leader who sets high standards for his team and inspires them to reach their full potential. His technical expertise has been invaluable to the success of our projects. I believe that Udhaya would be an asset to any organization."
-        name="Piyush Jaiswal"
-        role="Backend Engineer, reported to Udhaya"
-      />
-    </div>
-  </section>
-
-  <!-- Engineering Principles -->
-  <section style="padding: 52px 0; border-bottom: 1px solid var(--rule);">
-    <h2 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin-bottom: 40px;">Engineering Principles</h2>
+    <h2 style="font-family: 'JetBrains Mono', monospace; font-size: var(--fs-32); font-weight: 600; margin-bottom: 40px;">What I've learned</h2>
     <div style="display: grid; gap: 32px;">
       <div>
         <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Reversibility</p>
@@ -120,7 +120,7 @@ import { profile } from '../data/profile';
   <!-- Next chapter -->
   <section style="padding: 52px 0; border-bottom: 1px solid var(--rule);">
     <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px;">Next chapter</p>
-    <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">I concluded my tenure at ConvertCart in May 2026 after 5+ years owning data infrastructure end-to-end. I'm now looking for roles where I can own a backend or data infrastructure system with the same scope and have real influence on how a team scales. I'm most excited by remote-first startups solving hard problems at scale.</p>
+    <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch;">I concluded my tenure at ConvertCart in May 2026 after 5+ years owning data infrastructure end-to-end. I'm looking for Staff, Principal, or Founding-Engineer roles where I can own a backend or data infrastructure system with the same scope and have real influence on how a team scales. I'm most excited by remote-first startups solving hard problems at scale.</p>
   </section>
 
   <!-- Areas I'm actively growing -->

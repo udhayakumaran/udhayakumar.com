@@ -19,10 +19,10 @@ import { profile } from '../data/profile';
   <section class="hiring-thesis"><SectionEyebrow label="Hiring thesis" /><p class="thesis-copy">I work best owning backend and data infrastructure systems end-to-end. I'm drawn to roles where I can influence architecture across multiple teams, lead small teams through scaling, and own both technical direction and operational reliability.</p><p class="role-fit"><strong>Relevant role fit:</strong> {profile.roleFit.join(' · ')}</p></section>
 
   <section class="production-proof"><SectionEyebrow label="Production proof" /><div class="proof-list">
+    <article><p class="proof-kicker">Cost optimization · data infrastructure</p><h2>ClickHouse cost optimization</h2><p>77.8% cost reduction (6× more efficient). Migrated customer segmentation from BigQuery Views to ClickHouse using batched deterministic hashing (cityHash64) and right-sized compute (64GB → 16GB RAM). The workload was wrong for the database model, not a tuning problem.</p><strong>₹1.4 lakhs/month savings · 6× efficiency gain</strong></article>
     <article><p class="proof-kicker">Ownership · system · scale</p><h2>Data platform</h2><p>I owned the rebuild of customer and order data infrastructure serving {profile.proof.merchants} across five commerce platforms. Webhook freshness moved from days-late batch data to sub-minute.</p><strong>Days → sub-minute webhook freshness</strong></article>
     <article><p class="proof-kicker">Ownership · product · adoption</p><h2>Recommendation system</h2><p>I initiated and built a three-tier recommendation product, from trust-first manual blocks to live ranking across five regions.</p><strong>{profile.proof.recommendations}</strong></article>
     <article><p class="proof-kicker">Ownership · data product · rollout</p><h2>Customer segmentation</h2><p>I owned the query model and builder that unified four source systems for Customer Success teams.</p><strong>{profile.proof.segmentation}</strong></article>
-    <article><p class="proof-kicker">Cost optimization · data infrastructure</p><h2>ClickHouse cost optimization</h2><p>Migrated customer segmentation from BigQuery Views to ClickHouse, reducing monthly cost from ₹1.8 lakhs to ₹40K (77.8% savings). Achieved through batched deterministic hashing (cityHash64) and right-sizing compute.</p><strong>₹1.4 lakhs/month savings · 64GB → 16GB RAM</strong></article>
   </div></section>
 
   <section id="selected-work" class="selected-work"><SectionEyebrow label="Selected work · recommended reading order" /><p class="section-intro">Start with the data platform, then read the production incident. These show architecture ownership and operational judgment fastest.</p><div class="case-list">
@@ -40,12 +40,9 @@ import { profile } from '../data/profile';
     <a href="/case-studies/hard-problems#incident-10" class="incident-item"><span class="incident-number">10</span><div><h2>Backpressure as a platform pattern</h2><p>Turned daily Pub/Sub consumer OOM crashes into a pause/resume pattern adopted across consuming services.</p></div><span class="incident-arrow">→</span></a>
   </div><a class="incident-record-link" href="/case-studies/hard-problems">Read all ten incident records →</a></section>
 
-  <section class="independent-work"><SectionEyebrow label="Independent products" /><p class="section-intro">Supporting evidence of founding-engineer range: product decisions, backend, UX, AI integration, and deployment.</p><div class="independent-list">
-    <article><a href={profile.links.briefMyDoctor} target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;"><p class="item-kicker">AI product · live</p><h2>BriefMyDoctor</h2><p>Controlled-content and LLM-assisted product that helps people prepare for doctor visits.</p></a></article>
-    <article><a href="https://chromewebstore.google.com/detail/hitreplai-%E2%80%94-ai-linkedin-c/dgajfbmalpiehfogbemkjpfgmjmcnafb?pli=1" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;"><p class="item-kicker">Chrome extension · live</p><h2>HitReplAI</h2><p>Built browser interaction, backend persistence, AI integration, marketing site, and deployment path.</p></a></article>
-    <article><a href={profile.links.enbus} target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;"><p class="item-kicker">Public data product · live</p><h2>enbus</h2><p>Tamil Nadu bus route search powered by PostgreSQL, fuzzy/full-text search, and an indexed route model.</p></a></article>
-    <article><a href={profile.links.fruggy} target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;"><p class="item-kicker">Grocery app · live</p><h2>Fruggy</h2><p>Helps Indian shoppers know real prices before checkout, compare pack sizes, and stay within budget—offline, private, no login.</p></a></article>
-  </div></section>
+  <section class="independent-note" style="padding: var(--space-section) 0; border-top: 1px solid var(--rule);">
+    <p style="font-size: var(--fs-14); color: var(--ink-2); max-width: 65ch;">Also shipped Affairs Map (LLM production pipeline), Fruggy (Flutter, 1K+ downloads), and a few other independent projects — happy to share the full list on request.</p>
+  </section>
 
   <section class="final-cta"><SectionEyebrow label="Next step" /><h2>Let's talk about the infrastructure problem you need owned end-to-end.</h2><p>Download my resume and tell me what you're building.</p><div class="hero-actions"><CTAButton href="/resume" label="Download Resume" variant="solid" /><CTAButton href={`mailto:${profile.email}`} label="Email me" variant="outline" /></div></section>
 </Layout>
@@ -57,9 +54,9 @@ import { profile } from '../data/profile';
   .hero-meta, .role-fit { color: var(--ink-2); max-width: 70ch; }
   .hero-actions { display: flex; gap: var(--space-3); flex-wrap: wrap; margin-top: var(--space-6); }
   .hero-links { display: flex; gap: var(--space-4); margin-top: var(--space-4); font-size: var(--fs-14); }
-  .hiring-thesis, .production-proof, .selected-work, .incident-feature, .independent-work, .final-cta { border-top: 1px solid var(--rule); padding: var(--space-section) 0; }
+  .hiring-thesis, .production-proof, .selected-work, .incident-feature, .final-cta { border-top: 1px solid var(--rule); padding: var(--space-section) 0; }
   .thesis-copy { max-width: 64ch; font-size: var(--fs-24); line-height: 1.45; margin-bottom: var(--space-4); }
-  .proof-list, .independent-list { display: grid; gap: var(--space-6); }
+  .proof-list { display: grid; gap: var(--space-6); }
   .proof-list article { padding: var(--space-6) 0; border-bottom: 1px solid var(--rule); max-width: 70ch; }
   .proof-list h2 { font-size: var(--fs-20); margin-bottom: var(--space-2); }
   .proof-list p { max-width: 65ch; color: var(--ink-2); }
@@ -82,11 +79,8 @@ import { profile } from '../data/profile';
   .incident-item p { color: var(--ink-2); font-size: var(--fs-14); }
   .incident-arrow { color: var(--accent); font-size: var(--fs-18); }
   .incident-record-link { display: inline-block; margin-top: var(--space-5); color: var(--accent); font-family: "IBM Plex Mono", monospace; font-size: var(--fs-14); }
-  .independent-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .independent-list article { padding-top: var(--space-4); border-top: 1px solid var(--rule); }
-  .independent-list h2 { font-size: var(--fs-20); margin-bottom: var(--space-2); }
-  .independent-list p:not(.item-kicker), .final-cta p { color: var(--ink-2); }
+  .final-cta p { color: var(--ink-2); }
   .final-cta { border-bottom: 1px solid var(--rule); }
   .final-cta h2 { max-width: 32ch; }
-  @media (max-width: 640px) { .hero h1 { max-width: none; } .incident-feature, .independent-list, .incident-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 640px) { .hero h1 { max-width: none; } .incident-feature, .incident-grid { grid-template-columns: 1fr; } }
 </style>

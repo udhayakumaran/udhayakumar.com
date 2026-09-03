@@ -167,6 +167,17 @@ import Layout from '../../layouts/Layout.astro';
       <p style="font-size: 14px; color: var(--ink-2); max-width: 65ch;">New sources plug into the landing layer. New consumers subscribe to Pub/Sub. No custom integrations required. Platform team owns the landing layer and CDC; 5-minute latency alerts, 15-minute on-call page threshold.</p>
     </section>
 
+    <!-- ClickHouse Tuning -->
+    <section style="margin-bottom: 48px;">
+      <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">ClickHouse Tuning</h2>
+      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 24px;">Migrated segmentation analytics from BigQuery to ClickHouse to reduce cost 77.8% (₹1.8L → ₹40K/month) and achieved sub-second response latency on million-row aggregations. Tuning choices:</p>
+      <ul style="list-style: none; padding: 0; margin: 0; max-width: 65ch;">
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;"><strong>Partitioning:</strong> <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent);">(client_id, date)</code> to isolate per-store backfills and date-range scans.</li>
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;"><strong>Order by:</strong> <code style="font-family: 'JetBrains Mono', monospace; color: var(--accent);">date</code> for both segmentation filters and time-series reporting queries.</li>
+        <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">Materialized views: Hourly batch refresh instead of real-time (stable CPU, predictable cost).</li>
+      </ul>
+    </section>
+
     <!-- Key Decisions -->
     <section style="margin-bottom: 48px;">
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Key Decisions</h2>

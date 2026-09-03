@@ -16,7 +16,7 @@ import Layout from '../../layouts/Layout.astro';
       <button onclick="navigator.clipboard.writeText(window.location.href); this.textContent='Copied!'; setTimeout(() => this.textContent='Copy link', 2000);" style="padding: 8px 16px; border: 1px solid var(--rule); background: transparent; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); white-space: nowrap; border-radius: 3px; transition: all 0.2s ease;" onmouseenter="this.style.borderColor='var(--accent)'" onmouseleave="this.style.borderColor='var(--rule)'">Copy link</button>
     </div>
 
-    <p style="font-size: 16px; color: var(--ink-2); margin-bottom: 32px; max-width: 65ch;">I built the company's product recommendation system from zero. Solved cold-start by tiering on data requirements: three independent engines, each deployable when its data dependency is met. Multi-region serving under latency SLA.</p>
+    <p style="font-size: 16px; color: var(--ink-2); margin-bottom: 32px; max-width: 65ch;">I built the company's product recommendation system from zero. Solved cold-start through three independent engines with CSM-driven tier selection: Curated (day 1, zero risk), Automated (pattern rules), Smart (live behavioral ranking). Multi-region serving under latency SLA.</p>
 
     <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 32px;">
       <span style="background: var(--accent-wash); color: var(--accent); padding: 8px 12px; border-radius: 3px; font-size: 13px;">day-1 deployment · no data required</span>
@@ -86,7 +86,7 @@ import Layout from '../../layouts/Layout.astro';
     <!-- Architecture -->
     <section style="margin-bottom: 48px;">
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Architecture</h2>
-      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 24px;">Three independent engines, tiered on data requirements. Curated: CSM hand-picks, zero data, day 1. Automated: pattern rules, ~50 transactions (week 1), batch-refreshed. Smart: live behavioral ranking, 30+ days history + 500 orders + 200 unique customers (week 3-4), Redis-backed. Each tier deployable when its data threshold is met. Multi-region MongoDB for serving, ClickHouse for analytics.</p>
+      <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin-bottom: 24px;">Three independent engines (Curated, Automated, Smart), tier selection driven by CSM discretion, not data availability. CSMs choose which tier per merchant based on trust and use case. Data flows live to Redis, then migrates to BigQuery after 30 minutes of session inactivity or session close. All logic and serving handled backend; client renders. Multi-region MongoDB for serving, ClickHouse for analytics.</p>
 
       <!-- Recommendation Architecture SVG -->
       <svg viewBox="0 0 640 480" style="max-width: 65ch; width: 100%; margin-bottom: 24px; display: block;" xmlns="http://www.w3.org/2000/svg">
@@ -145,8 +145,8 @@ import Layout from '../../layouts/Layout.astro';
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Key Decisions</h2>
       <ol style="max-width: 65ch; list-style: none; padding: 0;">
         <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 20px;">
-          <strong>Three independent engines tiered on data requirements</strong><br/>
-          <span style="color: var(--ink-2);">Do not ship all tiers day 1. Tier deployment is blocked by data availability. Curated activates immediately (no data needed). Automated activates week 1-2 (50+ transactions). Smart activates week 3-4 (30+ days baseline). Each tier unblocks the next by generating data.</span>
+          <strong>Tier selection driven by CSM judgment, not data triggers</strong><br/>
+          <span style="color: var(--ink-2);">CSMs choose which tier per merchant—Curated for cautious starts, Automated for merchants with early transaction history, Smart for established stores ready for live behavioral ranking. No automatic progression based on transaction thresholds. Puts control in the hands of customer success, not an algorithm.</span>
         </li>
         <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 20px;">
           <strong>Computation matched to data maturity</strong><br/>
@@ -168,8 +168,8 @@ import Layout from '../../layouts/Layout.astro';
       <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">Execution</h2>
 
       <div style="margin-bottom: 24px;">
-        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Data Threshold Gating</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Automated tier: monitored order volume. Gated at 50 cumulative transactions. Batch job runs daily; queries only fire once gate passes. Smart tier: monitored 30-day history, order count (≥500), unique customer count (≥200). Model retraining scheduled only after all thresholds met.</p>
+        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Data Pipeline</h3>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Behavioral events collected live into Redis. After 30 minutes of session inactivity or session close, data migrates to BigQuery for historical analysis. All logic and filtering happens backend; client is rendering only. Tier selection and ranking computed server-side, not pushed client-side.</p>
       </div>
 
       <div style="margin-bottom: 24px;">
@@ -200,16 +200,16 @@ import Layout from '../../layouts/Layout.astro';
       <div style="margin-bottom: 24px;">
         <h3 style="font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 12px;">Technical Achievement</h3>
         <ul style="max-width: 65ch; list-style: none; padding: 0;">
-          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Solved cold-start by tiering on data requirements. Zero data (Curated) → week 1 data (Automated) → week 4 data (Smart). Each tier deployable independently.</li>
+          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Cold-start solved by CSM-driven tier selection + three independent engines. CSMs choose tier (Curated, Automated, Smart) per merchant based on confidence and use case, not algorithm-triggered progression.</li>
+          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Data pipeline: live to Redis, migrate to BigQuery after 30min inactivity or session close. All backend logic; client renders only. No client-side filtering or ranking logic.</li>
           <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Multi-region serving with regional Redis + fallback caching. 200ms p99 latency across five regions despite 5-10s replication lag.</li>
-          <li style="font-size: 16px; line-height: 1.8; color: var(--ink); margin-bottom: 12px;">Model validation gate ensured Smart tier only served high-confidence rankings. Prevented garbage output from ruining system trust.</li>
-          <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">Canary deployment pattern for ranking updates. New models validated on 5% traffic before full rollout.</li>
+          <li style="font-size: 16px; line-height: 1.8; color: var(--ink);">Model validation gate ensured Smart tier only served high-confidence rankings. Prevented garbage output from ruining system trust.</li>
         </ul>
       </div>
 
       <div>
         <h3 style="font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 12px;">Scale</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Day-1 deployment (zero data needed) · five regions · 200ms p99 latency target · three-tier architecture supports 30-day progression from Curated → Automated → Smart</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Day-1 deployment (Curated tier, zero risk) · five regions · 200ms p99 latency · CSM-driven tier progression from Curated → Automated → Smart as merchants gain confidence</p>
       </div>
     </section>
 
@@ -219,7 +219,7 @@ import Layout from '../../layouts/Layout.astro';
 
       <div style="margin-bottom: 24px;">
         <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">What I'd Preserve</h3>
-        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Three-tier tiered-on-data-requirements model. Data dependencies block tier activation. This architecture prevented shipping garbage output and losing merchant trust on day 1.</p>
+        <p style="font-size: 16px; line-height: 1.8; color: var(--ink); max-width: 65ch; margin: 0;">Three-tier architecture with CSM control. Giving customer success ownership over tier selection (not automation) meant we could start with Curated (zero risk), and CSMs could upgrade merchants to Automated/Smart as they gained confidence. Prevented shipping garbage output and losing trust on day 1.</p>
       </div>
 
       <div>

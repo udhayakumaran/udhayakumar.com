@@ -22,7 +22,7 @@ def role(title: str, dates: str, company: str, items: tuple[str, ...]) -> str:
 <div class="company">{esc(company)}</div><ul>{bullets(items)}</ul></section>'''
 
 
-HTML = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Udhaya Kumar - Senior Backend Engineer</title>
+HTML = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Udhaya Kumar - Staff Backend Engineer</title>
 <style>
 @page {{ size: Letter; margin: .48in .55in .45in; }}
 * {{ box-sizing: border-box; }} body {{ margin: 0; color: #171a20; font-family: Arial, Helvetica, sans-serif; font-size: 9.25pt; line-height: 1.34; }}
@@ -32,7 +32,7 @@ h1 {{ margin: 0; font-size: 24pt; line-height: 1; letter-spacing: .01em; }} h2 {
 .role {{ margin: 0 0 8px; break-inside: avoid; }} .role-head {{ display: flex; justify-content: space-between; gap: 16px; line-height: 1.2; }} .role-head span {{ white-space: nowrap; color: #47505a; }} .company {{ margin: 2px 0 2px; color: #47505a; font-style: italic; }} ul {{ margin: 0; padding-left: 17px; }} li {{ margin: 1px 0; }}
 .page-break {{ break-before: page; page-break-before: always; }} .project {{ margin: 0 0 6px; }} .project strong {{ color: #075858; }} .footer {{ margin-top: 18px; padding-top: 5px; border-top: 1px solid #b9d1ce; color: #606871; font-size: 7.5pt; display: flex; justify-content: space-between; }}
 </style></head><body>
-<header><h1>UDHAYA KUMAR</h1><div class="target">Senior Backend Engineer, Data Platform Focus</div><div class="contact"><a href="mailto:mail4udhaya@gmail.com">mail4udhaya@gmail.com</a> | <a href="https://linkedin.com/in/udhayakumark">linkedin.com/in/udhayakumark</a> | Salem, Tamil Nadu, India | Remote</div></header>
+<header><h1>UDHAYA KUMAR</h1><div class="target">Staff Backend Engineer | Debezium · ClickHouse · Pub/Sub · Real-time CDC</div><div class="contact"><a href="mailto:mail4udhaya@gmail.com">mail4udhaya@gmail.com</a> | <a href="https://linkedin.com/in/udhayakumark">linkedin.com/in/udhayakumark</a> | Salem, Tamil Nadu, India | Remote</div></header>
 <h2>Professional Summary</h2><p class="summary">Architect and operate high-scale data systems where every layer (ingestion, modeling, serving, operations) matters. Rearchitected the data platform from batch-sync (days-late latency) to real-time CDC (sub-minute latency) serving 200+ e-commerce merchants. Designed segmentation engine (1,000+ active segments, 80% merchant adoption) and built recommendation system from zero-to-one. Grew backend platform team from 4 to 7 engineers. 13 years across PHP, Node.js, TypeScript, MySQL, ClickHouse, BigQuery, GCP, GKE. Seeking: Staff Engineer, Principal Engineer, or Founding Engineer roles in data infrastructure or platform systems. Remote-first.</p>
 <h2>Professional Experience</h2>
 {role("Senior Product Development Lead (Backend / Data Platform)", "Aug 2021 - May 2026", "ConvertCart AI System Pvt Ltd | Bengaluru (Remote)", ("Owned architecture, migration, monitoring, and production operation for customer and order data across 200+ merchants on five commerce platforms.", "Rearchitected data ingestion from cron-based batch sync to real-time CDC pipelines (Debezium + Google Pub/Sub). Raw MySQL landing → fan-out to MongoDB (serving), ClickHouse (analytics), BigQuery (historical). Reduced data freshness from days-late to sub-minute across all sources. Maintained 98%+ uptime. Directly unblocked real-time segmentation, recommendations, and personalization features.", "Designed multi-source data model and BigQuery customer schema consolidating four e-commerce platforms (Shopify, BigCommerce, WooCommerce, Magento) plus click-tracking data. Implemented identity resolution across anonymous sessions and known customers. Built SQL query builder and materialization pipeline enabling non-technical CSMs to create segments.", "Built segmentation engine serving 1,000+ active segments within 6 months. 80% merchant adoption of advanced features. Business impact: reduced engineering backlog from 40 pending requests to self-serve (CSMs unblocked from engineering dependency).", "Built recommendation engine (Manual → Automated → Smart trust ladder) from zero-to-one. 80%+ of merchants trialling Smart tier adopted it. Multi-region serving with 200ms p99 latency target.", "Architected 50+ microservice platform while leading platform team growth from 4 to 7 engineers. Owned architecture reviews, code reviews, technical alignment, mentoring, and delivery decisions."))}
@@ -50,7 +50,7 @@ h1 {{ margin: 0; font-size: 24pt; line-height: 1; letter-spacing: .01em; }} h2 {
 <p>B.E. Computer Science and Engineering · Adhiyamaan College of Engineering</p>
 <h2>Looking For</h2>
 <ul><li>Staff Engineer or Principal Engineer roles: owning data systems or platforms end-to-end, working with teams of 3–8 engineers, making tradeoff decisions under constraints.</li><li>Founding Engineer roles: zero-to-one shipping in data infrastructure or backend systems, comfortable with ambiguity and shipping fast.</li><li>Also open to: Engineering Manager roles focused on platform/infrastructure teams, with strong IC credibility as foundation.</li><li>Preferences: remote-first, India-based or worldwide roles, async-friendly engineering cultures where engineers own outcomes.</li></ul>
-<div class="footer"><span>Udhaya Kumar</span><span>Senior Backend Engineer, Data Platform Focus</span></div>
+<div class="footer"><span>Udhaya Kumar</span><span>Staff Backend Engineer | Debezium · ClickHouse · Pub/Sub · Real-time CDC</span></div>
 </body></html>'''
 
 
@@ -64,7 +64,7 @@ def main() -> None:
     subprocess.run([chrome, "--headless", "--no-sandbox", "--disable-gpu", "--no-pdf-header-footer", f"--print-to-pdf={pdf_path}", html_path.as_uri()], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True)
 
     metadata_pdf = TMP / "metadata-general.pdf"
-    subprocess.run(["/usr/bin/gs", "-q", "-dBATCH", "-dNOPAUSE", "-sDEVICE=pdfwrite", f"-sOutputFile={metadata_pdf}", str(pdf_path), "-c", "[/Title (Senior Backend Engineer - Udhaya Kumar) /Author (Udhaya Kumar) /Subject (ATS-friendly resume) /Keywords (Senior Backend Engineer, backend infrastructure, distributed systems, data platform, CDC, Debezium, Pub/Sub, migrations, observability, ClickHouse, BigQuery, MySQL) /DOCINFO pdfmark"], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True)
+    subprocess.run(["/usr/bin/gs", "-q", "-dBATCH", "-dNOPAUSE", "-sDEVICE=pdfwrite", f"-sOutputFile={metadata_pdf}", str(pdf_path), "-c", "[/Title (Staff Backend Engineer - Udhaya Kumar) /Author (Udhaya Kumar) /Subject (ATS-friendly resume) /Keywords (Staff Backend Engineer, real-time data infrastructure, CDC, Debezium, ClickHouse, Pub/Sub, backend infrastructure, distributed systems, data platform, migrations, observability, BigQuery, MySQL) /DOCINFO pdfmark"], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True)
     metadata_pdf.replace(pdf_path)
 
     print(f"Generated optimized resume at {pdf_path}")

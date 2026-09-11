@@ -85,23 +85,40 @@ const { lenses, defaultLens = "data" } = Astro.props;
 <script define:vars={{ lenses, defaultLens }}>
   const lensButtons = document.getElementById("lens-buttons");
   const lensNote = document.getElementById("lens-note");
+  const isOnCaseStudiesPage = window.location.pathname === "/case-studies" || window.location.pathname === "/case-studies/";
 
   if (lensButtons) {
-    // Set initial hash from lens
-    function updateHash(lensId) {
-      if (lensId !== "data") {
-        window.location.hash = lensId;
+    // Get or set lens from URL (use query param on case-studies page, hash elsewhere)
+    function getActiveLens() {
+      if (isOnCaseStudiesPage) {
+        const params = new URLSearchParams(window.location.search);
+        return params.get("lens") || "data";
       } else {
-        window.location.hash = "";
+        return window.location.hash.slice(1) || "data";
       }
     }
 
-    // Sync from hash on page load
-    function syncFromHash() {
-      const hash = window.location.hash.slice(1) || "data";
+    function updateLens(lensId) {
+      if (isOnCaseStudiesPage) {
+        const url = new URL(window.location);
+        url.searchParams.set("lens", lensId);
+        window.history.replaceState({}, "", url);
+        // Trigger page re-render or reorder via CSS/JS
+        document.documentElement.setAttribute("data-active-lens", lensId);
+      } else {
+        if (lensId !== "data") {
+          window.location.hash = lensId;
+        } else {
+          window.location.hash = "";
+        }
+      }
+    }
+
+    // Sync buttons and note from active lens
+    function syncFromLens(lensId) {
       const buttons = lensButtons.querySelectorAll(".lens-btn");
       buttons.forEach((btn) => {
-        if (btn.dataset.lens === hash) {
+        if (btn.dataset.lens === lensId) {
           btn.classList.add("active");
           btn.setAttribute("aria-pressed", "true");
         } else {
@@ -111,7 +128,7 @@ const { lenses, defaultLens = "data" } = Astro.props;
       });
 
       // Update note (fade, but instant reorder per BUILD-BRIEF)
-      const lens = lenses.find((l) => l.id === hash);
+      const lens = lenses.find((l) => l.id === lensId);
       if (lens && lensNote) {
         lensNote.textContent = lens.note;
       }
@@ -121,15 +138,21 @@ const { lenses, defaultLens = "data" } = Astro.props;
     lensButtons.addEventListener("click", (e) => {
       if (e.target.classList.contains("lens-btn")) {
         const lensId = e.target.dataset.lens;
-        updateHash(lensId);
-        syncFromHash();
+        updateLens(lensId);
+        syncFromLens(lensId);
+        // Dispatch custom event for other components to listen
+        document.dispatchEvent(new CustomEvent("lens-change", { detail: { lensId } }));
       }
     });
 
-    // Hash change listener
-    window.addEventListener("hashchange", syncFromHash);
+    // Hash change listener (for non-case-studies pages)
+    if (!isOnCaseStudiesPage) {
+      window.addEventListener("hashchange", () => {
+        syncFromLens(getActiveLens());
+      });
+    }
 
     // Initial sync on load
-    syncFromHash();
+    syncFromLens(getActiveLens());
   }
 </script>

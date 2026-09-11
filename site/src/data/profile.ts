@@ -77,3 +77,30 @@ export const roleLanes = [
   "Staff Backend Engineer",
   "Founding Engineer",
 ];
+
+export const caseStudyLenses = [
+  {
+    id: "data",
+    label: "Data Platform",
+    note: "Five years owning a data platform end to end — ingestion, modelling, serving, and the cost of running it. Two CDC paths, a warehouse consolidation, a multi-tenant landing store, and a reporting migration driven by the shape of a billing model rather than a broken system.",
+    leadsWith: "data-platform",
+  },
+  {
+    id: "arch",
+    label: "Architecture",
+    note: "Every case study below states what I rejected and why. The through-line: refuse to normalise at the ingestion boundary where the decision is irreversible, then normalise in the warehouse where a wrong model is a redefinition rather than a migration. Same judgment applied at two layers.",
+    leadsWith: "data-platform",
+  },
+  {
+    id: "founding",
+    label: "Founding Engineer",
+    note: "Zero to one twice over — a recommendation product built from scratch inside a startup and taken to 80%+ adoption on its hardest tier, and six products designed, built and shipped alone outside one. Comfortable owning a surface end to end with nobody behind me.",
+    leadsWith: "recommendations",
+  },
+  {
+    id: "ecom",
+    label: "E-commerce",
+    note: "Shopify, BigCommerce, WooCommerce, and Magento 1 and 2 — in production simultaneously for 200+ merchants across five years. Webhook reliability, catalogue sync, storefront latency budgets, conversion attribution, and the constraint that a merchant will absorb no cost for your architecture.",
+    leadsWith: "data-platform",
+  },
+];

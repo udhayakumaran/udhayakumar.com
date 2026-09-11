@@ -10,22 +10,23 @@ const normalizedPath = currentPath.replace(/\/$/, "") || "/";
 
 const navItems = [
   { href: "/", label: "Home" },
-  { href: "/case-studies", label: "Work" },
-  { href: "/about", label: "About" },
-  { href: "/resume", label: "Resume" },
+  { href: "/case-studies/", label: "Work" },
+  { href: "/about/", label: "About" },
+  { href: "/resume/", label: "Resume" },
 ];
 ---
 
-<header>
-  <nav aria-label="Primary navigation">
-    <a href="/" class="wordmark">{profile.name}</a>
-    <div class="nav-links">
+<header class="border-b border-rule py-6 sticky top-0 bg-bg z-100">
+  <nav class="mx-auto max-w-[860px] px-5 flex gap-10 items-center md:gap-5" aria-label="Primary navigation">
+    <a href="/" class="font-display text-18 font-bold text-ink no-underline mr-auto transition-colors duration-200 min-h-[44px] inline-flex items-center hover:text-accent">{profile.name}</a>
+    <div class="flex gap-10 items-center md:gap-5 md:order-3 md:w-full">
       {navItems.map((item) => (
         <a
           href={item.href}
+          class="no-underline text-ink font-code text-14 font-medium border-b-2 border-transparent transition-[border-color] duration-200 min-h-[44px] inline-flex items-center px-2 hover:border-accent focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
           aria-current={
             normalizedPath === item.href ||
-            (item.href === "/case-studies" && normalizedPath.startsWith("/case-studies/"))
+            (item.href === "/case-studies/" && normalizedPath.startsWith("/case-studies/"))
               ? "page"
               : undefined
           }
@@ -33,157 +34,16 @@ const navItems = [
           {item.label}
         </a>
       ))}
-      <a href={`mailto:${profile.email}`}>Contact</a>
+      <a href={`mailto:${profile.email}`} class="no-underline text-ink font-code text-14 font-medium border-b-2 border-transparent transition-[border-color] duration-200 min-h-[44px] inline-flex items-center px-2 hover:border-accent focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">Contact</a>
     </div>
-    <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode" title="Toggle dark mode" aria-pressed="false">
+    <button class="bg-transparent border border-rule-2 text-ink text-14 font-medium px-2 py-2 rounded-sm cursor-pointer transition-all duration-200 font-code min-w-[44px] min-h-[44px] hover:border-accent hover:text-accent focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2 md:order-2" id="theme-toggle" aria-label="Switch to dark mode" title="Toggle dark mode" aria-pressed="false">
       <span id="theme-icon">🌙</span>
     </button>
-    <button class="cmd-palette-trigger" id="cmd-palette-trigger" aria-label="Open command palette" title="Open command palette (⌘K)">
-      <span class="cmd-palette-icon">⌘</span>
+    <button class="bg-transparent border border-rule-2 text-ink-3 text-12 font-semibold px-2 py-2 rounded-sm cursor-pointer transition-all duration-200 font-code min-w-[44px] min-h-[44px] flex items-center justify-center hover:border-accent hover:text-accent focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2" id="cmd-palette-trigger" aria-label="Open command palette" title="Open command palette (⌘K)">
+      <span class="inline-block">⌘</span>
     </button>
   </nav>
 </header>
-
-<style>
-  header {
-    border-bottom: 1px solid var(--rule);
-    padding: var(--space-6) 0;
-    position: sticky;
-    top: 0;
-    background: var(--bg);
-    z-index: 100;
-  }
-
-  nav {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    gap: var(--space-8);
-    align-items: center;
-  }
-
-  .wordmark {
-    font-family: "Bricolage Grotesque", system-ui, sans-serif;
-    font-size: var(--fs-18);
-    font-weight: 700;
-    color: var(--ink);
-    text-decoration: none;
-    margin-right: auto;
-    transition: color 0.2s ease;
-  }
-
-  .wordmark:hover {
-    color: var(--accent);
-  }
-
-  .nav-links {
-    display: flex;
-    gap: var(--space-8);
-    align-items: center;
-  }
-
-  nav a {
-    text-decoration: none;
-    color: var(--ink);
-    font-family: "IBM Plex Mono", monospace;
-    font-size: var(--fs-14);
-    font-weight: 500;
-    border-bottom: 2px solid transparent;
-    transition: border-color 0.2s ease;
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-  }
-
-  nav a:hover,
-  nav a[aria-current="page"] {
-    border-bottom-color: var(--accent);
-  }
-
-  nav a:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
-
-  .theme-toggle {
-    background: transparent;
-    border: 1px solid var(--rule-2);
-    color: var(--ink);
-    font-size: var(--fs-14);
-    font-weight: 500;
-    padding: var(--space-2) var(--space-3);
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-family: "IBM Plex Mono", monospace;
-    min-width: 44px;
-    min-height: 44px;
-  }
-
-  .theme-toggle:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  .theme-toggle:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
-
-  .cmd-palette-trigger {
-    background: transparent;
-    border: 1px solid var(--rule-2);
-    color: var(--ink-3);
-    font-size: var(--fs-12);
-    font-weight: 600;
-    padding: var(--space-2) var(--space-3);
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-family: "IBM Plex Mono", monospace;
-    min-width: 44px;
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .cmd-palette-trigger:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  .cmd-palette-trigger:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
-
-  .cmd-palette-icon {
-    display: inline-block;
-  }
-
-  @media (max-width: 768px) {
-    nav {
-      gap: var(--space-5);
-      flex-wrap: wrap;
-    }
-
-    .nav-links {
-      gap: var(--space-5);
-      order: 3;
-      width: 100%;
-    }
-
-    .wordmark {
-      margin-right: 0;
-    }
-
-    .theme-toggle {
-      order: 2;
-    }
-  }
-</style>
 
 <script>
   const themeToggle = document.getElementById("theme-toggle");

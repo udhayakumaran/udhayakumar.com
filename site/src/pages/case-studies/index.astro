@@ -76,25 +76,6 @@ const caseStudies: CaseStudy[] = [
   </section>
 </Layout>
 
-<style>
-  .case-label { color: var(--accent-ink); font-family: "IBM Plex Mono", monospace; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; }
-
-  .case-link {
-    order: var(--order, auto);
-  }
-
-  .case-link:hover {
-    border-color: var(--accent);
-  }
-  .case-link:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
-
-  #case-studies-grid {
-    display: grid;
-  }
-</style>
 
 <script define:vars={{ caseStudyLenses }}>
   const grid = document.getElementById("case-studies-grid");

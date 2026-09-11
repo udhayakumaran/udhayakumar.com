@@ -12,12 +12,12 @@ import Layout from '../../layouts/Layout.astro';
 >
   <article class="py-13">
     <nav class="mb-8">
-      <a href="/case-studies" class="text-14 text-accent no-underline">← Back to case studies</a>
+      <a href="/case-studies/" class="text-14 text-accent no-underline">← Back to case studies</a>
     </nav>
 
     <div class="flex gap-4 items-start mb-6">
       <h1 class="font-code text-32 font-semibold m-0 flex-1">The Data Platform</h1>
-      <button onclick="navigator.clipboard.writeText(window.location.href); this.textContent='Copied!'; setTimeout(() => this.textContent='Copy link', 2000);" class="px-4 py-2 border border-rule bg-transparent cursor-pointer font-code text-12 text-accent whitespace-nowrap rounded-[3px] transition-all duration-200" onmouseenter="this.style.borderColor='var(--accent)'" onmouseleave="this.style.borderColor='var(--rule)'">Copy link</button>
+      <button onclick="navigator.clipboard.writeText(window.location.href); this.textContent='Copied!'; setTimeout(() => this.textContent='Copy link', 2000);" class="px-4 py-2 min-h-[44px] flex items-center border border-rule bg-transparent cursor-pointer font-code text-12 text-accent whitespace-nowrap rounded-[3px] transition-all duration-200" onmouseenter="this.style.borderColor='var(--accent)'" onmouseleave="this.style.borderColor='var(--rule)'">Copy link</button>
     </div>
 
     <p class="text-16 text-ink-2 mb-8 max-w-[65ch]">I owned the rebuild of customer and order data infrastructure across 200+ merchants on five commerce platforms. Freshness: sub-5-minute for webhook platforms, ~1–6 hours for others (vs. days-late baseline).</p>
@@ -95,22 +95,8 @@ import Layout from '../../layouts/Layout.astro';
       <!-- Architecture SVG Diagram -->
       <svg viewBox="0 0 640 480" class="max-w-[65ch] w-full mb-6 block arch-diagram" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <style>
-            .arch-box { fill: var(--panel); stroke: var(--rule-2); stroke-width: 1.5; transition: all 0.2s ease; }
-            .arch-box:hover { stroke: var(--accent); stroke-width: 2.5; }
-            .arch-group[data-decision] .arch-box { cursor: pointer; }
-            .arch-group[data-decision][data-active] .arch-box { fill: var(--accent-wash); stroke: var(--accent); stroke-width: 2.5; }
-            .arch-group[data-decision]:focus-visible .arch-box { outline: 2px solid var(--accent); outline-offset: 3px; }
-            .arch-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; fill: var(--ink); }
-            .arch-label-small { font-family: 'JetBrains Mono', monospace; font-size: 10px; fill: var(--ink-2); }
-            .arch-arrow { stroke: var(--ink-3); stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
-            .arch-accent { fill: var(--accent); }
-            @media (prefers-reduced-motion: reduce) {
-              .arch-box { transition: none; }
-            }
-          </style>
           <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-            <polygon points="0 0, 10 3, 0 6" fill="var(--ink-3)" />
+            <polygon points="0 0, 10 3, 0 6" class="fill-ink-3" />
           </marker>
         </defs>
 
@@ -137,7 +123,7 @@ import Layout from '../../layouts/Layout.astro';
         <g class="arch-group" data-decision="0" tabindex="0" role="button" aria-label="MySQL Landing Layer: raw, per-source schemas, reversible landing layer">
           <rect class="arch-box" x="60" y="110" width="440" height="60" rx="4"/>
           <text class="arch-label" x="290" y="138" text-anchor="middle" font-weight="600">MySQL Landing Layer</text>
-          <text class="arch-label-small" x="290" y="155" text-anchor="middle">(raw, per-source schemas, reversible landing layer)</text>
+          <text  x="290" y="155" text-anchor="middle">(raw, per-source schemas, reversible landing layer)</text>
         </g>
 
         <!-- Arrow to CDC -->
@@ -147,7 +133,7 @@ import Layout from '../../layouts/Layout.astro';
         <g class="arch-group" data-decision="1" tabindex="0" role="button" aria-label="Debezium CDC and Google Pub/Sub: replay boundary, per-tenant isolation">
           <rect class="arch-box" x="80" y="210" width="420" height="60" rx="4"/>
           <text class="arch-label" x="290" y="238" text-anchor="middle" font-weight="600">Debezium CDC → Google Pub/Sub</text>
-          <text class="arch-label-small" x="290" y="255" text-anchor="middle">(replay boundary, per-tenant isolation)</text>
+          <text  x="290" y="255" text-anchor="middle">(replay boundary, per-tenant isolation)</text>
         </g>
 
         <!-- Arrows to serving layer -->
@@ -159,30 +145,30 @@ import Layout from '../../layouts/Layout.astro';
         <g class="arch-group" data-decision="3" tabindex="0" role="button" aria-label="MongoDB serving layer for point lookups">
           <rect class="arch-box" x="20" y="310" width="140" height="70" rx="4"/>
           <text class="arch-label" x="90" y="335" text-anchor="middle" font-weight="600">MongoDB</text>
-          <text class="arch-label-small" x="90" y="355" text-anchor="middle">(serving)</text>
-          <text class="arch-label-small" x="90" y="370" text-anchor="middle">point lookups</text>
+          <text  x="90" y="355" text-anchor="middle">(serving)</text>
+          <text  x="90" y="370" text-anchor="middle">point lookups</text>
         </g>
 
         <g class="arch-group" data-decision="3" tabindex="0" role="button" aria-label="ClickHouse analytics layer for aggregation">
           <rect class="arch-box" x="200" y="310" width="140" height="70" rx="4"/>
           <text class="arch-label" x="270" y="335" text-anchor="middle" font-weight="600">ClickHouse</text>
-          <text class="arch-label-small" x="270" y="355" text-anchor="middle">(analytics)</text>
-          <text class="arch-label-small" x="270" y="370" text-anchor="middle">aggregation</text>
+          <text  x="270" y="355" text-anchor="middle">(analytics)</text>
+          <text  x="270" y="370" text-anchor="middle">aggregation</text>
         </g>
 
         <g class="arch-group" data-decision="3" tabindex="0" role="button" aria-label="BigQuery historical layer for audit trail">
           <rect class="arch-box" x="380" y="310" width="140" height="70" rx="4"/>
           <text class="arch-label" x="450" y="335" text-anchor="middle" font-weight="600">BigQuery</text>
-          <text class="arch-label-small" x="450" y="355" text-anchor="middle">(historical)</text>
-          <text class="arch-label-small" x="450" y="370" text-anchor="middle">audit trail</text>
+          <text  x="450" y="355" text-anchor="middle">(historical)</text>
+          <text  x="450" y="370" text-anchor="middle">audit trail</text>
         </g>
 
         <!-- Ownership & SLO annotations -->
-        <text class="arch-label-small" x="290" y="190" text-anchor="middle" style="fill: var(--accent); font-size: 9px;">Platform team owns</text>
-        <text class="arch-label-small" x="290" y="280" text-anchor="middle" style="fill: var(--accent); font-size: 9px;">5min alert, 15min page</text>
+        <text  x="290" y="190" text-anchor="middle" class="arch-label-small fill-accent text-[11px]">Platform team owns</text>
+        <text  x="290" y="280" text-anchor="middle" class="arch-label-small fill-accent text-[11px]">5min alert, 15min page</text>
 
         <!-- Consumption callout -->
-        <text class="arch-label-small" x="290" y="430" text-anchor="middle" style="fill: var(--accent);">← Recommendations, Segmentation, Attribution, Reporting</text>
+        <text  x="290" y="430" text-anchor="middle" class="fill-accent">← Recommendations, Segmentation, Attribution, Reporting</text>
       </svg>
 
       <p class="text-14 text-ink-2 max-w-[65ch]">New sources plug into the landing layer. New consumers subscribe to Pub/Sub. No custom integrations required. Platform team owns the landing layer and CDC; 5-minute latency alerts, 15-minute on-call page threshold.</p>
@@ -344,16 +330,13 @@ import Layout from '../../layouts/Layout.astro';
     <section class="py-13 border-t border-rule mt-13">
       <p class="font-code text-12 text-accent font-semibold mb-4">Next steps</p>
       <ul class="list-none p-0 m-0">
-        <li class="mb-3">→ <a href="/case-studies/hard-problems" class="plain-link">See production incidents that shaped this design</a></li>
-        <li class="mb-3">→ <a href="/resume" class="plain-link">Download my resume</a></li>
+        <li class="mb-3">→ <a href="/case-studies/hard-problems/" class="plain-link">See production incidents that shaped this design</a></li>
+        <li class="mb-3">→ <a href="/resume/" class="plain-link">Download my resume</a></li>
       </ul>
     </section>
   </article>
 </Layout>
 
-<style>
-  .case-next { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 32px; margin-top: 48px; border-top: 1px solid var(--rule); }
-</style>
 
 <script>
   const diagram = document.querySelector(".arch-diagram");

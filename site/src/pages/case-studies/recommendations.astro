@@ -12,12 +12,12 @@ import Layout from '../../layouts/Layout.astro';
 >
   <article class="py-13">
     <nav class="mb-8">
-      <a href="/case-studies" class="text-14 text-accent no-underline">← Back to case studies</a>
+      <a href="/case-studies/" class="text-14 text-accent no-underline">← Back to case studies</a>
     </nav>
 
     <div class="flex gap-4 items-start mb-6">
       <h1 class="font-code text-32 font-semibold m-0 flex-1">Recommendation Blocks</h1>
-      <button onclick="navigator.clipboard.writeText(window.location.href); this.textContent='Copied!'; setTimeout(() => this.textContent='Copy link', 2000);" class="px-4 py-2 border border-rule bg-transparent cursor-pointer font-code text-12 text-accent whitespace-nowrap rounded-[3px] transition-all duration-200" onmouseenter="this.style.borderColor='var(--accent)'" onmouseleave="this.style.borderColor='var(--rule)'">Copy link</button>
+      <button onclick="navigator.clipboard.writeText(window.location.href); this.textContent='Copied!'; setTimeout(() => this.textContent='Copy link', 2000);" class="px-4 py-2 min-h-[44px] flex items-center border border-rule bg-transparent cursor-pointer font-code text-12 text-accent whitespace-nowrap rounded-[3px] transition-all duration-200" onmouseenter="this.style.borderColor='var(--accent)'" onmouseleave="this.style.borderColor='var(--rule)'">Copy link</button>
     </div>
 
     <p class="text-16 text-ink-2 mb-8 max-w-[65ch]">I built the company's product recommendation system from zero. Solved cold-start through three independent engines with CSM-driven tier selection: Curated (day 1, zero risk), Automated (pattern rules), Smart (live behavioral ranking). Multi-region serving under latency SLA.</p>
@@ -95,30 +95,24 @@ import Layout from '../../layouts/Layout.astro';
       <!-- Recommendation Architecture SVG -->
       <svg viewBox="0 0 640 480" class="max-w-[65ch] w-full mb-6 block" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <style>
-            .rec-box { fill: var(--panel); stroke: var(--rule-2); stroke-width: 1.5; }
-            .rec-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; fill: var(--ink); font-weight: 600; }
-            .rec-label-small { font-family: 'JetBrains Mono', monospace; font-size: 10px; fill: var(--ink-2); }
-            .rec-arrow { stroke: var(--ink-3); stroke-width: 2; fill: none; marker-end: url(#rec-arrowhead); }
-          </style>
           <marker id="rec-arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-            <polygon points="0 0, 10 3, 0 6" fill="var(--ink-3)" />
+            <polygon points="0 0, 10 3, 0 6" class="fill-ink-3" />
           </marker>
         </defs>
 
         <!-- Tier progression (left column) -->
-        <text class="rec-label" x="100" y="25" text-anchor="middle" style="fill: var(--accent);">TIER PROGRESSION</text>
+        <text class="rec-label" x="100" y="25" text-anchor="middle" class="fill-accent">TIER PROGRESSION</text>
         <rect class="rec-box" x="20" y="40" width="160" height="60" rx="4"/>
         <text class="rec-label" x="100" y="65" text-anchor="middle">Manual</text>
         <text class="rec-label-small" x="100" y="85" text-anchor="middle">CSM hand-picks</text>
         <line class="rec-arrow" x1="100" y1="100" x2="100" y2="130"/>
-        <text class="rec-label-small" x="100" y="125" text-anchor="middle" style="fill: var(--accent);">trust ↑</text>
+        <text class="rec-label-small" x="100" y="125" text-anchor="middle" class="fill-accent">trust ↑</text>
 
         <rect class="rec-box" x="20" y="130" width="160" height="60" rx="4"/>
         <text class="rec-label" x="100" y="155" text-anchor="middle">Automated</text>
         <text class="rec-label-small" x="100" y="175" text-anchor="middle">Rules · batch</text>
         <line class="rec-arrow" x1="100" y1="190" x2="100" y2="220"/>
-        <text class="rec-label-small" x="100" y="215" text-anchor="middle" style="fill: var(--accent);">trust ↑</text>
+        <text class="rec-label-small" x="100" y="215" text-anchor="middle" class="fill-accent">trust ↑</text>
 
         <rect class="rec-box" x="20" y="220" width="160" height="80" rx="4"/>
         <text class="rec-label" x="100" y="250" text-anchor="middle">Smart</text>
@@ -126,7 +120,7 @@ import Layout from '../../layouts/Layout.astro';
         <text class="rec-label-small" x="100" y="285" text-anchor="middle">Live ranking · Redis</text>
 
         <!-- Multi-region serving (right column) -->
-        <text class="rec-label" x="500" y="25" text-anchor="middle" style="fill: var(--accent);">SERVING</text>
+        <text class="rec-label" x="500" y="25" text-anchor="middle" class="fill-accent">SERVING</text>
         <rect class="rec-box" x="420" y="40" width="160" height="50" rx="4"/>
         <text class="rec-label-small" x="500" y="70" text-anchor="middle">US · EU · APAC</text>
 
@@ -134,13 +128,13 @@ import Layout from '../../layouts/Layout.astro';
         <text class="rec-label-small" x="500" y="130" text-anchor="middle">India · Brazil</text>
 
         <rect class="rec-box" x="420" y="160" width="160" height="60" rx="4"/>
-        <text class="rec-label-small" x="500" y="185" text-anchor="middle" style="fill: var(--accent); font-weight: 600;">200ms p99</text>
+        <text class="rec-label-small" x="500" y="185" text-anchor="middle" class="fill-accent font-semibold">200ms p99</text>
         <text class="rec-label-small" x="500" y="205" text-anchor="middle">latency SLA</text>
 
         <!-- Latency tradeoff annotation -->
-        <line style="stroke: var(--rule); stroke-width: 1;" x1="40" y1="340" x2="600" y2="340"/>
-        <text class="rec-label-small" x="320" y="360" text-anchor="middle" style="fill: var(--ink-3);">Latency-freshness tradeoff: read replicas lag 5–10s, acceptable for merchant UX</text>
-        <text class="rec-label-small" x="320" y="380" text-anchor="middle" style="fill: var(--ink-3);">Redis replication lag reduces on slow replica (fallback to cached tier), prioritizes speed over freshness</text>
+        <line class="stroke-rule [stroke-width:1]" x1="40" y1="340" x2="600" y2="340"/>
+        <text class="rec-label-small" x="320" y="360" text-anchor="middle" class="fill-ink-3">Latency-freshness tradeoff: read replicas lag 5–10s, acceptable for merchant UX</text>
+        <text class="rec-label-small" x="320" y="380" text-anchor="middle" class="fill-ink-3">Redis replication lag reduces on slow replica (fallback to cached tier), prioritizes speed over freshness</text>
       </svg>
     </section>
 
@@ -239,12 +233,9 @@ import Layout from '../../layouts/Layout.astro';
       <p class="font-code text-12 text-accent font-semibold mb-4">Next steps</p>
       <ul class="list-none p-0 m-0">
         <li class="mb-3">→ <a href="/case-studies/hard-problems" class="plain-link">See production incidents that shaped this design</a></li>
-        <li class="mb-3">→ <a href="/resume" class="plain-link">Download my resume</a></li>
+        <li class="mb-3">→ <a href="/resume/" class="plain-link">Download my resume</a></li>
       </ul>
     </section>
   </article>
 </Layout>
 
-<style>
-  .case-next { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 32px; margin-top: 48px; border-top: 1px solid var(--rule); }
-</style>

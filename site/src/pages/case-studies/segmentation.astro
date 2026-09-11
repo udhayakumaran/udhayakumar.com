@@ -12,12 +12,12 @@ import Layout from '../../layouts/Layout.astro';
 >
   <article class="py-13">
     <nav class="mb-8">
-      <a href="/case-studies" class="text-14 text-accent no-underline">← Back to case studies</a>
+      <a href="/case-studies/" class="text-14 text-accent no-underline">← Back to case studies</a>
     </nav>
 
     <div class="flex gap-4 items-start mb-6">
       <h1 class="font-code text-32 font-semibold m-0 flex-1">Customer Segmentation</h1>
-      <button onclick="navigator.clipboard.writeText(window.location.href); this.textContent='Copied!'; setTimeout(() => this.textContent='Copy link', 2000);" class="px-4 py-2 border border-rule bg-transparent cursor-pointer font-code text-12 text-accent whitespace-nowrap rounded-[3px] transition-all duration-200" onmouseenter="this.style.borderColor='var(--accent)'" onmouseleave="this.style.borderColor='var(--rule)'">Copy link</button>
+      <button onclick="navigator.clipboard.writeText(window.location.href); this.textContent='Copied!'; setTimeout(() => this.textContent='Copy link', 2000);" class="px-4 py-2 min-h-[44px] flex items-center border border-rule bg-transparent cursor-pointer font-code text-12 text-accent whitespace-nowrap rounded-[3px] transition-all duration-200" onmouseenter="this.style.borderColor='var(--accent)'" onmouseleave="this.style.borderColor='var(--rule)'">Copy link</button>
     </div>
 
     <p class="text-16 text-ink-2 mb-8 max-w-[65ch]">Built the system that lets a non-technical Customer Success rep build audiences like "shoppers who'd buy again if reminded" without writing a line of code or filing an engineering ticket. Unified four disconnected data sources into one query interface.</p>
@@ -98,48 +98,40 @@ import Layout from '../../layouts/Layout.astro';
       <!-- Segmentation Architecture SVG -->
       <svg viewBox="0 0 640 500" class="max-w-[65ch] w-full mb-6 block" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <style>
-            .seg-box { fill: var(--panel); stroke: var(--rule-2); stroke-width: 1.5; }
-            .seg-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; fill: var(--ink); font-weight: 600; }
-            .seg-label-small { font-family: 'JetBrains Mono', monospace; font-size: 10px; fill: var(--ink-2); }
-            .seg-arrow { stroke: var(--ink-3); stroke-width: 2; fill: none; marker-end: url(#seg-arrowhead); }
-            .seg-before { fill: #FFE5CC; }
-            .seg-after { fill: #E7EAD6; }
-          </style>
           <marker id="seg-arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-            <polygon points="0 0, 10 3, 0 6" fill="var(--ink-3)" />
+            <polygon points="0 0, 10 3, 0 6" class="fill-ink-3" />
           </marker>
         </defs>
 
         <!-- BEFORE column (left) -->
-        <text class="seg-label" x="80" y="25" text-anchor="middle" style="fill: var(--accent);">BEFORE</text>
+        <text class="seg-label" x="80" y="25" text-anchor="middle" class="fill-accent">BEFORE</text>
         <rect class="seg-box seg-before" x="20" y="40" width="120" height="50" rx="4"/>
         <text class="seg-label-small" x="80" y="70" text-anchor="middle">CSM Request</text>
         <line class="seg-arrow" x1="80" y1="90" x2="80" y2="120"/>
         <rect class="seg-box seg-before" x="20" y="120" width="120" height="50" rx="4"/>
         <text class="seg-label-small" x="80" y="150" text-anchor="middle">Engineering Ticket</text>
         <line class="seg-arrow" x1="80" y1="170" x2="80" y2="200"/>
-        <text class="seg-label-small" x="80" y="220" text-anchor="middle" style="fill: var(--accent);">3–5 days</text>
+        <text class="seg-label-small" x="80" y="220" text-anchor="middle" class="fill-accent">3–5 days</text>
         <line class="seg-arrow" x1="80" y1="230" x2="80" y2="260"/>
         <rect class="seg-box seg-before" x="20" y="260" width="120" height="50" rx="4"/>
         <text class="seg-label-small" x="80" y="290" text-anchor="middle">Segment Live</text>
 
         <!-- AFTER column (right) -->
-        <text class="seg-label" x="480" y="25" text-anchor="middle" style="fill: var(--accent);">AFTER</text>
+        <text class="seg-label" x="480" y="25" text-anchor="middle" class="fill-accent">AFTER</text>
         <rect class="seg-box seg-after" x="420" y="40" width="120" height="50" rx="4"/>
         <text class="seg-label-small" x="480" y="70" text-anchor="middle">CSM Query</text>
         <line class="seg-arrow" x1="480" y1="90" x2="480" y2="120"/>
         <rect class="seg-box seg-after" x="420" y="120" width="120" height="50" rx="4"/>
         <text class="seg-label-small" x="480" y="150" text-anchor="middle">Self-Service UI</text>
         <line class="seg-arrow" x1="480" y1="170" x2="480" y2="200"/>
-        <text class="seg-label-small" x="480" y="220" text-anchor="middle" style="fill: var(--accent);">minutes</text>
+        <text class="seg-label-small" x="480" y="220" text-anchor="middle" class="fill-accent">minutes</text>
         <line class="seg-arrow" x1="480" y1="230" x2="480" y2="260"/>
         <rect class="seg-box seg-after" x="420" y="260" width="120" height="50" rx="4"/>
         <text class="seg-label-small" x="480" y="290" text-anchor="middle">Segment Live</text>
 
         <!-- Bottom: Architecture components -->
-        <line style="stroke: var(--rule); stroke-width: 1;" x1="40" y1="350" x2="600" y2="350"/>
-        <text class="seg-label-small" x="320" y="375" text-anchor="middle" style="fill: var(--accent);">Powered by</text>
+        <line class="stroke-rule [stroke-width:1]" x1="40" y1="350" x2="600" y2="350"/>
+        <text class="seg-label-small" x="320" y="375" text-anchor="middle" class="fill-accent">Powered by</text>
         <text class="seg-label-small" x="100" y="400" text-anchor="start">Sources: Click, Commerce, Orders, Loyalty</text>
         <text class="seg-label-small" x="100" y="420" text-anchor="start">→ Unified customer model (BigQuery) → Scheduled queries (derived subsets) → Dimensions (views)</text>
         <text class="seg-label-small" x="100" y="440" text-anchor="start">→ Query builder (UI) → Views → Campaign export</text>
@@ -223,12 +215,9 @@ import Layout from '../../layouts/Layout.astro';
       <p class="font-code text-12 text-accent font-semibold mb-4">Next steps</p>
       <ul class="list-none p-0 m-0">
         <li class="mb-3">→ <a href="/case-studies/hard-problems" class="plain-link">See production incidents that shaped this design</a></li>
-        <li class="mb-3">→ <a href="/resume" class="plain-link">Download my resume</a></li>
+        <li class="mb-3">→ <a href="/resume/" class="plain-link">Download my resume</a></li>
       </ul>
     </section>
   </article>
 </Layout>
 
-<style>
-  .case-next { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 32px; margin-top: 48px; border-top: 1px solid var(--rule); }
-</style>

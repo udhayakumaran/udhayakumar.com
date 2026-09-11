@@ -36,19 +36,3 @@ const incidents = [
   </section>
 </Layout>
 
-<style>
-  .incident-page { padding: var(--space-section) 0; }
-  .back-link { display: inline-block; margin-bottom: var(--space-10); color: var(--accent); font: 500 var(--fs-14) / 1.4 "IBM Plex Mono", monospace; }
-  .incident-page h1 { max-width: 12ch; margin-bottom: var(--space-4); }
-  .lede { max-width: 60ch; color: var(--ink-2); font-size: clamp(18px, 2.5vw, 22px); line-height: 1.5; margin-bottom: var(--space-10); }
-  .records { border-top: 1px solid var(--rule); }
-  .record { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: var(--space-5); padding: var(--space-6) 0; border-bottom: 1px solid var(--rule); }
-  .record-number { color: var(--accent); font: 600 var(--fs-14) / 1.4 "IBM Plex Mono", monospace; }
-  .record-category { color: var(--accent); font: 500 var(--fs-12) / 1.4 "IBM Plex Mono", monospace; text-transform: uppercase; letter-spacing: .08em; margin-bottom: var(--space-2); }
-  .record h2 { font-size: clamp(19px, 2.5vw, 24px); margin-bottom: var(--space-2); }
-  .record p:last-child { max-width: 68ch; color: var(--ink-2); }
-  .record-cta { display: grid; gap: var(--space-3); padding: var(--space-8) 0; }
-  .record-cta p { color: var(--ink-2); }
-  .record-cta a { color: var(--accent); font-family: "IBM Plex Mono", monospace; font-size: var(--fs-14); }
-  @media (max-width: 640px) { .record { grid-template-columns: 36px minmax(0, 1fr); gap: var(--space-3); } }
-</style>

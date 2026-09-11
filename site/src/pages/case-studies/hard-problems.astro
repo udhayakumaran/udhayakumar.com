@@ -12,7 +12,7 @@ import Layout from '../../layouts/Layout.astro';
 >
   <article class="py-13">
     <nav class="mb-8">
-      <a href="/case-studies" class="text-14 text-accent no-underline">← Back to case studies</a>
+      <a href="/case-studies/" class="text-14 text-accent no-underline">← Back to case studies</a>
     </nav>
 
     <h1 class="font-code text-32 font-semibold mb-6">Production incidents</h1>
@@ -332,69 +332,6 @@ import Layout from '../../layouts/Layout.astro';
   </article>
 </Layout>
 
-<style>
-  /* Incident mini-nav */
-  .incident-nav {
-    position: fixed;
-    bottom: 80px;
-    right: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    background: var(--bg);
-    border: 1px solid var(--rule);
-    border-radius: 6px;
-    padding: var(--space-3);
-    z-index: 50;
-    max-height: 300px;
-    overflow-y: auto;
-  }
-
-  .incident-nav-item {
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--rule);
-    background: transparent;
-    color: var(--ink-3);
-    font-size: var(--fs-12);
-    font-weight: 600;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-family: "IBM Plex Mono", monospace;
-  }
-
-  .incident-nav-item:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  .incident-nav-item[data-active] {
-    background: var(--accent);
-    color: var(--bg);
-    border-color: var(--accent);
-  }
-
-  /* Mobile overflow fix */
-  @media (max-width: 640px) {
-    .incident-nav {
-      display: none;
-    }
-
-    .incident-progression {
-      grid-template-columns: 1fr !important;
-      gap: var(--space-2) !important;
-    }
-
-    .incident-progression > div {
-      min-width: 0;
-      word-break: break-word;
-    }
-  }
-</style>
 
 <script>
   // Incident mini-nav functionality

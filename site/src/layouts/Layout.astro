@@ -149,85 +149,35 @@ const articleJsonLd = article ? {
   <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)}></script>
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)}></script>
   {articleJsonLd && <script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)}></script>}
-
-  <style>
-    main {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .footer-nav {
-      margin-top: var(--space-6);
-      padding-top: var(--space-6);
-      border-top: 1px solid var(--rule);
-      display: flex;
-      gap: var(--space-4);
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .footer-nav a {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 14px;
-      color: var(--accent);
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.2s ease;
-    }
-
-    .footer-nav a:hover {
-      border-bottom-color: var(--accent);
-    }
-
-    .footer-nav a:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-    }
-  </style>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
   <Header currentPath={Astro.url.pathname} />
 
-  <main id="main-content">
+  <main id="main-content" class="mx-auto max-w-[860px] px-5">
     <slot />
   </main>
 
   <Footer>
-    <nav class="footer-nav">
-      <a href="/engineering-notes">Incident Log & Postmortems</a>
-      <a href="/architecture-decisions">Architecture Decision Records</a>
+    <nav class="mt-6 pt-6 border-t border-rule flex gap-4 justify-center flex-wrap">
+      <a href="/engineering-notes/" class="font-code text-14 text-accent no-underline border-b border-transparent transition-[border-color] duration-200 hover:border-accent focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">Incident Log & Postmortems</a>
+      <a href="/architecture-decisions/" class="font-code text-14 text-accent no-underline border-b border-transparent transition-[border-color] duration-200 hover:border-accent focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">Architecture Decision Records</a>
     </nav>
   </Footer>
 
   <CommandPalette />
 
-  <button id="back-to-top" aria-label="Back to top" class="fixed bottom-6 right-6 w-12 h-12 border border-rule bg-bg text-ink cursor-pointer rounded font-[20px] hidden z-[999] transition-all ease-[0.2s]">↑</button>
+  <button id="back-to-top" aria-label="Back to top" class="fixed bottom-6 right-6 w-12 h-12 border border-rule bg-bg text-ink cursor-pointer rounded text-20 hidden z-[999] transition-all duration-200 hover:border-accent hover:text-accent">↑</button>
 
   <script>
     const backToTopBtn = document.getElementById('back-to-top');
 
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) {
-        backToTopBtn.style.display = 'block';
-      } else {
-        backToTopBtn.style.display = 'none';
-      }
+      backToTopBtn.classList.toggle('hidden', window.scrollY <= 300);
     });
 
     backToTopBtn.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    backToTopBtn.addEventListener('mouseenter', () => {
-      backToTopBtn.style.borderColor = 'var(--accent)';
-      backToTopBtn.style.color = 'var(--accent)';
-    });
-
-    backToTopBtn.addEventListener('mouseleave', () => {
-      backToTopBtn.style.borderColor = 'var(--rule)';
-      backToTopBtn.style.color = 'var(--ink)';
     });
   </script>
 

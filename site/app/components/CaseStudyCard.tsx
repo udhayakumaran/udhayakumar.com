@@ -1,46 +1,65 @@
 import Link from "next/link";
+import type { CaseStudy } from "../data/case-studies";
 
 interface Props {
-  href: string;
-  title: string;
-  label: string;
-  subtitle: string;
-  tags: string[];
-  isMostRelevant?: boolean;
+  study: CaseStudy;
+  number: number;
 }
 
-export default function CaseStudyCard({
-  href,
-  title,
-  label,
-  subtitle,
-  tags,
-  isMostRelevant = false,
-}: Props) {
+const badgeVariantClasses: Record<CaseStudy["badgeVariant"], string> = {
+  accent: "text-accent-ink bg-accent-wash border border-accent/40",
+  sage: "text-sage bg-sage-wash border border-sage/40",
+  neutral: "text-ink-2 bg-panel-2 border border-rule",
+};
+
+export default function CaseStudyCard({ study, number }: Props) {
   return (
-    <Link
-      href={href}
-      className="no-underline block p-6 bg-panel border border-rule-2 rounded transition-all hover:border-accent hover:-translate-y-1"
-    >
-      <div className="font-label-mono-lg text-label-mono-lg text-ink-3 font-semibold mb-1">
-        {label}
-      </div>
-      <div className="flex justify-between items-start gap-2 mb-2">
-        <h2 className="font-headline-lg text-headline-lg text-ink m-0">{title}</h2>
-        {isMostRelevant && (
-          <span className="font-label-mono-lg text-label-mono-lg text-accent uppercase tracking-[0.05em] whitespace-nowrap">
-            most relevant
+    <article className="p-6 bg-panel border border-rule rounded transition-all duration-200 hover:border-accent hover:-translate-y-1 flex flex-col gap-5">
+      <div className="flex items-center justify-between gap-4 border-b border-rule pb-3">
+        <div className="flex items-center gap-3">
+          <span className="font-label-mono-sm text-label-mono-sm text-ink-3 font-semibold tracking-wider">
+            {String(number).padStart(2, "0")}
           </span>
-        )}
+          <span className="text-rule-2 font-caption-mono text-caption-mono">/</span>
+          <span className="font-label-mono-sm text-label-mono-sm text-accent uppercase font-semibold tracking-wide">
+            {study.category}
+          </span>
+        </div>
+        <span className={`font-caption-mono text-caption-mono px-2 py-0.5 rounded font-medium ${badgeVariantClasses[study.badgeVariant]}`}>
+          {study.badge}
+        </span>
       </div>
-      <p className="text-body-md text-body-md text-ink-2 mb-3">{subtitle}</p>
+
+      <div className="flex flex-col gap-2">
+        <h2 className="font-headline-md text-headline-md font-semibold tracking-tight">
+          <Link href={study.href} className="text-ink hover:text-accent transition-colors">
+            {study.title}
+          </Link>
+        </h2>
+        <p className="font-body-md text-body-md text-ink-2">{study.subtitle}</p>
+      </div>
+
       <div className="flex flex-wrap gap-2">
-        {tags.map((tag) => (
-          <span key={tag} className="tag-chip">
+        {study.techTags.map((tag) => (
+          <span key={tag} className="px-2.5 py-1 rounded bg-panel-2 border border-rule font-caption-mono text-caption-mono text-ink-2 font-medium">
             {tag}
           </span>
         ))}
       </div>
-    </Link>
+
+      <div className="pt-3 border-t border-rule flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex items-center gap-2 bg-panel-2 px-3 py-2 rounded border border-rule/60 text-ink-2">
+          <span className="material-symbols-outlined text-[18px] text-sage">{study.telemetryIcon}</span>
+          <span className="font-caption-mono text-caption-mono text-ink font-medium">{study.telemetryText}</span>
+        </div>
+        <Link
+          href={study.href}
+          className="inline-flex items-center gap-1.5 font-label-mono-lg text-label-mono-lg text-accent font-semibold hover:text-accent-ink hover:underline shrink-0 min-h-[44px]"
+        >
+          <span>Read Architecture Breakdown</span>
+          <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+        </Link>
+      </div>
+    </article>
   );
 }

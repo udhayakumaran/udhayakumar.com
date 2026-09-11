@@ -236,7 +236,7 @@
   }
 }
 
-/* Base reset — layered so Tailwind utility classes always win the cascade */
+/* Base reset - layered so Tailwind utility classes always win the cascade */
 @layer base {
 * {
   margin: 0;

@@ -43,21 +43,57 @@ import Layout from '../../layouts/Layout.astro';
     <!-- Timeline and recovery -->
     <section class="mb-12">
       <h2 class="section-heading">The recovery</h2>
-      <ol class="incident-timeline">
-        <li><strong>Detection</strong><span>Snapshot drove CPU to 60%; writes began queueing.</span></li>
-        <li><strong>Diagnosis</strong><span>The ~50M-row snapshot and lock behavior, not downstream consumers, were saturating MySQL.</span></li>
-        <li><strong>Stop decision</strong><span>I stopped the Debezium job and killed the snapshot before migration progress outweighed production risk.</span></li>
-        <li><strong>Recovery</strong><span>Production writes recovered within seconds; Datastream bootstrapped the baseline.</span></li>
-        <li><strong>Permanent change</strong><span>We moved to incremental table migration with a rollback path and production-scale snapshot testing.</span></li>
-      </ol>
-      <p class="text-16 leading-[1.8] text-ink max-w-[65ch] mb-4"><strong>Immediate:</strong> stopped the Debezium job and killed the snapshot. Production writes recovered within seconds.</p>
-      <p class="text-16 leading-[1.8] text-ink max-w-[65ch] mb-4"><strong>Short term:</strong> we'd built the system with a fallback — Google Cloud's Datastream service was already capturing changes from the same landing layer as a parallel replication path. We pivoted: use Datastream to bootstrap the initial snapshot, then switch tables to Debezium CDC incrementally.</p>
-      <p class="prose-body"><strong>Long term:</strong> this dual-replication strategy (Datastream + Debezium) became our production design for several months. It gave us:</p>
-      <ul class="text-16 leading-[1.8] text-ink max-w-[65ch] mt-4 list-none p-0">
-        <li class="mb-3">Safe snapshots (Datastream handles them at scale).</li>
-        <li class="mb-3">Gradual transition to pure Debezium (one table at a time).</li>
-        <li class="mb-3">A rollback path if Debezium had issues on any table.</li>
-      </ul>
+      <div id="incident-stepper" class="incident-stepper">
+        <ol class="stepper-timeline">
+          <li class="stepper-item" data-step="0">
+            <button class="stepper-trigger" aria-expanded="false">
+              <span class="stepper-number">1</span>
+              <span class="stepper-label">Detection</span>
+            </button>
+            <div class="stepper-content">
+              <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">Snapshot drove CPU to 60%; writes began queueing. Dashboards weren't updating. We had visibility into the problem within minutes.</p>
+            </div>
+          </li>
+          <li class="stepper-item" data-step="1">
+            <button class="stepper-trigger" aria-expanded="false">
+              <span class="stepper-number">2</span>
+              <span class="stepper-label">Diagnosis</span>
+            </button>
+            <div class="stepper-content">
+              <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">The ~50M-row snapshot and lock behavior, not downstream consumers, were saturating MySQL. Query planner chose a suboptimal execution path. Read lock held longer than expected.</p>
+            </div>
+          </li>
+          <li class="stepper-item" data-step="2">
+            <button class="stepper-trigger" aria-expanded="false">
+              <span class="stepper-number">3</span>
+              <span class="stepper-label">Stop decision</span>
+            </button>
+            <div class="stepper-content">
+              <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">I stopped the Debezium job and killed the snapshot before migration progress outweighed production risk. The judgment call: <strong>production stability wins</strong>. Architectural purity comes second.</p>
+            </div>
+          </li>
+          <li class="stepper-item" data-step="3">
+            <button class="stepper-trigger" aria-expanded="false">
+              <span class="stepper-number">4</span>
+              <span class="stepper-label">Recovery</span>
+            </button>
+            <div class="stepper-content">
+              <p class="text-16 leading-[1.8] text-ink max-w-[65ch] mb-3">Production writes recovered within seconds. We'd built the system with a fallback — Google Cloud's Datastream service was already capturing changes from the same landing layer as a parallel replication path. We pivoted: use Datastream to bootstrap the initial snapshot, then switch tables to Debezium CDC incrementally.</p>
+              <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">The dual-replication strategy (Datastream + Debezium) bought us safe snapshots, gradual transition, and a rollback path.</p>
+            </div>
+          </li>
+          <li class="stepper-item" data-step="4">
+            <button class="stepper-trigger" aria-expanded="false">
+              <span class="stepper-number">5</span>
+              <span class="stepper-label">Permanent change</span>
+            </button>
+            <div class="stepper-content">
+              <p class="text-16 leading-[1.8] text-ink max-w-[65ch] mb-3">We moved to incremental table migration with a rollback path and production-scale snapshot testing.</p>
+              <p class="text-16 leading-[1.8] text-ink max-w-[65ch]">This dual-replication strategy became our production design for several months, then we eventually graduated to pure Debezium once we understood its behavior at scale.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
     </section>
 
     <!-- Why It Happened -->
@@ -101,10 +137,123 @@ import Layout from '../../layouts/Layout.astro';
 
 <style>
   .note-meta { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--ink-3); margin-bottom: 40px; }
-  .incident-timeline { display: grid; gap: 12px; max-width: 65ch; list-style: none; padding: 0; margin: 0 0 24px; }
-  .incident-timeline li { display: grid; grid-template-columns: 140px 1fr; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--rule); line-height: 1.6; }
-  .incident-timeline strong { color: var(--accent); }
-  .incident-timeline span { color: var(--ink); }
+
+  /* Incident stepper */
+  .stepper-timeline { display: grid; gap: 8px; max-width: 65ch; list-style: none; padding: 0; margin: 0; }
+
+  .stepper-item { border-bottom: 1px solid var(--rule); }
+
+  .stepper-trigger {
+    width: 100%;
+    padding: var(--space-4) 0;
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: var(--space-4);
+    align-items: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: left;
+    transition: background-color 0.2s ease;
+  }
+
+  .stepper-trigger:hover {
+    background: var(--panel);
+  }
+
+  .stepper-trigger:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+  }
+
+  .stepper-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    font-weight: 600;
+    border-radius: 50%;
+    font-size: var(--fs-12);
+    flex-shrink: 0;
+  }
+
+  .stepper-trigger[aria-expanded="true"] .stepper-number {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  .stepper-label {
+    font-weight: 600;
+    color: var(--ink);
+    font-size: var(--fs-16);
+  }
+
+  .stepper-content {
+    display: none;
+    padding: 0 0 var(--space-4) 56px;
+  }
+
+  .stepper-trigger[aria-expanded="true"] + .stepper-content {
+    display: block;
+    animation: slideDown 0.2s ease-out;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stepper-content {
+      animation: none;
+    }
+  }
+
   .case-next { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 32px; margin-top: 48px; border-top: 1px solid var(--rule); }
-  @media (max-width: 640px) { .incident-timeline li { grid-template-columns: 1fr; gap: 4px; } }
+  @media (max-width: 640px) { .stepper-trigger { grid-template-columns: 32px 1fr; } }
 </style>
+
+<script>
+  const steppers = document.querySelectorAll('.stepper-trigger');
+
+  steppers.forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+      trigger.setAttribute('aria-expanded', !isExpanded);
+    });
+
+    // Allow keyboard navigation: arrow keys to move between steps
+    trigger.addEventListener('keydown', (e) => {
+      const item = trigger.closest('.stepper-item');
+      let targetTrigger = null;
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        const nextItem = item.nextElementSibling;
+        if (nextItem) {
+          targetTrigger = nextItem.querySelector('.stepper-trigger');
+        }
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        const prevItem = item.previousElementSibling;
+        if (prevItem) {
+          targetTrigger = prevItem.querySelector('.stepper-trigger');
+        }
+      }
+
+      if (targetTrigger) {
+        targetTrigger.focus();
+      }
+    });
+  });
+</script>

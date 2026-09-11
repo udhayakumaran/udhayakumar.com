@@ -93,14 +93,20 @@ import Layout from '../../layouts/Layout.astro';
       <p class="prose-body mb-6">Consolidates four source systems (commerce, click-tracking, loyalty, CRM) into a raw MySQL landing store, preserving original schema. Debezium streams changes via Google Pub/Sub. Downstream layer fans out to three specialized stores: MongoDB for point lookups (serving), ClickHouse for analytics, BigQuery for historical data.</p>
 
       <!-- Architecture SVG Diagram -->
-      <svg viewBox="0 0 640 480" class="max-w-[65ch] w-full mb-6 block" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 640 480" class="max-w-[65ch] w-full mb-6 block arch-diagram" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <style>
-            .arch-box { fill: var(--panel); stroke: var(--rule-2); stroke-width: 1.5; }
+            .arch-box { fill: var(--panel); stroke: var(--rule-2); stroke-width: 1.5; transition: all 0.2s ease; }
+            .arch-box:hover { stroke: var(--accent); stroke-width: 2.5; }
+            .arch-group[data-decision] .arch-box { cursor: pointer; }
+            .arch-group[data-decision][data-active] .arch-box { fill: var(--accent-wash); stroke: var(--accent); stroke-width: 2.5; }
             .arch-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; fill: var(--ink); }
             .arch-label-small { font-family: 'JetBrains Mono', monospace; font-size: 10px; fill: var(--ink-2); }
             .arch-arrow { stroke: var(--ink-3); stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
             .arch-accent { fill: var(--accent); }
+            @media (prefers-reduced-motion: reduce) {
+              .arch-box { transition: none; }
+            }
           </style>
           <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
             <polygon points="0 0, 10 3, 0 6" fill="var(--ink-3)" />
@@ -127,17 +133,21 @@ import Layout from '../../layouts/Layout.astro';
         <line class="arch-arrow" x1="560" y1="70" x2="450" y2="110"/>
 
         <!-- MySQL Landing Layer -->
-        <rect class="arch-box" x="60" y="110" width="440" height="60" rx="4"/>
-        <text class="arch-label" x="290" y="138" text-anchor="middle" font-weight="600">MySQL Landing Layer</text>
-        <text class="arch-label-small" x="290" y="155" text-anchor="middle">(raw, per-source schemas, reversible landing layer)</text>
+        <g class="arch-group" data-decision="0">
+          <rect class="arch-box" x="60" y="110" width="440" height="60" rx="4"/>
+          <text class="arch-label" x="290" y="138" text-anchor="middle" font-weight="600">MySQL Landing Layer</text>
+          <text class="arch-label-small" x="290" y="155" text-anchor="middle">(raw, per-source schemas, reversible landing layer)</text>
+        </g>
 
         <!-- Arrow to CDC -->
         <line class="arch-arrow" x1="290" y1="170" x2="290" y2="210"/>
 
         <!-- Debezium CDC + Pub/Sub -->
-        <rect class="arch-box" x="80" y="210" width="420" height="60" rx="4"/>
-        <text class="arch-label" x="290" y="238" text-anchor="middle" font-weight="600">Debezium CDC → Google Pub/Sub</text>
-        <text class="arch-label-small" x="290" y="255" text-anchor="middle">(replay boundary, per-tenant isolation)</text>
+        <g class="arch-group" data-decision="1">
+          <rect class="arch-box" x="80" y="210" width="420" height="60" rx="4"/>
+          <text class="arch-label" x="290" y="238" text-anchor="middle" font-weight="600">Debezium CDC → Google Pub/Sub</text>
+          <text class="arch-label-small" x="290" y="255" text-anchor="middle">(replay boundary, per-tenant isolation)</text>
+        </g>
 
         <!-- Arrows to serving layer -->
         <line class="arch-arrow" x1="160" y1="270" x2="100" y2="310"/>
@@ -145,20 +155,26 @@ import Layout from '../../layouts/Layout.astro';
         <line class="arch-arrow" x1="420" y1="270" x2="480" y2="310"/>
 
         <!-- Serving Layer: MongoDB, ClickHouse, BigQuery -->
-        <rect class="arch-box" x="20" y="310" width="140" height="70" rx="4"/>
-        <text class="arch-label" x="90" y="335" text-anchor="middle" font-weight="600">MongoDB</text>
-        <text class="arch-label-small" x="90" y="355" text-anchor="middle">(serving)</text>
-        <text class="arch-label-small" x="90" y="370" text-anchor="middle">point lookups</text>
+        <g class="arch-group" data-decision="3">
+          <rect class="arch-box" x="20" y="310" width="140" height="70" rx="4"/>
+          <text class="arch-label" x="90" y="335" text-anchor="middle" font-weight="600">MongoDB</text>
+          <text class="arch-label-small" x="90" y="355" text-anchor="middle">(serving)</text>
+          <text class="arch-label-small" x="90" y="370" text-anchor="middle">point lookups</text>
+        </g>
 
-        <rect class="arch-box" x="200" y="310" width="140" height="70" rx="4"/>
-        <text class="arch-label" x="270" y="335" text-anchor="middle" font-weight="600">ClickHouse</text>
-        <text class="arch-label-small" x="270" y="355" text-anchor="middle">(analytics)</text>
-        <text class="arch-label-small" x="270" y="370" text-anchor="middle">aggregation</text>
+        <g class="arch-group" data-decision="3">
+          <rect class="arch-box" x="200" y="310" width="140" height="70" rx="4"/>
+          <text class="arch-label" x="270" y="335" text-anchor="middle" font-weight="600">ClickHouse</text>
+          <text class="arch-label-small" x="270" y="355" text-anchor="middle">(analytics)</text>
+          <text class="arch-label-small" x="270" y="370" text-anchor="middle">aggregation</text>
+        </g>
 
-        <rect class="arch-box" x="380" y="310" width="140" height="70" rx="4"/>
-        <text class="arch-label" x="450" y="335" text-anchor="middle" font-weight="600">BigQuery</text>
-        <text class="arch-label-small" x="450" y="355" text-anchor="middle">(historical)</text>
-        <text class="arch-label-small" x="450" y="370" text-anchor="middle">audit trail</text>
+        <g class="arch-group" data-decision="3">
+          <rect class="arch-box" x="380" y="310" width="140" height="70" rx="4"/>
+          <text class="arch-label" x="450" y="335" text-anchor="middle" font-weight="600">BigQuery</text>
+          <text class="arch-label-small" x="450" y="355" text-anchor="middle">(historical)</text>
+          <text class="arch-label-small" x="450" y="370" text-anchor="middle">audit trail</text>
+        </g>
 
         <!-- Ownership & SLO annotations -->
         <text class="arch-label-small" x="290" y="190" text-anchor="middle" style="fill: var(--accent); font-size: 9px;">Platform team owns</text>
@@ -337,3 +353,37 @@ import Layout from '../../layouts/Layout.astro';
 <style>
   .case-next { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 32px; margin-top: 48px; border-top: 1px solid var(--rule); }
 </style>
+
+<script>
+  const diagram = document.querySelector(".arch-diagram");
+
+  if (diagram) {
+    const groups = diagram.querySelectorAll("[data-decision]");
+    const decisions = document.querySelectorAll("section.mb-12 li");
+
+    groups.forEach((group) => {
+      group.addEventListener("click", () => {
+        const decisionIdx = parseInt(group.dataset.decision);
+
+        // Remove active state from all groups
+        groups.forEach((g) => g.removeAttribute("data-active"));
+
+        // Set active on clicked group
+        group.setAttribute("data-active", "");
+
+        // Scroll corresponding decision into view
+        if (decisions[decisionIdx]) {
+          decisions[decisionIdx].scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+
+      // Keyboard support
+      group.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          group.click();
+        }
+      });
+    });
+  }
+</script>

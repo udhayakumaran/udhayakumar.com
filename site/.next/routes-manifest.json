@@ -50,6 +50,12 @@
       "regex": "^/case\\-studies(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/case\\-studies(?:/)?$"
+    },
+    {
+      "page": "/case-studies/data-platform",
+      "regex": "^/case\\-studies/data\\-platform(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/case\\-studies/data\\-platform(?:/)?$"
     }
   ],
   "dataRoutes": [],

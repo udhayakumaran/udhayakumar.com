@@ -1,5 +1,6 @@
 {
   "/_not-found/page": "/_not-found",
   "/page": "/",
-  "/case-studies/page": "/case-studies"
+  "/case-studies/page": "/case-studies",
+  "/case-studies/data-platform/page": "/case-studies/data-platform"
 }

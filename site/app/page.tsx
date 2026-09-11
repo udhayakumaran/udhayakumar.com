@@ -81,7 +81,7 @@ export default function HomePage() {
       <section className="py-12 md:py-14 border-b border-rule">
         <div className="flex flex-col gap-6">
           <div className="inline-flex items-center gap-2 self-start bg-panel px-2.5 py-1 border border-rule font-caption-mono text-caption-mono text-ink-2">
-            <span className="text-accent">⚡</span>
+            <span className="material-symbols-outlined text-[14px] text-accent">terminal</span>
             <span>INFRASTRUCTURE ARCHITECTURE &amp; SRE</span>
           </div>
           <h1 className="font-display-hero text-display-hero md:text-[40px] md:leading-[46px] text-ink font-bold tracking-tight">
@@ -120,33 +120,51 @@ export default function HomePage() {
         <div className="p-4 sm:p-6 bg-panel border border-rule rounded-sm relative overflow-hidden">
           <div className="flex items-center justify-between pb-3 border-b border-rule">
             <div className="flex items-center gap-2">
-              <span className="text-accent">🔗</span>
+              <span className="material-symbols-outlined text-[16px] text-accent">hub</span>
               <span className="font-caption-mono text-caption-mono text-ink uppercase">PIPELINE TOPOLOGY // ZERO-LOCK DEBEZIUM INGESTION</span>
             </div>
             <span className="font-caption-mono text-caption-mono text-sage">SYNCHRONIZED</span>
           </div>
 
-          {/* Pipeline Diagram */}
-          <div className="py-4 flex items-center justify-between font-caption-mono text-caption-mono">
-            <div className="px-3 py-2 bg-panel-2 border border-rule rounded text-center text-xs">
-              <div className="font-semibold text-ink">POSTGRES</div>
-              <div className="text-ink-3">WAL</div>
-            </div>
-            <div className="flex-1 border-b border-dashed border-rule mx-2"></div>
-            <div className="px-3 py-2 bg-sage-wash border border-sage rounded text-center text-xs">
-              <div className="font-semibold text-sage">DEBEZIUM</div>
-              <div className="text-sage">CDC</div>
-            </div>
-            <div className="flex-1 border-b border-dashed border-rule mx-2"></div>
-            <div className="px-3 py-2 bg-accent-wash border border-accent rounded text-center text-xs">
-              <div className="font-semibold text-accent-ink">KAFKA</div>
-              <div className="text-accent-ink">32P</div>
-            </div>
-            <div className="flex-1 border-b border-dashed border-rule mx-2"></div>
-            <div className="px-3 py-2 bg-panel-2 border border-rule rounded text-center text-xs">
-              <div className="font-semibold text-ink">SINK</div>
-              <div className="text-ink-3">DATA</div>
-            </div>
+          {/* SVG Diagram */}
+          <div className="py-4">
+            <svg className="w-full h-28" fill="none" viewBox="0 0 760 110" xmlns="http://www.w3.org/2000/svg">
+              <line stroke="#C7B896" strokeDasharray="4 4" strokeWidth={1.5} x1={130} x2={250} y1={55} y2={55} />
+              <line stroke="#C7B896" strokeDasharray="4 4" strokeWidth={1.5} x1={370} x2={490} y1={55} y2={55} />
+              <line stroke="#C7B896" strokeDasharray="4 4" strokeWidth={1.5} x1={610} x2={710} y1={55} y2={55} />
+
+              <rect fill="#FAF6EC" height={60} rx={2} stroke="#DED2B4" strokeWidth={1.5} width={120} x={10} y={25} />
+              <text fill="#1C1A15" fontFamily="JetBrains Mono" fontSize={11} fontWeight={600} textAnchor="middle" x={70} y={50}>
+                POSTGRES
+              </text>
+              <text fill="#8A8674" fontFamily="JetBrains Mono" fontSize={9} textAnchor="middle" x={70} y={66}>
+                WAL_LEVEL=LOGICAL
+              </text>
+
+              <rect fill="#E7EAD6" height={60} rx={2} stroke="#6E7B4C" strokeWidth={1.5} width={120} x={250} y={25} />
+              <text fill="#6E7B4C" fontFamily="JetBrains Mono" fontSize={11} fontWeight={600} textAnchor="middle" x={310} y={50}>
+                DEBEZIUM CDC
+              </text>
+              <text fill="#576337" fontFamily="JetBrains Mono" fontSize={9} textAnchor="middle" x={310} y={66}>
+                OFF-PEAK SNAPSHOT
+              </text>
+
+              <rect fill="#F5DFC9" height={60} rx={2} stroke="#C85A2E" strokeWidth={1.5} width={120} x={490} y={25} />
+              <text fill="#A84420" fontFamily="JetBrains Mono" fontSize={11} fontWeight={600} textAnchor="middle" x={550} y={50}>
+                APACHE KAFKA
+              </text>
+              <text fill="#9F3C11" fontFamily="JetBrains Mono" fontSize={9} textAnchor="middle" x={550} y={66}>
+                32 PARTITIONS
+              </text>
+
+              <rect fill="#FAF6EC" height={60} rx={2} stroke="#DED2B4" strokeWidth={1.5} width={48} x={710} y={25} />
+              <text fill="#1C1A15" fontFamily="JetBrains Mono" fontSize={10} fontWeight={600} textAnchor="middle" x={734} y={52}>
+                SINK
+              </text>
+              <text fill="#8A8674" fontFamily="JetBrains Mono" fontSize={8} textAnchor="middle" x={734} y={66}>
+                ANALYTICS
+              </text>
+            </svg>
           </div>
 
           <div className="flex flex-wrap items-center justify-between text-ink-3 font-caption-mono text-caption-mono pt-2 border-t border-rule">
@@ -208,9 +226,9 @@ export default function HomePage() {
 
       {/* Architectural Invariant Callout */}
       <section className="py-10 border-b border-rule">
-        <div className="bg-panel border-l-4 border-accent border-y border-r border-rule p-6">
+        <div className="bg-panel border-l-2 border-accent border-y border-r border-rule p-6">
           <div className="flex items-start gap-4">
-            <span className="text-accent text-2xl shrink-0 mt-0.5">✓</span>
+            <span className="material-symbols-outlined text-accent text-[24px] shrink-0 mt-0.5">verified</span>
             <div>
               <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-1">Architectural Invariant</h4>
               <p className="font-body-md text-body-md text-ink-2">
@@ -246,7 +264,7 @@ export default function HomePage() {
             >
               <div className="flex items-center justify-between pb-3">
                 <span className="font-caption-mono text-caption-mono text-accent-ink font-semibold">INC-{inc.id}</span>
-                <span className="text-ink-3 group-hover:text-accent group-hover:translate-x-1 transition-all">→</span>
+                <span className="material-symbols-outlined text-[18px] text-ink-3 group-hover:text-accent group-hover:translate-x-1 transition-all">arrow_forward</span>
               </div>
               <h3 className="font-headline-sm text-headline-sm leading-snug text-ink font-semibold mb-4 group-hover:text-accent transition-colors">
                 {inc.title}
@@ -262,6 +280,28 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Terminal Output Section */}
+      <section className="py-10">
+        <div className="bg-panel border border-rule rounded-sm overflow-hidden">
+          <div className="flex items-center justify-between px-4 py-2.5 bg-panel-2 border-b border-rule">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-rule-2 inline-block"></span>
+              <span className="w-2.5 h-2.5 rounded-full bg-rule-2 inline-block"></span>
+              <span className="w-2.5 h-2.5 rounded-full bg-rule-2 inline-block"></span>
+              <span className="font-caption-mono text-caption-mono text-ink ml-2">sys-telemetry-cli --live</span>
+            </div>
+            <span className="font-caption-mono text-caption-mono text-sage">STATUS: LISTENING</span>
+          </div>
+          <div className="p-4 font-caption-mono text-caption-mono leading-relaxed text-ink space-y-1">
+            <p className="text-ink-3">{"$ kubectl get pods -n ingress-edge -o wide"}</p>
+            <p className="text-ink-2">NAME{"                         "}READY{"   "}STATUS{"    "}RESTARTS{"   "}AGE{"   "}IP</p>
+            <p className="text-sage">envoy-edge-mesh-79d8f89-4xkq9{"    "}1/1{"     "}Running{"   "}0{"          "}42d{"   "}10.244.3.18</p>
+            <p className="text-sage">envoy-edge-mesh-79d8f89-8lm2v{"    "}1/1{"     "}Running{"   "}0{"          "}42d{"   "}10.244.5.91</p>
+            <p className="text-ink-3 pt-2">{`$ prometheus-eval 'rate(http_requests_total{status=~"5.."}[5m])'`}</p>
+            <p className="text-accent-ink">0.000000000000e+00 (Zero elevated 5xx anomalies detected across primary load balancers)</p>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

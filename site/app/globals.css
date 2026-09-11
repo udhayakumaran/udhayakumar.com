@@ -236,7 +236,8 @@
   }
 }
 
-/* Base reset */
+/* Base reset — layered so Tailwind utility classes always win the cascade */
+@layer base {
 * {
   margin: 0;
   padding: 0;
@@ -487,3 +488,4 @@ section:first-of-type {
     grid-template-columns: 1fr !important;
   }
 }
+} /* end @layer base */

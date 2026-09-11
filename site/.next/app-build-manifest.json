@@ -1,44 +1,25 @@
 {
   "pages": {
-    "/_not-found/page": [
-      "static/chunks/webpack-ba12f21138bd56e8.js",
-      "static/chunks/4bd1b696-c023c6e3521b1417.js",
-      "static/chunks/255-d9c2bf1d8dd3ca97.js",
-      "static/chunks/main-app-62503e05b83d2739.js",
-      "static/chunks/app/_not-found/page-7a7dd9bf25c2cb66.js"
-    ],
     "/layout": [
-      "static/chunks/webpack-ba12f21138bd56e8.js",
-      "static/chunks/4bd1b696-c023c6e3521b1417.js",
-      "static/chunks/255-d9c2bf1d8dd3ca97.js",
-      "static/chunks/main-app-62503e05b83d2739.js",
-      "static/css/eb029f3690d460a5.css",
-      "static/chunks/619-ba102abea3e3d0e4.js",
-      "static/chunks/680-859192dc2941ed4a.js",
-      "static/chunks/app/layout-500f95e314946e02.js"
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/layout.css",
+      "static/chunks/app/layout.js"
     ],
     "/page": [
-      "static/chunks/webpack-ba12f21138bd56e8.js",
-      "static/chunks/4bd1b696-c023c6e3521b1417.js",
-      "static/chunks/255-d9c2bf1d8dd3ca97.js",
-      "static/chunks/main-app-62503e05b83d2739.js",
-      "static/chunks/619-ba102abea3e3d0e4.js",
-      "static/chunks/app/page-48a73a0dfc26a04a.js"
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/page.js"
     ],
     "/case-studies/page": [
-      "static/chunks/webpack-ba12f21138bd56e8.js",
-      "static/chunks/4bd1b696-c023c6e3521b1417.js",
-      "static/chunks/255-d9c2bf1d8dd3ca97.js",
-      "static/chunks/main-app-62503e05b83d2739.js",
-      "static/chunks/619-ba102abea3e3d0e4.js",
-      "static/chunks/app/case-studies/page-9885e7371f72bd30.js"
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/case-studies/page.js"
     ],
     "/case-studies/data-platform/page": [
-      "static/chunks/webpack-ba12f21138bd56e8.js",
-      "static/chunks/4bd1b696-c023c6e3521b1417.js",
-      "static/chunks/255-d9c2bf1d8dd3ca97.js",
-      "static/chunks/main-app-62503e05b83d2739.js",
-      "static/chunks/app/case-studies/data-platform/page-2fbf30a00c4326cd.js"
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/case-studies/data-platform/page.js"
     ]
   }
 }

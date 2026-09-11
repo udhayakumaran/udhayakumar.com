@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
 import { IBM_Plex_Sans, Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
@@ -27,14 +27,15 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
   title: "Udhaya Kumar",
   description: "Staff Backend Engineer with 13+ years building production systems, data platforms, and independent products.",
   authors: [{ name: "Udhayakumar" }],
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-  },
   icons: {
     icon: "/favicon.svg",
   },
@@ -94,7 +95,7 @@ export default function RootLayout({
         <a href="#main-content" className="skip-link sr-only">Skip to content</a>
         <CommandPaletteProvider>
           <Header />
-          <main id="main-content" className="mx-auto max-w-[860px] px-5">
+          <main id="main-content" className="mx-auto max-w-[860px] px-5 pt-20">
             {children}
           </main>
           <Footer />

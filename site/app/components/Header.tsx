@@ -29,54 +29,60 @@ export default function Header() {
   };
 
   return (
-    <header className="border-b border-rule py-6 sticky top-0 bg-bg z-100">
-      <nav
-        className="mx-auto max-w-[860px] px-5 flex gap-10 items-center md:gap-5"
-        aria-label="Primary navigation"
-      >
-        <Link
-          href="/"
-          className="font-display text-headline-sm text-headline-sm font-bold text-ink no-underline mr-auto transition-colors duration-200 min-h-[44px] inline-flex items-center hover:text-accent"
-        >
-          Udhaya
-        </Link>
-
-        <div className="flex gap-10 items-center md:gap-5 md:order-3 md:w-full">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`no-underline text-ink font-label-mono-lg text-label-mono-lg font-medium border-b-2 transition-[border-color] duration-200 min-h-[44px] inline-flex items-center px-2 ${
-                isActive(item.href)
-                  ? "border-accent"
-                  : "border-transparent hover:border-accent"
-              }`}
-              aria-current={isActive(item.href) ? "page" : undefined}
-            >
-              {item.label}
-            </Link>
-          ))}
+    <header className="fixed top-0 w-full z-50 bg-bg/95 backdrop-blur-sm border-b border-rule">
+      <div className="h-20 max-w-[860px] mx-auto px-5 flex items-center justify-between gap-4">
+        <div className="flex items-center gap-2 shrink-0">
+          <Link href="/" className="flex flex-col min-h-[44px] justify-center whitespace-nowrap">
+            <span className="font-headline-sm text-headline-sm text-ink tracking-tight uppercase">Udhaya Kumar</span>
+            <span className="font-caption-mono text-caption-mono text-ink-2 uppercase tracking-widest">Infrastructure &amp; Reliability</span>
+          </Link>
+          <span className="hidden sm:inline-block px-2 py-0.5 rounded bg-sage-wash text-sage border border-sage font-caption-mono text-caption-mono ml-2 whitespace-nowrap">
+            PROD / SRE
+          </span>
         </div>
 
-        <button
-          className="bg-transparent border border-rule-2 text-ink text-label-mono-lg text-label-mono-lg font-medium px-2 py-2 rounded-sm cursor-pointer transition-all duration-200 font-mono min-w-[44px] min-h-[44px] hover:border-accent hover:text-accent focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2 md:order-2"
-          id="theme-toggle"
-          aria-label="Switch to dark mode"
-          title="Toggle dark mode"
-          aria-pressed="false"
-        >
-          <span id="theme-icon">🌙</span>
-        </button>
+        <div className="flex items-center gap-4">
+          <nav className="hidden lg:flex items-center gap-1" aria-label="Primary navigation">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={
+                  isActive(item.href)
+                    ? "min-h-[44px] inline-flex items-center px-3 transition-colors bg-panel-2 text-ink border-b-2 border-accent font-semibold font-label-mono-sm text-label-mono-sm"
+                    : "min-h-[44px] inline-flex items-center px-3 text-ink-2 font-label-mono-sm text-label-mono-sm hover:bg-panel hover:text-ink transition-colors"
+                }
+                aria-current={isActive(item.href) ? "page" : undefined}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
 
-        <button
-          onClick={open}
-          className="bg-transparent border border-rule-2 text-ink-3 text-label-mono-lg text-label-mono-lg font-semibold px-2 py-2 rounded-sm cursor-pointer transition-all duration-200 font-mono min-w-[44px] min-h-[44px] flex items-center justify-center hover:border-accent hover:text-accent focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
-          aria-label="Open command palette"
-          title="Open command palette (⌘K)"
-        >
-          <span className="inline-block">⌘</span>
-        </button>
-      </nav>
+          <button
+            className="w-8 h-8 flex items-center justify-center rounded-full text-ink-2 hover:text-accent hover:bg-panel transition-colors focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
+            id="theme-toggle"
+            aria-label="Switch to dark mode"
+            title="Toggle dark mode"
+            aria-pressed="false"
+          >
+            <span id="theme-icon">🌙</span>
+          </button>
+
+          <button
+            onClick={open}
+            className="w-8 h-8 flex items-center justify-center rounded-full text-ink-2 hover:text-accent hover:bg-panel transition-colors focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
+            aria-label="Open command palette"
+            title="Open command palette (⌘K)"
+          >
+            <span className="font-mono text-label-mono-sm">⌘</span>
+          </button>
+
+          <div className="w-8 h-8 rounded-full bg-ink flex items-center justify-center shrink-0 text-bg">
+            <span className="material-symbols-outlined text-[18px]">person</span>
+          </div>
+        </div>
+      </div>
     </header>
   );
 }

@@ -331,3 +331,125 @@ import Layout from '../../layouts/Layout.astro';
     </section>
   </article>
 </Layout>
+
+<style>
+  /* Incident mini-nav */
+  .incident-nav {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    background: var(--bg);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: var(--space-3);
+    z-index: 50;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  .incident-nav-item {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--rule);
+    background: transparent;
+    color: var(--ink-3);
+    font-size: var(--fs-12);
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: "IBM Plex Mono", monospace;
+  }
+
+  .incident-nav-item:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .incident-nav-item[data-active] {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+
+  /* Mobile overflow fix */
+  @media (max-width: 640px) {
+    .incident-nav {
+      display: none;
+    }
+
+    .incident-progression {
+      grid-template-columns: 1fr !important;
+      gap: var(--space-2) !important;
+    }
+
+    .incident-progression > div {
+      min-width: 0;
+      word-break: break-word;
+    }
+  }
+</style>
+
+<script>
+  // Incident mini-nav functionality
+  const incidents = Array.from(document.querySelectorAll('[id^="incident-"]'));
+
+  if (incidents.length > 0) {
+    // Create nav container
+    const nav = document.createElement('div');
+    nav.className = 'incident-nav';
+    nav.setAttribute('aria-label', 'Jump to incident');
+
+    // Create nav buttons
+    incidents.forEach((section, idx) => {
+      const num = String(idx + 1).padStart(2, '0');
+      const btn = document.createElement('button');
+      btn.className = 'incident-nav-item';
+      btn.textContent = num;
+      btn.dataset.incident = idx;
+      btn.dataset.id = section.id;
+
+      btn.addEventListener('click', () => {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+
+      nav.appendChild(btn);
+    });
+
+    // Insert nav into DOM
+    document.body.appendChild(nav);
+
+    // Highlight current incident on scroll
+    const updateActiveIncident = () => {
+      let activeIdx = 0;
+      let closestDistance = Infinity;
+
+      incidents.forEach((section, idx) => {
+        const rect = section.getBoundingClientRect();
+        const distance = Math.abs(rect.top);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          activeIdx = idx;
+        }
+      });
+
+      document.querySelectorAll('.incident-nav-item').forEach((btn, idx) => {
+        if (idx === activeIdx) {
+          btn.setAttribute('data-active', '');
+        } else {
+          btn.removeAttribute('data-active');
+        }
+      });
+    };
+
+    // Listen for scroll
+    document.addEventListener('scroll', updateActiveIncident, { passive: true });
+    updateActiveIncident(); // Initial call
+  }
+</script>

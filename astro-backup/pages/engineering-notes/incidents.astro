@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const incidents = [
+  ['01', 'Query shape, not tuning', 'Pagination joined millions of rows before applying LIMIT. Reversed the order and moved 3+ minutes to under 500ms - a 360× improvement.', 'Diagnosis · query architecture'],
+  ['02', 'Production lock contention', 'A cutover pushed response times above five seconds across 100+ merchants. Isolated ingestion, traced MySQL lock waits, and reduced per-client LOAD DATA parallelism from six jobs to three.', 'Crisis · production isolation'],
+  ['03', 'Customer problem nobody asked about', 'Out-of-stock recommendations stayed live for up to 24 hours. Reused webhook and CDC infrastructure to propagate product changes within five minutes, removing the recurring complaint.', 'Product judgment · customer signal'],
+  ['04', 'Views to destination-shaped consumers', 'MySQL views pushed worst-case latency above 30 seconds. CTEs bought runway at 1.5-2 seconds; Debezium and Pub/Sub consumers made that serving shape durable.', 'Architecture · deadline judgment'],
+  ['05', 'Missing index, missing process', 'An unindexed MongoDB filter caused intermittent slow queries. Added the index, then added production query monitoring so this class of regression surfaced in minutes.', 'Operational discipline · prevention'],
+  ['06', 'Christmas production pressure', 'Real-time ClickHouse updates exhausted RAM during peak sales. Scaled resources to recover, reverted to an acceptable 24-hour batch, and added guardrails for database-specific constraints.', 'Leadership · stability tradeoff'],
+  ['07', 'Repeated ordering failure', 'Unspecified result ordering broke twice across BigQuery and ClickHouse. Fixed producer and consumer contracts, then added continuous validation instead of relying on incidental order.', 'Pattern recognition · systems thinking'],
+  ['08', 'Silent failure, fixed algorithmically', 'A full join corrupted 100M-member segment diffs without errors. Deterministic cityHash64 bucketing made comparison fit within 16GB and reduced cycle cost 6×.', 'Algorithms · correctness under constraint'],
+  ['09', 'Materialized-view scale mismatch', 'ClickHouse triggers repeatedly rescanned large tables at hundreds of events per second. Replaced them with hourly batch refresh: stable CPU, predictable cost, reports under 30 seconds.', 'Database behavior · scale judgment'],
+  ['10', 'Node.js memory and backpressure', 'Pub/Sub consumers hit daily OOMs at a 512MiB pod limit. Pause at 80% memory, resume at 60%, and combine with HPA; the pattern became a standard across consuming services.', 'Resilience · platform pattern'],
+];
+---
+
+<Layout title="Incident Record — Udhaya Kumar" description="Ten production incidents showing Udhaya Kumar's approach to diagnosis, architecture, reliability, and leadership under pressure." article={{
+    datePublished: "2025-09-03",
+    dateModified: "2025-09-03",
+  }}>
+  <section class="incident-page">
+    <a class="back-link" href="/engineering-notes/">← Engineering notes</a>
+    <p class="eyebrow">Production evidence · 10 records</p>
+    <h1>Hard problems leave patterns.</h1>
+    <p class="lede">These are not outage trophies. They are a record of how I diagnose under pressure and recognize system constraints.</p>
+    <div class="records">
+      {incidents.map(([number, title, summary, category]) => (
+        <article class="record">
+          <span class="record-number">{number}</span>
+          <div><p class="record-category">{category}</p><h2>{title}</h2><p>{summary}</p><a href={`/case-studies/hard-problems#incident-${number}`} class="text-14 text-accent font-mono mt-2 inline-block">→ full breakdown</a></div>
+        </article>
+      ))}
+    </div>
+    <div class="record-cta"><p>Want the full incident details?</p><a href="/case-studies/hard-problems">Read the full incident breakdowns →</a><p class="mt-4 text-14 text-ink-2">Or dive into the specific deep-dive on the Debezium snapshot:</p><a href="/engineering-notes/debezium-50m-row-snapshot/">The 50M-row CDC snapshot incident →</a><a href="/resume" class="mt-4 block">View the role-focused resumes →</a></div>
+  </section>
+</Layout>
+

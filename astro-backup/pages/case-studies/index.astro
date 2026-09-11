@@ -1,0 +1,124 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import LensSelector from '../../components/LensSelector.astro';
+import { caseStudyLenses } from '../../data/profile';
+
+interface CaseStudy {
+  id: string;
+  href: string;
+  label: string;
+  title: string;
+  subtitle: string;
+  tags: string[];
+}
+
+const caseStudies: CaseStudy[] = [
+  {
+    id: "data-platform",
+    href: "/case-studies/data-platform",
+    label: "Primary case study · recommended first read",
+    title: "The Data Platform",
+    subtitle: "Owned the rebuild of customer and order data infrastructure across 200+ merchants on five commerce platforms; freshness ranges from sub-5-minute (webhooks) to ~6 hours (legacy) vs. days-late baseline.",
+    tags: ["tiered freshness", "200+ merchants", "5 e-commerce platforms"],
+  },
+  {
+    id: "segmentation",
+    href: "/case-studies/segmentation",
+    label: "Customer data product · self-serve",
+    title: "Customer Segmentation",
+    subtitle: "Owned the query model and builder that let Customer Success create audiences from four source systems without routine engineering tickets.",
+    tags: ["4 source systems, 1 query", "built on the platform ↑"],
+  },
+  {
+    id: "recommendations",
+    href: "/case-studies/recommendations",
+    label: "Product system · recommendations",
+    title: "Recommendation Blocks",
+    subtitle: "Owned the trust ladder, serving system, and adoption measurement for a recommendation product built from zero.",
+    tags: ["80% of all merchants", "5 regions", "200-400ms p99"],
+  },
+  {
+    id: "hard-problems",
+    href: "/case-studies/hard-problems",
+    label: "Production incidents · deep dive",
+    title: "Hard Problems & Learnings",
+    subtitle: "Ten production incidents that shaped engineering judgment. Lock contention at scale, silent failures, architectural incompatibility, database constraints, resilience patterns, leadership under crisis.",
+    tags: ["query architecture", "scale constraints", "systematic patterns"],
+  },
+];
+---
+
+<Layout title="Case Studies — Udhaya Kumar" description="Three complete systems I owned: a data platform with CDC and warehouse consolidation, a segmentation engine for non-technical users, and a real-time recommendation system serving multiple regions.">
+  <section class="py-13">
+    <h1 class="font-code text-32 font-semibold mb-4">Case Studies</h1>
+    <p class="text-16 text-ink-2 max-w-[65ch] mb-10">These four case studies form a narrative: Start with the <a href="/case-studies/data-platform" class="text-accent">data platform</a> to understand my architectural approach and how I think about reversibility. Then read <a href="/case-studies/hard-problems" class="text-accent">hard problems</a> to see production judgment in action — how I handle pressure, learn from mistakes, and make decisions under constraint. Finally, <a href="/case-studies/segmentation" class="text-accent">segmentation</a> and <a href="/case-studies/recommendations" class="text-accent">recommendations</a> show how this architecture serves products and users. Together, they illustrate the full arc of ownership: from first principles through execution to impact.</p>
+
+    <LensSelector lenses={caseStudyLenses} defaultLens="data" />
+
+    <div class="grid gap-6" id="case-studies-grid">
+      {caseStudies.map((study, idx) => (
+        <a href={study.href} class="no-underline block p-6 bg-panel border border-rule-2 rounded transition-[border-color] duration-200 case-link" data-case-id={study.id} data-case-idx={idx}>
+          <div class="font-code text-12 text-ink-3 font-semibold mb-1 case-number">{String(idx + 1).padStart(2, '0')}</div>
+          <div class="flex justify-between items-start gap-2 mb-2">
+            <h2 class="font-code text-18 font-semibold text-ink m-0">{study.title}</h2>
+            <span class="font-code text-11 font-semibold text-accent uppercase tracking-[0.05em] whitespace-nowrap case-badge" style="display:none;">most relevant</span>
+          </div>
+          <p class="case-label">{study.label}</p>
+          <p class="text-14 text-ink-2 leading-[1.6] mb-3">{study.subtitle}</p>
+          <div class="flex flex-wrap gap-2">
+            {study.tags.map((tag) => (
+              <span class="tag-chip">{tag}</span>
+            ))}
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>
+
+
+<script define:vars={{ caseStudyLenses }}>
+  const grid = document.getElementById("case-studies-grid");
+
+  function reorderCaseStudies(lensId) {
+    if (!grid) return;
+
+    const lens = caseStudyLenses.find((l) => l.id === lensId);
+    if (!lens) return;
+
+    const cards = Array.from(grid.querySelectorAll("[data-case-id]"));
+    const leadCardId = lens.leadsWith;
+
+    // Sort cards: lead study first, others in default order
+    cards.sort((a, b) => {
+      const aIsLead = a.dataset.caseId === leadCardId;
+      const bIsLead = b.dataset.caseId === leadCardId;
+
+      if (aIsLead) return -1;
+      if (bIsLead) return 1;
+
+      // Maintain original order for non-lead cards
+      return parseInt(a.dataset.caseIdx) - parseInt(b.dataset.caseIdx);
+    });
+
+    // Reorder in DOM and update indices + badge visibility
+    cards.forEach((card, idx) => {
+      grid.appendChild(card);
+      card.querySelector(".case-number").textContent = String(idx + 1).padStart(2, "0");
+      const badge = card.querySelector(".case-badge");
+      if (badge) {
+        badge.style.display = idx === 0 ? "inline-block" : "none";
+      }
+    });
+  }
+
+  // Listen for lens changes via custom event from LensSelector
+  document.addEventListener("lens-change", (e) => {
+    reorderCaseStudies(e.detail.lensId);
+  });
+
+  // Initial reorder based on current lens
+  const params = new URLSearchParams(window.location.search);
+  const activeLens = params.get("lens") || "data";
+  reorderCaseStudies(activeLens);
+</script>

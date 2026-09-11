@@ -1,0 +1,14 @@
+---
+interface Props {
+  href: string;
+  variant?: "solid" | "outline";
+  label: string;
+}
+
+const { href, variant = "solid", label } = Astro.props;
+---
+
+<a href={href} class={`btn btn-${variant}`}>
+  {label}
+</a>
+

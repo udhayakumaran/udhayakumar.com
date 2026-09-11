@@ -1,0 +1,163 @@
+---
+import { searchIndex, type SearchItem } from '../data/search-index';
+---
+
+<dialog id="command-palette" class="command-palette">
+  <div class="palette-content">
+    <div class="palette-header">
+      <input
+        id="palette-input"
+        type="text"
+        placeholder="Search case studies, incidents, pages..."
+        class="palette-input"
+        autocomplete="off"
+      />
+    </div>
+    <div id="palette-results" class="palette-results">
+      <div class="palette-empty">Start typing to search...</div>
+    </div>
+  </div>
+</dialog>
+
+
+<script define:vars={{ searchIndex }}>
+  import Fuse from 'fuse.js';
+
+  const dialog = document.getElementById('command-palette');
+  const input = document.getElementById('palette-input');
+  const results = document.getElementById('palette-results');
+
+  const fuse = new Fuse(searchIndex, {
+    keys: ['title', 'keywords', 'section'],
+    threshold: 0.3,
+    includeScore: true,
+  });
+
+  let selectedIndex = -1;
+
+  function renderResults(items) {
+    if (items.length === 0) {
+      results.innerHTML = '<div class="palette-empty">No results found</div>';
+      selectedIndex = -1;
+      return;
+    }
+
+    const groupedBySection = items.reduce((acc, item) => {
+      if (!acc[item.item.section]) {
+        acc[item.item.section] = [];
+      }
+      acc[item.item.section].push(item.item);
+      return acc;
+    }, {});
+
+    let html = '';
+    let itemCount = 0;
+
+    Object.entries(groupedBySection).forEach(([section, sectionItems]) => {
+      html += `<div class="palette-group"><div class="palette-group-label">${section}</div>`;
+
+      sectionItems.forEach((item) => {
+        const isSelected = itemCount === selectedIndex ? 'data-selected' : '';
+        html += `<button class="palette-item" ${isSelected} data-url="${item.url}" data-index="${itemCount}">
+          <strong>${item.title}</strong>
+          <span class="palette-item-section">${item.section}</span>
+        </button>`;
+        itemCount++;
+      });
+
+      html += '</div>';
+    });
+
+    results.innerHTML = html;
+
+    // Re-attach click handlers
+    results.querySelectorAll('.palette-item').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        navigateToUrl(btn.dataset.url);
+      });
+    });
+  }
+
+  function navigateToUrl(url) {
+    dialog.close();
+    window.location.href = url;
+  }
+
+  function handleKeydown(e) {
+    if (!dialog.open) {
+      // Open on Cmd+K or Ctrl+K
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        dialog.showModal();
+        input.focus();
+      }
+      return;
+    }
+
+    // Dialog is open
+    const items = results.querySelectorAll('.palette-item');
+
+    switch (e.key) {
+      case 'Escape':
+        dialog.close();
+        e.preventDefault();
+        break;
+
+      case 'ArrowDown':
+        e.preventDefault();
+        if (items.length === 0) return;
+        selectedIndex = selectedIndex < items.length - 1 ? selectedIndex + 1 : 0;
+        updateSelection(items);
+        break;
+
+      case 'ArrowUp':
+        e.preventDefault();
+        if (items.length === 0) return;
+        selectedIndex = selectedIndex > 0 ? selectedIndex - 1 : items.length - 1;
+        updateSelection(items);
+        break;
+
+      case 'Enter':
+        e.preventDefault();
+        if (selectedIndex >= 0 && selectedIndex < items.length) {
+          navigateToUrl(items[selectedIndex].dataset.url);
+        }
+        break;
+    }
+  }
+
+  function updateSelection(items) {
+    items.forEach((btn, idx) => {
+      if (idx === selectedIndex) {
+        btn.setAttribute('data-selected', '');
+        btn.scrollIntoView({ block: 'nearest' });
+      } else {
+        btn.removeAttribute('data-selected');
+      }
+    });
+  }
+
+  function handleInput() {
+    const query = input.value;
+    selectedIndex = -1;
+
+    if (query.trim() === '') {
+      renderResults([]);
+      return;
+    }
+
+    const searchResults = fuse.search(query);
+    renderResults(searchResults);
+  }
+
+  // Event listeners
+  input.addEventListener('input', handleInput);
+  document.addEventListener('keydown', handleKeydown);
+
+  // Close on backdrop click
+  dialog.addEventListener('click', (e) => {
+    if (e.target === dialog) {
+      dialog.close();
+    }
+  });
+</script>

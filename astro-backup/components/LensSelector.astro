@@ -1,0 +1,107 @@
+---
+interface Lens {
+  id: string;
+  label: string;
+  note: string;
+}
+
+interface Props {
+  lenses: Lens[];
+  defaultLens?: string;
+}
+
+const { lenses, defaultLens = "data" } = Astro.props;
+---
+
+<div class="lens-selector">
+  <div class="lens-buttons" id="lens-buttons">
+    {lenses.map((lens) => (
+      <button
+        class={`lens-btn ${defaultLens === lens.id ? "active" : ""}`}
+        data-lens={lens.id}
+        aria-pressed={defaultLens === lens.id}
+      >
+        {lens.label}
+      </button>
+    ))}
+  </div>
+  <div class="lens-note" id="lens-note">
+    {lenses.find((l) => l.id === defaultLens)?.note}
+  </div>
+</div>
+
+
+<script define:vars={{ lenses, defaultLens }}>
+  const lensButtons = document.getElementById("lens-buttons");
+  const lensNote = document.getElementById("lens-note");
+  const isOnCaseStudiesPage = window.location.pathname === "/case-studies" || window.location.pathname === "/case-studies/";
+
+  if (lensButtons) {
+    // Get or set lens from URL (use query param on case-studies page, hash elsewhere)
+    function getActiveLens() {
+      if (isOnCaseStudiesPage) {
+        const params = new URLSearchParams(window.location.search);
+        return params.get("lens") || "data";
+      } else {
+        return window.location.hash.slice(1) || "data";
+      }
+    }
+
+    function updateLens(lensId) {
+      if (isOnCaseStudiesPage) {
+        const url = new URL(window.location);
+        url.searchParams.set("lens", lensId);
+        window.history.replaceState({}, "", url);
+        // Trigger page re-render or reorder via CSS/JS
+        document.documentElement.setAttribute("data-active-lens", lensId);
+      } else {
+        if (lensId !== "data") {
+          window.location.hash = lensId;
+        } else {
+          window.location.hash = "";
+        }
+      }
+    }
+
+    // Sync buttons and note from active lens
+    function syncFromLens(lensId) {
+      const buttons = lensButtons.querySelectorAll(".lens-btn");
+      buttons.forEach((btn) => {
+        if (btn.dataset.lens === lensId) {
+          btn.classList.add("active");
+          btn.setAttribute("aria-pressed", "true");
+        } else {
+          btn.classList.remove("active");
+          btn.setAttribute("aria-pressed", "false");
+        }
+      });
+
+      // Update note (fade, but instant reorder per BUILD-BRIEF)
+      const lens = lenses.find((l) => l.id === lensId);
+      if (lens && lensNote) {
+        lensNote.textContent = lens.note;
+      }
+    }
+
+    // Button click handler
+    lensButtons.addEventListener("click", (e) => {
+      if (e.target.classList.contains("lens-btn")) {
+        const lensId = e.target.dataset.lens;
+        updateLens(lensId);
+        syncFromLens(lensId);
+        // Dispatch custom event for other components to listen
+        document.dispatchEvent(new CustomEvent("lens-change", { detail: { lensId } }));
+      }
+    });
+
+    // Hash change listener (for non-case-studies pages)
+    if (!isOnCaseStudiesPage) {
+      window.addEventListener("hashchange", () => {
+        syncFromLens(getActiveLens());
+      });
+    }
+
+    // Initial sync on load
+    syncFromLens(getActiveLens());
+  }
+</script>

@@ -1,0 +1,13 @@
+---
+interface Props {
+  label: string;
+  accent?: "sage" | "accent";
+}
+
+const { label, accent = "accent" } = Astro.props;
+---
+
+<div class={`eyebrow ${accent === "sage" ? "sage" : ""}`}>
+  {label}
+</div>
+

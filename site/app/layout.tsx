@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import CommandPalette from "./components/CommandPalette";
+import CommandPaletteProvider from "./components/CommandPaletteProvider";
 
 const ibmPlexSans = IBM_Plex_Sans({
   variable: "--font-sans",
@@ -91,12 +92,14 @@ export default function RootLayout({
       </head>
       <body>
         <a href="#main-content" className="skip-link sr-only">Skip to content</a>
-        <Header />
-        <main id="main-content" className="mx-auto max-w-[860px] px-5">
-          {children}
-        </main>
-        <Footer />
-        <CommandPalette />
+        <CommandPaletteProvider>
+          <Header />
+          <main id="main-content" className="mx-auto max-w-[860px] px-5">
+            {children}
+          </main>
+          <Footer />
+          <CommandPalette />
+        </CommandPaletteProvider>
         <button
           id="back-to-top"
           aria-label="Back to top"

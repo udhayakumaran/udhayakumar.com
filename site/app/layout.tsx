@@ -1,0 +1,123 @@
+import { Metadata } from "next";
+import { IBM_Plex_Sans, Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
+import "./globals.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import CommandPalette from "./components/CommandPalette";
+
+const ibmPlexSans = IBM_Plex_Sans({
+  variable: "--font-sans",
+  weight: ["400", "500", "600"],
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const bricolageGrotesque = Bricolage_Grotesque({
+  variable: "--font-display",
+  weight: ["600", "700"],
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-mono",
+  weight: ["400", "500"],
+  subsets: ["latin"],
+  display: "swap",
+});
+
+export const metadata: Metadata = {
+  title: "Udhaya Kumar",
+  description: "Staff Backend Engineer with 13+ years building production systems, data platforms, and independent products.",
+  authors: [{ name: "Udhayakumar" }],
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+  },
+  icons: {
+    icon: "/favicon.svg",
+  },
+  openGraph: {
+    title: "Udhaya Kumar",
+    description: "Staff Backend Engineer with 13+ years building production systems, data platforms, and independent products.",
+    url: "https://udhayakumar.com",
+    siteName: "Udhaya Kumar",
+    type: "website",
+    images: [
+      {
+        url: "https://udhayakumar.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Udhaya Kumar — Staff Backend Engineer",
+      },
+    ],
+  },
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const themeInitScript = `
+    (function() {
+      const saved = localStorage.getItem('theme');
+      const theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  `;
+
+  return (
+    <html lang="en" className={`${ibmPlexSans.variable} ${bricolageGrotesque.variable} ${jetbrainsMono.variable}`}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{ __html: themeInitScript }}
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
+        />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-DDRCFD4HSF"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-DDRCFD4HSF');
+            `,
+          }}
+        />
+      </head>
+      <body>
+        <a href="#main-content" className="skip-link sr-only">Skip to content</a>
+        <Header />
+        <main id="main-content" className="mx-auto max-w-[860px] px-5">
+          {children}
+        </main>
+        <Footer />
+        <CommandPalette />
+        <button
+          id="back-to-top"
+          aria-label="Back to top"
+          className="fixed bottom-6 right-6 w-12 h-12 border border-rule bg-bg text-ink cursor-pointer rounded text-20 hidden z-[999] transition-all duration-200 hover:border-accent hover:text-accent"
+        >
+          ↑
+        </button>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              const backToTopBtn = document.getElementById('back-to-top');
+              window.addEventListener('scroll', () => {
+                backToTopBtn.classList.toggle('hidden', window.scrollY <= 300);
+              });
+              backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              });
+            `,
+          }}
+        />
+      </body>
+    </html>
+  );
+}

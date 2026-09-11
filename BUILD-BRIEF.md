@@ -41,9 +41,18 @@ The design consequence: every title, subtitle, and metric visible **before** a r
 
 **Layout** — single column, max-width 860px, generous section padding (52px between sections), no sidebar, no hero image. Structural rhythm carries the page, not decoration.
 
-**Motion** — deliberately minimal. A 150ms fade on the lens note only. No page-load animation, no scroll-triggered reveals, no animated section transitions. This was a considered decision, not an oversight: the target audience penalizes flashy portfolio gimmicks, and the content itself argues for restraint (case study 1 is literally about deleting unnecessary complexity). `prefers-reduced-motion: reduce` disables all transitions/animations globally.
+**Motion & Interactivity** — restraint on decoration, purposeful on content exploration. No page-load animation, no scroll-triggered reveals, no decorative section transitions. But: interactive diagrams, keyboard-navigable case-study filters, and tooling for engineering audiences (command palette, incident steppers) that make existing content more explorable without adding fluff. The through-line: motion and interaction that serves the audiences (engineers reading for tradeoff depth, recruiters skimming) stays; purely decorative polish goes. `prefers-reduced-motion: reduce` disables all motion/animation globally, but content interactions (click, expand, scroll-to) remain fully functional.
 
 **Case study disclosure** — native `<details>`/`<summary>`, zero JavaScript required for the core interaction. Works with JS disabled, keyboard-accessible for free, content inside closed `<details>` is still findable via in-page browser search in Chromium browsers.
+
+**Interactive features (added, Sept 2025)** — no new framework or 3D; pure content-exploration enhancements for the target audiences:
+- **Command palette** (Cmd/Ctrl+K): Fuzzy search across case studies, incidents, and pages. Signals engineering craft to technical reviewers; fast nav for a site that outgrew single-scroll.
+- **Architecture diagram** (case-studies/data-platform): Click SVG boxes to highlight + scroll to related key-decision. Connects diagram to reasoning without adding prose.
+- **Incident stepper** (engineering-notes/debezium): Five-step timeline with expand-on-click; each step surfaces detail. Merges duplicated prose (immediate/short-term/long-term).
+- **Incident mini-nav** (case-studies/hard-problems): Persistent number nav (bottom-right) to jump between 10 incidents. Auto-highlights current incident on scroll. Mobile: hidden, table switches to single-column.
+- **Lens system** (case-studies/index): Four role-specific lenses (data, arch, founding, ecom) reorder case studies by relevance. "Most relevant" badge highlights lead study. Query-param-driven for link-sharing per role. No animation on reorder, just instant swap + 150ms fade on the lens note (existing behavior, unchanged).
+
+All interactive features degrade gracefully: they enhance but never block content, skip cleanly under `prefers-reduced-motion`, and work on mobile/low-bandwidth.
 
 ---
 

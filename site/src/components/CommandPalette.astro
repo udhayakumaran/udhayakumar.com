@@ -70,6 +70,11 @@ import { searchIndex, type SearchItem } from '../data/search-index';
     outline: none;
   }
 
+  .palette-input:focus-visible {
+    outline: 2px solid var(--accent-ink);
+    outline-offset: -2px;
+  }
+
   .palette-input::placeholder {
     color: var(--ink-3);
   }

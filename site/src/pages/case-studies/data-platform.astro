@@ -100,6 +100,7 @@ import Layout from '../../layouts/Layout.astro';
             .arch-box:hover { stroke: var(--accent); stroke-width: 2.5; }
             .arch-group[data-decision] .arch-box { cursor: pointer; }
             .arch-group[data-decision][data-active] .arch-box { fill: var(--accent-wash); stroke: var(--accent); stroke-width: 2.5; }
+            .arch-group[data-decision]:focus-visible .arch-box { outline: 2px solid var(--accent); outline-offset: 3px; }
             .arch-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; fill: var(--ink); }
             .arch-label-small { font-family: 'JetBrains Mono', monospace; font-size: 10px; fill: var(--ink-2); }
             .arch-arrow { stroke: var(--ink-3); stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
@@ -133,7 +134,7 @@ import Layout from '../../layouts/Layout.astro';
         <line class="arch-arrow" x1="560" y1="70" x2="450" y2="110"/>
 
         <!-- MySQL Landing Layer -->
-        <g class="arch-group" data-decision="0">
+        <g class="arch-group" data-decision="0" tabindex="0" role="button" aria-label="MySQL Landing Layer: raw, per-source schemas, reversible landing layer">
           <rect class="arch-box" x="60" y="110" width="440" height="60" rx="4"/>
           <text class="arch-label" x="290" y="138" text-anchor="middle" font-weight="600">MySQL Landing Layer</text>
           <text class="arch-label-small" x="290" y="155" text-anchor="middle">(raw, per-source schemas, reversible landing layer)</text>
@@ -143,7 +144,7 @@ import Layout from '../../layouts/Layout.astro';
         <line class="arch-arrow" x1="290" y1="170" x2="290" y2="210"/>
 
         <!-- Debezium CDC + Pub/Sub -->
-        <g class="arch-group" data-decision="1">
+        <g class="arch-group" data-decision="1" tabindex="0" role="button" aria-label="Debezium CDC and Google Pub/Sub: replay boundary, per-tenant isolation">
           <rect class="arch-box" x="80" y="210" width="420" height="60" rx="4"/>
           <text class="arch-label" x="290" y="238" text-anchor="middle" font-weight="600">Debezium CDC → Google Pub/Sub</text>
           <text class="arch-label-small" x="290" y="255" text-anchor="middle">(replay boundary, per-tenant isolation)</text>
@@ -155,21 +156,21 @@ import Layout from '../../layouts/Layout.astro';
         <line class="arch-arrow" x1="420" y1="270" x2="480" y2="310"/>
 
         <!-- Serving Layer: MongoDB, ClickHouse, BigQuery -->
-        <g class="arch-group" data-decision="3">
+        <g class="arch-group" data-decision="3" tabindex="0" role="button" aria-label="MongoDB serving layer for point lookups">
           <rect class="arch-box" x="20" y="310" width="140" height="70" rx="4"/>
           <text class="arch-label" x="90" y="335" text-anchor="middle" font-weight="600">MongoDB</text>
           <text class="arch-label-small" x="90" y="355" text-anchor="middle">(serving)</text>
           <text class="arch-label-small" x="90" y="370" text-anchor="middle">point lookups</text>
         </g>
 
-        <g class="arch-group" data-decision="3">
+        <g class="arch-group" data-decision="3" tabindex="0" role="button" aria-label="ClickHouse analytics layer for aggregation">
           <rect class="arch-box" x="200" y="310" width="140" height="70" rx="4"/>
           <text class="arch-label" x="270" y="335" text-anchor="middle" font-weight="600">ClickHouse</text>
           <text class="arch-label-small" x="270" y="355" text-anchor="middle">(analytics)</text>
           <text class="arch-label-small" x="270" y="370" text-anchor="middle">aggregation</text>
         </g>
 
-        <g class="arch-group" data-decision="3">
+        <g class="arch-group" data-decision="3" tabindex="0" role="button" aria-label="BigQuery historical layer for audit trail">
           <rect class="arch-box" x="380" y="310" width="140" height="70" rx="4"/>
           <text class="arch-label" x="450" y="335" text-anchor="middle" font-weight="600">BigQuery</text>
           <text class="arch-label-small" x="450" y="355" text-anchor="middle">(historical)</text>

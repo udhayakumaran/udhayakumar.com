@@ -19,25 +19,27 @@ The design consequence: every title, subtitle, and metric visible **before** a r
 
 ## 2. Design system
 
-**Palette** — light-first, full dark-mode parity via `prefers-color-scheme`, with `[data-theme]` override support for an explicit toggle (none is currently built, but tokens support one):
+**Palette** — warm editorial aesthetic, light-first, full dark-mode parity via `prefers-color-scheme`, with `[data-theme]` override support for an explicit toggle (none is currently built, but tokens support one):
 
 ```css
---bg:        #FCFCFD   /* dark: #0F1217 */
---panel:     #F3F4F7   /* dark: #161A21 */
---panel-2:   #EAECF1   /* dark: #1C212A */
---ink:       #15171C   /* dark: #E7E9ED */
---ink-2:     #555B6A   /* dark: #9AA1AF */
---ink-3:     #7C8393   /* dark: #79808E */
---rule:      #E1E4EA   /* dark: #252A33 */
---rule-2:    #CBD0DA   /* dark: #333A45 */
---accent:      #0A6A6A /* dark: #5BC4B8 */   -- teal, restrained, used for links/active states/metric chips only
---accent-ink:  #075858 /* dark: #7FD4CA */
---accent-wash: #E4F1F0 /* dark: #122A29 */
---flag:      #8A4B08   /* dark: #D9A05B */   -- amber, TODO/placeholder markers only, never decorative
---flag-wash: #FBEEE0   /* dark: #2A2015 */
+--bg:        #FAF6EC   /* cream; dark: #15140F */
+--panel:     #F2EBDA   /* light panel; dark: #1E1C15 */
+--panel-2:   #E9E0C8   /* secondary panel; dark: #28251A */
+--ink:       #1C1A15   /* text; dark: #F1ECDD */
+--ink-2:     #59564A   /* secondary text; dark: #B7B199 */
+--ink-3:     #8A8674   /* tertiary text; dark: #8C8873 */
+--rule:      #DED2B4   /* dividers; dark: #342F20 */
+--rule-2:    #C7B896   /* secondary dividers; dark: #48412C */
+--accent:      #C85A2E /* rust-orange, links/active states only; dark: #E8A57D */
+--accent-ink:  #A84420 /* darker rust for small text; dark: #F0B899 */
+--accent-wash: #F5DFC9 /* light wash for metric chips; dark: #2A1F15 */
+--sage:      #6E7B4C   /* secondary system accent; dark: #9CB37A */
+--sage-wash: #E7EAD6   /* light wash; dark: #232A1C */
+--flag:      #8A4B08   /* amber, TODO/placeholder markers only; dark: #D9A05B */
+--flag-wash: #FBEEE0   /* light wash; dark: #2A2015 */
 ```
 
-**Type** — IBM Plex Sans (body, headings) + IBM Plex Mono (labels, metadata, code, eyebrows), loaded from Google Fonts with system fallback stacks. No display/serif face — this is a technical document, not an editorial page. Body copy measure capped at 68ch.
+**Type** — IBM Plex Sans (body, headings) + IBM Plex Mono (labels, metadata, code, eyebrows) + JetBrains Mono (code blocks, `.label-mono` eyebrows), loaded from Google Fonts with system fallback stacks. Display face: Bricolage Grotesque (h1 only, 800 weight). Body copy measure capped at 68ch.
 
 **Layout** — single column, max-width 860px, generous section padding (52px between sections), no sidebar, no hero image. Structural rhythm carries the page, not decoration.
 

@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import CommandPalette from '../components/CommandPalette.astro';
 import { profile } from '../data/profile';
 
 interface Props {
@@ -199,6 +200,8 @@ const articleJsonLd = article ? {
       <a href="/architecture-decisions">Architecture Decision Records</a>
     </nav>
   </Footer>
+
+  <CommandPalette />
 
   <button id="back-to-top" aria-label="Back to top" class="fixed bottom-6 right-6 w-12 h-12 border border-rule bg-bg text-ink cursor-pointer rounded font-[20px] hidden z-[999] transition-all ease-[0.2s]">↑</button>
 

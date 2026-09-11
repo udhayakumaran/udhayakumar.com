@@ -1,0 +1,288 @@
+---
+import { searchIndex, type SearchItem } from '../data/search-index';
+---
+
+<dialog id="command-palette" class="command-palette">
+  <div class="palette-content">
+    <div class="palette-header">
+      <input
+        id="palette-input"
+        type="text"
+        placeholder="Search case studies, incidents, pages..."
+        class="palette-input"
+        autocomplete="off"
+      />
+    </div>
+    <div id="palette-results" class="palette-results">
+      <div class="palette-empty">Start typing to search...</div>
+    </div>
+  </div>
+</dialog>
+
+<style>
+  .command-palette {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 18, 23, 0.8);
+    border: none;
+    padding: 0;
+    display: none;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+  }
+
+  .command-palette[open] {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 100px;
+  }
+
+  .command-palette::backdrop {
+    background: transparent;
+  }
+
+  .palette-content {
+    background: var(--bg);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 500px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  .palette-header {
+    padding: var(--space-4);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .palette-input {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    border: none;
+    background: transparent;
+    color: var(--ink);
+    font-size: var(--fs-16);
+    font-family: inherit;
+    outline: none;
+  }
+
+  .palette-input::placeholder {
+    color: var(--ink-3);
+  }
+
+  .palette-results {
+    overflow-y: auto;
+    max-height: 350px;
+  }
+
+  .palette-empty {
+    padding: var(--space-6) var(--space-4);
+    color: var(--ink-3);
+    text-align: center;
+    font-size: var(--fs-14);
+  }
+
+  .palette-group {
+    padding-top: var(--space-3);
+  }
+
+  .palette-group-label {
+    padding: var(--space-2) var(--space-4);
+    color: var(--ink-3);
+    font-size: var(--fs-12);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+
+  .palette-item {
+    padding: var(--space-3) var(--space-4);
+    cursor: pointer;
+    color: var(--ink);
+    text-decoration: none;
+    display: block;
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+    font-family: inherit;
+    font-size: var(--fs-14);
+    transition: background-color 0.15s ease;
+  }
+
+  .palette-item:hover,
+  .palette-item[data-selected] {
+    background: var(--panel);
+  }
+
+  .palette-item strong {
+    color: var(--accent);
+  }
+
+  .palette-item-section {
+    display: block;
+    color: var(--ink-3);
+    font-size: var(--fs-12);
+    margin-top: var(--space-1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .command-palette {
+      backdrop-filter: none;
+    }
+
+    .palette-content {
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .palette-item {
+      transition: none;
+    }
+  }
+</style>
+
+<script define:vars={{ searchIndex }}>
+  import Fuse from 'fuse.js';
+
+  const dialog = document.getElementById('command-palette');
+  const input = document.getElementById('palette-input');
+  const results = document.getElementById('palette-results');
+
+  const fuse = new Fuse(searchIndex, {
+    keys: ['title', 'keywords', 'section'],
+    threshold: 0.3,
+    includeScore: true,
+  });
+
+  let selectedIndex = -1;
+
+  function renderResults(items) {
+    if (items.length === 0) {
+      results.innerHTML = '<div class="palette-empty">No results found</div>';
+      selectedIndex = -1;
+      return;
+    }
+
+    const groupedBySection = items.reduce((acc, item) => {
+      if (!acc[item.item.section]) {
+        acc[item.item.section] = [];
+      }
+      acc[item.item.section].push(item.item);
+      return acc;
+    }, {});
+
+    let html = '';
+    let itemCount = 0;
+
+    Object.entries(groupedBySection).forEach(([section, sectionItems]) => {
+      html += `<div class="palette-group"><div class="palette-group-label">${section}</div>`;
+
+      sectionItems.forEach((item) => {
+        const isSelected = itemCount === selectedIndex ? 'data-selected' : '';
+        html += `<button class="palette-item" ${isSelected} data-url="${item.url}" data-index="${itemCount}">
+          <strong>${item.title}</strong>
+          <span class="palette-item-section">${item.section}</span>
+        </button>`;
+        itemCount++;
+      });
+
+      html += '</div>';
+    });
+
+    results.innerHTML = html;
+
+    // Re-attach click handlers
+    results.querySelectorAll('.palette-item').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        navigateToUrl(btn.dataset.url);
+      });
+    });
+  }
+
+  function navigateToUrl(url) {
+    dialog.close();
+    window.location.href = url;
+  }
+
+  function handleKeydown(e) {
+    if (!dialog.open) {
+      // Open on Cmd+K or Ctrl+K
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        dialog.showModal();
+        input.focus();
+      }
+      return;
+    }
+
+    // Dialog is open
+    const items = results.querySelectorAll('.palette-item');
+
+    switch (e.key) {
+      case 'Escape':
+        dialog.close();
+        e.preventDefault();
+        break;
+
+      case 'ArrowDown':
+        e.preventDefault();
+        if (items.length === 0) return;
+        selectedIndex = selectedIndex < items.length - 1 ? selectedIndex + 1 : 0;
+        updateSelection(items);
+        break;
+
+      case 'ArrowUp':
+        e.preventDefault();
+        if (items.length === 0) return;
+        selectedIndex = selectedIndex > 0 ? selectedIndex - 1 : items.length - 1;
+        updateSelection(items);
+        break;
+
+      case 'Enter':
+        e.preventDefault();
+        if (selectedIndex >= 0 && selectedIndex < items.length) {
+          navigateToUrl(items[selectedIndex].dataset.url);
+        }
+        break;
+    }
+  }
+
+  function updateSelection(items) {
+    items.forEach((btn, idx) => {
+      if (idx === selectedIndex) {
+        btn.setAttribute('data-selected', '');
+        btn.scrollIntoView({ block: 'nearest' });
+      } else {
+        btn.removeAttribute('data-selected');
+      }
+    });
+  }
+
+  function handleInput() {
+    const query = input.value;
+    selectedIndex = -1;
+
+    if (query.trim() === '') {
+      renderResults([]);
+      return;
+    }
+
+    const searchResults = fuse.search(query);
+    renderResults(searchResults);
+  }
+
+  // Event listeners
+  input.addEventListener('input', handleInput);
+  document.addEventListener('keydown', handleKeydown);
+
+  // Close on backdrop click
+  dialog.addEventListener('click', (e) => {
+    if (e.target === dialog) {
+      dialog.close();
+    }
+  });
+</script>

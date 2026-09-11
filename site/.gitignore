@@ -5,3 +5,5 @@ node_modules/
 .env.local
 site/node_modules/
 .vercel
+.next/
+*.tsbuildinfo

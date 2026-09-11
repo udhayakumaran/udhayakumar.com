@@ -1,1 +1,0 @@
-self.__NEXT_FONT_MANIFEST="{\"pages\":{},\"app\":{\"/home/udhayakumar/projects/udhayakumar.com/site/app/layout\":[\"static/media/9d5a263311222317-s.p.woff2\",\"static/media/26d4368bf94c0ec4-s.p.woff2\",\"static/media/558ca1a6aa3cb55e-s.p.woff2\"]},\"appUsingSizeAdjust\":true,\"pagesUsingSizeAdjust\":false}"

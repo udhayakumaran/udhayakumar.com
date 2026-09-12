@@ -129,7 +129,7 @@ export default function CommandPalette() {
                 <div className="px-4 py-2 text-caption-mono text-caption-mono text-ink-3 font-label-mono-lg uppercase tracking-wider">
                   {section}
                 </div>
-                {items.map((item, idx) => {
+                {items.map((item) => {
                   const globalIdx = allResults.indexOf(item);
                   return (
                     <button

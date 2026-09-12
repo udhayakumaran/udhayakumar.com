@@ -12,24 +12,26 @@
     "build": "next build",
     "start": "next start",
     "build:test": "NEXT_DIST_DIR=.next-test next build",
-    "start:test": "NEXT_DIST_DIR=.next-test next start"
+    "start:test": "NEXT_DIST_DIR=.next-test next start",
+    "lint": "next lint"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "fuse.js": "^7.0.0",
     "next": "^15.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "tailwindcss": "^4.3.3",
-    "@tailwindcss/postcss": "^4.3.3",
-    "fuse.js": "^7.0.0"
+    "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
-    "playwright": "^1.62.1",
-    "typescript": "^5.7.0",
+    "@types/node": "^20.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "@types/node": "^20.0.0"
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^15.5.25",
+    "typescript": "^5.7.0"
   }
 }

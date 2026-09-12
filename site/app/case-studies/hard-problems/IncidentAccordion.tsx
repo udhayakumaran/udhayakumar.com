@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export interface Incident {
   id: string;
@@ -14,6 +14,15 @@ export interface Incident {
 
 export default function IncidentAccordion({ incidents }: { incidents: Incident[] }) {
   const [openId, setOpenId] = useState<string | null>(incidents[0]?.id ?? null);
+
+  useEffect(() => {
+    const hash = window.location.hash.replace("#", "");
+    const match = hash.match(/^incident-(\d+)$/);
+    if (!match) return;
+    const idx = parseInt(match[1], 10) - 1;
+    const target = incidents[idx];
+    if (target) setOpenId(target.id);
+  }, [incidents]);
 
   return (
     <div className="flex flex-col gap-4">

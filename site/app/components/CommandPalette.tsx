@@ -17,7 +17,7 @@ const fuse = new Fuse(searchIndex, {
 });
 
 export default function CommandPalette() {
-  const { isOpen, close } = useContext(CommandPaletteContext);
+  const { isOpen, open, close } = useContext(CommandPaletteContext);
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [results, setResults] = useState<GroupedResults>({});
@@ -58,10 +58,7 @@ export default function CommandPalette() {
       if (!isOpen) {
         if ((e.metaKey || e.ctrlKey) && e.key === "k") {
           e.preventDefault();
-          const ctx = document.querySelector(
-            "[data-command-palette-trigger]"
-          ) as HTMLElement;
-          ctx?.click?.();
+          open();
         }
         return;
       }
@@ -94,7 +91,7 @@ export default function CommandPalette() {
 
     window.addEventListener("keydown", handleKeydown);
     return () => window.removeEventListener("keydown", handleKeydown);
-  }, [isOpen, selectedIndex, allResults, close, router]);
+  }, [isOpen, selectedIndex, allResults, open, close, router]);
 
   if (!isOpen) {
     return null;

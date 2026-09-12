@@ -70,7 +70,7 @@ export default function RootLayout({
   `;
 
   return (
-    <html lang="en" className={`${ibmPlexSans.variable} ${bricolageGrotesque.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${ibmPlexSans.variable} ${bricolageGrotesque.variable} ${jetbrainsMono.variable}`}>
       <head>
         <script
           dangerouslySetInnerHTML={{ __html: themeInitScript }}

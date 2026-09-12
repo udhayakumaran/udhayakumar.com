@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import { CommandPaletteContext } from "./CommandPaletteProvider";
 
@@ -17,6 +17,19 @@ const navItems = [
 export default function Header() {
   const pathname = usePathname();
   const { open } = useContext(CommandPaletteContext);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+
+  useEffect(() => {
+    const current = document.documentElement.getAttribute("data-theme");
+    setTheme(current === "dark" ? "dark" : "light");
+  }, []);
+
+  const toggleTheme = () => {
+    const next = theme === "dark" ? "light" : "dark";
+    setTheme(next);
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("theme", next);
+  };
 
   const isActive = (href: string) => {
     const normalizedPathname = pathname.replace(/\/$/, "") || "/";
@@ -60,13 +73,13 @@ export default function Header() {
           </nav>
 
           <button
+            onClick={toggleTheme}
             className="w-8 h-8 flex items-center justify-center rounded-full text-ink-2 hover:text-accent hover:bg-panel transition-colors focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
-            id="theme-toggle"
-            aria-label="Switch to dark mode"
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
             title="Toggle dark mode"
-            aria-pressed="false"
+            aria-pressed={theme === "dark"}
           >
-            <span id="theme-icon">🌙</span>
+            <span>{theme === "dark" ? "☀️" : "🌙"}</span>
           </button>
 
           <button

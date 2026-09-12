@@ -1,6 +1,12 @@
 import { Suspense } from "react";
 import Link from "next/link";
+import { Metadata } from "next";
 import CaseStudiesContent from "./CaseStudiesContent";
+
+export const metadata: Metadata = {
+  title: "Case Studies",
+  description: "Four complete systems I owned: a data platform with CDC and warehouse consolidation, a segmentation engine for non-technical users, a real-time recommendation system, and ten production incidents that shaped my engineering judgment.",
+};
 
 export default function CaseStudiesPage() {
   return (

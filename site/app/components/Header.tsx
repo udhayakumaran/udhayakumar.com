@@ -102,10 +102,6 @@ export default function Header() {
             <span className="font-mono text-label-mono-sm">⌘</span>
           </button>
 
-          <div className="w-8 h-8 rounded-full bg-ink flex items-center justify-center shrink-0 text-bg">
-            <span className="text-[14px]">👤</span>
-          </div>
-
           <button
             onClick={() => setMobileNavOpen((v) => !v)}
             className="lg:hidden w-8 h-8 flex items-center justify-center rounded-full text-ink-2 hover:text-accent hover:bg-panel transition-colors focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"

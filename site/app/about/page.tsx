@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Metadata } from "next";
 import { profile } from "../data/profile";
+import BackLink from "../components/BackLink";
 
 export const metadata: Metadata = {
   title: "About",
@@ -88,6 +89,10 @@ const culture = [
 export default function AboutPage() {
   return (
     <div className="flex flex-col w-full">
+      <div className="pt-8 pb-6">
+        <BackLink href="/" label="Back to Home" />
+      </div>
+
       {/* Header & intro */}
       <section className="flex flex-col gap-4 pb-10">
         <div className="flex items-center gap-2 flex-wrap">

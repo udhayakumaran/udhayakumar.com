@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Metadata } from "next";
 import { profile } from "../data/profile";
+import BackLink from "../components/BackLink";
 
 export const metadata: Metadata = {
   title: "Resume",
@@ -75,6 +76,10 @@ const experience = [
 export default function ResumePage() {
   return (
     <div className="flex flex-col w-full">
+      <div className="pt-8 pb-6">
+        <BackLink href="/" label="Back to Home" />
+      </div>
+
       <header className="flex flex-col gap-3 mb-10">
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-accent"></span>

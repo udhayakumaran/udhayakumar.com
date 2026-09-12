@@ -13,7 +13,15 @@ Thumbs.db
 .idea/
 *.sublime-*
 
-# Build artifacts (none for this project, but standard pattern)
+# Build artifacts
 dist/
 build/
+.next/
 .vercel
+
+# Dependencies / env / bytecode
+node_modules/
+.env
+.env.*
+__pycache__/
+*.pyc

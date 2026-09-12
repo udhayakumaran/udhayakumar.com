@@ -232,7 +232,7 @@ export default function HomePage() {
             <div>
               <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-1">Architectural Invariant</h4>
               <p className="font-body-md text-body-md text-ink-2">
-                "Every distributed abstraction leaks under catastrophic load. Reliability is not the complete absence of failures, but the deterministic containment of their blast radius."
+                &ldquo;Every distributed abstraction leaks under catastrophic load. Reliability is not the complete absence of failures, but the deterministic containment of their blast radius.&rdquo;
               </p>
             </div>
           </div>
@@ -245,7 +245,7 @@ export default function HomePage() {
           <span className="font-label-mono-sm text-label-mono-sm text-accent uppercase tracking-wider font-semibold">02 / PRODUCTION POST-MORTEMS &amp; INCIDENTS</span>
           <h2 className="font-headline-lg text-headline-lg text-ink">Real Failures, Honest Root Causes, Measurable Mitigations.</h2>
           <p className="font-body-md text-body-md text-ink-2 max-w-[65ch] mb-4">
-            Reliability isn't proven when systems are idle; it's proven in failure modes. A catalog of production outages analyzed with rigorous blameless retrospectives.
+            Reliability isn&apos;t proven when systems are idle; it&apos;s proven in failure modes. A catalog of production outages analyzed with rigorous blameless retrospectives.
           </p>
           <div>
             <Link href="/case-studies/hard-problems/" className="font-label-mono-sm text-label-mono-sm text-accent font-semibold border-b border-accent pb-0.5 inline-flex items-center gap-1.5 hover:text-accent-ink transition-colors mb-8">

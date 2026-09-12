@@ -6,4 +6,5 @@ node_modules/
 site/node_modules/
 .vercel
 .next/
+.next-test/
 *.tsbuildinfo

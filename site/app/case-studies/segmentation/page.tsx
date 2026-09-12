@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Metadata } from "next";
+import BackLink from "../../components/BackLink";
 
 export const metadata: Metadata = {
   title: "Customer Segmentation",
@@ -24,13 +25,7 @@ export default function SegmentationCaseStudy() {
   return (
     <article className="flex flex-col w-full">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 mb-8 border-b border-rule">
-        <Link
-          href="/case-studies/"
-          className="inline-flex items-center gap-2 min-h-[44px] text-accent font-label-mono-sm text-label-mono-sm hover:text-accent-ink transition-colors group"
-        >
-          <span className="text-[14px] transition-transform group-hover:-translate-x-1">←</span>
-          <span>BACK TO ALL CASE STUDIES</span>
-        </Link>
+        <BackLink href="/case-studies/" label="BACK TO ALL CASE STUDIES" />
         <span className="font-caption-mono text-caption-mono text-ink-3 uppercase tracking-wider">
           CASE STUDY 02 // CUSTOMER DATA // BIGQUERY &amp; MONGODB
         </span>

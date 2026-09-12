@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Metadata } from "next";
+import BackLink from "../../components/BackLink";
 import IncidentAccordion from "./IncidentAccordion";
 import { incidents } from "./incidents-data";
 
@@ -24,11 +25,8 @@ const progression = [
 export default function HardProblemsPage() {
   return (
     <div className="flex flex-col w-full">
-      <div className="pb-4">
-        <Link href="/case-studies/" className="text-accent font-label-mono-sm text-label-mono-sm inline-flex items-center gap-1.5">
-          <span className="text-[14px]">←</span>
-          Back to case studies
-        </Link>
+      <div className="pb-6">
+        <BackLink href="/case-studies/" label="BACK TO ALL CASE STUDIES" />
       </div>
 
       <header className="flex flex-col gap-3 pb-8">

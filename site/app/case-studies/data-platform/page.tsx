@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Metadata } from "next";
+import BackLink from "../../components/BackLink";
 
 export const metadata: Metadata = {
   title: "The Data Platform",
@@ -50,13 +51,7 @@ export default function DataPlatformCaseStudy() {
     <article className="flex flex-col w-full">
       {/* Top nav / metadata header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 mb-8 border-b border-rule">
-        <Link
-          href="/case-studies/"
-          className="inline-flex items-center gap-2 min-h-[44px] text-accent font-label-mono-sm text-label-mono-sm hover:text-accent-ink transition-colors group"
-        >
-          <span className="text-[14px] transition-transform group-hover:-translate-x-1">←</span>
-          <span>BACK TO ALL CASE STUDIES</span>
-        </Link>
+        <BackLink href="/case-studies/" label="BACK TO ALL CASE STUDIES" />
         <span className="font-caption-mono text-caption-mono text-ink-3 uppercase tracking-wider">
           CASE STUDY 01 // DATA PLATFORM // MYSQL &amp; DEBEZIUM
         </span>
@@ -102,14 +97,22 @@ export default function DataPlatformCaseStudy() {
         ))}
       </section>
 
-      {/* 01 // Topology */}
-      <section className="mb-10">
-        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-3">
-          <h2 className="font-headline-md text-headline-md text-ink tracking-tight flex items-center gap-2">
-            <span className="font-caption-mono text-caption-mono text-accent">01 //</span> Topology &amp; Freshness Tiers
-          </h2>
+      {/* 01 // Role & Context */}
+      <section className="flex flex-col gap-3 mb-10">
+        <span className="font-caption-mono text-caption-mono text-accent">01 // ROLE &amp; CONTEXT</span>
+        <h2 className="font-headline-lg text-headline-lg text-ink">My Role</h2>
+        <p className="font-body-md text-body-md text-ink-2">
+          Owned architectural design, implementation, and operational reliability of the entire data platform. Led the technical decision-making around freshness guarantees, CDC tooling, and warehouse consolidation. Managed the execution across five parallel e-commerce platform integrations while maintaining zero data loss.
+        </p>
+      </section>
+
+      {/* 02 // Topology */}
+      <section className="flex flex-col gap-3 mb-10">
+        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+          <span className="font-caption-mono text-caption-mono text-accent">02 // TOPOLOGY &amp; FRESHNESS TIERS</span>
           <span className="font-caption-mono text-caption-mono text-ink-3">DEBEZIUM CDC TO WAREHOUSE</span>
         </div>
+        <h2 className="font-headline-lg text-headline-lg text-ink">System Architecture</h2>
 
         <div className="bg-panel p-4 sm:p-6 rounded overflow-hidden">
           <div className="flex items-center justify-between pb-2 mb-4 bg-panel-2 p-2 rounded">
@@ -164,9 +167,9 @@ export default function DataPlatformCaseStudy() {
         </div>
       </section>
 
-      {/* 02 // Problem */}
+      {/* 03 // Problem */}
       <section className="flex flex-col gap-3 mb-10">
-        <span className="font-caption-mono text-caption-mono text-accent">02 // WHY THE LEGACY PIPELINE HAD TO GO</span>
+        <span className="font-caption-mono text-caption-mono text-accent">03 // WHY THE LEGACY PIPELINE HAD TO GO</span>
         <h2 className="font-headline-lg text-headline-lg text-ink">The Challenge: Stale Data, Fragmented Sources</h2>
         <p className="font-body-md text-body-md text-ink-2">
           Legacy data infrastructure consisted of nightly batch ETL jobs pulling data 12-24 hours behind production reality. The data was scattered across five independent e-commerce platforms with no unified view, and the pipeline was load-bearing enough that breaking it during migration risked halting critical business functions.
@@ -190,9 +193,9 @@ export default function DataPlatformCaseStudy() {
         </p>
       </section>
 
-      {/* 03 // Strategy */}
+      {/* 04 // Strategy */}
       <section className="flex flex-col gap-3 mb-10">
-        <span className="font-caption-mono text-caption-mono text-accent">03 // STRATEGY &amp; IMPLEMENTATION</span>
+        <span className="font-caption-mono text-caption-mono text-accent">04 // STRATEGY &amp; IMPLEMENTATION</span>
         <h2 className="font-headline-lg text-headline-lg text-ink">Architectural Solution: Tiered Freshness Model</h2>
         <p className="font-body-md text-body-md text-ink-2">
           Chose Debezium for CDC to avoid application code changes, and deployed a single MySQL landing zone as a synchronization point — eliminating the need to maintain five separate CDC connectors. Rather than forcing every consumer onto the most expensive freshness guarantee, three tiers let each data class pick the latency it actually needed.
@@ -238,7 +241,7 @@ ENGINE = ReplacingMergeTree(version)
 
       {/* Key Decisions */}
       <section className="flex flex-col gap-3 mb-10">
-        <span className="font-caption-mono text-caption-mono text-accent">04 // KEY DECISIONS</span>
+        <span className="font-caption-mono text-caption-mono text-accent">05 // KEY DECISIONS</span>
         <h2 className="font-headline-lg text-headline-lg text-ink">Decisions &amp; Tradeoffs</h2>
         <ul className="flex flex-col gap-2 list-none">
           <li id="decision-0" className="p-4 bg-panel rounded scroll-my-24">
@@ -256,9 +259,9 @@ ENGINE = ReplacingMergeTree(version)
         </ul>
       </section>
 
-      {/* 04 // Production Safeguards (Execution) */}
+      {/* 06 // Production Safeguards (Execution) */}
       <section className="flex flex-col gap-3 mb-10">
-        <span className="font-caption-mono text-caption-mono text-accent">05 // PRODUCTION SAFEGUARDS</span>
+        <span className="font-caption-mono text-caption-mono text-accent">06 // PRODUCTION SAFEGUARDS</span>
         <h2 className="font-headline-lg text-headline-lg text-ink">Rollout: Migration Without Breaking Production</h2>
         <p className="font-body-md text-body-md text-ink-2">
           Rolling out to 200+ merchants one at a time is an operational discipline, not a one-time cutover. Three safeguards ran throughout the migration:
@@ -280,9 +283,9 @@ ENGINE = ReplacingMergeTree(version)
         </div>
       </section>
 
-      {/* 05 // Results table (Impact) */}
+      {/* 07 // Results table (Impact) */}
       <section className="flex flex-col gap-3 pt-2 mb-10">
-        <span className="font-caption-mono text-caption-mono text-accent">06 // RESULTS &amp; RETROSPECTIVE</span>
+        <span className="font-caption-mono text-caption-mono text-accent">07 // RESULTS &amp; RETROSPECTIVE</span>
         <h2 className="font-headline-lg text-headline-lg text-ink">Results &amp; Operational Payoff</h2>
         <p className="font-body-md text-body-md text-ink-2">
           Customer Success adoption jumped from 6% to 91% weekly active usage because teams finally had access to fresh data that matched reality.

@@ -10,7 +10,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "build:test": "NEXT_DIST_DIR=.next-test next build",
+    "start:test": "NEXT_DIST_DIR=.next-test next start"
   },
   "keywords": [],
   "author": "",

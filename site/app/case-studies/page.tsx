@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import { Metadata } from "next";
+import BackLink from "../components/BackLink";
 import CaseStudiesContent from "./CaseStudiesContent";
 
 export const metadata: Metadata = {
@@ -11,14 +12,8 @@ export const metadata: Metadata = {
 export default function CaseStudiesPage() {
   return (
     <div className="flex flex-col w-full">
-      <div className="mb-6">
-        <Link
-          href="/"
-          className="font-label-mono-sm text-label-mono-sm text-accent font-medium hover:underline inline-flex items-center gap-1.5 transition-colors"
-        >
-          <span className="text-[14px] leading-none">←</span>
-          <span>BACK TO OVERVIEW</span>
-        </Link>
+      <div className="pb-6">
+        <BackLink href="/" label="BACK TO OVERVIEW" />
       </div>
 
       <div className="flex flex-col gap-3 mb-8">

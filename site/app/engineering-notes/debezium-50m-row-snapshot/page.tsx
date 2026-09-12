@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Metadata } from "next";
+import BackLink from "../../components/BackLink";
 
 export const metadata: Metadata = {
   title: "The 50M-Row Debezium Snapshot Incident",
@@ -18,10 +19,7 @@ export default function DebeziumSnapshotNote() {
   return (
     <article className="flex flex-col w-full">
       <div className="pb-6">
-        <Link href="/engineering-notes/" className="text-accent font-label-mono-sm text-label-mono-sm inline-flex items-center gap-1.5">
-          <span className="text-[14px]">←</span>
-          Back to engineering notes
-        </Link>
+        <BackLink href="/engineering-notes/" label="BACK TO ENGINEERING NOTES" />
       </div>
 
       <header className="flex flex-col gap-3 mb-10">

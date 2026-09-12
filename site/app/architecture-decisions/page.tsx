@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Metadata } from "next";
+import BackLink from "../components/BackLink";
 
 export const metadata: Metadata = {
   title: "Architecture Decisions",
@@ -81,13 +82,7 @@ export default function ArchitectureDecisionsPage() {
   return (
     <div className="flex flex-col w-full">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 font-label-mono-sm text-label-mono-sm text-accent hover:text-accent-ink transition-colors min-h-[44px]"
-        >
-          <span className="text-[14px]">←</span>
-          <span>BACK TO OVERVIEW</span>
-        </Link>
+        <BackLink href="/" label="BACK TO OVERVIEW" />
         <div className="inline-flex items-center gap-2 self-start sm:self-auto px-2.5 py-1 rounded bg-panel border border-rule">
           <span className="w-1.5 h-1.5 rounded-full bg-accent"></span>
           <span className="font-caption-mono text-caption-mono text-ink-2 uppercase tracking-widest">INDEX // ARCHITECTURE DECISION RECORDS</span>

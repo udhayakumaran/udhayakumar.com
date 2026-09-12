@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Metadata } from "next";
+import BackLink from "../components/BackLink";
 
 export const metadata: Metadata = {
   title: "Engineering Notes",
@@ -10,9 +11,7 @@ export default function EngineeringNotesPage() {
   return (
     <div className="flex flex-col w-full">
       <div className="pb-6">
-        <Link href="/" className="text-accent font-label-mono-sm text-label-mono-sm">
-          ← Back home
-        </Link>
+        <BackLink href="/" label="BACK TO OVERVIEW" />
       </div>
 
       <h1 className="font-headline-lg text-headline-lg text-ink font-bold mb-3">Engineering Notes</h1>

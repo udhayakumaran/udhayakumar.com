@@ -79,7 +79,7 @@ export default function Header() {
           </button>
 
           <div className="w-8 h-8 rounded-full bg-ink flex items-center justify-center shrink-0 text-bg">
-            <span className="material-symbols-outlined text-[18px]">person</span>
+            <span className="text-[14px]">👤</span>
           </div>
         </div>
       </div>

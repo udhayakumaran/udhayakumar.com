@@ -21,7 +21,7 @@ export const caseStudies: CaseStudy[] = [
     title: "The Data Platform",
     subtitle: "Owned the rebuild of customer and order data infrastructure across 200+ merchants on five commerce platforms; freshness ranges from sub-5-minute (webhooks) to ~6 hours (legacy) vs. days-late baseline.",
     techTags: ["MYSQL", "DEBEZIUM", "PUB/SUB", "BIGQUERY", "CLICKHOUSE"],
-    telemetryIcon: "speed",
+    telemetryIcon: "⚡",
     telemetryText: "200+ merchants · 5 platforms · <5min freshness (webhooks)",
   },
   {
@@ -33,7 +33,7 @@ export const caseStudies: CaseStudy[] = [
     title: "Customer Segmentation",
     subtitle: "Owned the query model and builder that let Customer Success create audiences from four source systems without routine engineering tickets.",
     techTags: ["BIGQUERY", "DATASTREAM", "QUERY BUILDER"],
-    telemetryIcon: "verified",
+    telemetryIcon: "✓",
     telemetryText: "4 source systems, 1 query · built on the platform above",
   },
   {
@@ -45,7 +45,7 @@ export const caseStudies: CaseStudy[] = [
     title: "Recommendation Blocks",
     subtitle: "Owned the trust ladder, serving system, and adoption measurement for a recommendation product built from zero.",
     techTags: ["SERVING LAYER", "TRUST LADDER", "5 REGIONS"],
-    telemetryIcon: "bolt",
+    telemetryIcon: "⚡",
     telemetryText: "80% of all merchants · 5 regions · 200-400ms p99",
   },
   {
@@ -57,7 +57,7 @@ export const caseStudies: CaseStudy[] = [
     title: "Hard Problems & Learnings",
     subtitle: "Ten production incidents that shaped engineering judgment. Lock contention at scale, silent failures, architectural incompatibility, database constraints, resilience patterns, leadership under crisis.",
     techTags: ["QUERY ARCHITECTURE", "SCALE CONSTRAINTS", "SYSTEMATIC PATTERNS"],
-    telemetryIcon: "memory",
+    telemetryIcon: "◆",
     telemetryText: "10 incidents · postmortem depth · judgment under pressure",
   },
 ];

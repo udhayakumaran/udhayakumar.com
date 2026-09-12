@@ -49,7 +49,7 @@ export default function CaseStudyCard({ study, number }: Props) {
 
       <div className="pt-3 border-t border-rule flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-center gap-2 bg-panel-2 px-3 py-2 rounded border border-rule/60 text-ink-2">
-          <span className="material-symbols-outlined text-[18px] text-sage">{study.telemetryIcon}</span>
+          <span className="text-[14px] text-sage">{study.telemetryIcon}</span>
           <span className="font-caption-mono text-caption-mono text-ink font-medium">{study.telemetryText}</span>
         </div>
         <Link
@@ -57,7 +57,7 @@ export default function CaseStudyCard({ study, number }: Props) {
           className="inline-flex items-center gap-1.5 font-label-mono-lg text-label-mono-lg text-accent font-semibold hover:text-accent-ink hover:underline shrink-0 min-h-[44px]"
         >
           <span>Read Architecture Breakdown</span>
-          <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+          <span className="text-[14px]">→</span>
         </Link>
       </div>
     </article>

@@ -28,7 +28,7 @@ export default function RecommendationsCaseStudy() {
           href="/case-studies/"
           className="inline-flex items-center gap-2 min-h-[44px] text-accent font-label-mono-sm text-label-mono-sm hover:text-accent-ink transition-colors group"
         >
-          <span className="material-symbols-outlined text-[16px] transition-transform group-hover:-translate-x-1">arrow_back</span>
+          <span className="text-[14px] transition-transform group-hover:-translate-x-1">←</span>
           <span>BACK TO ALL CASE STUDIES</span>
         </Link>
         <span className="font-caption-mono text-caption-mono text-ink-3 uppercase tracking-wider">
@@ -207,7 +207,7 @@ export default function RecommendationsCaseStudy() {
           href="/case-studies/"
           className="min-h-[44px] px-4 py-2 bg-panel rounded font-label-mono-sm text-label-mono-sm text-ink hover:bg-panel-2 transition-colors inline-flex items-center gap-2"
         >
-          <span className="material-symbols-outlined text-[16px]">menu</span>
+          <span className="text-[14px]">☰</span>
           <span>ALL CASE STUDIES</span>
         </Link>
         <Link
@@ -215,7 +215,7 @@ export default function RecommendationsCaseStudy() {
           className="min-h-[44px] px-4 py-2 bg-accent rounded font-label-mono-sm text-label-mono-sm text-bg hover:bg-accent-ink transition-colors inline-flex items-center gap-2 group"
         >
           <span>NEXT: HARD PROBLEMS &amp; LEARNINGS</span>
-          <span className="material-symbols-outlined text-[16px] transition-transform group-hover:translate-x-1">arrow_forward</span>
+          <span className="text-[14px] transition-transform group-hover:translate-x-1">→</span>
         </Link>
       </div>
     </article>

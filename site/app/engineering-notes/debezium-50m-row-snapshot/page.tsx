@@ -19,7 +19,7 @@ export default function DebeziumSnapshotNote() {
     <article className="flex flex-col w-full">
       <div className="pb-6">
         <Link href="/engineering-notes/" className="text-accent font-label-mono-sm text-label-mono-sm inline-flex items-center gap-1.5">
-          <span className="material-symbols-outlined text-[16px]">arrow_back</span>
+          <span className="text-[14px]">←</span>
           Back to engineering notes
         </Link>
       </div>

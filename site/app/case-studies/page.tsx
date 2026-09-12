@@ -10,7 +10,7 @@ export default function CaseStudiesPage() {
           href="/"
           className="font-label-mono-sm text-label-mono-sm text-accent font-medium hover:underline inline-flex items-center gap-1.5 transition-colors"
         >
-          <span className="material-symbols-outlined text-[16px] leading-none">arrow_back</span>
+          <span className="text-[14px] leading-none">←</span>
           <span>BACK TO OVERVIEW</span>
         </Link>
       </div>
@@ -38,7 +38,7 @@ export default function CaseStudiesPage() {
       <div className="mt-12 p-6 bg-panel-2 border border-rule-2 rounded flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div className="flex items-start gap-4">
           <div className="w-10 h-10 rounded bg-bg border border-rule-2 flex items-center justify-center shrink-0 text-accent">
-            <span className="material-symbols-outlined text-[22px]">terminal</span>
+            <span className="text-[18px]">$_</span>
           </div>
           <div className="flex flex-col gap-1">
             <h3 className="font-headline-sm text-headline-sm text-ink font-semibold">

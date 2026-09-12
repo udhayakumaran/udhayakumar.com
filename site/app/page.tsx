@@ -81,7 +81,7 @@ export default function HomePage() {
       <section className="py-12 md:py-14 border-b border-rule">
         <div className="flex flex-col gap-6">
           <div className="inline-flex items-center gap-2 self-start bg-panel px-2.5 py-1 border border-rule font-caption-mono text-caption-mono text-ink-2">
-            <span className="material-symbols-outlined text-[14px] text-accent">terminal</span>
+            <span className="text-[14px] text-accent">$_</span>
             <span>INFRASTRUCTURE ARCHITECTURE &amp; SRE</span>
           </div>
           <h1 className="font-display-hero text-display-hero md:text-[40px] md:leading-[46px] text-ink font-bold tracking-tight">
@@ -120,7 +120,7 @@ export default function HomePage() {
         <div className="p-4 sm:p-6 bg-panel border border-rule rounded-sm relative overflow-hidden">
           <div className="flex items-center justify-between pb-3 border-b border-rule">
             <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-[16px] text-accent">hub</span>
+              <span className="text-[14px] text-accent">◈</span>
               <span className="font-caption-mono text-caption-mono text-ink uppercase">PIPELINE TOPOLOGY // ZERO-LOCK DEBEZIUM INGESTION</span>
             </div>
             <span className="font-caption-mono text-caption-mono text-sage">SYNCHRONIZED</span>
@@ -228,7 +228,7 @@ export default function HomePage() {
       <section className="py-10 border-b border-rule">
         <div className="bg-panel border-l-2 border-accent border-y border-r border-rule p-6">
           <div className="flex items-start gap-4">
-            <span className="material-symbols-outlined text-accent text-[24px] shrink-0 mt-0.5">verified</span>
+            <span className="text-accent text-[24px] shrink-0 mt-0.5">✓</span>
             <div>
               <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-1">Architectural Invariant</h4>
               <p className="font-body-md text-body-md text-ink-2">
@@ -264,7 +264,7 @@ export default function HomePage() {
             >
               <div className="flex items-center justify-between pb-3">
                 <span className="font-caption-mono text-caption-mono text-accent-ink font-semibold">INC-{inc.id}</span>
-                <span className="material-symbols-outlined text-[18px] text-ink-3 group-hover:text-accent group-hover:translate-x-1 transition-all">arrow_forward</span>
+                <span className="text-[18px] text-ink-3 group-hover:text-accent group-hover:translate-x-1 transition-all">→</span>
               </div>
               <h3 className="font-headline-sm text-headline-sm leading-snug text-ink font-semibold mb-4 group-hover:text-accent transition-colors">
                 {inc.title}

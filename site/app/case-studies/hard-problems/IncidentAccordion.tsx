@@ -42,8 +42,8 @@ export default function IncidentAccordion({ incidents }: { incidents: Incident[]
                   <span>WHEN: <strong className="text-ink font-mono">{inc.when}</strong></span>
                   <span>•</span>
                   <span>DURATION: <strong className="text-ink font-mono">{inc.duration}</strong></span>
-                  <span className={`material-symbols-outlined text-[18px] text-ink-3 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}>
-                    expand_more
+                  <span className={`text-[14px] text-ink-3 transition-transform duration-200 inline-block ${isOpen ? "rotate-180" : ""}`}>
+                    ▼
                   </span>
                 </div>
               </div>

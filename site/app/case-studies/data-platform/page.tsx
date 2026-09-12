@@ -54,7 +54,7 @@ export default function DataPlatformCaseStudy() {
           href="/case-studies/"
           className="inline-flex items-center gap-2 min-h-[44px] text-accent font-label-mono-sm text-label-mono-sm hover:text-accent-ink transition-colors group"
         >
-          <span className="material-symbols-outlined text-[16px] transition-transform group-hover:-translate-x-1">arrow_back</span>
+          <span className="text-[14px] transition-transform group-hover:-translate-x-1">←</span>
           <span>BACK TO ALL CASE STUDIES</span>
         </Link>
         <span className="font-caption-mono text-caption-mono text-ink-3 uppercase tracking-wider">
@@ -173,7 +173,7 @@ export default function DataPlatformCaseStudy() {
         </p>
         <div className="p-4 bg-panel rounded my-1">
           <h3 className="font-headline-sm text-headline-sm text-ink mb-1 flex items-center gap-2">
-            <span className="material-symbols-outlined text-accent text-[20px]">warning</span>
+            <span className="text-accent text-[20px]">⚠</span>
             Failure Points in the Legacy Pipeline
           </h3>
           <ul className="flex flex-col gap-2 font-body-sm text-body-sm text-ink-2 list-none pt-2">
@@ -214,7 +214,7 @@ export default function DataPlatformCaseStudy() {
       <section className="flex flex-col gap-3 w-full mb-10">
         <div className="flex items-center justify-between">
           <h3 className="font-headline-sm text-headline-sm text-ink flex items-center gap-2">
-            <span className="material-symbols-outlined text-accent text-[18px]">terminal</span>
+            <span className="text-accent text-[16px]">$_</span>
             ClickHouse Tuning Notes
           </h3>
           <span className="font-caption-mono text-caption-mono text-ink-3">clickhouse-merge-tree.conf</span>
@@ -320,7 +320,7 @@ ENGINE = ReplacingMergeTree(version)
           href="/case-studies/"
           className="min-h-[44px] px-4 py-2 bg-panel rounded font-label-mono-sm text-label-mono-sm text-ink hover:bg-panel-2 transition-colors inline-flex items-center gap-2"
         >
-          <span className="material-symbols-outlined text-[16px]">menu</span>
+          <span className="text-[14px]">☰</span>
           <span>ALL CASE STUDIES</span>
         </Link>
         <Link
@@ -328,7 +328,7 @@ ENGINE = ReplacingMergeTree(version)
           className="min-h-[44px] px-4 py-2 bg-accent rounded font-label-mono-sm text-label-mono-sm text-bg hover:bg-accent-ink transition-colors inline-flex items-center gap-2 group"
         >
           <span>NEXT: CUSTOMER SEGMENTATION</span>
-          <span className="material-symbols-outlined text-[16px] transition-transform group-hover:translate-x-1">arrow_forward</span>
+          <span className="text-[14px] transition-transform group-hover:translate-x-1">→</span>
         </Link>
       </div>
     </article>

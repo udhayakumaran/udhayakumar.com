@@ -26,7 +26,7 @@ export default function HardProblemsPage() {
     <div className="flex flex-col w-full">
       <div className="pb-4">
         <Link href="/case-studies/" className="text-accent font-label-mono-sm text-label-mono-sm inline-flex items-center gap-1.5">
-          <span className="material-symbols-outlined text-[16px]">arrow_back</span>
+          <span className="text-[14px]">←</span>
           Back to case studies
         </Link>
       </div>
@@ -81,7 +81,7 @@ export default function HardProblemsPage() {
           href="/case-studies/"
           className="min-h-[44px] px-4 py-2 bg-panel rounded font-label-mono-sm text-label-mono-sm text-ink hover:bg-panel-2 transition-colors inline-flex items-center gap-2"
         >
-          <span className="material-symbols-outlined text-[16px]">menu</span>
+          <span className="text-[14px]">☰</span>
           ALL CASE STUDIES
         </Link>
         <Link
@@ -89,7 +89,7 @@ export default function HardProblemsPage() {
           className="min-h-[44px] px-4 py-2 bg-accent rounded font-label-mono-sm text-label-mono-sm text-bg hover:bg-accent-ink transition-colors inline-flex items-center gap-2"
         >
           VIEW THE RESUME THESE SHAPED
-          <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
+          <span className="text-[14px]">→</span>
         </Link>
       </div>
     </div>

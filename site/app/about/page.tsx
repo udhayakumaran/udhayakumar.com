@@ -44,19 +44,19 @@ const testimonials = [
 const matrix = [
   {
     label: "HIRING FOR",
-    icon: "cases",
+    icon: "💼",
     body: "Staff, Principal, or Founding-Engineer roles where I can own a backend or data infrastructure system with real influence on how a team scales.",
     items: profile.roleFit.slice(0, 3),
   },
   {
     label: "WHAT I BRING",
-    icon: "memory",
+    icon: "◆",
     body: "Deep expertise across CDC pipelines, warehouse consolidation, and building for reversibility so mistakes stay cheap to fix.",
     items: profile.technologies.slice(0, 3),
   },
   {
     label: "CORE LEARNINGS",
-    icon: "psychology",
+    icon: "◎",
     body: "Match storage to question. Operational simplicity beats sophisticated abstractions. Ship in trust order, not sophistication order.",
     items: ["Reversibility by design", "Debuggability under pressure", "Adoption requires trust"],
   },
@@ -110,7 +110,7 @@ export default function AboutPage() {
           <div className="md:col-span-4 flex flex-col gap-2 p-4 bg-panel rounded-lg">
             <div className="flex items-center justify-between pb-1">
               <span className="font-caption-mono text-caption-mono text-ink-3 uppercase">CAREER VITALS</span>
-              <span className="material-symbols-outlined text-accent text-[18px]">verified</span>
+              <span className="text-accent text-[18px]">✓</span>
             </div>
             <div className="flex flex-col gap-1">
               {vitals.map((v) => (
@@ -139,7 +139,7 @@ export default function AboutPage() {
             <article key={t.name} className="p-6 bg-panel rounded-lg flex flex-col justify-between gap-4 transition-colors duration-200 hover:bg-panel-2">
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-between text-accent">
-                  <span className="material-symbols-outlined text-[28px]">format_quote</span>
+                  <span className="text-[28px] leading-none">&ldquo;</span>
                   <span className="font-caption-mono text-caption-mono text-ink-3">{t.tag}</span>
                 </div>
                 <p className="font-body-md text-body-md text-ink leading-relaxed italic">&ldquo;{t.quote}&rdquo;</p>
@@ -165,7 +165,7 @@ export default function AboutPage() {
             <div key={col.label} className="bg-panel rounded-lg p-4 flex flex-col gap-2 transition-colors duration-200 hover:bg-panel-2">
               <div className="flex items-center justify-between pb-1">
                 <span className="font-label-mono-sm text-label-mono-sm text-accent uppercase font-medium">{col.label}</span>
-                <span className="material-symbols-outlined text-ink-3 text-[18px]">{col.icon}</span>
+                <span className="text-ink-3 text-[16px]">{col.icon}</span>
               </div>
               <p className="font-body-md text-body-md text-ink leading-relaxed">{col.body}</p>
               <ul className="flex flex-col gap-1.5 pt-1">
@@ -229,14 +229,14 @@ export default function AboutPage() {
               href={`mailto:${profile.email}`}
               className="min-h-[44px] px-4 py-2.5 rounded bg-accent text-bg font-label-mono-sm text-label-mono-sm uppercase tracking-wider inline-flex items-center justify-center gap-2 transition-colors duration-200 hover:bg-accent-ink"
             >
-              <span className="material-symbols-outlined text-[18px]">chat</span>
+              <span className="text-[16px]">💬</span>
               Schedule Technical Chat
             </Link>
             <Link
               href="/architecture-decisions/"
               className="min-h-[44px] px-4 py-2.5 rounded bg-panel-2 text-ink font-label-mono-sm text-label-mono-sm uppercase tracking-wider inline-flex items-center justify-center gap-2 transition-colors duration-200 hover:bg-rule"
             >
-              <span className="material-symbols-outlined text-[18px]">account_tree</span>
+              <span className="text-[16px]">◈</span>
               View Architecture Decisions
             </Link>
           </div>

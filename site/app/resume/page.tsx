@@ -103,7 +103,7 @@ export default function ResumePage() {
         <div className="p-6 md:p-8 bg-panel border-2 border-accent rounded flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="flex flex-col gap-1 max-w-[540px]">
             <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-accent text-[18px]">verified</span>
+              <span className="text-accent text-[18px]">✓</span>
               <span className="font-label-mono-sm text-label-mono-sm text-accent-ink uppercase tracking-wider font-semibold">
                 PDF · CONSOLIDATED RESUME
               </span>
@@ -119,7 +119,7 @@ export default function ResumePage() {
             href={profile.resume.file}
             className="w-full md:w-auto shrink-0 min-h-[44px] bg-accent text-bg border border-accent-ink px-6 py-3 rounded font-label-mono-sm text-label-mono-sm uppercase tracking-wider font-semibold hover:bg-accent-ink transition-colors flex items-center justify-center gap-2"
           >
-            <span className="material-symbols-outlined text-[18px]">download</span>
+            <span className="text-[16px]">⬇</span>
             <span>Download Resume (PDF)</span>
           </Link>
         </div>
@@ -128,7 +128,7 @@ export default function ResumePage() {
       <section className="mb-10">
         <div className="flex items-center justify-between border-b border-rule pb-3 mb-6">
           <h2 className="font-headline-md text-headline-md text-ink flex items-center gap-2">
-            <span className="material-symbols-outlined text-ink-2 text-[22px]">history_toggle_off</span>
+            <span className="text-ink-2 text-[18px]">◷</span>
             Engineering Track Record
           </h2>
           <span className="font-caption-mono text-caption-mono text-ink-3 uppercase">2010 — 2026</span>

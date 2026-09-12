@@ -85,7 +85,7 @@ export default function ArchitectureDecisionsPage() {
           href="/"
           className="inline-flex items-center gap-2 font-label-mono-sm text-label-mono-sm text-accent hover:text-accent-ink transition-colors min-h-[44px]"
         >
-          <span className="material-symbols-outlined text-[16px]">arrow_back</span>
+          <span className="text-[14px]">←</span>
           <span>BACK TO OVERVIEW</span>
         </Link>
         <div className="inline-flex items-center gap-2 self-start sm:self-auto px-2.5 py-1 rounded bg-panel border border-rule">

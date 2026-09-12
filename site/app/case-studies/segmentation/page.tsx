@@ -1,0 +1,226 @@
+import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Customer Segmentation",
+  description: "Built the system that lets non-technical Customer Success reps build audiences without code. Four source systems, one query interface, 1,000+ segments.",
+};
+
+const metaStrip = [
+  { label: "SOURCES", value: "Click, Commerce, Orders, Loyalty" },
+  { label: "SERVING LAYER", value: "MongoDB + BigQuery" },
+  { label: "INTERFACE", value: "Drag-and-drop query builder" },
+  { label: "STATUS", value: "Self-serve", accent: "sage" },
+];
+
+const metrics = [
+  { label: "ACTIVE SEGMENTS", value: "1,000", suffix: "+", note: "Within 6 months of launch" },
+  { label: "SOURCE SYSTEMS UNIFIED", value: "4", suffix: "", note: "Click, Commerce, Orders, Loyalty" },
+  { label: "TURNAROUND", value: "3-5 days", suffix: "→ min", note: "Ticket to self-service", isText: true },
+  { label: "CSM TIME SAVED", value: "~15", suffix: "hrs/wk", note: "On manual segment creation", accentValue: "sage" },
+];
+
+export default function SegmentationCaseStudy() {
+  return (
+    <article className="flex flex-col w-full">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 mb-8 border-b border-rule">
+        <Link
+          href="/case-studies/"
+          className="inline-flex items-center gap-2 min-h-[44px] text-accent font-label-mono-sm text-label-mono-sm hover:text-accent-ink transition-colors group"
+        >
+          <span className="material-symbols-outlined text-[16px] transition-transform group-hover:-translate-x-1">arrow_back</span>
+          <span>BACK TO ALL CASE STUDIES</span>
+        </Link>
+        <span className="font-caption-mono text-caption-mono text-ink-3 uppercase tracking-wider">
+          CASE STUDY 02 // CUSTOMER DATA // BIGQUERY &amp; MONGODB
+        </span>
+      </div>
+
+      <header className="flex flex-col gap-4 mb-10">
+        <div className="flex items-center gap-2">
+          <span className="px-2 py-0.5 rounded bg-sage-wash text-sage font-caption-mono text-caption-mono uppercase tracking-widest">
+            CUSTOMER DATA PRODUCT
+          </span>
+          <span className="font-caption-mono text-caption-mono text-ink-3">•</span>
+          <span className="font-caption-mono text-caption-mono text-ink-2">PUBLISHED 2025-09-03</span>
+        </div>
+        <h1 className="font-display-hero text-display-hero text-ink">Customer Segmentation</h1>
+        <p className="font-body-lg text-body-lg text-ink-2 max-w-[72ch]">
+          Built the system that lets a non-technical Customer Success rep build audiences like &ldquo;shoppers who&apos;d buy again if reminded&rdquo; without writing a line of code or filing an engineering ticket — unifying four disconnected data sources into one query interface.
+        </p>
+
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2">
+          {metaStrip.map((m) => (
+            <div key={m.label} className="p-3 bg-panel rounded">
+              <span className="block font-caption-mono text-caption-mono text-ink-3 uppercase">{m.label}</span>
+              <span className={`font-label-mono-sm text-label-mono-sm font-semibold ${m.accent === "sage" ? "text-sage" : "text-ink"}`}>
+                {m.value}
+              </span>
+            </div>
+          ))}
+        </div>
+      </header>
+
+      <section className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-10">
+        {metrics.map((m) => (
+          <div key={m.label} className="bg-panel p-4 rounded flex flex-col justify-between">
+            <span className="font-caption-mono text-caption-mono text-ink-3 uppercase tracking-wider">{m.label}</span>
+            <div className="mt-2 flex items-baseline gap-1">
+              <span className={`font-display-hero ${m.isText ? "text-headline-sm" : "text-headline-lg"} ${m.accentValue === "sage" ? "text-sage" : "text-ink"}`}>{m.value}</span>
+              <span className="font-label-mono-sm text-label-mono-sm font-bold text-accent">{m.suffix}</span>
+            </div>
+            <span className="font-caption-mono text-caption-mono text-ink-2 mt-1">{m.note}</span>
+          </div>
+        ))}
+      </section>
+
+      <section className="flex flex-col gap-3 mb-10">
+        <span className="font-caption-mono text-caption-mono text-accent">01 // ROLE &amp; CONTEXT</span>
+        <h2 className="font-headline-lg text-headline-lg text-ink">My Role</h2>
+        <p className="font-body-md text-body-md text-ink-2">
+          Owned architecture and product design — the unified data model, query composition system, and precomputation strategy (scheduled queries + views). Directed the query builder, materialization pipeline, and customer data model implementation with a small team (2-3 engineers, alongside other projects), while partnering directly with the CSM team on audience needs and monitoring BigQuery cost and query performance in production.
+        </p>
+        <p className="font-body-md text-body-md text-ink-2">
+          Customer Success wanted to run targeted campaigns — &ldquo;remind shoppers who almost bought,&rdquo; &ldquo;reward loyal customers.&rdquo; Customer signals lived in four disconnected systems: click-tracking, commerce, orders, loyalty. CSMs filed engineering tickets for each segment, blocking campaigns and capping productivity.
+        </p>
+      </section>
+
+      <section className="flex flex-col gap-3 mb-10">
+        <span className="font-caption-mono text-caption-mono text-accent">02 // THE PROBLEM</span>
+        <h2 className="font-headline-lg text-headline-lg text-ink">No Self-Service, No Unified Model</h2>
+        <p className="font-body-md text-body-md text-ink-2">
+          Segments were built ad-hoc for campaigns, manually combined by engineers. Each new segment added 3-5 days of latency. The loyalty program couldn&apos;t be queried against order data — there was no way to answer &ldquo;loyalty customers who haven&apos;t ordered in 30 days.&rdquo;
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 my-1">
+          <div className="p-4 bg-panel rounded">
+            <div className="font-label-mono-sm text-label-mono-sm text-accent font-semibold mb-2">BEFORE</div>
+            <ul className="list-none space-y-1 font-body-sm text-body-sm text-ink-2">
+              <li>Manual segment definition</li>
+              <li>Engineering ticket per segment</li>
+              <li>Disconnected data sources</li>
+            </ul>
+          </div>
+          <div className="p-4 bg-panel rounded">
+            <div className="font-label-mono-sm text-label-mono-sm text-accent font-semibold mb-2">WHY IT MATTERED</div>
+            <ul className="list-none space-y-1 font-body-sm text-body-sm text-ink-2">
+              <li>Campaigns blocked on engineering</li>
+              <li>Couldn&apos;t combine customer signals</li>
+              <li>CSM productivity capped</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-3 mb-10">
+        <span className="font-caption-mono text-caption-mono text-accent">03 // ARCHITECTURE</span>
+        <h2 className="font-headline-lg text-headline-lg text-ink">Self-Serve Query Builder on a Unified Model</h2>
+        <p className="font-body-md text-body-md text-ink-2">
+          Consolidated four source systems into one unified customer model in BigQuery, defining reusable customer dimensions (loyalty status, purchase frequency, engagement, churn risk). CSMs compose segments by stacking filters through a UI; scheduled queries precompute expensive derived subsets, and views join these with raw and dimension data.
+        </p>
+
+        <div className="bg-panel p-4 sm:p-6 rounded overflow-hidden my-1">
+          <div className="flex items-center justify-between pb-2 mb-4 bg-panel-2 p-2 rounded">
+            <span className="font-label-mono-sm text-label-mono-sm text-ink font-semibold">BEFORE → AFTER: SEGMENT TURNAROUND</span>
+          </div>
+          <div className="grid grid-cols-2 gap-6">
+            <div className="flex flex-col items-center gap-2">
+              <div className="px-4 py-2 bg-panel-2 border border-rule rounded text-center w-full">
+                <span className="font-label-mono-sm text-label-mono-sm text-ink">CSM Request</span>
+              </div>
+              <span className="text-ink-3">↓</span>
+              <div className="px-4 py-2 bg-panel-2 border border-rule rounded text-center w-full">
+                <span className="font-label-mono-sm text-label-mono-sm text-ink">Engineering Ticket</span>
+              </div>
+              <span className="text-accent-ink font-caption-mono text-caption-mono">3-5 days</span>
+              <span className="text-ink-3">↓</span>
+              <div className="px-4 py-2 bg-panel-2 border border-rule rounded text-center w-full">
+                <span className="font-label-mono-sm text-label-mono-sm text-ink">Segment Live</span>
+              </div>
+            </div>
+            <div className="flex flex-col items-center gap-2">
+              <div className="px-4 py-2 bg-sage-wash border border-sage rounded text-center w-full">
+                <span className="font-label-mono-sm text-label-mono-sm text-sage">CSM Query</span>
+              </div>
+              <span className="text-ink-3">↓</span>
+              <div className="px-4 py-2 bg-sage-wash border border-sage rounded text-center w-full">
+                <span className="font-label-mono-sm text-label-mono-sm text-sage">Self-Service UI</span>
+              </div>
+              <span className="text-sage font-caption-mono text-caption-mono">minutes</span>
+              <span className="text-ink-3">↓</span>
+              <div className="px-4 py-2 bg-sage-wash border border-sage rounded text-center w-full">
+                <span className="font-label-mono-sm text-label-mono-sm text-sage">Segment Live</span>
+              </div>
+            </div>
+          </div>
+          <div className="pt-4 mt-4 border-t border-rule text-ink-3 font-caption-mono text-caption-mono">
+            POWERED BY: Sources (Click, Commerce, Orders, Loyalty) → Unified customer model (BigQuery) → Scheduled queries → Dimensions (views) → Query builder (UI) → Campaign export
+          </div>
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-3 mb-10">
+        <span className="font-caption-mono text-caption-mono text-accent">04 // KEY DECISIONS</span>
+        <h2 className="font-headline-lg text-headline-lg text-ink">Decisions &amp; Tradeoffs</h2>
+        <ul className="flex flex-col gap-2 list-none">
+          <li className="p-4 bg-panel rounded">
+            <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">UI-First, SQL Later</h4>
+            <p className="font-body-sm text-body-sm text-ink-2">CSMs weren&apos;t comfortable with raw SQL. A drag-and-drop builder got adoption faster than 80% of use cases, at the cost of less expressive queries. After 6 months of adoption, demand for SQL grew, so a &ldquo;SQL mode&rdquo; toggle was added.</p>
+          </li>
+          <li className="p-4 bg-panel rounded">
+            <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">No Query Approvals, Trust CSMs</h4>
+            <p className="font-body-sm text-body-sm text-ink-2">Gave CSMs ownership of audience quality. Risk: a bad segment definition means a bad email campaign. Mitigated with a &ldquo;Preview&rdquo; step showing sample customers before deploy.</p>
+          </li>
+          <li className="p-4 bg-panel rounded">
+            <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">Point-in-Time Snapshots, Not Real-Time</h4>
+            <p className="font-body-sm text-body-sm text-ink-2">Segments computed once daily at midnight — predictable cost and performance, up to 24 hours stale. Fine for retention campaigns that don&apos;t need fresher-than-daily data; didn&apos;t over-engineer for real-time.</p>
+          </li>
+        </ul>
+      </section>
+
+      <section className="flex flex-col gap-3 mb-10">
+        <span className="font-caption-mono text-caption-mono text-accent">05 // EXECUTION</span>
+        <h2 className="font-headline-lg text-headline-lg text-ink">Rollout &amp; the Hard Part</h2>
+        <p className="font-body-md text-body-md text-ink-2">
+          Started with the first CSM, iterated on dimensions and UI, then expanded to the full team once query builder patterns stabilized. Within 6 months, 1,000+ segments were active.
+        </p>
+        <div className="p-4 bg-panel rounded">
+          <h3 className="font-headline-sm text-headline-sm text-ink mb-2 flex items-center gap-2">
+            <span className="material-symbols-outlined text-accent text-[20px]">warning</span>
+            The Hard Part: No Single Source of Truth
+          </h3>
+          <p className="font-body-sm text-body-sm text-ink-2">
+            A segment like &ldquo;high-value recent customers with abandoned carts&rdquo; required stitching data from three independent stores simultaneously: MySQL (order totals, campaign exclusions), ClickHouse (behavior events, recency windows, UTM tracking), and MongoDB (active shopping carts). No query layer bridges these three — the segment builder had to enforce consistency across federated filters rather than rely on a single normalized schema. Matching storage to question sometimes means accepting complexity at the integration layer when the question spans multiple systems.
+          </p>
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-3 pt-2 mb-10">
+        <span className="font-caption-mono text-caption-mono text-accent">06 // RESULTS &amp; RETROSPECTIVE</span>
+        <h2 className="font-headline-lg text-headline-lg text-ink">Impact</h2>
+        <p className="font-body-md text-body-md text-ink-2">
+          Segment request → engineering ticket → 3-5 days became CSM query → self-service UI → minutes. Customer Success handled routine segment creation without engineering intervention, and data literacy grew across the CSM team.
+        </p>
+        <p className="font-body-md text-body-md text-ink-2 pt-2">
+          <strong>What I&apos;d change today:</strong> BigQuery&apos;s scan-based billing drove reporting cost concerns — I would have moved to ClickHouse earlier, or built segmentation there directly. I&apos;d also build lineage tracking from day one, since dependencies between segments and queries grew complex fast.
+        </p>
+      </section>
+
+      <div className="mt-4 pt-6 border-t border-rule flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <Link
+          href="/case-studies/"
+          className="min-h-[44px] px-4 py-2 bg-panel rounded font-label-mono-sm text-label-mono-sm text-ink hover:bg-panel-2 transition-colors inline-flex items-center gap-2"
+        >
+          <span className="material-symbols-outlined text-[16px]">menu</span>
+          <span>ALL CASE STUDIES</span>
+        </Link>
+        <Link
+          href="/case-studies/recommendations/"
+          className="min-h-[44px] px-4 py-2 bg-accent rounded font-label-mono-sm text-label-mono-sm text-bg hover:bg-accent-ink transition-colors inline-flex items-center gap-2 group"
+        >
+          <span>NEXT: RECOMMENDATION BLOCKS</span>
+          <span className="material-symbols-outlined text-[16px] transition-transform group-hover:translate-x-1">arrow_forward</span>
+        </Link>
+      </div>
+    </article>
+  );
+}

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Metadata } from "next";
 import BackLink from "../../components/BackLink";
+import CTAButton from "../../components/CTAButton";
 import IncidentAccordion from "./IncidentAccordion";
 import { incidents } from "./incidents-data";
 
@@ -34,7 +35,7 @@ export default function HardProblemsPage() {
           <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
           POST-MORTEM LEDGER // 10 PRODUCTION INCIDENTS
         </span>
-        <h1 className="font-display-hero text-headline-lg md:text-display-hero text-ink tracking-tight">
+        <h1 className="font-display-hero text-headline-lg md:text-display-hero text-ink tracking-tight break-words">
           Hard Problems &amp; Learnings
         </h1>
         <p className="font-body-lg text-body-lg text-ink-2 leading-relaxed max-w-[65ch]">
@@ -75,20 +76,8 @@ export default function HardProblemsPage() {
       </section>
 
       <div className="pt-2 pb-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-rule pt-6">
-        <Link
-          href="/case-studies/"
-          className="min-h-[44px] px-4 py-2 bg-panel rounded font-label-mono-sm text-label-mono-sm text-ink hover:bg-panel-2 transition-colors inline-flex items-center gap-2"
-        >
-          <span className="text-[14px]">☰</span>
-          ALL CASE STUDIES
-        </Link>
-        <Link
-          href="/resume/"
-          className="min-h-[44px] px-4 py-2 bg-accent rounded font-label-mono-sm text-label-mono-sm text-bg hover:bg-accent-ink transition-colors inline-flex items-center gap-2"
-        >
-          VIEW THE RESUME THESE SHAPED
-          <span className="text-[14px]">→</span>
-        </Link>
+        <CTAButton href="/case-studies/" label="ALL CASE STUDIES" variant="panel" size="sm" icon="☰" />
+        <CTAButton href="/resume/" label="VIEW THE RESUME THESE SHAPED" variant="solid" size="sm" arrow="right" />
       </div>
     </div>
   );

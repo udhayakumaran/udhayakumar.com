@@ -1,20 +1,22 @@
-import Link from "next/link";
 import { Metadata } from "next";
-import BackLink from "../../components/BackLink";
+import CaseStudyTagBar from "../../components/CaseStudyTagBar";
+import CaseStudyHero, { MetaItem, MetricItem } from "../../components/CaseStudyHero";
+import SectionBlock from "../../components/SectionBlock";
+import CTAButton from "../../components/CTAButton";
 
 export const metadata: Metadata = {
   title: "The Data Platform",
   description: "Rebuilding customer and order data infrastructure across 200+ merchants with tiered freshness.",
 };
 
-const metaStrip = [
+const metaStrip: MetaItem[] = [
   { label: "SOURCES", value: "MySQL, MongoDB, Postgres" },
   { label: "CDC PIPELINE", value: "Debezium" },
   { label: "TRANSPORT", value: "Google Pub/Sub" },
   { label: "SLA IMPACT", value: "0% Dropped", accent: "sage" },
 ];
 
-const metrics = [
+const metrics: MetricItem[] = [
   { label: "MERCHANTS ONBOARDED", value: "200", suffix: "+", note: "Across 5 commerce platforms" },
   { label: "FASTEST TIER FRESHNESS", value: "<5", suffix: "min", note: "Webhook-driven tier-1", suffixColor: "sage" },
   { label: "COST REDUCTION", value: "40", suffix: "%", note: "3 warehouses consolidated to 1" },
@@ -49,71 +51,25 @@ const resultsTable = [
 export default function DataPlatformCaseStudy() {
   return (
     <article className="flex flex-col w-full">
-      {/* Top nav / metadata header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-8 pb-4 mb-8 border-b border-rule">
-        <BackLink href="/" label="Back to Home" />
-        <span className="font-caption-mono text-caption-mono text-ink-3 uppercase tracking-wider">
-          CASE STUDY 01 // DATA PLATFORM // MYSQL &amp; DEBEZIUM
-        </span>
-      </div>
+      <CaseStudyTagBar caseStudyLabel="CASE STUDY 01 // DATA PLATFORM // MYSQL & DEBEZIUM" />
 
-      {/* Hero */}
-      <header className="flex flex-col gap-4 mb-10">
-        <div className="flex items-center gap-2">
-          <span className="px-2 py-0.5 rounded bg-sage-wash text-sage font-caption-mono text-caption-mono uppercase tracking-widest">
-            PRODUCTION MIGRATION ARCHIVE
-          </span>
-          <span className="font-caption-mono text-caption-mono text-ink-3">•</span>
-          <span className="font-caption-mono text-caption-mono text-ink-2">PUBLISHED 2025-09-03</span>
-        </div>
-        <h1 className="font-display-hero text-display-hero text-ink break-words">The Data Platform</h1>
-        <p className="font-body-lg text-body-lg text-ink-2 max-w-[72ch]">
-          Owned the rebuild of customer and order data infrastructure across 200+ merchants on five commerce platforms — replacing a 12-24 hour stale nightly batch pipeline with a tiered-freshness system ranging from sub-5-minute webhooks to nightly archival, without breaking a single load-bearing dependency during migration.
-        </p>
+      <CaseStudyHero
+        badge="PRODUCTION MIGRATION ARCHIVE"
+        badgeVariant="sage"
+        publishedDate="2025-09-03"
+        title="The Data Platform"
+        intro="Owned the rebuild of customer and order data infrastructure across 200+ merchants on five commerce platforms — replacing a 12-24 hour stale nightly batch pipeline with a tiered-freshness system ranging from sub-5-minute webhooks to nightly archival, without breaking a single load-bearing dependency during migration."
+        metaStrip={metaStrip}
+        metrics={metrics}
+      />
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2">
-          {metaStrip.map((m) => (
-            <div key={m.label} className="p-3 bg-panel rounded">
-              <span className="block font-caption-mono text-caption-mono text-ink-3 uppercase">{m.label}</span>
-              <span className={`font-label-mono-sm text-label-mono-sm font-semibold ${m.accent === "sage" ? "text-sage" : "text-ink"}`}>
-                {m.value}
-              </span>
-            </div>
-          ))}
-        </div>
-      </header>
-
-      {/* Metric callout bar */}
-      <section className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-10">
-        {metrics.map((m) => (
-          <div key={m.label} className="bg-panel p-4 rounded flex flex-col justify-between">
-            <span className="font-caption-mono text-caption-mono text-ink-3 uppercase tracking-wider">{m.label}</span>
-            <div className="mt-2 flex items-baseline gap-1">
-              <span className={`font-display-hero text-headline-lg ${m.accentValue === "sage" ? "text-sage" : "text-ink"}`}>{m.value}</span>
-              <span className={`font-label-mono-sm text-label-mono-sm font-bold ${m.suffixColor === "sage" ? "text-sage" : "text-accent"}`}>{m.suffix}</span>
-            </div>
-            <span className="font-caption-mono text-caption-mono text-ink-2 mt-1">{m.note}</span>
-          </div>
-        ))}
-      </section>
-
-      {/* 01 // Role & Context */}
-      <section className="flex flex-col gap-3 mb-10">
-        <span className="font-caption-mono text-caption-mono text-accent">01 // ROLE &amp; CONTEXT</span>
-        <h2 className="font-headline-lg text-headline-lg text-ink">My Role</h2>
+      <SectionBlock index="01" eyebrow="ROLE & CONTEXT" title="My Role">
         <p className="font-body-md text-body-md text-ink-2">
           Owned architectural design, implementation, and operational reliability of the entire data platform. Led the technical decision-making around freshness guarantees, CDC tooling, and warehouse consolidation. Managed the execution across five parallel e-commerce platform integrations while maintaining zero data loss.
         </p>
-      </section>
+      </SectionBlock>
 
-      {/* 02 // Topology */}
-      <section className="flex flex-col gap-3 mb-10">
-        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
-          <span className="font-caption-mono text-caption-mono text-accent">02 // TOPOLOGY &amp; FRESHNESS TIERS</span>
-          <span className="font-caption-mono text-caption-mono text-ink-3">DEBEZIUM CDC TO WAREHOUSE</span>
-        </div>
-        <h2 className="font-headline-lg text-headline-lg text-ink">System Architecture</h2>
-
+      <SectionBlock index="02" eyebrow="TOPOLOGY & FRESHNESS TIERS" meta="DEBEZIUM CDC TO WAREHOUSE" title="System Architecture">
         <div className="bg-panel p-4 sm:p-6 rounded overflow-hidden">
           <div className="flex items-center justify-between pb-2 mb-4 bg-panel-2 p-2 rounded">
             <div className="flex items-center gap-2">
@@ -165,12 +121,9 @@ export default function DataPlatformCaseStudy() {
             </svg>
           </div>
         </div>
-      </section>
+      </SectionBlock>
 
-      {/* 03 // Problem */}
-      <section className="flex flex-col gap-3 mb-10">
-        <span className="font-caption-mono text-caption-mono text-accent">03 // WHY THE LEGACY PIPELINE HAD TO GO</span>
-        <h2 className="font-headline-lg text-headline-lg text-ink">The Challenge: Stale Data, Fragmented Sources</h2>
+      <SectionBlock index="03" eyebrow="WHY THE LEGACY PIPELINE HAD TO GO" title="The Challenge: Stale Data, Fragmented Sources">
         <p className="font-body-md text-body-md text-ink-2">
           Legacy data infrastructure consisted of nightly batch ETL jobs pulling data 12-24 hours behind production reality. The data was scattered across five independent e-commerce platforms with no unified view, and the pipeline was load-bearing enough that breaking it during migration risked halting critical business functions.
         </p>
@@ -191,12 +144,9 @@ export default function DataPlatformCaseStudy() {
         <p className="font-body-md text-body-md text-ink-2">
           The requirement was absolute: define freshness tiers for different data classes without building five separate pipelines, and enable non-engineers to query the unified dataset without SQL expertise.
         </p>
-      </section>
+      </SectionBlock>
 
-      {/* 04 // Strategy */}
-      <section className="flex flex-col gap-3 mb-10">
-        <span className="font-caption-mono text-caption-mono text-accent">04 // STRATEGY &amp; IMPLEMENTATION</span>
-        <h2 className="font-headline-lg text-headline-lg text-ink">Architectural Solution: Tiered Freshness Model</h2>
+      <SectionBlock index="04" eyebrow="STRATEGY & IMPLEMENTATION" title="Architectural Solution: Tiered Freshness Model">
         <p className="font-body-md text-body-md text-ink-2">
           Chose Debezium for CDC to avoid application code changes, and deployed a single MySQL landing zone as a synchronization point — eliminating the need to maintain five separate CDC connectors. Rather than forcing every consumer onto the most expensive freshness guarantee, three tiers let each data class pick the latency it actually needed.
         </p>
@@ -211,7 +161,7 @@ export default function DataPlatformCaseStudy() {
         <p className="font-body-md text-body-md text-ink-2">
           Events flowed through Google Cloud Pub/Sub for decoupling, then into BigQuery for historical analytics and ClickHouse for real-time queries — giving each consumer independent scaling without forcing a single warehouse to serve every workload.
         </p>
-      </section>
+      </SectionBlock>
 
       {/* Code block: ClickHouse tuning */}
       <section className="flex flex-col gap-3 w-full mb-10">
@@ -239,10 +189,7 @@ ENGINE = ReplacingMergeTree(version)
         </div>
       </section>
 
-      {/* Key Decisions */}
-      <section className="flex flex-col gap-3 mb-10">
-        <span className="font-caption-mono text-caption-mono text-accent">05 // KEY DECISIONS</span>
-        <h2 className="font-headline-lg text-headline-lg text-ink">Decisions &amp; Tradeoffs</h2>
+      <SectionBlock index="05" eyebrow="KEY DECISIONS" title="Decisions & Tradeoffs">
         <ul className="flex flex-col gap-2 list-none">
           <li id="decision-0" className="p-4 bg-panel rounded scroll-my-24">
             <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">MySQL as Landing Zone</h4>
@@ -257,12 +204,9 @@ ENGINE = ReplacingMergeTree(version)
             <p className="font-body-sm text-body-sm text-ink-2">BigQuery handles slow analytics queries (minutes acceptable); ClickHouse serves fast dashboards and alerts (sub-second SLA). Allows independent scaling and tuning per workload.</p>
           </li>
         </ul>
-      </section>
+      </SectionBlock>
 
-      {/* 06 // Production Safeguards (Execution) */}
-      <section className="flex flex-col gap-3 mb-10">
-        <span className="font-caption-mono text-caption-mono text-accent">06 // PRODUCTION SAFEGUARDS</span>
-        <h2 className="font-headline-lg text-headline-lg text-ink">Rollout: Migration Without Breaking Production</h2>
+      <SectionBlock index="06" eyebrow="PRODUCTION SAFEGUARDS" title="Rollout: Migration Without Breaking Production">
         <p className="font-body-md text-body-md text-ink-2">
           Rolling out to 200+ merchants one at a time is an operational discipline, not a one-time cutover. Three safeguards ran throughout the migration:
         </p>
@@ -281,12 +225,9 @@ ENGINE = ReplacingMergeTree(version)
             </div>
           ))}
         </div>
-      </section>
+      </SectionBlock>
 
-      {/* 07 // Results table (Impact) */}
-      <section className="flex flex-col gap-3 pt-2 mb-10">
-        <span className="font-caption-mono text-caption-mono text-accent">07 // RESULTS &amp; RETROSPECTIVE</span>
-        <h2 className="font-headline-lg text-headline-lg text-ink">Results &amp; Operational Payoff</h2>
+      <SectionBlock index="07" eyebrow="RESULTS & RETROSPECTIVE" title="Results & Operational Payoff" topPadding>
         <p className="font-body-md text-body-md text-ink-2">
           Customer Success adoption jumped from 6% to 91% weekly active usage because teams finally had access to fresh data that matched reality.
         </p>
@@ -315,24 +256,11 @@ ENGINE = ReplacingMergeTree(version)
         <p className="font-body-md text-body-md text-ink-2 pt-2">
           <strong>What I&apos;d change today:</strong> given current tooling maturity, I&apos;d use Postgres logical replication + Kafka Connect over Debezium for simpler operational debugging. The dual-path (BigQuery + ClickHouse) added operational overhead that a single unified MPP warehouse could have replaced had we bet on that earlier.
         </p>
-      </section>
+      </SectionBlock>
 
-      {/* Bottom nav */}
       <div className="mt-4 pt-6 border-t border-rule flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <Link
-          href="/case-studies/"
-          className="min-h-[44px] px-4 py-2 bg-panel rounded font-label-mono-sm text-label-mono-sm text-ink hover:bg-panel-2 transition-colors inline-flex items-center gap-2"
-        >
-          <span className="text-[14px]">☰</span>
-          <span>ALL CASE STUDIES</span>
-        </Link>
-        <Link
-          href="/case-studies/segmentation/"
-          className="min-h-[44px] px-4 py-2 bg-accent rounded font-label-mono-sm text-label-mono-sm text-bg hover:bg-accent-ink transition-colors inline-flex items-center gap-2 group"
-        >
-          <span>NEXT: CUSTOMER SEGMENTATION</span>
-          <span className="text-[14px] transition-transform group-hover:translate-x-1">→</span>
-        </Link>
+        <CTAButton href="/case-studies/" label="ALL CASE STUDIES" variant="panel" size="sm" icon="☰" />
+        <CTAButton href="/case-studies/segmentation/" label="NEXT: CUSTOMER SEGMENTATION" variant="solid" size="sm" arrow="right" />
       </div>
     </article>
   );

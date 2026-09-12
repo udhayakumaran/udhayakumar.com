@@ -1,20 +1,22 @@
-import Link from "next/link";
 import { Metadata } from "next";
-import BackLink from "../../components/BackLink";
+import CaseStudyTagBar from "../../components/CaseStudyTagBar";
+import CaseStudyHero, { MetaItem, MetricItem } from "../../components/CaseStudyHero";
+import SectionBlock from "../../components/SectionBlock";
+import CTAButton from "../../components/CTAButton";
 
 export const metadata: Metadata = {
   title: "Recommendation Blocks",
   description: "Built product recommendations from zero to 80% adoption across five regions by designing a trust-building three-tier ladder: Manual → Automated → Smart.",
 };
 
-const metaStrip = [
+const metaStrip: MetaItem[] = [
   { label: "SERVING", value: "MongoDB Atlas (multi-region)" },
   { label: "RANKING CACHE", value: "Redis" },
   { label: "REGIONS", value: "US, EU, APAC, India, Brazil" },
   { label: "LATENCY SLA", value: "200ms p99", accent: "sage" },
 ];
 
-const metrics = [
+const metrics: MetricItem[] = [
   { label: "MERCHANT ADOPTION", value: "80", suffix: "%", note: "Of all merchants, from launch", accentValue: "sage" },
   { label: "REGIONS SERVED", value: "5", suffix: "", note: "Under one latency SLA" },
   { label: "P99 LATENCY", value: "200-400", suffix: "ms", note: "Across all five regions" },
@@ -24,65 +26,27 @@ const metrics = [
 export default function RecommendationsCaseStudy() {
   return (
     <article className="flex flex-col w-full">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-8 pb-4 mb-8 border-b border-rule">
-        <BackLink href="/" label="Back to Home" />
-        <span className="font-caption-mono text-caption-mono text-ink-3 uppercase tracking-wider">
-          CASE STUDY 03 // PRODUCT SYSTEM // NODE.JS &amp; REDIS
-        </span>
-      </div>
+      <CaseStudyTagBar caseStudyLabel="CASE STUDY 03 // PRODUCT SYSTEM // NODE.JS & REDIS" />
 
-      <header className="flex flex-col gap-4 mb-10">
-        <div className="flex items-center gap-2">
-          <span className="px-2 py-0.5 rounded bg-panel-2 text-ink-2 font-caption-mono text-caption-mono uppercase tracking-widest">
-            PRODUCT SYSTEM · ZERO TO ONE
-          </span>
-          <span className="font-caption-mono text-caption-mono text-ink-3">•</span>
-          <span className="font-caption-mono text-caption-mono text-ink-2">PUBLISHED 2025-09-03</span>
-        </div>
-        <h1 className="font-display-hero text-display-hero text-ink break-words">Recommendation Blocks</h1>
-        <p className="font-body-lg text-body-lg text-ink-2 max-w-[72ch]">
-          Built the company&apos;s product recommendation system from zero. Solved the cold-start problem with three independent engines under CSM-driven tier selection — Curated (day 1, zero risk), Automated (pattern rules), Smart (live behavioral ranking) — served across five regions under a 200ms p99 latency SLA.
-        </p>
+      <CaseStudyHero
+        badge="PRODUCT SYSTEM · ZERO TO ONE"
+        publishedDate="2025-09-03"
+        title="Recommendation Blocks"
+        intro="Built the company's product recommendation system from zero. Solved the cold-start problem with three independent engines under CSM-driven tier selection — Curated (day 1, zero risk), Automated (pattern rules), Smart (live behavioral ranking) — served across five regions under a 200ms p99 latency SLA."
+        metaStrip={metaStrip}
+        metrics={metrics}
+      />
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2">
-          {metaStrip.map((m) => (
-            <div key={m.label} className="p-3 bg-panel rounded">
-              <span className="block font-caption-mono text-caption-mono text-ink-3 uppercase">{m.label}</span>
-              <span className={`font-label-mono-sm text-label-mono-sm font-semibold ${m.accent === "sage" ? "text-sage" : "text-ink"}`}>
-                {m.value}
-              </span>
-            </div>
-          ))}
-        </div>
-      </header>
-
-      <section className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-10">
-        {metrics.map((m) => (
-          <div key={m.label} className="bg-panel p-4 rounded flex flex-col justify-between">
-            <span className="font-caption-mono text-caption-mono text-ink-3 uppercase tracking-wider">{m.label}</span>
-            <div className="mt-2 flex items-baseline gap-1">
-              <span className={`font-display-hero text-headline-lg ${m.accentValue === "sage" ? "text-sage" : "text-ink"}`}>{m.value}</span>
-              <span className="font-label-mono-sm text-label-mono-sm font-bold text-accent">{m.suffix}</span>
-            </div>
-            <span className="font-caption-mono text-caption-mono text-ink-2 mt-1">{m.note}</span>
-          </div>
-        ))}
-      </section>
-
-      <section className="flex flex-col gap-3 mb-10">
-        <span className="font-caption-mono text-caption-mono text-accent">01 // ROLE &amp; CONTEXT</span>
-        <h2 className="font-headline-lg text-headline-lg text-ink">My Role</h2>
+      <SectionBlock index="01" eyebrow="ROLE & CONTEXT" title="My Role">
         <p className="font-body-md text-body-md text-ink-2">
           Designed the three-tier trust model (Manual/Automated/Smart) to reduce merchant risk and enable gradual adoption, architected multi-region serving with latency SLAs and the real-time ranking engine, and directed the Redis-backed live tier, MongoDB serving layer, and ranking algorithm implementation with a small team (2-3 engineers) while staying close to product tradeoffs.
         </p>
         <p className="font-body-md text-body-md text-ink-2">
           The platform serves 200+ merchants across five regions — SMBs with low transaction volume on day 1. Recommendation systems need behavioral data to produce quality results, so the architecture had to ship value on day one with zero data, then scale to algorithmic sophistication as data accumulated.
         </p>
-      </section>
+      </SectionBlock>
 
-      <section className="flex flex-col gap-3 mb-10">
-        <span className="font-caption-mono text-caption-mono text-accent">02 // THE PROBLEM</span>
-        <h2 className="font-headline-lg text-headline-lg text-ink">The Bootstrap Problem</h2>
+      <SectionBlock index="02" eyebrow="THE PROBLEM" title="The Bootstrap Problem">
         <p className="font-body-md text-body-md text-ink-2">
           A new merchant has zero behavioral data on day 1. Live recommendation ranking needs statistical significance to produce quality results — ship live ranking immediately and recommendations are garbage, so merchants disable the feature. By day 30, when enough data exists, trust is already destroyed and can&apos;t be recovered. You need immediate value with zero data, but can&apos;t gather data unless merchants use recommendations first.
         </p>
@@ -104,11 +68,9 @@ export default function RecommendationsCaseStudy() {
             </ul>
           </div>
         </div>
-      </section>
+      </SectionBlock>
 
-      <section className="flex flex-col gap-3 mb-10">
-        <span className="font-caption-mono text-caption-mono text-accent">03 // ARCHITECTURE</span>
-        <h2 className="font-headline-lg text-headline-lg text-ink">Three Engines, CSM-Driven Tier Selection</h2>
+      <SectionBlock index="03" eyebrow="ARCHITECTURE" title="Three Engines, CSM-Driven Tier Selection">
         <p className="font-body-md text-body-md text-ink-2">
           Three independent engines — Curated, Automated, Smart — with tier selection driven by CSM discretion, not data availability. CSMs choose which tier per merchant based on trust and use case. Data flows live to Redis, then migrates to BigQuery after 30 minutes of session inactivity or session close.
         </p>
@@ -150,11 +112,9 @@ export default function RecommendationsCaseStudy() {
             Latency-freshness tradeoff: regional read replicas lag 5-10s, acceptable for merchant UX. On slow replica, fallback to cached tier — prioritizes speed over freshness.
           </div>
         </div>
-      </section>
+      </SectionBlock>
 
-      <section className="flex flex-col gap-3 mb-10">
-        <span className="font-caption-mono text-caption-mono text-accent">04 // KEY DECISIONS</span>
-        <h2 className="font-headline-lg text-headline-lg text-ink">Decisions &amp; Tradeoffs</h2>
+      <SectionBlock index="04" eyebrow="KEY DECISIONS" title="Decisions & Tradeoffs">
         <ul className="flex flex-col gap-2 list-none">
           <li className="p-4 bg-panel rounded">
             <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">Tier Selection Driven by CSM Judgment</h4>
@@ -173,45 +133,29 @@ export default function RecommendationsCaseStudy() {
             <p className="font-body-sm text-body-sm text-ink-2">Regional replicas incur 5-10s replication lag — acceptable cost for 200ms p99 serving. A central Redis for all regions would mean 300-500ms network latency instead.</p>
           </li>
         </ul>
-      </section>
+      </SectionBlock>
 
-      <section className="flex flex-col gap-3 mb-10">
-        <span className="font-caption-mono text-caption-mono text-accent">05 // EXECUTION</span>
-        <h2 className="font-headline-lg text-headline-lg text-ink">Validation, Monitoring, Rollback</h2>
+      <SectionBlock index="05" eyebrow="EXECUTION" title="Validation, Monitoring, Rollback">
         <p className="font-body-md text-body-md text-ink-2">
           Smart ranking trained on historical data was validated against held-out test sets before serving live — checking for cardinality issues, signal stability, and tail behavior, rejecting models that failed validation. Built a canary deployment for the Smart tier: new models ran on 5% of traffic first, compared against the incumbent.
         </p>
         <p className="font-body-md text-body-md text-ink-2">
           Tracked block click-through rate and latency per tier. Anomalies (CTR drop &gt;10%, latency spike) paged on-call, and tiers could be disabled independently if quality degraded.
         </p>
-      </section>
+      </SectionBlock>
 
-      <section className="flex flex-col gap-3 pt-2 mb-10">
-        <span className="font-caption-mono text-caption-mono text-accent">06 // RESULTS &amp; RETROSPECTIVE</span>
-        <h2 className="font-headline-lg text-headline-lg text-ink">Impact</h2>
+      <SectionBlock index="06" eyebrow="RESULTS & RETROSPECTIVE" title="Impact" topPadding>
         <p className="font-body-md text-body-md text-ink-2">
           Cold-start was solved by CSM-driven tier selection across three independent engines, not algorithm-triggered progression. Multi-region serving with regional Redis and fallback caching hit 200ms p99 latency across five regions despite 5-10s replication lag, and the model validation gate prevented garbage output from ever reaching merchants and ruining trust.
         </p>
         <p className="font-body-md text-body-md text-ink-2 pt-2">
           <strong>What I&apos;d change today:</strong> canary deployments from day one rather than added later; a feature flag for the Smart tier per merchant instead of an all-or-nothing rollout; and separating model retraining from serving with an async cache layer, since the current design retrains synchronously and risks latency spikes.
         </p>
-      </section>
+      </SectionBlock>
 
       <div className="mt-4 pt-6 border-t border-rule flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <Link
-          href="/case-studies/"
-          className="min-h-[44px] px-4 py-2 bg-panel rounded font-label-mono-sm text-label-mono-sm text-ink hover:bg-panel-2 transition-colors inline-flex items-center gap-2"
-        >
-          <span className="text-[14px]">☰</span>
-          <span>ALL CASE STUDIES</span>
-        </Link>
-        <Link
-          href="/case-studies/hard-problems/"
-          className="min-h-[44px] px-4 py-2 bg-accent rounded font-label-mono-sm text-label-mono-sm text-bg hover:bg-accent-ink transition-colors inline-flex items-center gap-2 group"
-        >
-          <span>NEXT: HARD PROBLEMS &amp; LEARNINGS</span>
-          <span className="text-[14px] transition-transform group-hover:translate-x-1">→</span>
-        </Link>
+        <CTAButton href="/case-studies/" label="ALL CASE STUDIES" variant="panel" size="sm" icon="☰" />
+        <CTAButton href="/case-studies/hard-problems/" label="NEXT: HARD PROBLEMS & LEARNINGS" variant="solid" size="sm" arrow="right" />
       </div>
     </article>
   );

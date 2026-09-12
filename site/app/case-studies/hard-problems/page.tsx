@@ -14,7 +14,7 @@ const stats = [
   { label: "DOCUMENTED INCIDENTS", value: "10", tag: "RECORDS" },
   { label: "BEST DIAGNOSIS WIN", value: "360x", tag: "FASTER" },
   { label: "COST REDUCTION (INC-08)", value: "6x", tag: "" },
-  { label: "PLATFORM PATTERNS ADOPTED", value: "2", tag: "" },
+  { label: "PLATFORM PATTERN ADOPTED", value: "1", tag: "" },
 ];
 
 const progression = [

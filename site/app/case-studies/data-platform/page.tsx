@@ -10,42 +10,43 @@ export const metadata: Metadata = {
 };
 
 const metaStrip: MetaItem[] = [
-  { label: "SOURCES", value: "MySQL, MongoDB, Postgres" },
+  { label: "SOURCES", value: "Commerce, Click-tracking, Loyalty, CRM" },
   { label: "CDC PIPELINE", value: "Debezium" },
   { label: "TRANSPORT", value: "Google Pub/Sub" },
-  { label: "SLA IMPACT", value: "0% Dropped", accent: "sage" },
+  { label: "MIGRATION", value: "3-Month Cutover", accent: "sage" },
 ];
 
 const metrics: MetricItem[] = [
   { label: "MERCHANTS ONBOARDED", value: "200", suffix: "+", note: "Across 5 commerce platforms" },
-  { label: "FASTEST TIER FRESHNESS", value: "<5", suffix: "min", note: "Webhook-driven tier-1", suffixColor: "sage" },
-  { label: "COST REDUCTION", value: "40", suffix: "%", note: "3 warehouses consolidated to 1" },
-  { label: "ADOPTION LIFT", value: "91", suffix: "%", accentValue: "sage", note: "From 6% baseline (weekly active)" },
+  { label: "FASTEST TIER FRESHNESS", value: "<5", suffix: "min", note: "Webhook-capable platforms", suffixColor: "sage" },
+  { label: "CLICKHOUSE COST CUT", value: "66", suffix: "%", note: "4× compute (BigQuery → ClickHouse)" },
+  { label: "ROLLBACK WINDOW", value: "30", suffix: "days", note: "Old pipeline kept live, never invoked" },
 ];
 
 const failurePoints = [
-  { title: "Stale-by-default reads:", body: "Nightly batch ETL meant every team — Customer Success, Analytics, Product — operated on 12-24 hour old snapshots, making real-time decisions impossible." },
-  { title: "Fragmented sources:", body: "Data scattered across five independent e-commerce platforms with no unified view, forcing teams to reconcile numbers by hand across systems." },
-  { title: "High migration risk:", body: "The legacy pipeline was load-bearing for critical business functions — breaking it during migration was not an acceptable failure mode." },
+  { title: "6+ hour batch delays:", body: "Commerce webhooks provided near-real-time events, but custom platform integrations required a full data download every 6 hours — click-tracking and loyalty data were even slower." },
+  { title: "Custom integrations per product:", body: "Every new downstream product needed to build its own integration instead of tapping a shared stream." },
+  { title: "Expensive BigQuery reporting:", body: "Reporting was expensive because queries had to reprocess data constantly instead of reading from a purpose-built serving layer." },
+  { title: "No unified data model:", body: "Customer data, orders, click-tracking, and loyalty data all flowed through separate systems with no unified schema." },
 ];
 
-const tiers = [
-  { label: "01. Tier-1 (Webhooks)", body: "High-frequency webhook events land in Pub/Sub within seconds, giving sub-5-minute freshness for the data that changes fastest." },
-  { label: "02. Tier-2 (Snapshots)", body: "Debezium CDC streams hourly database snapshots through the MySQL landing zone for data that tolerates an hour of lag." },
-  { label: "03. Tier-3 (Batch)", body: "Legacy nightly batch exports cover archival and low-priority data, avoiding the cost of real-time infrastructure where it isn't needed." },
+const architectureLayers = [
+  { label: "01. Consolidation", body: "Four source systems (commerce, click-tracking, loyalty, CRM) land in a raw MySQL store, preserving original per-source schema." },
+  { label: "02. CDC", body: "Debezium streams changes off the landing store through Google Pub/Sub, giving a replay boundary and per-tenant isolation." },
+  { label: "03. Serving fan-out", body: "Three specialized stores: MongoDB for point lookups, ClickHouse for analytics, BigQuery for historical/audit data." },
 ];
 
 const safeguards = [
-  { title: "1. Dual-Write Validation Window", tag: "2-WEEK CANARY", tagVariant: "sage", body: "Every merchant ran old batch and new CDC pipelines in parallel for a 2-week validation window before cutover, with feature flags toggling reads between them." },
-  { title: "2. Incident Response Rehearsals", tag: "FAILURE DRILLS", tagVariant: "accent", body: "Rehearsed common failure modes ahead of rollout — Debezium snapshot hangs, Kafka partition rebalances, ClickHouse merge storms — so on-call response was practiced, not improvised." },
-  { title: "3. Automated Drift Detection", tag: "CANARY LOGIC", tagVariant: "neutral", body: "Automated canary jobs compared old-pipeline and new-pipeline outputs continuously, surfacing data drift before it reached a dashboard or report." },
+  { title: "1. Dual-Write Validation Window", tag: "2-WEEK CANARY", tagVariant: "sage", body: "Dual-wrote to old and new landing layers for 2 weeks. Hourly validation compared row counts, key distributions, timestamp ranges, and checksums before each store's cutover." },
+  { title: "2. 30-Day Rollback Window", tag: "SAFETY NET", tagVariant: "accent", body: "Kept the old pipeline running for 30 days after cutover so a broken migration could be reverted. Never had to use it, but it reduced risk both operationally and psychologically." },
+  { title: "3. Freshness Monitoring & Paging", tag: "5-MIN ALERT · 15-MIN PAGE", tagVariant: "neutral", body: "Tracked freshness (source → landing → serving), lag per store, and checkpoint latency. Alerted on 5-minute latency deviation; paged on-call for delays over 15 minutes." },
 ];
 
 const resultsTable = [
-  { metric: "Data Latency (p80 of queries)", legacy: "12-24 hours", now: "5 minutes", gain: "~150x Faster" },
-  { metric: "Warehouse Infrastructure", legacy: "3 single-purpose warehouses", now: "1 consolidated (BigQuery+ClickHouse)", gain: "40% Cost Reduction" },
-  { metric: "Customer Success Adoption", legacy: "6% weekly active", now: "91% weekly active", gain: "15x Adoption" },
-  { metric: "Analytics Report Refresh", legacy: "4 hours", now: "5 minutes", gain: "48x Faster" },
+  { metric: "Data Freshness (webhook-capable platforms)", legacy: "Days-late (legacy cron)", now: "<5 minutes", gain: "Real-time unlocked" },
+  { metric: "Data Freshness (full-resync platforms)", legacy: "Days-late (legacy cron)", now: "~6 hours", gain: "Tiered by capability" },
+  { metric: "Segmentation Analytics Cost", legacy: "$2,470/mo (BigQuery)", now: "$850/mo (ClickHouse)", gain: "66% Cost Cut, 4× Compute" },
+  { metric: "Reporting Cost Model", legacy: "Scaled with query volume", now: "Team-controlled, fixed", gain: "Cost Curve Owned" },
 ];
 
 export default function DataPlatformCaseStudy() {
@@ -58,14 +59,14 @@ export default function DataPlatformCaseStudy() {
         badgeVariant="sage"
         publishedDate="2025-09-03"
         title="The Data Platform"
-        intro="Owned the rebuild of customer and order data infrastructure across 200+ merchants on five commerce platforms — replacing a 12-24 hour stale nightly batch pipeline with a tiered-freshness system ranging from sub-5-minute webhooks to nightly archival, without breaking a single load-bearing dependency during migration."
+        intro="Owned the rebuild of customer and order data infrastructure across 200+ merchants on five commerce platforms — replacing a days-late legacy batch pipeline with a tiered-freshness system ranging from sub-5-minute webhooks to 6 hours for legacy integrations, migrated store-by-store over 3 months with a rollback path that was never used."
         metaStrip={metaStrip}
         metrics={metrics}
       />
 
       <SectionBlock index="01" eyebrow="ROLE & CONTEXT" title="My Role">
         <p className="font-body-md text-body-md text-ink-2">
-          Owned architectural design, implementation, and operational reliability of the entire data platform. Led the technical decision-making around freshness guarantees, CDC tooling, and warehouse consolidation. Managed the execution across five parallel e-commerce platform integrations while maintaining zero data loss.
+          Owned architecture and technical direction — ingestion, CDC, and multi-layer serving design — plus CDC strategy, migration strategy, and production rollout across roughly five years of platform ownership. Directed the core implementation (CDC pipeline, landing store, warehouse consolidation) that the platform team, which I grew from 4 to 7 engineers, built and maintained.
         </p>
       </SectionBlock>
 
@@ -87,37 +88,49 @@ export default function DataPlatformCaseStudy() {
           </div>
 
           <div className="w-full overflow-x-auto pb-2">
-            <svg className="w-full min-w-[700px] h-auto" viewBox="0 0 760 220" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x={20} y={20} width={130} height={40} rx={4} fill="#F2EBDA" stroke="#DED2B4" strokeWidth={1.5} />
-              <text x={85} y={44} fontFamily="JetBrains Mono" fontSize={11} fontWeight={600} textAnchor="middle" fill="#1C1A15">MongoDB</text>
-              <rect x={20} y={90} width={130} height={40} rx={4} fill="#F2EBDA" stroke="#DED2B4" strokeWidth={1.5} />
-              <text x={85} y={114} fontFamily="JetBrains Mono" fontSize={11} fontWeight={600} textAnchor="middle" fill="#1C1A15">Postgres</text>
-              <rect x={20} y={160} width={130} height={40} rx={4} fill="#F2EBDA" stroke="#DED2B4" strokeWidth={1.5} />
-              <text x={85} y={184} fontFamily="JetBrains Mono" fontSize={11} fontWeight={600} textAnchor="middle" fill="#1C1A15">Webhooks</text>
+            <svg className="w-full min-w-[700px] h-auto" viewBox="0 0 640 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x={20} y={20} width={130} height={45} rx={4} fill="#F2EBDA" stroke="#DED2B4" strokeWidth={1.5} />
+              <text x={85} y={47} fontFamily="JetBrains Mono" fontSize={11} fontWeight={600} textAnchor="middle" fill="#1C1A15">Commerce</text>
+              <rect x={170} y={20} width={130} height={45} rx={4} fill="#F2EBDA" stroke="#DED2B4" strokeWidth={1.5} />
+              <text x={235} y={47} fontFamily="JetBrains Mono" fontSize={11} fontWeight={600} textAnchor="middle" fill="#1C1A15">Click-tracking</text>
+              <rect x={320} y={20} width={130} height={45} rx={4} fill="#F2EBDA" stroke="#DED2B4" strokeWidth={1.5} />
+              <text x={385} y={47} fontFamily="JetBrains Mono" fontSize={11} fontWeight={600} textAnchor="middle" fill="#1C1A15">Loyalty</text>
+              <rect x={470} y={20} width={130} height={45} rx={4} fill="#F2EBDA" stroke="#DED2B4" strokeWidth={1.5} />
+              <text x={535} y={47} fontFamily="JetBrains Mono" fontSize={11} fontWeight={600} textAnchor="middle" fill="#1C1A15">CRM</text>
 
-              <line x1={150} y1={40} x2={230} y2={90} stroke="#6E7B4C" strokeWidth={1.5} strokeDasharray="4 4" />
-              <line x1={150} y1={110} x2={230} y2={100} stroke="#6E7B4C" strokeWidth={1.5} strokeDasharray="4 4" />
-              <line x1={150} y1={180} x2={480} y2={110} stroke="#C85A2E" strokeWidth={1.5} strokeDasharray="4 4" />
+              <line x1={85} y1={65} x2={200} y2={100} stroke="#6E7B4C" strokeWidth={1.5} strokeDasharray="4 4" />
+              <line x1={235} y1={65} x2={280} y2={100} stroke="#6E7B4C" strokeWidth={1.5} strokeDasharray="4 4" />
+              <line x1={385} y1={65} x2={360} y2={100} stroke="#6E7B4C" strokeWidth={1.5} strokeDasharray="4 4" />
+              <line x1={535} y1={65} x2={440} y2={100} stroke="#6E7B4C" strokeWidth={1.5} strokeDasharray="4 4" />
 
-              <rect x={230} y={70} width={140} height={50} rx={4} fill="#E9E0C8" stroke="#C7B896" strokeWidth={1.5} />
-              <text x={300} y={92} fontFamily="JetBrains Mono" fontSize={11} fontWeight={600} textAnchor="middle" fill="#1C1A15">MySQL Landing</text>
-              <text x={300} y={108} fontFamily="JetBrains Mono" fontSize={9} textAnchor="middle" fill="#59564A">Sync point</text>
+              <rect x={60} y={100} width={440} height={55} rx={4} fill="#E9E0C8" stroke="#C7B896" strokeWidth={1.5} />
+              <text x={280} y={124} fontFamily="JetBrains Mono" fontSize={11} fontWeight={600} textAnchor="middle" fill="#1C1A15">MySQL Landing Layer</text>
+              <text x={280} y={140} fontFamily="JetBrains Mono" fontSize={9} textAnchor="middle" fill="#59564A">raw, per-source schemas, reversible</text>
 
-              <line x1={370} y1={95} x2={480} y2={95} stroke="#6E7B4C" strokeWidth={1.5} strokeDasharray="4 4" />
-              <rect x={480} y={70} width={130} height={50} rx={4} fill="#E7EAD6" stroke="#6E7B4C" strokeWidth={1.5} />
-              <text x={545} y={92} fontFamily="JetBrains Mono" fontSize={11} fontWeight={600} textAnchor="middle" fill="#576337">Debezium CDC</text>
-              <text x={545} y={108} fontFamily="JetBrains Mono" fontSize={9} textAnchor="middle" fill="#576337">+ Pub/Sub</text>
+              <line x1={280} y1={155} x2={280} y2={190} stroke="#6E7B4C" strokeWidth={1.5} strokeDasharray="4 4" />
 
-              <line x1={610} y1={85} x2={690} y2={45} stroke="#C85A2E" strokeWidth={1.5} strokeDasharray="4 4" />
-              <line x1={610} y1={105} x2={690} y2={145} stroke="#C85A2E" strokeWidth={1.5} strokeDasharray="4 4" />
+              <rect x={80} y={190} width={400} height={55} rx={4} fill="#E7EAD6" stroke="#6E7B4C" strokeWidth={1.5} />
+              <text x={280} y={214} fontFamily="JetBrains Mono" fontSize={11} fontWeight={600} textAnchor="middle" fill="#576337">Debezium CDC → Google Pub/Sub</text>
+              <text x={280} y={230} fontFamily="JetBrains Mono" fontSize={9} textAnchor="middle" fill="#576337">replay boundary, per-tenant isolation</text>
 
-              <rect x={620} y={20} width={120} height={50} rx={4} fill="#F5DFC9" stroke="#C85A2E" strokeWidth={1.5} />
-              <text x={680} y={42} fontFamily="JetBrains Mono" fontSize={11} fontWeight={600} textAnchor="middle" fill="#A84420">BigQuery</text>
-              <text x={680} y={58} fontFamily="JetBrains Mono" fontSize={9} textAnchor="middle" fill="#9F3C11">Analytics</text>
+              <line x1={160} y1={245} x2={90} y2={290} stroke="#C85A2E" strokeWidth={1.5} strokeDasharray="4 4" />
+              <line x1={280} y1={245} x2={280} y2={290} stroke="#C85A2E" strokeWidth={1.5} strokeDasharray="4 4" />
+              <line x1={400} y1={245} x2={470} y2={290} stroke="#C85A2E" strokeWidth={1.5} strokeDasharray="4 4" />
 
-              <rect x={620} y={120} width={120} height={50} rx={4} fill="#F5DFC9" stroke="#C85A2E" strokeWidth={1.5} />
-              <text x={680} y={142} fontFamily="JetBrains Mono" fontSize={11} fontWeight={600} textAnchor="middle" fill="#A84420">ClickHouse</text>
-              <text x={680} y={158} fontFamily="JetBrains Mono" fontSize={9} textAnchor="middle" fill="#9F3C11">Real-time</text>
+              <rect x={20} y={290} width={140} height={65} rx={4} fill="#F5DFC9" stroke="#C85A2E" strokeWidth={1.5} />
+              <text x={90} y={314} fontFamily="JetBrains Mono" fontSize={11} fontWeight={600} textAnchor="middle" fill="#A84420">MongoDB</text>
+              <text x={90} y={330} fontFamily="JetBrains Mono" fontSize={9} textAnchor="middle" fill="#9F3C11">serving</text>
+              <text x={90} y={344} fontFamily="JetBrains Mono" fontSize={9} textAnchor="middle" fill="#9F3C11">point lookups</text>
+
+              <rect x={210} y={290} width={140} height={65} rx={4} fill="#F5DFC9" stroke="#C85A2E" strokeWidth={1.5} />
+              <text x={280} y={314} fontFamily="JetBrains Mono" fontSize={11} fontWeight={600} textAnchor="middle" fill="#A84420">ClickHouse</text>
+              <text x={280} y={330} fontFamily="JetBrains Mono" fontSize={9} textAnchor="middle" fill="#9F3C11">analytics</text>
+              <text x={280} y={344} fontFamily="JetBrains Mono" fontSize={9} textAnchor="middle" fill="#9F3C11">aggregation</text>
+
+              <rect x={400} y={290} width={140} height={65} rx={4} fill="#F5DFC9" stroke="#C85A2E" strokeWidth={1.5} />
+              <text x={470} y={314} fontFamily="JetBrains Mono" fontSize={11} fontWeight={600} textAnchor="middle" fill="#A84420">BigQuery</text>
+              <text x={470} y={330} fontFamily="JetBrains Mono" fontSize={9} textAnchor="middle" fill="#9F3C11">historical</text>
+              <text x={470} y={344} fontFamily="JetBrains Mono" fontSize={9} textAnchor="middle" fill="#9F3C11">audit trail</text>
             </svg>
           </div>
         </div>
@@ -125,7 +138,7 @@ export default function DataPlatformCaseStudy() {
 
       <SectionBlock index="03" eyebrow="WHY THE LEGACY PIPELINE HAD TO GO" title="The Challenge: Stale Data, Fragmented Sources">
         <p className="font-body-md text-body-md text-ink-2">
-          Legacy data infrastructure consisted of nightly batch ETL jobs pulling data 12-24 hours behind production reality. The data was scattered across five independent e-commerce platforms with no unified view, and the pipeline was load-bearing enough that breaking it during migration risked halting critical business functions.
+          Data arrived days late. Commerce webhooks gave near-real-time events, but custom platform integrations required a full data download every 6 hours, and click-tracking and loyalty data were even slower. Downstream products couldn&apos;t build real-time features, and the pipeline was load-bearing enough that breaking it during migration risked halting critical business functions.
         </p>
         <div className="p-4 bg-panel rounded my-1">
           <h3 className="font-headline-sm text-headline-sm text-ink mb-1 flex items-center gap-2">
@@ -142,16 +155,16 @@ export default function DataPlatformCaseStudy() {
           </ul>
         </div>
         <p className="font-body-md text-body-md text-ink-2">
-          The requirement was absolute: define freshness tiers for different data classes without building five separate pipelines, and enable non-engineers to query the unified dataset without SQL expertise.
+          New products needed to build custom integrations instead of tapping a shared stream, and reporting was expensive because queries had to reprocess data constantly.
         </p>
       </SectionBlock>
 
-      <SectionBlock index="04" eyebrow="STRATEGY & IMPLEMENTATION" title="Architectural Solution: Tiered Freshness Model">
+      <SectionBlock index="04" eyebrow="STRATEGY & IMPLEMENTATION" title="Architectural Solution: Landing Layer + CDC Fan-Out">
         <p className="font-body-md text-body-md text-ink-2">
-          Chose Debezium for CDC to avoid application code changes, and deployed a single MySQL landing zone as a synchronization point — eliminating the need to maintain five separate CDC connectors. Rather than forcing every consumer onto the most expensive freshness guarantee, three tiers let each data class pick the latency it actually needed.
+          Consolidates four source systems (commerce, click-tracking, loyalty, CRM) into a raw MySQL landing store, preserving original schema. Debezium streams changes via Google Pub/Sub. The downstream layer fans out to three specialized stores rather than forcing every workload onto one general-purpose warehouse.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 my-1">
-          {tiers.map((t) => (
+          {architectureLayers.map((t) => (
             <div key={t.label} className="p-4 bg-panel rounded flex flex-col">
               <span className="font-label-mono-sm text-label-mono-sm text-accent font-bold mb-1">{t.label}</span>
               <p className="font-body-sm text-body-sm text-ink-2">{t.body}</p>
@@ -159,7 +172,7 @@ export default function DataPlatformCaseStudy() {
           ))}
         </div>
         <p className="font-body-md text-body-md text-ink-2">
-          Events flowed through Google Cloud Pub/Sub for decoupling, then into BigQuery for historical analytics and ClickHouse for real-time queries — giving each consumer independent scaling without forcing a single warehouse to serve every workload.
+          New sources plug into the landing layer and new consumers subscribe to Pub/Sub — no custom integrations required. The platform team owns the landing layer and CDC, with a 5-minute latency alert and a 15-minute on-call page threshold.
         </p>
       </SectionBlock>
 
@@ -174,17 +187,17 @@ export default function DataPlatformCaseStudy() {
         </div>
         <div className="bg-panel rounded overflow-hidden">
           <div className="bg-panel-2 px-4 py-2 flex items-center justify-between">
-            <span className="font-caption-mono text-caption-mono text-ink-2">MERGE TREE // WRITE PATH TUNING</span>
+            <span className="font-caption-mono text-caption-mono text-ink-2">SEGMENTATION ANALYTICS // BIGQUERY → CLICKHOUSE</span>
           </div>
           <pre className="p-4 font-label-mono-sm text-label-mono-sm text-ink overflow-x-auto leading-relaxed">
-            <code>{`-- Initial bottleneck: 500 events/sec before merge lock contention
--- Ordering by InsertionTime (not primary key) cut write amplification 60%
-ORDER BY (insertion_time, merchant_id)
+            <code>{`-- Migrated customer segmentation from BigQuery Views to ClickHouse
+-- Cost: 66% reduction | Compute: 64GB -> 16GB RAM (4x) via cityHash64 batched hashing
 
--- ReplacingMergeTree handles late-arriving updates without full re-merges
-ENGINE = ReplacingMergeTree(version)
+PARTITION BY (client_id, date)   -- isolates per-store backfills, date-range scans
+ORDER BY date                    -- serves segmentation filters + time-series reporting
 
--- Result: sustainable 8k events/sec, p99 query latency < 200ms`}</code>
+-- Materialized views: hourly batch refresh, not real-time
+-- (stable CPU, predictable cost -- the workload was wrong for the DB model, not a tuning problem)`}</code>
           </pre>
         </div>
       </section>
@@ -192,23 +205,27 @@ ENGINE = ReplacingMergeTree(version)
       <SectionBlock index="05" eyebrow="KEY DECISIONS" title="Decisions & Tradeoffs">
         <ul className="flex flex-col gap-2 list-none">
           <li id="decision-0" className="p-4 bg-panel rounded scroll-my-24">
-            <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">MySQL as Landing Zone</h4>
-            <p className="font-body-sm text-body-sm text-ink-2">Instead of managing five separate Debezium → Kafka connectors, centralize snapshot and streaming logic in one MySQL instance. Simplifies schema evolution and gives one place to tune CDC lag and snapshot concurrency.</p>
+            <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">Landed Raw Instead of Normalizing at Ingest</h4>
+            <p className="font-body-sm text-body-sm text-ink-2">Costs: five schemas instead of one. Benefit: reversibility — wrong normalization at ingest means a multi-service migration; a wrong view is a redefinition away from correction.</p>
           </li>
           <li id="decision-1" className="p-4 bg-panel rounded scroll-my-24">
-            <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">Tiered Freshness Model</h4>
-            <p className="font-body-sm text-body-sm text-ink-2">Webhooks → Pub/Sub (tier-1, &lt;5m), database snapshots → Debezium (tier-2, 1h), batch exports (tier-3, nightly). Lets customers optimize cost/latency tradeoff without forcing all data to the highest SLA.</p>
+            <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">CDC From the Landing Store, Not Sources</h4>
+            <p className="font-body-sm text-body-sm text-ink-2">Costs: one more moving part. Benefit: CDC from a consolidated landing layer with replay and validation boundaries.</p>
+          </li>
+          <li className="p-4 bg-panel rounded">
+            <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">Two Replication Paths: Datastream + Debezium</h4>
+            <p className="font-body-sm text-body-sm text-ink-2">Started with managed Datastream, gradually earned our way to pure Debezium. Avoided speculative engineering while managing risk.</p>
           </li>
           <li id="decision-3" className="p-4 bg-panel rounded scroll-my-24">
-            <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">BigQuery + ClickHouse Dual Path</h4>
-            <p className="font-body-sm text-body-sm text-ink-2">BigQuery handles slow analytics queries (minutes acceptable); ClickHouse serves fast dashboards and alerts (sub-second SLA). Allows independent scaling and tuning per workload.</p>
+            <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">Table-Per-Client Multiplies Operational Surface</h4>
+            <p className="font-body-sm text-body-sm text-ink-2">Thousands of tables; migrations run across all of them. Accepted because shared-table contention is worse and less visible than operational overhead.</p>
           </li>
         </ul>
       </SectionBlock>
 
       <SectionBlock index="06" eyebrow="PRODUCTION SAFEGUARDS" title="Rollout: Migration Without Breaking Production">
         <p className="font-body-md text-body-md text-ink-2">
-          Rolling out to 200+ merchants one at a time is an operational discipline, not a one-time cutover. Three safeguards ran throughout the migration:
+          Store-by-store cutover, because the data layer sits under every product — a bad cutover breaks all of them simultaneously. Three safeguards ran throughout the migration:
         </p>
         <div className="flex flex-col gap-2 my-1">
           {safeguards.map((s) => (
@@ -225,11 +242,16 @@ ENGINE = ReplacingMergeTree(version)
             </div>
           ))}
         </div>
+        <div className="my-1 p-4 bg-panel border border-accent rounded">
+          <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">The production incident that changed the design</h4>
+          <p className="font-body-sm text-body-sm text-ink-2 mb-2">Debezium&apos;s snapshot query on 50M rows consumed 60% CPU and blocked production writes. We stopped rollout immediately, used Datastream to seed the baseline instead, then transitioned tables to Debezium incrementally.</p>
+          <a href="/engineering-notes/debezium-50m-row-snapshot/" className="font-label-mono-sm text-label-mono-sm text-accent hover:text-accent-ink transition-colors">Read the full incident and recovery decisions →</a>
+        </div>
       </SectionBlock>
 
       <SectionBlock index="07" eyebrow="RESULTS & RETROSPECTIVE" title="Results & Operational Payoff" topPadding>
         <p className="font-body-md text-body-md text-ink-2">
-          Customer Success adoption jumped from 6% to 91% weekly active usage because teams finally had access to fresh data that matched reality.
+          Real-time recommendations became possible within seconds of customer actions, conversion attribution could finally link orders to specific blocks, and segmentation worked with fresh data instead of stale exports — while reporting moved off a cost curve that scaled with query volume onto one the team controlled.
         </p>
         <div className="w-full overflow-x-auto my-1 rounded bg-panel">
           <table className="w-full text-left font-body-sm text-body-sm">
@@ -254,7 +276,7 @@ ENGINE = ReplacingMergeTree(version)
           </table>
         </div>
         <p className="font-body-md text-body-md text-ink-2 pt-2">
-          <strong>What I&apos;d change today:</strong> given current tooling maturity, I&apos;d use Postgres logical replication + Kafka Connect over Debezium for simpler operational debugging. The dual-path (BigQuery + ClickHouse) added operational overhead that a single unified MPP warehouse could have replaced had we bet on that earlier.
+          <strong>What I&apos;d change today:</strong> I&apos;d go to pure Debezium from day one — Datastream was our transition strategy, and we could have earned off it faster once Debezium proved itself in production. I&apos;d also consider separate CDC per domain (commerce vs. click-tracking) to reduce blast radius, and evaluate Iceberg for the analytics layer, which wasn&apos;t production-ready at the time.
         </p>
       </SectionBlock>
 

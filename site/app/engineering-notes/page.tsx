@@ -25,9 +25,9 @@ export default function EngineeringNotesPage() {
         </h2>
         <Link
           href="/engineering-notes/debezium-50m-row-snapshot/"
-          className="block p-5 bg-panel border border-rule rounded hover:border-accent transition-colors"
+          className="group no-underline block p-5 bg-panel border border-rule rounded hover:border-accent transition-colors"
         >
-          <h3 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">
+          <h3 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2 group-hover:underline">
             The 50M-Row Debezium Snapshot Incident
           </h3>
           <p className="font-body-sm text-body-sm text-ink-2">

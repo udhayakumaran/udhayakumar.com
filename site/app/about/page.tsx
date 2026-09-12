@@ -12,7 +12,7 @@ const vitals = [
   { label: "Merchants Served", value: profile.convertCart.merchants },
   { label: "Platform Ownership", value: profile.convertCart.platformOwnership },
   { label: "Team Growth", value: profile.convertCart.teamGrowth },
-  { label: "Cost Reduction", value: "77.8%", accent: "sage" },
+  { label: "Cost Reduction", value: "66%", accent: "sage" },
 ];
 
 const testimonials = [
@@ -109,7 +109,7 @@ export default function AboutPage() {
               I&apos;m a {profile.primaryTitle} open to Staff, Principal, or Founding-Engineer roles where I can own a backend or data infrastructure system with the same scope and have real influence on how a team scales.
             </p>
             <p className="font-body-md text-body-md text-ink-2 leading-relaxed max-w-[65ch]">
-              {profile.positioning} Scaled a platform team from {profile.convertCart.teamGrowth}, served {profile.proof.merchants}, and reduced infrastructure cost 77.8% along the way.
+              {profile.positioning} Scaled a platform team from {profile.convertCart.teamGrowth}, served {profile.proof.merchants}, and reduced infrastructure cost 66% along the way.
             </p>
           </div>
           <div className="md:col-span-4 flex flex-col gap-2 p-4 bg-panel rounded-lg">
@@ -137,7 +137,7 @@ export default function AboutPage() {
           <h2 className="font-caption-mono text-caption-mono uppercase tracking-widest text-accent font-medium">
             RECOMMENDATIONS // WHAT COLLABORATORS SAY
           </h2>
-          <span className="font-caption-mono text-caption-mono text-ink-3 hidden sm:inline-block">4 VERIFIED ENDORSEMENTS</span>
+          <span className="font-caption-mono text-caption-mono text-ink-3 hidden sm:inline-block">4 ENDORSEMENTS</span>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {testimonials.map((t) => (

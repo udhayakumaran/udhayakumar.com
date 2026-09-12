@@ -14,7 +14,10 @@ const badgeVariantClasses: Record<CaseStudy["badgeVariant"], string> = {
 
 export default function CaseStudyCard({ study, number }: Props) {
   return (
-    <article className="p-6 bg-panel border border-rule rounded transition-all duration-200 hover:border-accent hover:-translate-y-1 flex flex-col gap-5">
+    <Link
+      href={study.href}
+      className="group no-underline p-6 bg-panel border border-rule rounded transition-all duration-200 hover:border-accent hover:-translate-y-1 flex flex-col gap-5"
+    >
       <div className="flex items-center justify-between gap-4 border-b border-rule pb-3">
         <div className="flex items-center gap-3">
           <span className="font-label-mono-sm text-label-mono-sm text-ink-3 font-semibold tracking-wider">
@@ -31,10 +34,8 @@ export default function CaseStudyCard({ study, number }: Props) {
       </div>
 
       <div className="flex flex-col gap-2">
-        <h2 className="font-headline-md text-headline-md font-semibold tracking-tight">
-          <Link href={study.href} className="text-ink hover:text-accent transition-colors">
-            {study.title}
-          </Link>
+        <h2 className="font-headline-md text-headline-md font-semibold tracking-tight text-ink group-hover:text-accent group-hover:underline transition-colors">
+          {study.title}
         </h2>
         <p className="font-body-md text-body-md text-ink-2">{study.subtitle}</p>
       </div>
@@ -52,14 +53,11 @@ export default function CaseStudyCard({ study, number }: Props) {
           <span className="text-[14px] text-sage">{study.telemetryIcon}</span>
           <span className="font-caption-mono text-caption-mono text-ink font-medium">{study.telemetryText}</span>
         </div>
-        <Link
-          href={study.href}
-          className="inline-flex items-center gap-1.5 font-label-mono-lg text-label-mono-lg text-accent font-semibold hover:text-accent-ink hover:underline shrink-0 min-h-[44px]"
-        >
+        <span className="inline-flex items-center gap-1.5 font-label-mono-lg text-label-mono-lg text-accent font-semibold shrink-0 min-h-[44px]">
           <span>Read Architecture Breakdown</span>
           <span className="text-[14px]">→</span>
-        </Link>
+        </span>
       </div>
-    </article>
+    </Link>
   );
 }

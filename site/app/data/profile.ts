@@ -32,7 +32,7 @@ export const profile = {
     recommendationsLatency: "200-400ms p99 (measured; target 500ms p99 across five regions)",
     mysql: "45 minutes → 3 minutes for a recurring reporting workload",
     dataIncident: "50M-row CDC snapshot consumed 60% CPU and blocked production writes",
-    clickhouseMigration: "Reduced customer segmentation cost from ₹1.8 lakhs/month (BigQuery, 60% of total bill) to ₹40K/month (ClickHouse Scale on GCP). cityHash64-based batched hashing reduced compute from 64GB → 16GB (minimum ClickHouse Cloud Production limit). Savings: ₹1.4 lakhs/month (77.8% reduction).",
+    clickhouseMigration: "Reduced customer segmentation cost from $2,470/month (BigQuery) to $850/month (ClickHouse Scale on GCP) — a 66% reduction, verified from invoices. cityHash64-based batched hashing reduced compute 4x (64GB → 16GB, minimum ClickHouse Cloud Production limit).",
     segmentationCSMTimeSaved: "CSM time saved: ~15 hours/week on manual segment creation",
   },
   technologies: [

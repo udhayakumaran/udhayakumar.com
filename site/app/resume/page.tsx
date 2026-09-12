@@ -12,7 +12,7 @@ const metrics = [
   { label: "MERCHANTS OWNED", value: "200+" },
   { label: "FASTEST FRESHNESS", value: "<5min" },
   { label: "TEAM GROWTH", value: "4 → 7" },
-  { label: "COST REDUCTION", value: "77.8%" },
+  { label: "COST REDUCTION", value: "66%" },
 ];
 
 const experience = [
@@ -27,7 +27,7 @@ const experience = [
       <>Rearchitected the data platform from legacy batch-sync (days-late) to real-time CDC, achieving <strong className="text-ink bg-panel-2 px-1 py-0.5 rounded font-label-mono-sm text-label-mono-sm">sub-5-minute freshness</strong> for webhook platforms across 200+ merchants on five commerce platforms.</>,
       <>Designed a segmentation engine reaching <strong className="text-ink bg-panel-2 px-1 py-0.5 rounded font-label-mono-sm text-label-mono-sm">1,000+ regularly-trained active segments</strong> within six months, saving Customer Success ~15 hours/week on manual segment creation.</>,
       <>Built a recommendation system from zero to one, reaching <strong className="text-ink bg-panel-2 px-1 py-0.5 rounded font-label-mono-sm text-label-mono-sm">80% merchant adoption</strong> at <strong className="text-sage bg-sage-wash border border-sage px-1 py-0.5 rounded font-label-mono-sm text-label-mono-sm">200-400ms p99</strong>.</>,
-      <>Migrated customer segmentation compute from BigQuery to ClickHouse, cutting cost from ₹1.8L/month to ₹40K/month — a <strong className="text-sage bg-sage-wash border border-sage px-1 py-0.5 rounded font-label-mono-sm text-label-mono-sm">77.8% reduction</strong> via cityHash64-based batched hashing.</>,
+      <>Migrated customer segmentation compute from BigQuery to ClickHouse, cutting cost from $2,470/month to $850/month — a <strong className="text-sage bg-sage-wash border border-sage px-1 py-0.5 rounded font-label-mono-sm text-label-mono-sm">66% reduction</strong> via cityHash64-based batched hashing.</>,
       <>Grew the backend platform team from <strong className="text-ink bg-panel-2 px-1 py-0.5 rounded font-label-mono-sm text-label-mono-sm">4 to 7 engineers</strong>.</>,
     ],
   },

@@ -84,14 +84,18 @@ export default function CommandPalette() {
           break;
         case "Escape":
           e.preventDefault();
-          close();
+          if (query) {
+            inputRef.current?.select();
+          } else {
+            close();
+          }
           break;
       }
     };
 
     window.addEventListener("keydown", handleKeydown);
     return () => window.removeEventListener("keydown", handleKeydown);
-  }, [isOpen, selectedIndex, allResults, open, close, router]);
+  }, [isOpen, selectedIndex, allResults, query, open, close, router]);
 
   if (!isOpen) {
     return null;

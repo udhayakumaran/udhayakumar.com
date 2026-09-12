@@ -59,13 +59,10 @@ export default function Header() {
     <header className="fixed top-0 w-full z-50 bg-bg/95 backdrop-blur-sm border-b border-rule">
       <div className="h-20 max-w-[860px] mx-auto px-5 flex items-center justify-between gap-4">
         <div className="flex items-center gap-2 shrink-0">
-          <Link href="/" className="flex flex-col min-h-[44px] justify-center whitespace-nowrap">
-            <span className="font-headline-sm text-headline-sm text-ink tracking-tight uppercase">Udhaya Kumar</span>
-            <span className="font-caption-mono text-caption-mono text-ink-2 uppercase tracking-widest">Infrastructure &amp; Reliability</span>
+          <Link href="/" className="group no-underline flex flex-col min-h-[44px] justify-center whitespace-nowrap">
+            <span className="font-headline-sm text-headline-sm text-ink tracking-tight uppercase group-hover:underline">Udhaya Kumar</span>
+            <span className="font-caption-mono text-caption-mono text-ink-2 uppercase tracking-widest">Staff Backend Engineer</span>
           </Link>
-          <span className="hidden sm:inline-block px-2 py-0.5 rounded bg-sage-wash text-sage border border-sage font-caption-mono text-caption-mono ml-2 whitespace-nowrap">
-            PROD / SRE
-          </span>
         </div>
 
         <div className="flex items-center gap-4">

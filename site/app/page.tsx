@@ -1,94 +1,39 @@
 import Link from "next/link";
+import { profile } from "./data/profile";
+import { caseStudies } from "./data/case-studies";
+import { incidents } from "./case-studies/hard-problems/incidents-data";
 
 const metrics = [
-  { label: "Max Scale", value: "120K QPS" },
-  { label: "Target Availability", value: "99.999%", color: "sage" },
-  { label: "Data Replicated", value: "4.8 PB" },
-  { label: "MTTR (2023-24)", value: "< 8 MIN", color: "accent-ink" },
+  { label: "Merchants Served", value: "200+ / 5 platforms" },
+  { label: "Data Freshness", value: "<5 MIN – 6 HRS", color: "sage" },
+  { label: "ClickHouse Cost Cut", value: "66% (4× Compute)", color: "accent-ink" },
+  { label: "Recommendation Adoption", value: "80% of Merchants" },
 ];
 
-const caseStudyCards = [
-  {
-    id: 1,
-    title: "Migrating 50M Rows with Zero Downtime via Debezium CDC",
-    description: "Solving CDC snapshot lock starvation and replication lag in PostgreSQL to Kafka streaming pipeline.",
-    tags: [
-      { text: "P99 LAG < 180MS", bg: "panel-2" },
-      { text: "ZERO DATA LOSS", bg: "sage-wash" },
-      { text: "50M RECORDS", bg: "panel-2" },
-    ],
-    badge: "MOST RELEVANT",
-    href: "/case-studies/data-platform/",
-  },
-  {
-    id: 2,
-    title: "Multi-Region Distributed Data Platform",
-    description: "Designing cross-datacenter state synchronization with consensus protocols and tiered caching.",
-    tags: [
-      { text: "99.999% AVAILABILITY", bg: "sage-wash" },
-      { text: "60% COST REDUCTION", bg: "panel-2" },
-    ],
-    badge: "DISTRIBUTED SYSTEMS",
-    href: "/case-studies/segmentation/",
-  },
-  {
-    id: 3,
-    title: "Dynamic Customer Segmentation Engine",
-    description: "Sub-second evaluation across 12M active user profiles with memory-bounded columnar indices.",
-    tags: [
-      { text: "12M PROFILES", bg: "panel-2" },
-      { text: "12MS LATENCY", bg: "accent-wash" },
-    ],
-    badge: "DATA ENGINE",
-    href: "/case-studies/segmentation/",
-  },
-  {
-    id: 4,
-    title: "Scalable Real-time Recommendation Pipeline",
-    description: "Low-latency inference orchestration handling 45k QPS with graceful degradation fallbacks.",
-    tags: [
-      { text: "45K QPS", bg: "panel-2" },
-      { text: "FALLBACK CIRCUIT BREAKERS", bg: "sage-wash" },
-    ],
-    badge: "STREAM INFERENCE",
-    href: "/case-studies/recommendations/",
-  },
-];
+const homeIncidentIds = ["INC-01", "INC-02", "INC-08", "INC-10"];
+const homeIncidents = incidents.filter((inc) => homeIncidentIds.includes(inc.id));
 
-const incidents = [
-  { id: "01", title: "Postgres Connection Pool Saturation during Flash Spike", category: "DATABASE LOCKS", sev: "SEV-1 // 23 MIN" },
-  { id: "02", title: "Debezium Kafka Partition Rebalance Cascade", category: "KAFKA / CDC", sev: "SEV-2 // 41 MIN" },
-  { id: "03", title: "DNS Split-Brain during Cloudflare Failover", category: "NETWORKING", sev: "SEV-1 // 18 MIN" },
-  { id: "04", title: "Redis Cache Stampede following Key Eviction", category: "CACHE STAMPEDE", sev: "SEV-2 // 14 MIN" },
-];
+function badgeClasses(variant: "accent" | "sage" | "neutral") {
+  if (variant === "accent") return "bg-accent-wash border border-accent/30 text-accent-ink";
+  if (variant === "sage") return "bg-sage-wash border border-sage text-sage";
+  return "bg-panel-2 border border-rule text-ink-3";
+}
 
 export default function HomePage() {
   return (
     <>
-      {/* Top Telemetry Micro-Bar */}
-      <div className="flex items-center justify-between py-2 border-b border-rule font-caption-mono text-caption-mono text-ink-3">
-        <div className="flex items-center gap-2">
-          <span className="inline-block w-1.5 h-1.5 rounded-full bg-sage"></span>
-          <span>CLUSTER: AWS-EAST-1 // PROD-STABLE</span>
-        </div>
-        <div className="flex items-center gap-4">
-          <span className="hidden sm:inline">UPTIME: 99.998%</span>
-          <span>EPOCH: 1714752000</span>
-        </div>
-      </div>
-
       {/* Hero Section */}
       <section className="py-12 md:py-14 border-b border-rule">
         <div className="flex flex-col gap-6">
           <div className="inline-flex items-center gap-2 self-start bg-panel px-2.5 py-1 border border-rule font-caption-mono text-caption-mono text-ink-2">
             <span className="text-[14px] text-accent">$_</span>
-            <span>INFRASTRUCTURE ARCHITECTURE &amp; SRE</span>
+            <span>{profile.primaryTitle.toUpperCase()}</span>
           </div>
           <h1 className="font-display-hero text-display-hero md:text-[40px] md:leading-[46px] text-ink font-bold tracking-tight">
-            Building Resilient Distributed Systems &amp; High-Throughput Infrastructure.
+            Owning Data Infrastructure That Scales to 200+ Production Merchants.
           </h1>
           <p className="font-body-md text-body-md leading-relaxed max-w-[65ch] text-ink-2">
-            Principal Infrastructure Architect specializing in zero-downtime database migrations, event streaming at scale, and high-availability systems that withstand production entropy.
+            {profile.positioning} Rearchitected data ingestion from legacy cron-based batch (days-late) to real-time CDC with sub-5-minute freshness for webhook-capable platforms, up to 6 hours for others.
           </p>
 
           {/* Metrics Ribbon */}
@@ -108,7 +53,7 @@ export default function HomePage() {
             <Link href="/case-studies/" className="min-h-[44px] inline-flex items-center justify-center bg-accent text-bg px-5 py-2.5 rounded-sm font-label-mono-sm font-medium border border-accent-ink hover:bg-accent-ink transition-all">
               View Case Studies
             </Link>
-            <Link href="#resume" className="min-h-[44px] inline-flex items-center justify-center border border-accent text-accent bg-transparent px-5 py-2.5 rounded-sm font-label-mono-sm font-medium hover:bg-accent-wash transition-all">
+            <Link href="/resume/" className="min-h-[44px] inline-flex items-center justify-center border border-accent text-accent bg-transparent px-5 py-2.5 rounded-sm font-label-mono-sm font-medium hover:bg-accent-wash transition-all">
               Download Resume
             </Link>
           </div>
@@ -121,9 +66,8 @@ export default function HomePage() {
           <div className="flex items-center justify-between pb-3 border-b border-rule">
             <div className="flex items-center gap-2">
               <span className="text-[14px] text-accent">◈</span>
-              <span className="font-caption-mono text-caption-mono text-ink uppercase">PIPELINE TOPOLOGY // ZERO-LOCK DEBEZIUM INGESTION</span>
+              <span className="font-caption-mono text-caption-mono text-ink uppercase">PIPELINE TOPOLOGY // DEBEZIUM CDC INGESTION</span>
             </div>
-            <span className="font-caption-mono text-caption-mono text-sage">SYNCHRONIZED</span>
           </div>
 
           {/* SVG Diagram */}
@@ -135,10 +79,10 @@ export default function HomePage() {
 
               <rect fill="#FAF6EC" height={60} rx={2} stroke="#DED2B4" strokeWidth={1.5} width={120} x={10} y={25} />
               <text fill="#1C1A15" fontFamily="JetBrains Mono" fontSize={11} fontWeight={600} textAnchor="middle" x={70} y={50}>
-                POSTGRES
+                MYSQL
               </text>
               <text fill="#8A8674" fontFamily="JetBrains Mono" fontSize={9} textAnchor="middle" x={70} y={66}>
-                WAL_LEVEL=LOGICAL
+                LANDING LAYER
               </text>
 
               <rect fill="#E7EAD6" height={60} rx={2} stroke="#6E7B4C" strokeWidth={1.5} width={120} x={250} y={25} />
@@ -146,30 +90,33 @@ export default function HomePage() {
                 DEBEZIUM CDC
               </text>
               <text fill="#576337" fontFamily="JetBrains Mono" fontSize={9} textAnchor="middle" x={310} y={66}>
-                OFF-PEAK SNAPSHOT
+                REPLAY BOUNDARY
               </text>
 
               <rect fill="#F5DFC9" height={60} rx={2} stroke="#C85A2E" strokeWidth={1.5} width={120} x={490} y={25} />
               <text fill="#A84420" fontFamily="JetBrains Mono" fontSize={11} fontWeight={600} textAnchor="middle" x={550} y={50}>
-                APACHE KAFKA
+                GOOGLE PUB/SUB
               </text>
               <text fill="#9F3C11" fontFamily="JetBrains Mono" fontSize={9} textAnchor="middle" x={550} y={66}>
-                32 PARTITIONS
+                PER-TENANT ISOLATION
               </text>
 
               <rect fill="#FAF6EC" height={60} rx={2} stroke="#DED2B4" strokeWidth={1.5} width={48} x={710} y={25} />
-              <text fill="#1C1A15" fontFamily="JetBrains Mono" fontSize={10} fontWeight={600} textAnchor="middle" x={734} y={52}>
-                SINK
+              <text fill="#1C1A15" fontFamily="JetBrains Mono" fontSize={9} fontWeight={600} textAnchor="middle" x={734} y={48}>
+                MONGO
               </text>
-              <text fill="#8A8674" fontFamily="JetBrains Mono" fontSize={8} textAnchor="middle" x={734} y={66}>
-                ANALYTICS
+              <text fill="#1C1A15" fontFamily="JetBrains Mono" fontSize={9} fontWeight={600} textAnchor="middle" x={734} y={58}>
+                CH
+              </text>
+              <text fill="#8A8674" fontFamily="JetBrains Mono" fontSize={8} textAnchor="middle" x={734} y={68}>
+                BQ
               </text>
             </svg>
           </div>
 
           <div className="flex flex-wrap items-center justify-between text-ink-3 font-caption-mono text-caption-mono pt-2 border-t border-rule">
-            <span>SIGNAL FLOW: RAW WAL → CDC EVENT BUFFER → PARTITION TOPICS → TARGET READ REPLICAS</span>
-            <span className="text-accent-ink font-medium">REPLICATION LAG: 142MS</span>
+            <span>SIGNAL FLOW: MYSQL LANDING → DEBEZIUM CDC → PUB/SUB → MONGODB / CLICKHOUSE / BIGQUERY</span>
+            <span className="text-accent-ink font-medium">5-MIN ALERT · 15-MIN PAGE</span>
           </div>
         </div>
       </section>
@@ -180,42 +127,33 @@ export default function HomePage() {
           <span className="font-label-mono-sm text-label-mono-sm text-accent uppercase tracking-wider font-semibold">01 / FEATURED ARCHITECTURE WORK</span>
           <h2 className="font-headline-lg text-headline-lg text-ink">Mission-Critical Production Engineering</h2>
           <p className="font-body-md text-body-md leading-relaxed max-w-[65ch] text-ink-2">
-            Architectural blueprints and technical retrospectives focused on sustained throughput, zero downtime transitions, and deterministic fault tolerance under peak load.
+            Start with the data platform, then the production incident it survived — these show architecture ownership and operational judgment fastest.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {caseStudyCards.map((card) => (
+          {caseStudies.map((card, i) => (
             <Link
               key={card.id}
               href={card.href}
-              className="group p-6 bg-panel border border-rule rounded-sm transition-all duration-200 hover:border-accent hover:-translate-y-1 cursor-pointer flex flex-col justify-between"
+              className="group no-underline p-6 bg-panel border border-rule rounded-sm transition-all duration-200 hover:border-accent hover:-translate-y-1 cursor-pointer flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between gap-2 pb-4">
-                  <span className="font-label-mono-sm text-label-mono-sm text-ink-3 uppercase">{String(card.id).padStart(2, "0")}</span>
-                  <span className={`font-caption-mono text-caption-mono ${card.badge === "MOST RELEVANT" ? "bg-accent-wash border border-accent/30 text-accent-ink" : "bg-panel-2 border border-rule text-ink-3"} font-semibold px-2 py-0.5 rounded-sm`}>
+                  <span className="font-label-mono-sm text-label-mono-sm text-ink-3 uppercase">{String(i + 1).padStart(2, "0")}</span>
+                  <span className={`font-caption-mono text-caption-mono font-semibold px-2 py-0.5 rounded-sm ${badgeClasses(card.badgeVariant)}`}>
                     {card.badge}
                   </span>
                 </div>
-                <h3 className="font-headline-sm text-headline-sm text-ink mb-2 group-hover:text-accent transition-colors">
+                <h3 className="font-headline-sm text-headline-sm text-ink mb-2 group-hover:text-accent group-hover:underline transition-colors">
                   {card.title}
                 </h3>
-                <p className="font-body-sm text-body-sm text-ink-2 mb-6">{card.description}</p>
+                <p className="font-body-sm text-body-sm text-ink-2 mb-6">{card.subtitle}</p>
               </div>
               <div className="flex flex-wrap gap-2 pt-4 border-t border-rule">
-                {card.tags.map((tag) => (
-                  <span
-                    key={tag.text}
-                    className={`font-caption-mono text-caption-mono px-2 py-0.5 rounded ${
-                      tag.bg === "sage-wash"
-                        ? "bg-sage-wash border border-sage text-sage"
-                        : tag.bg === "accent-wash"
-                        ? "bg-accent-wash border border-accent/30 text-accent-ink"
-                        : "bg-panel-2 border border-rule text-ink-2"
-                    }`}
-                  >
-                    {tag.text}
+                {card.techTags.map((tag) => (
+                  <span key={tag} className="font-caption-mono text-caption-mono px-2 py-0.5 rounded bg-panel-2 border border-rule text-ink-2">
+                    {tag}
                   </span>
                 ))}
               </div>
@@ -224,15 +162,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Architectural Invariant Callout */}
+      {/* Hiring Thesis Callout */}
       <section className="py-10 border-b border-rule">
         <div className="bg-panel border-l-2 border-accent border-y border-r border-rule p-6">
           <div className="flex items-start gap-4">
             <span className="text-accent text-[24px] shrink-0 mt-0.5">✓</span>
             <div>
-              <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-1">Architectural Invariant</h4>
+              <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-1">Hiring Thesis</h4>
               <p className="font-body-md text-body-md text-ink-2">
-                &ldquo;Every distributed abstraction leaks under catastrophic load. Reliability is not the complete absence of failures, but the deterministic containment of their blast radius.&rdquo;
+                I work best owning backend and data infrastructure systems end-to-end. I&apos;m drawn to roles where I can influence architecture across multiple teams, lead small teams through scaling, and own both technical direction and operational reliability.
               </p>
             </div>
           </div>
@@ -245,7 +183,7 @@ export default function HomePage() {
           <span className="font-label-mono-sm text-label-mono-sm text-accent uppercase tracking-wider font-semibold">02 / PRODUCTION POST-MORTEMS &amp; INCIDENTS</span>
           <h2 className="font-headline-lg text-headline-lg text-ink">Real Failures, Honest Root Causes, Measurable Mitigations.</h2>
           <p className="font-body-md text-body-md text-ink-2 max-w-[65ch] mb-4">
-            Reliability isn&apos;t proven when systems are idle; it&apos;s proven in failure modes. A catalog of production outages analyzed with rigorous blameless retrospectives.
+            A decade of production lessons: query shape, lock contention, silent data failure, memory pressure, and the judgment to trade freshness for stability when the system needs it.
           </p>
           <div>
             <Link href="/case-studies/hard-problems/" className="font-label-mono-sm text-label-mono-sm text-accent font-semibold border-b border-accent pb-0.5 inline-flex items-center gap-1.5 hover:text-accent-ink transition-colors mb-8">
@@ -256,50 +194,30 @@ export default function HomePage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {incidents.map((inc) => (
-            <Link
-              key={inc.id}
-              href={`/case-studies/hard-problems/#incident-${inc.id}`}
-              className="group block bg-panel border border-rule p-6 rounded-sm hover:border-accent hover:bg-panel-2 transition-all cursor-pointer"
-            >
-              <div className="flex items-center justify-between pb-3">
-                <span className="font-caption-mono text-caption-mono text-accent-ink font-semibold">INC-{inc.id}</span>
-                <span className="text-[18px] text-ink-3 group-hover:text-accent group-hover:translate-x-1 transition-all">→</span>
-              </div>
-              <h3 className="font-headline-sm text-headline-sm leading-snug text-ink font-semibold mb-4 group-hover:text-accent transition-colors">
-                {inc.title}
-              </h3>
-              <div className="pt-3 border-t border-rule flex items-center justify-between">
-                <span className="font-caption-mono text-caption-mono px-2 py-0.5 bg-panel-2 border border-rule text-ink-2 rounded">
-                  {inc.category}
-                </span>
-                <span className="font-caption-mono text-caption-mono text-ink-3">{inc.sev}</span>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* Terminal Output Section */}
-      <section className="py-10">
-        <div className="bg-panel border border-rule rounded-sm overflow-hidden">
-          <div className="flex items-center justify-between px-4 py-2.5 bg-panel-2 border-b border-rule">
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-rule-2 inline-block"></span>
-              <span className="w-2.5 h-2.5 rounded-full bg-rule-2 inline-block"></span>
-              <span className="w-2.5 h-2.5 rounded-full bg-rule-2 inline-block"></span>
-              <span className="font-caption-mono text-caption-mono text-ink ml-2">sys-telemetry-cli --live</span>
-            </div>
-            <span className="font-caption-mono text-caption-mono text-sage">STATUS: LISTENING</span>
-          </div>
-          <div className="p-4 font-caption-mono text-caption-mono leading-relaxed text-ink space-y-1">
-            <p className="text-ink-3">{"$ kubectl get pods -n ingress-edge -o wide"}</p>
-            <p className="text-ink-2">NAME{"                         "}READY{"   "}STATUS{"    "}RESTARTS{"   "}AGE{"   "}IP</p>
-            <p className="text-sage">envoy-edge-mesh-79d8f89-4xkq9{"    "}1/1{"     "}Running{"   "}0{"          "}42d{"   "}10.244.3.18</p>
-            <p className="text-sage">envoy-edge-mesh-79d8f89-8lm2v{"    "}1/1{"     "}Running{"   "}0{"          "}42d{"   "}10.244.5.91</p>
-            <p className="text-ink-3 pt-2">{`$ prometheus-eval 'rate(http_requests_total{status=~"5.."}[5m])'`}</p>
-            <p className="text-accent-ink">0.000000000000e+00 (Zero elevated 5xx anomalies detected across primary load balancers)</p>
-          </div>
+          {homeIncidents.map((inc) => {
+            const num = inc.id.replace("INC-", "");
+            return (
+              <Link
+                key={inc.id}
+                href={`/case-studies/hard-problems/#incident-${num}`}
+                className="group no-underline block bg-panel border border-rule p-6 rounded-sm hover:border-accent hover:bg-panel-2 transition-all cursor-pointer"
+              >
+                <div className="flex items-center justify-between pb-3">
+                  <span className="font-caption-mono text-caption-mono text-accent-ink font-semibold">{inc.id}</span>
+                  <span className="text-[18px] text-ink-3 group-hover:text-accent group-hover:translate-x-1 transition-all">→</span>
+                </div>
+                <h3 className="font-headline-sm text-headline-sm leading-snug text-ink font-semibold mb-4 group-hover:text-accent group-hover:underline transition-colors">
+                  {inc.title}
+                </h3>
+                <div className="pt-3 border-t border-rule flex items-center justify-between">
+                  <span className="font-caption-mono text-caption-mono px-2 py-0.5 bg-panel-2 border border-rule text-ink-2 rounded">
+                    {inc.category}
+                  </span>
+                  <span className="font-caption-mono text-caption-mono text-ink-3">{inc.duration}</span>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </section>
     </>

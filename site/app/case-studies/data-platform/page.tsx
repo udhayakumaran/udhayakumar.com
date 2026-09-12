@@ -74,7 +74,7 @@ export default function DataPlatformCaseStudy() {
         <div className="bg-panel p-4 sm:p-6 rounded overflow-hidden">
           <div className="flex items-center justify-between pb-2 mb-4 bg-panel-2 p-2 rounded">
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-accent animate-pulse"></span>
+              <span className="w-2.5 h-2.5 rounded-full bg-accent"></span>
               <span className="font-label-mono-sm text-label-mono-sm text-ink font-semibold">DISTRIBUTED CDC PIPELINE</span>
             </div>
             <div className="hidden sm:flex items-center gap-3">

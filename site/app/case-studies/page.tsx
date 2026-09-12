@@ -21,8 +21,6 @@ export default function CaseStudiesPage() {
           <span className="font-caption-mono text-caption-mono px-2 py-0.5 rounded bg-panel-2 text-ink-2 uppercase tracking-wider">
             INDEX // 4 PRODUCTION SYSTEMS
           </span>
-          <span className="h-1 w-1 rounded-full bg-rule-2"></span>
-          <span className="font-caption-mono text-caption-mono text-ink-3">SYS_VERIFIED</span>
         </div>
         <h1 className="font-headline-lg text-headline-lg text-ink font-bold tracking-tight">
           Case Studies &amp; Systems Architecture

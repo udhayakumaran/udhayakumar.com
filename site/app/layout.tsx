@@ -64,7 +64,7 @@ export default function RootLayout({
   const themeInitScript = `
     (function() {
       const saved = localStorage.getItem('theme');
-      const theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      const theme = saved || 'light';
       document.documentElement.setAttribute('data-theme', theme);
     })();
   `;

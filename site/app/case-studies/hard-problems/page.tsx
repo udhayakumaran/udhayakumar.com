@@ -32,7 +32,7 @@ export default function HardProblemsPage() {
 
       <header className="flex flex-col gap-3 pb-8">
         <span className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-panel-2 text-ink-2 font-caption-mono text-caption-mono w-fit">
-          <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
+          <span className="w-1.5 h-1.5 rounded-full bg-accent"></span>
           POST-MORTEM LEDGER // 10 PRODUCTION INCIDENTS
         </span>
         <h1 className="font-display-hero text-headline-lg md:text-display-hero text-ink tracking-tight break-words">

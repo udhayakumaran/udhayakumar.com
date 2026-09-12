@@ -18,8 +18,8 @@ const steps = [
 export default function DebeziumSnapshotNote() {
   return (
     <article className="flex flex-col w-full">
-      <div className="pb-6">
-        <BackLink href="/engineering-notes/" label="BACK TO ENGINEERING NOTES" />
+      <div className="pt-8 pb-6">
+        <BackLink href="/" label="Back to Home" />
       </div>
 
       <header className="flex flex-col gap-3 mb-10">

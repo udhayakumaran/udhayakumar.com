@@ -24,8 +24,8 @@ const metrics = [
 export default function RecommendationsCaseStudy() {
   return (
     <article className="flex flex-col w-full">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 mb-8 border-b border-rule">
-        <BackLink href="/case-studies/" label="BACK TO ALL CASE STUDIES" />
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-8 pb-4 mb-8 border-b border-rule">
+        <BackLink href="/" label="Back to Home" />
         <span className="font-caption-mono text-caption-mono text-ink-3 uppercase tracking-wider">
           CASE STUDY 03 // PRODUCT SYSTEM // NODE.JS &amp; REDIS
         </span>

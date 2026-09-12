@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 export default function EngineeringNotesPage() {
   return (
     <div className="flex flex-col w-full">
-      <div className="pb-6">
-        <BackLink href="/" label="BACK TO OVERVIEW" />
+      <div className="pt-8 pb-6">
+        <BackLink href="/" label="Back to Home" />
       </div>
 
       <h1 className="font-headline-lg text-headline-lg text-ink font-bold mb-3">Engineering Notes</h1>

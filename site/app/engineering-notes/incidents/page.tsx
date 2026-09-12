@@ -23,8 +23,8 @@ const incidents = [
 export default function IncidentsPage() {
   return (
     <div className="flex flex-col w-full">
-      <div className="pb-6">
-        <BackLink href="/engineering-notes/" label="BACK TO ENGINEERING NOTES" />
+      <div className="pt-8 pb-6">
+        <BackLink href="/" label="Back to Home" />
       </div>
 
       <span className="font-label-mono-sm text-label-mono-sm text-accent uppercase tracking-widest mb-2 block">

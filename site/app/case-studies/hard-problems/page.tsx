@@ -25,8 +25,8 @@ const progression = [
 export default function HardProblemsPage() {
   return (
     <div className="flex flex-col w-full">
-      <div className="pb-6">
-        <BackLink href="/case-studies/" label="BACK TO ALL CASE STUDIES" />
+      <div className="pt-8 pb-6">
+        <BackLink href="/" label="Back to Home" />
       </div>
 
       <header className="flex flex-col gap-3 pb-8">

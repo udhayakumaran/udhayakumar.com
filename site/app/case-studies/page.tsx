@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 export default function CaseStudiesPage() {
   return (
     <div className="flex flex-col w-full">
-      <div className="pb-6">
-        <BackLink href="/" label="BACK TO OVERVIEW" />
+      <div className="pt-8 pb-6">
+        <BackLink href="/" label="Back to Home" />
       </div>
 
       <div className="flex flex-col gap-3 mb-8">

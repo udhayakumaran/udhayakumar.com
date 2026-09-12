@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "export",
   trailingSlash: true,
   // Separate build output when running a local production check alongside
   // `next dev` (see `npm run build:test` / `start:test`) — `next dev` and

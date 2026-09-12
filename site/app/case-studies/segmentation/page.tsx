@@ -44,7 +44,7 @@ export default function SegmentationCaseStudy() {
           <span className="font-caption-mono text-caption-mono text-ink-3">•</span>
           <span className="font-caption-mono text-caption-mono text-ink-2">PUBLISHED 2025-09-03</span>
         </div>
-        <h1 className="font-display-hero text-display-hero text-ink">Customer Segmentation</h1>
+        <h1 className="font-display-hero text-display-hero text-ink break-words">Customer Segmentation</h1>
         <p className="font-body-lg text-body-lg text-ink-2 max-w-[72ch]">
           Built the system that lets a non-technical Customer Success rep build audiences like &ldquo;shoppers who&apos;d buy again if reminded&rdquo; without writing a line of code or filing an engineering ticket — unifying four disconnected data sources into one query interface.
         </p>

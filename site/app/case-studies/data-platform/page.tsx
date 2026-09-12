@@ -71,7 +71,7 @@ export default function DataPlatformCaseStudy() {
           <span className="font-caption-mono text-caption-mono text-ink-3">•</span>
           <span className="font-caption-mono text-caption-mono text-ink-2">PUBLISHED 2025-09-03</span>
         </div>
-        <h1 className="font-display-hero text-display-hero text-ink">The Data Platform</h1>
+        <h1 className="font-display-hero text-display-hero text-ink break-words">The Data Platform</h1>
         <p className="font-body-lg text-body-lg text-ink-2 max-w-[72ch]">
           Owned the rebuild of customer and order data infrastructure across 200+ merchants on five commerce platforms — replacing a 12-24 hour stale nightly batch pipeline with a tiered-freshness system ranging from sub-5-minute webhooks to nightly archival, without breaking a single load-bearing dependency during migration.
         </p>

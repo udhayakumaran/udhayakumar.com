@@ -44,7 +44,7 @@ export default function RecommendationsCaseStudy() {
           <span className="font-caption-mono text-caption-mono text-ink-3">•</span>
           <span className="font-caption-mono text-caption-mono text-ink-2">PUBLISHED 2025-09-03</span>
         </div>
-        <h1 className="font-display-hero text-display-hero text-ink">Recommendation Blocks</h1>
+        <h1 className="font-display-hero text-display-hero text-ink break-words">Recommendation Blocks</h1>
         <p className="font-body-lg text-body-lg text-ink-2 max-w-[72ch]">
           Built the company&apos;s product recommendation system from zero. Solved the cold-start problem with three independent engines under CSM-driven tier selection — Curated (day 1, zero risk), Automated (pattern rules), Smart (live behavioral ranking) — served across five regions under a 200ms p99 latency SLA.
         </p>

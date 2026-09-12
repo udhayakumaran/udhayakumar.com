@@ -282,7 +282,7 @@ ORDER BY date                    -- serves segmentation filters + time-series re
 
       <div className="mt-4 pt-6 border-t border-rule flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <CTAButton href="/case-studies/" label="ALL CASE STUDIES" variant="panel" size="sm" icon="☰" />
-        <CTAButton href="/case-studies/segmentation/" label="NEXT: CUSTOMER SEGMENTATION" variant="solid" size="sm" arrow="right" />
+        <CTAButton href="/case-studies/identity-resolution/" label="NEXT: IDENTITY RESOLUTION" variant="solid" size="sm" arrow="right" />
       </div>
     </article>
   );

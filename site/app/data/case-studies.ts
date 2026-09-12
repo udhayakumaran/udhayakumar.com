@@ -25,6 +25,18 @@ export const caseStudies: CaseStudy[] = [
     telemetryText: "200+ merchants · 5 platforms · <5min freshness (webhooks)",
   },
   {
+    id: "identity-resolution",
+    href: "/case-studies/identity-resolution/",
+    category: "IDENTITY / CUSTOMER DATA",
+    badge: "CROSS-DEVICE",
+    badgeVariant: "sage",
+    title: "Identity Resolution",
+    subtitle: "Architected deterministic identity resolution across email, device, cookie, phone, and platform IDs on a legacy, highly-distributed profile system — merging ~15%+ of contacts into an existing identity across ~200-300 merchants.",
+    techTags: ["DETERMINISTIC MATCHING", "READ-TIME RESOLUTION", "LEGACY SYSTEM"],
+    telemetryIcon: "⚡",
+    telemetryText: "200-300 merchants · ~15% contact merge rate · deterministic matching",
+  },
+  {
     id: "segmentation",
     href: "/case-studies/segmentation/",
     category: "CUSTOMER DATA PRODUCT",

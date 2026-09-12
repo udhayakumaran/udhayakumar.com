@@ -27,6 +27,7 @@ export const profile = {
   proof: {
     merchants: "200+ merchants across five commerce platforms",
     freshness: "Customer and order data freshness: sub-5-minute for webhook platforms, ~1–6 hours for others (vs. days-late baseline)",
+    identityResolution: "Deterministic identity resolution across email, device ID, cookie, phone, and platform customer IDs on a legacy, distributed profile system — used across ~200-300 merchants; matched ~15%+ of contacts into an existing identity.",
     segmentation: "1,000+ regularly-trained active segments (used continuously) within six months of launch",
     recommendations: "80% of all merchants using recommendation blocks (adopted from launch)",
     recommendationsLatency: "200-400ms p99 (measured; target 500ms p99 across five regions)",
@@ -58,7 +59,7 @@ export const profile = {
   ],
   resume: { label: "Staff Backend Engineer | Debezium · ClickHouse · Pub/Sub · Real-time CDC", file: "/Udhayakumar-Resume.pdf", description: "13+ years backend infrastructure, data platforms, and production systems" },
   experienceTimeline: [
-    { index: "A1", years: "2020–2026", company: "ConvertCart", role: "Backend Engineer, Platform Ownership — data ingestion, warehouse consolidation, and multi-channel personalisation" },
+    { index: "A1", years: "2020–2026", company: "ConvertCart", role: "Backend Engineer, Platform Ownership — data ingestion, warehouse consolidation, cross-device identity resolution, and multi-channel personalisation" },
     { index: "A2", years: "2018–2019", company: "Friday Media Group", role: "Backend Engineer, Founding Team — marketplace APIs, content ingestion, and data pipeline" },
     { index: "A2b", years: "2019–2020", company: "Independent Consultant", role: "Backend Consultant — freelance development work during transition between roles" },
     { index: "A3", years: "2014–2018", company: "Scientific Games", role: "Backend Engineer — lottery reporting, data optimization, and microservices" },

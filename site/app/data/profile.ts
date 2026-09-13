@@ -54,7 +54,7 @@ export const profile = {
     "Senior Platform Engineer",
     "Senior Data Infrastructure Engineer",
   ],
-  resume: { label: "Staff Backend Engineer | Debezium · ClickHouse · Pub/Sub · Real-time CDC", file: "/Udhayakumar-Resume.pdf", description: "13+ years backend infrastructure, data platforms, and production systems" },
+  resume: { label: "Staff Backend Engineer | Debezium · ClickHouse · Pub/Sub · Real-time CDC", file: "/Udhayakumar-Staff-Backend-Engineer-Resume.pdf", description: "13+ years backend infrastructure, data platforms, and production systems" },
   experienceTimeline: [
     { index: "A1a", years: "2020–2021", company: "ConvertCart", role: "Senior Software Developer - Team Lead — diagnosed fragile cron-sync system, redesigned to real-time CDC pipelines, stopped production crisis, initiated recommendation engine" },
     { index: "A1b", years: "2021–2026", company: "ConvertCart", role: "Senior Product Development Lead — owned architecture, migration, monitoring for 200+ merchants; designed identity resolution, segmentation engine, recommendation system at scale; grew platform team 4→7" },

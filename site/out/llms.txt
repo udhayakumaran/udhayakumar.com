@@ -1,0 +1,16 @@
+# Udhaya Kumar — Staff Backend Engineer
+
+Staff Backend Engineer with 13+ years building production systems and data platforms. Specializes in real-time CDC infrastructure, data warehousing, identity resolution, and scaling backend systems across 200+ merchants.
+
+## Key work
+
+- **Data platforms**: CDC pipelines with Debezium, warehouse consolidation (BigQuery, ClickHouse), tiered freshness for real-time and batch consumers
+- **Systems architecture**: Deterministic identity resolution, segmentation engines, recommendation systems, production incident recovery
+- **Scaling**: multi-region serving, latency optimization, cost reduction, team growth (4 → 7 engineers)
+
+## Links
+
+- Home: https://udhayakumar.com/
+- About: https://udhayakumar.com/about/
+- Case Studies: https://udhayakumar.com/case-studies/
+- Resume: https://udhayakumar.com/resume/

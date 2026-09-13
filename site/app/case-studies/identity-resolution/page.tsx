@@ -6,7 +6,15 @@ import CTAButton from "../../components/CTAButton";
 
 export const metadata: Metadata = {
   title: "Identity Resolution",
-  description: "Architected deterministic identity resolution across email, device, cookie, phone, and platform IDs on a legacy, distributed profile system — merging ~15%+ of contacts into an existing identity.",
+  description: "Deterministic identity resolution across email, device, cookie, and phone IDs — merging 15%+ of contacts into an existing identity.",
+  alternates: {
+    canonical: "https://udhayakumar.com/case-studies/identity-resolution/",
+  },
+  openGraph: {
+    title: "Identity Resolution",
+    description: "Deterministic identity resolution across email, device, cookie, and phone IDs — merging 15%+ of contacts into an existing identity.",
+    url: "https://udhayakumar.com/case-studies/identity-resolution/",
+  },
 };
 
 const metaStrip: MetaItem[] = [
@@ -120,15 +128,15 @@ export default function IdentityResolutionCaseStudy() {
       <SectionBlock index="04" eyebrow="KEY DECISIONS" title="Decisions & Tradeoffs">
         <ul className="flex flex-col gap-2 list-none">
           <li className="p-4 bg-panel rounded">
-            <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">Read-Time Join, Not Migrate-First</h4>
+            <h3 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">Read-Time Join, Not Migrate-First</h3>
             <p className="font-body-sm text-body-sm text-ink-2">Legacy profile system was highly distributed across service databases. A full migration to a single identity store would have been expensive, slow, and risky — we would have shipped slower. Read-time deterministic join added latency per query but avoided the migration entirely, letting us ship identity resolution without blocking on infrastructure renovation.</p>
           </li>
           <li className="p-4 bg-panel rounded">
-            <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">Deterministic Matching Only</h4>
+            <h3 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">Deterministic Matching Only</h3>
             <p className="font-body-sm text-body-sm text-ink-2">Scoped out probabilistic/fuzzy matching (e.g. email-similarity heuristics, ML-based clustering) to ship faster and keep resolution auditable — if two records matched, it was because an exact identifier was shared, not a guess. Probabilistic matching would have higher recall but lower precision, risking false merges that are hard to debug in production.</p>
           </li>
           <li className="p-4 bg-panel rounded">
-            <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">No Conflict Resolution (v1)</h4>
+            <h3 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">No Conflict Resolution (v1)</h3>
             <p className="font-body-sm text-body-sm text-ink-2">Deterministic matching assumed clean data — a shared email meant the same person. In reality, email can be reused (e.g. a shared account, a person using a generic email across merchants). Handling conflicts (determining which identity wins, handling merges/splits) was designed for v2 (a full profile-system consolidation) but not shipped in v1 — the v2 renovation would have also unified schema, reduced read-time join complexity, and solved conflicts structurally.</p>
           </li>
         </ul>

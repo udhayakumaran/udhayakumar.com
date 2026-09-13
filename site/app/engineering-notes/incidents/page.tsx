@@ -4,7 +4,15 @@ import BackLink from "../../components/BackLink";
 
 export const metadata: Metadata = {
   title: "Incident Record",
-  description: "Ten production incidents showing Udhaya Kumar's approach to diagnosis, architecture, reliability, and leadership under pressure.",
+  description: "Ten production incidents showing approach to diagnosis, architecture, reliability, and leadership under pressure.",
+  alternates: {
+    canonical: "https://udhayakumar.com/engineering-notes/incidents/",
+  },
+  openGraph: {
+    title: "Incident Record",
+    description: "Ten production incidents showing approach to diagnosis, architecture, reliability, and leadership under pressure.",
+    url: "https://udhayakumar.com/engineering-notes/incidents/",
+  },
 };
 
 const incidents = [

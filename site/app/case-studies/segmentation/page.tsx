@@ -7,6 +7,14 @@ import CTAButton from "../../components/CTAButton";
 export const metadata: Metadata = {
   title: "Customer Segmentation",
   description: "Built the system that lets non-technical Customer Success reps build audiences without code. Four source systems, one query interface, 1,000+ segments.",
+  alternates: {
+    canonical: "https://udhayakumar.com/case-studies/segmentation/",
+  },
+  openGraph: {
+    title: "Customer Segmentation",
+    description: "Built the system that lets non-technical Customer Success reps build audiences without code. Four source systems, one query interface, 1,000+ segments.",
+    url: "https://udhayakumar.com/case-studies/segmentation/",
+  },
 };
 
 const metaStrip: MetaItem[] = [
@@ -119,15 +127,15 @@ export default function SegmentationCaseStudy() {
       <SectionBlock index="04" eyebrow="KEY DECISIONS" title="Decisions & Tradeoffs">
         <ul className="flex flex-col gap-2 list-none">
           <li className="p-4 bg-panel rounded">
-            <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">UI-First, SQL Later</h4>
+            <h3 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">UI-First, SQL Later</h3>
             <p className="font-body-sm text-body-sm text-ink-2">CSMs weren&apos;t comfortable with raw SQL. A drag-and-drop builder got adoption faster than 80% of use cases, at the cost of less expressive queries. After 6 months of adoption, demand for SQL grew, so a &ldquo;SQL mode&rdquo; toggle was added.</p>
           </li>
           <li className="p-4 bg-panel rounded">
-            <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">No Query Approvals, Trust CSMs</h4>
+            <h3 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">No Query Approvals, Trust CSMs</h3>
             <p className="font-body-sm text-body-sm text-ink-2">Gave CSMs ownership of audience quality. Risk: a bad segment definition means a bad email campaign. Mitigated with a &ldquo;Preview&rdquo; step showing sample customers before deploy.</p>
           </li>
           <li className="p-4 bg-panel rounded">
-            <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">Point-in-Time Snapshots, Not Real-Time</h4>
+            <h3 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">Point-in-Time Snapshots, Not Real-Time</h3>
             <p className="font-body-sm text-body-sm text-ink-2">Segments computed once daily at midnight — predictable cost and performance, up to 24 hours stale. Fine for retention campaigns that don&apos;t need fresher-than-daily data; didn&apos;t over-engineer for real-time.</p>
           </li>
         </ul>

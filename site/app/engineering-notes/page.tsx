@@ -5,6 +5,14 @@ import BackLink from "../components/BackLink";
 export const metadata: Metadata = {
   title: "Engineering Notes",
   description: "Technical deep-dives into architecture decisions, incident recovery, and systems thinking.",
+  alternates: {
+    canonical: "https://udhayakumar.com/engineering-notes/",
+  },
+  openGraph: {
+    title: "Engineering Notes",
+    description: "Technical deep-dives into architecture decisions, incident recovery, and systems thinking.",
+    url: "https://udhayakumar.com/engineering-notes/",
+  },
 };
 
 export default function EngineeringNotesPage() {
@@ -15,8 +23,11 @@ export default function EngineeringNotesPage() {
       </div>
 
       <h1 className="font-headline-lg text-headline-lg text-ink font-bold mb-3">Engineering Notes</h1>
-      <p className="font-body-lg text-body-lg text-ink-2 max-w-[65ch] mb-12">
-        Deep-dives into decisions, incidents, and lessons from building data platforms and backend infrastructure at scale.
+      <p className="font-body-lg text-body-lg text-ink-2 max-w-[65ch] mb-2">
+        Deep-dives into decisions, incidents, and lessons from building data platforms and backend infrastructure at scale. These notes capture production problems that exposed deeper architectural constraints, migration strategies that worked, and recovery patterns that became platform doctrine.
+      </p>
+      <p className="font-body-md text-body-md text-ink-2 max-w-[65ch] mb-12">
+        See the full <Link href="/case-studies/hard-problems/" className="text-accent">ten-incident ledger</Link> for lock contention at scale, silent failures, architectural incompatibility under deadline, and leadership under crisis.
       </p>
 
       <section className="mb-12">

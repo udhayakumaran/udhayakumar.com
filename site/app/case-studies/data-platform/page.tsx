@@ -7,6 +7,14 @@ import CTAButton from "../../components/CTAButton";
 export const metadata: Metadata = {
   title: "The Data Platform",
   description: "Rebuilding customer and order data infrastructure across 200+ merchants with tiered freshness.",
+  alternates: {
+    canonical: "https://udhayakumar.com/case-studies/data-platform/",
+  },
+  openGraph: {
+    title: "The Data Platform",
+    description: "Rebuilding customer and order data infrastructure across 200+ merchants with tiered freshness.",
+    url: "https://udhayakumar.com/case-studies/data-platform/",
+  },
 };
 
 const metaStrip: MetaItem[] = [
@@ -205,19 +213,19 @@ ORDER BY date                    -- serves segmentation filters + time-series re
       <SectionBlock index="05" eyebrow="KEY DECISIONS" title="Decisions & Tradeoffs">
         <ul className="flex flex-col gap-2 list-none">
           <li id="decision-0" className="p-4 bg-panel rounded scroll-my-24">
-            <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">Landed Raw Instead of Normalizing at Ingest</h4>
+            <h3 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">Landed Raw Instead of Normalizing at Ingest</h3>
             <p className="font-body-sm text-body-sm text-ink-2">Costs: five schemas instead of one. Benefit: reversibility — wrong normalization at ingest means a multi-service migration; a wrong view is a redefinition away from correction.</p>
           </li>
           <li id="decision-1" className="p-4 bg-panel rounded scroll-my-24">
-            <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">CDC From the Landing Store, Not Sources</h4>
+            <h3 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">CDC From the Landing Store, Not Sources</h3>
             <p className="font-body-sm text-body-sm text-ink-2">Costs: one more moving part. Benefit: CDC from a consolidated landing layer with replay and validation boundaries.</p>
           </li>
           <li className="p-4 bg-panel rounded">
-            <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">Two Replication Paths: Datastream + Debezium</h4>
+            <h3 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">Two Replication Paths: Datastream + Debezium</h3>
             <p className="font-body-sm text-body-sm text-ink-2">Started with managed Datastream, gradually earned our way to pure Debezium. Avoided speculative engineering while managing risk.</p>
           </li>
           <li id="decision-3" className="p-4 bg-panel rounded scroll-my-24">
-            <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">Table-Per-Client Multiplies Operational Surface</h4>
+            <h3 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">Table-Per-Client Multiplies Operational Surface</h3>
             <p className="font-body-sm text-body-sm text-ink-2">Thousands of tables; migrations run across all of them. Accepted because shared-table contention is worse and less visible than operational overhead.</p>
           </li>
         </ul>
@@ -243,7 +251,7 @@ ORDER BY date                    -- serves segmentation filters + time-series re
           ))}
         </div>
         <div className="my-1 p-4 bg-panel border border-accent rounded">
-          <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">The production incident that changed the design</h4>
+          <h3 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">The production incident that changed the design</h3>
           <p className="font-body-sm text-body-sm text-ink-2 mb-2">Debezium&apos;s snapshot query on 50M rows consumed 60% CPU and blocked production writes. We stopped rollout immediately, used Datastream to seed the baseline instead, then transitioned tables to Debezium incrementally.</p>
           <a href="/engineering-notes/debezium-50m-row-snapshot/" className="font-label-mono-sm text-label-mono-sm text-accent hover:text-accent-ink transition-colors">Read the full incident and recovery decisions →</a>
         </div>

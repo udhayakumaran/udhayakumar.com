@@ -6,7 +6,15 @@ import CaseStudiesContent from "./CaseStudiesContent";
 
 export const metadata: Metadata = {
   title: "Case Studies",
-  description: "Four complete systems I owned: a data platform with CDC and warehouse consolidation, a segmentation engine for non-technical users, a real-time recommendation system, and ten production incidents that shaped my engineering judgment.",
+  description: "Four production systems I owned: a CDC data platform, a segmentation engine, a recommendation system, and ten incidents that shaped my engineering judgment.",
+  alternates: {
+    canonical: "https://udhayakumar.com/case-studies/",
+  },
+  openGraph: {
+    title: "Case Studies",
+    description: "Four production systems I owned: a CDC data platform, a segmentation engine, a recommendation system, and ten incidents that shaped my engineering judgment.",
+    url: "https://udhayakumar.com/case-studies/",
+  },
 };
 
 export default function CaseStudiesPage() {
@@ -26,7 +34,7 @@ export default function CaseStudiesPage() {
           Case Studies &amp; Systems Architecture
         </h1>
         <p className="font-body-lg text-body-lg text-ink-2 max-w-[65ch]">
-          Four complete systems I owned, from first principles through execution to impact: a data platform with CDC and warehouse consolidation, a segmentation engine for non-technical users, a real-time recommendation system, and ten production incidents that shaped my engineering judgment.
+          Four complete systems I owned, from first principles through execution to impact: a CDC data platform rebuilding infrastructure across 200+ merchants, a segmentation engine that let non-technical teams build audiences without code, a real-time recommendation system solving cold-start, and ten production incidents that shaped my engineering judgment.
         </p>
       </div>
 
@@ -40,9 +48,9 @@ export default function CaseStudiesPage() {
             <span className="text-[18px]">$_</span>
           </div>
           <div className="flex flex-col gap-1">
-            <h3 className="font-headline-sm text-headline-sm text-ink font-semibold">
+            <h2 className="font-headline-sm text-headline-sm text-ink font-semibold">
               Looking for the incidents behind the architecture?
-            </h3>
+            </h2>
             <p className="font-body-sm text-body-sm text-ink-2 max-w-[50ch]">
               Ten production incidents that shaped engineering judgment are cataloged in Hard Problems &amp; Learnings.
             </p>

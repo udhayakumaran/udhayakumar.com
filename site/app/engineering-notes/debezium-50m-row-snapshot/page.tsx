@@ -4,7 +4,15 @@ import BackLink from "../../components/BackLink";
 
 export const metadata: Metadata = {
   title: "The 50M-Row Debezium Snapshot Incident",
-  description: "How a snapshot operation nearly derailed a critical migration, and what it taught about production risk vs architectural purity.",
+  description: "How a snapshot consumed 60% CPU and blocked production writes, and the recovery strategy that shaped CDC rollout.",
+  alternates: {
+    canonical: "https://udhayakumar.com/engineering-notes/debezium-50m-row-snapshot/",
+  },
+  openGraph: {
+    title: "The 50M-Row Debezium Snapshot Incident",
+    description: "How a snapshot consumed 60% CPU and blocked production writes, and the recovery strategy that shaped CDC rollout.",
+    url: "https://udhayakumar.com/engineering-notes/debezium-50m-row-snapshot/",
+  },
 };
 
 const steps = [

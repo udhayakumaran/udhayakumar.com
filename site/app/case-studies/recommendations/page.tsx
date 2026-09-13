@@ -7,6 +7,14 @@ import CTAButton from "../../components/CTAButton";
 export const metadata: Metadata = {
   title: "Recommendation Blocks",
   description: "Built product recommendations from zero to 80% adoption across five regions by designing a trust-building three-tier ladder: Manual → Automated → Smart.",
+  alternates: {
+    canonical: "https://udhayakumar.com/case-studies/recommendations/",
+  },
+  openGraph: {
+    title: "Recommendation Blocks",
+    description: "Built product recommendations from zero to 80% adoption across five regions by designing a trust-building three-tier ladder: Manual → Automated → Smart.",
+    url: "https://udhayakumar.com/case-studies/recommendations/",
+  },
 };
 
 const metaStrip: MetaItem[] = [
@@ -117,19 +125,19 @@ export default function RecommendationsCaseStudy() {
       <SectionBlock index="04" eyebrow="KEY DECISIONS" title="Decisions & Tradeoffs">
         <ul className="flex flex-col gap-2 list-none">
           <li className="p-4 bg-panel rounded">
-            <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">Tier Selection Driven by CSM Judgment</h4>
+            <h3 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">Tier Selection Driven by CSM Judgment</h3>
             <p className="font-body-sm text-body-sm text-ink-2">CSMs choose which tier per merchant — no automatic progression based on transaction thresholds. Puts control in the hands of customer success, not an algorithm.</p>
           </li>
           <li className="p-4 bg-panel rounded">
-            <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">Computation Matched to Data Maturity</h4>
+            <h3 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">Computation Matched to Data Maturity</h3>
             <p className="font-body-sm text-body-sm text-ink-2">Curated is static (no computation). Automated is batch rules. Smart is live ranking (statistical model). Computing live ranking on day-7 data would overfit.</p>
           </li>
           <li className="p-4 bg-panel rounded">
-            <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">Redis-First Serving, Accept Eventual Consistency</h4>
+            <h3 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">Redis-First Serving, Accept Eventual Consistency</h3>
             <p className="font-body-sm text-body-sm text-ink-2">In-flight ranking state lost on Redis failure is acceptable for recommendations — would not accept this for transactional orders. The 200ms p99 requirement demands in-memory serving.</p>
           </li>
           <li className="p-4 bg-panel rounded">
-            <h4 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">Read Replicas Trade Freshness for Latency</h4>
+            <h3 className="font-headline-sm text-headline-sm text-ink font-semibold mb-2">Read Replicas Trade Freshness for Latency</h3>
             <p className="font-body-sm text-body-sm text-ink-2">Regional replicas incur 5-10s replication lag — acceptable cost for 200ms p99 serving. A central Redis for all regions would mean 300-500ms network latency instead.</p>
           </li>
         </ul>

@@ -5,7 +5,15 @@ import BackLink from "../components/BackLink";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "About Udhaya Kumar, Staff Backend Engineer with 13+ years building real-time data infrastructure — Debezium, ClickHouse, Pub/Sub.",
+  description: "Staff Backend Engineer with 13+ years building real-time data infrastructure — Debezium, ClickHouse, Pub/Sub.",
+  alternates: {
+    canonical: "https://udhayakumar.com/about/",
+  },
+  openGraph: {
+    title: "About",
+    description: "Staff Backend Engineer with 13+ years building real-time data infrastructure — Debezium, ClickHouse, Pub/Sub.",
+    url: "https://udhayakumar.com/about/",
+  },
 };
 
 const vitals = [

@@ -7,7 +7,15 @@ import { incidents } from "./incidents-data";
 
 export const metadata: Metadata = {
   title: "Hard Problems & Learnings",
-  description: "Ten production incidents that shaped engineering judgment. Lock contention at scale, silent failures, architectural incompatibility, database constraints, resilience patterns, leadership under crisis.",
+  description: "Ten production incidents: lock contention at scale, silent failures, architectural incompatibility, and leadership under crisis.",
+  alternates: {
+    canonical: "https://udhayakumar.com/case-studies/hard-problems/",
+  },
+  openGraph: {
+    title: "Hard Problems & Learnings",
+    description: "Ten production incidents: lock contention at scale, silent failures, architectural incompatibility, and leadership under crisis.",
+    url: "https://udhayakumar.com/case-studies/hard-problems/",
+  },
 };
 
 const stats = [

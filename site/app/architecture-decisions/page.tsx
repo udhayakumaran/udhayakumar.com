@@ -5,6 +5,14 @@ import BackLink from "../components/BackLink";
 export const metadata: Metadata = {
   title: "Architecture Decisions",
   description: "Architectural tradeoffs and design decisions under production constraints. How I choose between correctness, complexity, and operational overhead.",
+  alternates: {
+    canonical: "https://udhayakumar.com/architecture-decisions/",
+  },
+  openGraph: {
+    title: "Architecture Decisions",
+    description: "Architectural tradeoffs and design decisions under production constraints. How I choose between correctness, complexity, and operational overhead.",
+    url: "https://udhayakumar.com/architecture-decisions/",
+  },
 };
 
 const stats = [

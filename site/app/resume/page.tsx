@@ -5,7 +5,15 @@ import BackLink from "../components/BackLink";
 
 export const metadata: Metadata = {
   title: "Resume",
-  description: "Download the resume for Udhaya Kumar, Staff Backend Engineer specializing in real-time data infrastructure (Debezium, ClickHouse, Pub/Sub).",
+  description: "Staff Backend Engineer resume — 13+ years building real-time data infrastructure (Debezium, ClickHouse, Pub/Sub).",
+  alternates: {
+    canonical: "https://udhayakumar.com/resume/",
+  },
+  openGraph: {
+    title: "Resume",
+    description: "Staff Backend Engineer resume — 13+ years building real-time data infrastructure (Debezium, ClickHouse, Pub/Sub).",
+    url: "https://udhayakumar.com/resume/",
+  },
 };
 
 const metrics = [

@@ -33,7 +33,11 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Udhaya Kumar",
+  metadataBase: new URL("https://udhayakumar.com"),
+  title: {
+    default: "Udhaya Kumar — Staff Backend Engineer",
+    template: "%s — Udhaya Kumar",
+  },
   description: "Staff Backend Engineer with 13+ years building production systems and data platforms.",
   authors: [{ name: "Udhayakumar" }],
   icons: {
@@ -53,6 +57,12 @@ export const metadata: Metadata = {
         alt: "Udhaya Kumar — Staff Backend Engineer",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Udhaya Kumar",
+    description: "Staff Backend Engineer with 13+ years building production systems and data platforms.",
+    images: ["https://udhayakumar.com/og-image.png"],
   },
 };
 
@@ -84,6 +94,35 @@ export default function RootLayout({
               gtag('js', new Date());
               gtag('config', 'G-DDRCFD4HSF');
             `,
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Udhaya Kumar",
+              jobTitle: "Staff Backend Engineer",
+              description: "I own backend and data platforms from system design through migration, production operation, and recovery.",
+              url: "https://udhayakumar.com",
+              sameAs: [
+                "https://linkedin.com/in/udhayakumark",
+                "https://github.com/udhayakumaran",
+              ],
+              knowsAbout: [
+                "Node.js",
+                "TypeScript",
+                "MySQL",
+                "Debezium",
+                "Google Pub/Sub",
+                "MongoDB",
+                "BigQuery",
+                "ClickHouse",
+                "Redis",
+                "GKE",
+              ],
+            }),
           }}
         />
       </head>

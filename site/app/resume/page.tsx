@@ -17,60 +17,86 @@ const metrics = [
 
 const experience = [
   {
-    role: "Backend Engineer, Platform Ownership",
+    role: "Senior Software Developer - Team Lead",
     company: "ConvertCart",
-    focus: "Data ingestion, warehouse consolidation, multi-channel personalisation",
-    years: "2020 — 2026",
-    current: true,
+    focus: "Real-time data pipelines, production incidents, recommendation engine",
+    years: "2020 — 2021",
+    tech: ["MySQL", "Debezium", "Pub/Sub", "Webhooks", "Datastream", "GKE"],
+    bullets: [
+      <>Diagnosed fragile cron-sync system (normalize-on-ingest locked all retroactive changes to full resyncs), redesigned to raw-source storage eliminating expensive resync friction.</>,
+      <>Replaced batch sync with real-time pipelines: native webhooks for Shopify and BigCommerce, custom implementations for WooCommerce and Magento 2 (no native webhook support).</>,
+      <>Stopped production crisis: <strong className="text-accent bg-accent-wash px-1 py-0.5 rounded font-label-mono-sm text-label-mono-sm">50M-row CDC snapshot consumed 60% CPU, blocked writes</strong>. Diagnosed root cause (table-level snapshots at scale), recovered safely via Datastream, fixed via incremental table-level migration with production-scale testing.</>,
+      <>Initiated recommendation engine (Manual → Automated → Smart trust ladder). Validated <strong className="text-ink bg-panel-2 px-1 py-0.5 rounded font-label-mono-sm text-label-mono-sm">80%+ adoption on Smart tier</strong>.</>,
+    ],
+  },
+  {
+    role: "Senior Product Development Lead",
+    company: "ConvertCart",
+    focus: "Data platform architecture, identity resolution, segmentation, recommendations",
+    years: "2021 — 2026",
     tech: ["MySQL", "Debezium", "Pub/Sub", "MongoDB", "BigQuery", "ClickHouse", "Redis", "GKE"],
     bullets: [
-      <>Rearchitected the data platform from legacy batch-sync (days-late) to real-time CDC, achieving <strong className="text-ink bg-panel-2 px-1 py-0.5 rounded font-label-mono-sm text-label-mono-sm">sub-5-minute freshness</strong> for webhook platforms across 200+ merchants on five commerce platforms.</>,
-      <>Architected deterministic identity resolution across <strong className="text-ink bg-panel-2 px-1 py-0.5 rounded font-label-mono-sm text-label-mono-sm">email, device, cookie, and platform IDs</strong> on a legacy, distributed profile system, matching <strong className="text-ink bg-panel-2 px-1 py-0.5 rounded font-label-mono-sm text-label-mono-sm">~15%+ of contacts</strong> into an existing identity across 200-300 merchants.</>,
-      <>Designed a segmentation engine reaching <strong className="text-ink bg-panel-2 px-1 py-0.5 rounded font-label-mono-sm text-label-mono-sm">1,000+ regularly-trained active segments</strong> within six months, saving Customer Success ~15 hours/week on manual segment creation.</>,
-      <>Built a recommendation system from zero to one, reaching <strong className="text-ink bg-panel-2 px-1 py-0.5 rounded font-label-mono-sm text-label-mono-sm">80% merchant adoption</strong> at <strong className="text-sage bg-sage-wash border border-sage px-1 py-0.5 rounded font-label-mono-sm text-label-mono-sm">200-400ms p99</strong>.</>,
-      <>Migrated customer segmentation compute from BigQuery to ClickHouse, cutting cost from $2,470/month to $850/month — a <strong className="text-sage bg-sage-wash border border-sage px-1 py-0.5 rounded font-label-mono-sm text-label-mono-sm">66% reduction</strong> via cityHash64-based batched hashing.</>,
-      <>Grew the backend platform team from <strong className="text-ink bg-panel-2 px-1 py-0.5 rounded font-label-mono-sm text-label-mono-sm">4 to 7 engineers</strong>.</>,
+      <>Owned architecture, migration, monitoring, and production operation for customer and order data across <strong className="text-ink bg-panel-2 px-1 py-0.5 rounded font-label-mono-sm text-label-mono-sm">200+ merchants on five commerce platforms</strong>.</>,
+      <>Designed multi-source BigQuery customer schema consolidating Shopify, BigCommerce, WooCommerce, Magento plus click-tracking. Implemented <strong className="text-ink bg-panel-2 px-1 py-0.5 rounded font-label-mono-sm text-label-mono-sm">deterministic identity resolution</strong> across anonymous sessions and known customers.</>,
+      <>Built SQL query builder and materialization pipeline enabling non-technical CSMs to create segments. Reached <strong className="text-ink bg-panel-2 px-1 py-0.5 rounded font-label-mono-sm text-label-mono-sm">1,000+ active segments in 6 months</strong>, eliminated 40-request engineering backlog.</>,
+      <>Scaled recommendation engine to <strong className="text-ink bg-panel-2 px-1 py-0.5 rounded font-label-mono-sm text-label-mono-sm">80% merchant adoption</strong> at <strong className="text-sage bg-sage-wash border border-sage px-1 py-0.5 rounded font-label-mono-sm text-label-mono-sm">200ms p99</strong> across five regions.</>,
+      <>Migrated segmentation compute from BigQuery to ClickHouse: <strong className="text-sage bg-sage-wash border border-sage px-1 py-0.5 rounded font-label-mono-sm text-label-mono-sm">$2,470 → $850/month (66% reduction)</strong> via cityHash64-based batched hashing and ClickHouse tuning.</>,
+      <>Architected <strong className="text-ink bg-panel-2 px-1 py-0.5 rounded font-label-mono-sm text-label-mono-sm">50+ microservices</strong> platform while growing team from <strong className="text-ink bg-panel-2 px-1 py-0.5 rounded font-label-mono-sm text-label-mono-sm">4 to 7 engineers</strong>.</>,
+    ],
+  },
+  {
+    role: "Software Development Lead",
+    company: "Friday Media Group",
+    focus: "Marketplace APIs, content ingestion, team leadership",
+    years: "2018 — 2019",
+    tech: [],
+    bullets: [
+      <>Led backend development for marketplace platforms managing 3–6 developers.</>,
+      <>Owned delivery for APIs, content ingestion, and data pipeline work while coaching engineers.</>,
     ],
   },
   {
     role: "Backend Consultant",
     company: "Independent Consultant",
-    focus: "Freelance development work during transition between roles",
+    focus: "Freelance backend development",
     years: "2019 — 2020",
     tech: [],
-    bullets: [],
+    bullets: [
+      <>Freelance backend development and delivery work for clients during transition between full-time roles.</>,
+    ],
   },
   {
-    role: "Backend Engineer, Founding Team",
-    company: "Friday Media Group",
-    focus: "Marketplace APIs, content ingestion, and data pipeline",
-    years: "2018 — 2019",
-    tech: [],
-    bullets: [],
-  },
-  {
-    role: "Backend Engineer",
+    role: "Senior Software Engineer",
     company: "Scientific Games",
-    focus: "Lottery reporting, data optimization, and microservices",
+    focus: "Query optimization, reporting integrations, microservices",
     years: "2014 — 2018",
-    tech: [],
-    bullets: [],
+    tech: ["MySQL", "JasperReports", "SQL optimization"],
+    bullets: [
+      <>Diagnosed and fixed pagination + join cardinality inversion bug in recurring reporting query. Fixed by reordering operations (filter before join): <strong className="text-accent bg-accent-wash px-1 py-0.5 rounded font-label-mono-sm text-label-mono-sm">3+ min → &lt;500ms (360x)</strong>.</>,
+      <>Built reporting integrations and web services for high-volume gaming platforms.</>,
+    ],
   },
   {
-    role: "Full-stack Engineer",
+    role: "Web Developer",
     company: "Tenlegs",
-    focus: "Email systems, logistics APIs, and operational tools",
+    focus: "Email systems, web applications",
     years: "2012 — 2014",
-    tech: [],
-    bullets: [],
+    tech: ["PHP", "MySQL", "HTML/CSS"],
+    bullets: [
+      <>Designed and built CSS-to-inline email template converter, parsing client website CSS and converting all styling to inline rules for cross-email-client consistency. Adopted internally and considered technically challenging at the time.</>,
+      <>Built web applications for an education-sector startup platform serving the artistic community.</>,
+    ],
   },
   {
-    role: "Junior Developer",
+    role: "Junior Software Engineer",
     company: "ISPG Technologies",
-    focus: "E-commerce backend and MySQL optimization",
+    focus: "LAMP-stack web projects",
     years: "2010 — 2012",
-    tech: [],
-    bullets: [],
+    tech: ["PHP", "MySQL", "LAMP"],
+    bullets: [
+      <>Delivered multiple web projects end-to-end using PHP, MySQL, HTML, and JavaScript — content management systems, social-networking platforms.</>,
+      <>Built strong foundation across the LAMP stack through varied small-to-medium projects.</>,
+    ],
   },
 ];
 
@@ -145,9 +171,7 @@ export default function ResumePage() {
             <article key={job.company + job.years} className="bg-panel border border-rule hover:border-rule-2 hover:bg-panel-2 transition-colors duration-200 rounded p-6">
               <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-2">
                 <h3 className="font-headline-sm text-headline-sm text-ink">{job.role}</h3>
-                <span className={`font-label-mono-sm text-label-mono-sm font-semibold px-2 py-0.5 rounded border w-fit ${
-                  job.current ? "text-accent-ink bg-accent-wash border-accent" : "text-ink-2 bg-panel-2 border-rule"
-                }`}>
+                <span className="font-label-mono-sm text-label-mono-sm font-semibold px-2 py-0.5 rounded border w-fit text-ink-2 bg-panel-2 border-rule">
                   {job.years}
                 </span>
               </div>

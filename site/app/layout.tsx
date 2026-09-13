@@ -34,14 +34,14 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: "Udhaya Kumar",
-  description: "Staff Backend Engineer with 13+ years building production systems, data platforms, and independent products.",
+  description: "Staff Backend Engineer with 13+ years building production systems and data platforms.",
   authors: [{ name: "Udhayakumar" }],
   icons: {
     icon: "/favicon.svg",
   },
   openGraph: {
     title: "Udhaya Kumar",
-    description: "Staff Backend Engineer with 13+ years building production systems, data platforms, and independent products.",
+    description: "Staff Backend Engineer with 13+ years building production systems and data platforms.",
     url: "https://udhayakumar.com",
     siteName: "Udhaya Kumar",
     type: "website",

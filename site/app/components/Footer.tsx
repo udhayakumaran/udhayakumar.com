@@ -27,7 +27,7 @@ export default function Footer({ children }: Props) {
           </div>
         </div>
         <div className="pt-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
-          <p className="font-caption-mono text-caption-mono text-ink-3">© 2025 Udhaya Kumar. Designed with architectural rigor &amp; warm modernism.</p>
+          <p className="font-caption-mono text-caption-mono text-ink-3">© 2026 Udhaya Kumar. Designed with architectural rigor &amp; warm modernism.</p>
         </div>
         {children}
       </div>

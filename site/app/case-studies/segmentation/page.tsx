@@ -31,7 +31,7 @@ export default function SegmentationCaseStudy() {
       <CaseStudyHero
         badge="CUSTOMER DATA PRODUCT"
         badgeVariant="sage"
-        publishedDate="2025-09-03"
+        publishedDate="2026-09-03"
         title="Customer Segmentation"
         intro="Built the system that lets a non-technical Customer Success rep build audiences like “shoppers who'd buy again if reminded” without writing a line of code or filing an engineering ticket — unifying four disconnected data sources into one query interface."
         metaStrip={metaStrip}

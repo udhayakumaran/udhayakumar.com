@@ -11,9 +11,6 @@ export const profile = {
   links: {
     linkedin: "https://linkedin.com/in/udhayakumark",
     github: "https://github.com/udhayakumaran",
-    enbus: "https://enbus.in",
-    briefMyDoctor: "https://briefmydoctor.com",
-    fruggy: "https://fruggy.in",
   },
   convertCart: {
     tenure: "Aug 2020 – May 2026",
@@ -31,7 +28,7 @@ export const profile = {
     segmentation: "1,000+ regularly-trained active segments (used continuously) within six months of launch",
     recommendations: "80% of all merchants using recommendation blocks (adopted from launch)",
     recommendationsLatency: "200-400ms p99 (measured; target 500ms p99 across five regions)",
-    mysql: "45 minutes → 3 minutes for a recurring reporting workload",
+    mysql: "3+ minutes → <500ms (360x improvement) — fixed a pagination/join cardinality inversion in a recurring reporting query",
     dataIncident: "50M-row CDC snapshot consumed 60% CPU and blocked production writes",
     clickhouseMigration: "Reduced customer segmentation cost from $2,470/month (BigQuery) to $850/month (ClickHouse Scale on GCP) — a 66% reduction, verified from invoices. cityHash64-based batched hashing reduced compute 4x (64GB → 16GB, minimum ClickHouse Cloud Production limit).",
     segmentationCSMTimeSaved: "CSM time saved: ~15 hours/week on manual segment creation",
@@ -59,12 +56,13 @@ export const profile = {
   ],
   resume: { label: "Staff Backend Engineer | Debezium · ClickHouse · Pub/Sub · Real-time CDC", file: "/Udhayakumar-Resume.pdf", description: "13+ years backend infrastructure, data platforms, and production systems" },
   experienceTimeline: [
-    { index: "A1", years: "2020–2026", company: "ConvertCart", role: "Backend Engineer, Platform Ownership — data ingestion, warehouse consolidation, cross-device identity resolution, and multi-channel personalisation" },
-    { index: "A2", years: "2018–2019", company: "Friday Media Group", role: "Backend Engineer, Founding Team — marketplace APIs, content ingestion, and data pipeline" },
+    { index: "A1a", years: "2020–2021", company: "ConvertCart", role: "Senior Software Developer - Team Lead — diagnosed fragile cron-sync system, redesigned to real-time CDC pipelines, stopped production crisis, initiated recommendation engine" },
+    { index: "A1b", years: "2021–2026", company: "ConvertCart", role: "Senior Product Development Lead — owned architecture, migration, monitoring for 200+ merchants; designed identity resolution, segmentation engine, recommendation system at scale; grew platform team 4→7" },
+    { index: "A2", years: "2018–2019", company: "Friday Media Group", role: "Software Development Lead — marketplace APIs, content ingestion, data pipeline; managed 3–6 developers" },
     { index: "A2b", years: "2019–2020", company: "Independent Consultant", role: "Backend Consultant — freelance development work during transition between roles" },
-    { index: "A3", years: "2014–2018", company: "Scientific Games", role: "Backend Engineer — lottery reporting, data optimization, and microservices" },
-    { index: "A4", years: "2012–2014", company: "Tenlegs", role: "Full-stack Engineer — email systems, logistics APIs, and operational tools" },
-    { index: "A5", years: "2010–2012", company: "ISPG Technologies", role: "Junior Developer — e-commerce backend and MySQL optimization" },
+    { index: "A3", years: "2014–2018", company: "Scientific Games", role: "Senior Software Engineer — query optimization (3+ min → <500ms via join reordering), reporting integrations, microservices" },
+    { index: "A4", years: "2012–2014", company: "Tenlegs", role: "Web Developer — CSS-to-inline email template converter, web applications" },
+    { index: "A5", years: "2010–2012", company: "ISPG Technologies", role: "Junior Software Engineer — LAMP-stack web projects, CMS, social-networking platforms" },
   ],
 } as const;
 
@@ -79,29 +77,3 @@ export const roleLanes = [
   "Founding Engineer",
 ];
 
-export const caseStudyLenses = [
-  {
-    id: "data",
-    label: "Data Platform",
-    note: "Five years owning a data platform end to end — ingestion, modelling, serving, and the cost of running it. Two CDC paths, a warehouse consolidation, a multi-tenant landing store, and a reporting migration driven by the shape of a billing model rather than a broken system.",
-    leadsWith: "data-platform",
-  },
-  {
-    id: "arch",
-    label: "Architecture",
-    note: "Every case study below states what I rejected and why. The through-line: refuse to normalise at the ingestion boundary where the decision is irreversible, then normalise in the warehouse where a wrong model is a redefinition rather than a migration. Same judgment applied at two layers.",
-    leadsWith: "data-platform",
-  },
-  {
-    id: "founding",
-    label: "Founding Engineer",
-    note: "Zero to one twice over — a recommendation product built from scratch inside a startup and taken to 80%+ adoption on its hardest tier, and six products designed, built and shipped alone outside one. Comfortable owning a surface end to end with nobody behind me.",
-    leadsWith: "recommendations",
-  },
-  {
-    id: "ecom",
-    label: "E-commerce",
-    note: "Shopify, BigCommerce, WooCommerce, and Magento 1 and 2 — in production simultaneously for 200+ merchants across five years. Webhook reliability, catalogue sync, storefront latency budgets, conversion attribution, and the constraint that a merchant will absorb no cost for your architecture.",
-    leadsWith: "data-platform",
-  },
-];

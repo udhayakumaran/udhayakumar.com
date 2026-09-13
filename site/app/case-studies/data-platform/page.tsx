@@ -57,7 +57,7 @@ export default function DataPlatformCaseStudy() {
       <CaseStudyHero
         badge="PRODUCTION MIGRATION ARCHIVE"
         badgeVariant="sage"
-        publishedDate="2025-09-03"
+        publishedDate="2026-09-03"
         title="The Data Platform"
         intro="Owned the rebuild of customer and order data infrastructure across 200+ merchants on five commerce platforms — replacing a days-late legacy batch pipeline with a tiered-freshness system ranging from sub-5-minute webhooks to 6 hours for legacy integrations, migrated store-by-store over 3 months with a rollback path that was never used."
         metaStrip={metaStrip}

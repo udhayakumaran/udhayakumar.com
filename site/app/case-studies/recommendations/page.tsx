@@ -30,7 +30,7 @@ export default function RecommendationsCaseStudy() {
 
       <CaseStudyHero
         badge="PRODUCT SYSTEM · ZERO TO ONE"
-        publishedDate="2025-09-03"
+        publishedDate="2026-09-03"
         title="Recommendation Blocks"
         intro="Built the company's product recommendation system from zero. Solved the cold-start problem with three independent engines under CSM-driven tier selection — Curated (day 1, zero risk), Automated (pattern rules), Smart (live behavioral ranking) — served across five regions under a 200ms p99 latency SLA."
         metaStrip={metaStrip}

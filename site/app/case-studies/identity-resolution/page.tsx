@@ -31,7 +31,7 @@ export default function IdentityResolutionCaseStudy() {
       <CaseStudyHero
         badge="CROSS-DEVICE"
         badgeVariant="sage"
-        publishedDate="2025-09-12"
+        publishedDate="2026-09-12"
         title="Identity Resolution"
         intro="Architected deterministic identity resolution across email, device ID, cookie, phone, push token, and platform customer IDs to unify pre-purchase sessions across devices and channels — so a customer leaving an email in a promotional popup on browser, then purchasing later on mobile, had all their prior activity correctly attributed to them."
         metaStrip={metaStrip}

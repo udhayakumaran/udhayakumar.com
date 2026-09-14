@@ -58,8 +58,8 @@ export const profile = {
   experienceTimeline: [
     { index: "A1a", years: "2020–2021", company: "ConvertCart", role: "Senior Software Developer - Team Lead — diagnosed fragile cron-sync system, redesigned to real-time CDC pipelines, stopped production crisis, initiated recommendation engine" },
     { index: "A1b", years: "2021–2026", company: "ConvertCart", role: "Senior Product Development Lead — owned architecture, migration, monitoring for 200+ merchants; designed identity resolution, segmentation engine, recommendation system at scale; grew platform team 4→7" },
-    { index: "A2", years: "2018–2019", company: "Friday Media Group", role: "Software Development Lead — marketplace APIs, content ingestion, data pipeline; managed 3–6 developers" },
     { index: "A2b", years: "2019–2020", company: "Independent Consultant", role: "Backend Consultant — freelance development work during transition between roles" },
+    { index: "A2", years: "2018–2019", company: "Friday Media Group", role: "Software Development Lead — marketplace APIs, content ingestion, data pipeline; managed 3–6 developers" },
     { index: "A3", years: "2014–2018", company: "Scientific Games", role: "Senior Software Engineer — query optimization (3+ min → <500ms via join reordering), reporting integrations, microservices" },
     { index: "A4", years: "2012–2014", company: "Tenlegs", role: "Web Developer — CSS-to-inline email template converter, web applications" },
     { index: "A5", years: "2010–2012", company: "ISPG Technologies", role: "Junior Software Engineer — LAMP-stack web projects, CMS, social-networking platforms" },

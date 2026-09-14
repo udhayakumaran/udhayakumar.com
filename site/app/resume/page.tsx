@@ -53,17 +53,6 @@ const experience = [
     ],
   },
   {
-    role: "Software Development Lead",
-    company: "Friday Media Group",
-    focus: "Marketplace APIs, content ingestion, team leadership",
-    years: "2018 — 2019",
-    tech: [],
-    bullets: [
-      <>Led backend development for marketplace platforms managing 3–6 developers.</>,
-      <>Owned delivery for APIs, content ingestion, and data pipeline work while coaching engineers.</>,
-    ],
-  },
-  {
     role: "Backend Consultant",
     company: "Independent Consultant",
     focus: "Freelance backend development",
@@ -71,6 +60,16 @@ const experience = [
     tech: [],
     bullets: [
       <>Freelance backend development and delivery work for clients during transition between full-time roles.</>,
+    ],
+  },
+  {
+    role: "Software Development Lead",
+    company: "Friday Media Group",
+    focus: "Marketplace APIs, content ingestion, team leadership",
+    years: "2018 — 2019",
+    tech: [],
+    bullets: [
+      <>Managed 3–6 engineers across marketplace API development, content ingestion, and data pipeline systems. Coached team on technical depth and ownership.</>,
     ],
   },
   {
